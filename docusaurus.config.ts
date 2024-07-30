@@ -73,7 +73,7 @@ const config: Config = {
         },
         {
           type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
+          sidebarId: 'connectSidebar',
           position: 'left',
           label: 'Connect',
         },

@@ -1,10 +1,12 @@
 import clsx from "clsx";
 import Heading from "@theme/Heading";
+import Link from "@docusaurus/Link";
 import styles from "./styles.module.css";
 
 type FeatureItem = {
   title: string;
   imageSrc: string;
+  docPath: string;
   description: JSX.Element;
 };
 
@@ -12,6 +14,7 @@ const FeatureList: FeatureItem[] = [
   {
     title: "Connect",
     imageSrc: require("@site/static/img/connect.png").default,
+    docPath: "/docs/connect/intro",
     description: (
       <>
         Learn about the private contributor tool Connect & its document models
@@ -21,33 +24,31 @@ const FeatureList: FeatureItem[] = [
   {
     title: "Switchboard",
     imageSrc: require("@site/static/img/switchboard.png").default,
-    description: (
-      <>
-        Get access to the API interface through Switchboard
-      </>
-    ),
+    docPath: "/docs/tutorial/intro",
+    description: <>Get access to the API interface through Switchboard</>,
   },
   {
     title: "Fusion",
     imageSrc: require("@site/static/img/fusion.png").default,
+    docPath: "/docs/connect/intro",
     description: (
-      <>
-        Find out how to create data transparency & clarity with Fusion
-      </>
+      <>Find out how to create data transparency & clarity with Fusion</>
     ),
   },
 ];
 
-function Feature({ title, imageSrc, description }: FeatureItem) {
+function Feature({ title, imageSrc, description, docPath }: FeatureItem) {
   return (
     <div className={clsx("col col--4")}>
-      <div className="text--center">
-        <img src={imageSrc} alt={title} className={styles.featureImage} />
-      </div>
-      <div className="text--center padding-horiz--md">
-        <Heading as="h3">{title}</Heading>
-        <p>{description}</p>
-      </div>
+      <Link to={docPath}>
+        <div className="text--center">
+          <img src={imageSrc} alt={title} className={styles.featureImage} />
+        </div>
+        <div className="text--center padding-horiz--md">
+          <Heading as="h3">{title}</Heading>
+          <p>{description}</p>
+        </div>
+      </Link>
     </div>
   );
 }
