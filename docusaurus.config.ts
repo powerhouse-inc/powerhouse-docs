@@ -77,7 +77,19 @@ const config: Config = {
           position: 'left',
           label: 'Connect',
         },
-        {to: '/blog', label: 'Blog', position: 'left'},
+        {
+          type: 'docSidebar',
+          sidebarId: 'fusionSidebar',
+          position: 'left',
+          label: 'Fusion',
+        },
+        {
+          type: 'docSidebar',
+          sidebarId: 'switchboardSidebar',
+          position: 'left',
+          label: 'Switchboard',
+        },
+        // {to: '/blog', label: 'Blog', position: 'left'},
         {
           href: 'https://github.com/facebook/docusaurus',
           label: 'GitHub',
