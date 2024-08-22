@@ -76,6 +76,12 @@ const config: Config = {
           position: 'left',
           label: 'Switchboard',
         },
+        {
+          type: 'docSidebar',
+          sidebarId: 'faqSidebar',
+          position: 'left',
+          label: 'FAQ',
+        },
         // {to: '/blog', label: 'Blog', position: 'left'},
         {
           href: 'https://github.com/facebook/docusaurus',
@@ -101,6 +107,10 @@ const config: Config = {
             {
               label: 'Switchboard',
               to: '/docs/switchboard/intro',
+            },
+            {
+              label: 'FAQ',
+              to: '/docs/faq/intro',
             },
           ],
         },
