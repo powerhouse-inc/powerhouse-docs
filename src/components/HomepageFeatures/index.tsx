@@ -24,13 +24,13 @@ const FeatureList: FeatureItem[] = [
   {
     title: "Switchboard",
     imageSrc: require("@site/static/img/switchboard.png").default,
-    docPath: "/docs/tutorial/intro",
+    docPath: "/docs/switchboard/intro",
     description: <>Get access to the API interface through Switchboard</>,
   },
   {
     title: "Fusion",
     imageSrc: require("@site/static/img/fusion.png").default,
-    docPath: "/docs/connect/intro",
+    docPath: "/docs/fusion/intro",
     description: (
       <>Find out how to create data transparency & clarity with Fusion</>
     ),
