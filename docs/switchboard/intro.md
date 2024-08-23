@@ -18,5 +18,4 @@ After structurally capturing the desired data of your formalised business proces
 ### Want to jump right in?
 
 Feeling eager? Jump in to the quick start docs and start making your first requests and queries on our initial use-cases.
-
-![Link to Real World Assets Reports]
+[**-> Real World Asset Reports**](./GraphQL%20References/rwa-reports.md)
