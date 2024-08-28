@@ -6,9 +6,13 @@ displayed_sidebar: connectSidebar
 
 # Intro to Connect
 
-Please visit [apps.powerhouse.io](https://apps.powerhouse.io/) to access the web-app version of connect
+Powerhouse Connect offers open organizations a hub to collaborate on your most important documents and processes. The underlying document synchronisation mechanism keeps files synchronised accross a number of different decentralized and centralized storage locations and embeds verifiable trails into the documents history. 
 
-## A Private contributor tool
+The first two implementations of Connect are currently live. Being the following: 
+- **Real World Asset Reporting** for the [Sky ecosystem.](https://fusion.sky.money) which offers an insights in the Real World Asset portfolio's that are maintained for the Sky ecosystem. 
+- **Grants Inventive Program Tracking** for [Arbitrum](https://arbgrants.com) which offers a grants tracking report for the grantee recipients of the Arbitrum LTIPP grant. 
+
+## Connect's key features
 
 - Connect functions as a private editor & contributor tool for contributors of open organisations. It allows teams to manage internal documents with full control over the data ownership. Connect is available as stand-alone desktop application or in the cloud.
 
@@ -17,25 +21,8 @@ Please visit [apps.powerhouse.io](https://apps.powerhouse.io/) to access the web
 - Connect allows contributors to edit and work on different 'document model types' selected or defined by the organisation. 
 
 :::info
-Think of Document Models as smart templates. Document Models are tools designed to assist and empower people working within DAOs. Functioning as a guide that helps you structure your work, ensuring all necessary steps are followed and information is captured correctly.
+Think of Document Models as smart templates. Document Models are tools designed to assist and empower people working within DAOs. Functioning as a guide that helps you structure your work, ensuring all necessary steps are followed and information is captured correctly. Feel free to dive deeper into document models with our [FAQ.](docs/faq/intro.md)
 :::
 
-## Connecting with your first drive instances
-
-### Adding a Public Drive
-
-Get access to an organisations drive instances by adding this drive to your Connect Drive navigation tree. To add a new drive you'll have to get the correct URL for the drive. Both public drives and secure cloud drives will be offered as centralised and decentralised solutions in the future. 
-
-### Adding a Secure Cloud Drive
-
-A secure cloud drive is a drive storage instance that allows smaller teams or 'internal' teams of an open organisation or DAO to maintain control over sharing & editing rights. A secure cloud drive is not directly available and transparent for anyone with the link as it offers access gating. 
-
-### Create a new Local Drive
-
-Create a new local drive that is hosted on your local device and not shared with anyone else. This allows a user to work in private and push updates that are ready for publication to a Secure Cloud Drive of a Public Drive.
-
-:::info
-Each drive can be made 'Available offline' if you want to store a local copy of it and contribute to the decentralisation of an open organisations documents. 
-:::
-
-*Additional documentation will be added soon.*
+### Getting started with Connect
+As we're expanding the feature scope of Connect gradually beyond the Sky Ecosystem we're welcoming new business partners to discuss their organizational needs via our [discord server](https://discord.com/invite/h7GKvqDyDP)

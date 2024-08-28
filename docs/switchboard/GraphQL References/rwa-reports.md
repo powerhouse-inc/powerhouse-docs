@@ -197,7 +197,7 @@ This allows you to filter for specific document ID's or a lists, documentTypes, 
 }
 ```
 
-3. his query + query variables will return a listenerID which can be used in the next step to query for specific strands. 
+3. This query + query variables will return a listenerID which can be used in the next step to query for specific strands. 
 
 ![untitled](./rwa-reports/rwaRegister.png)
 *An example of registering a listener and receiving a listenerId back.*
