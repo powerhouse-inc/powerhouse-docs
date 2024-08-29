@@ -35,18 +35,31 @@ const FeatureList: FeatureItem[] = [
       <>Find out how to create data transparency & clarity with Fusion</>
     ),
   },
+  {
+    title: "Renown",
+    imageSrc: require("@site/static/img/renown.png").default,
+    docPath: "/docs/renown/intro",
+    description: (
+      <>
+        Dive into the customizable reputation system that consolidates data from
+        Powerhouse applications
+      </>
+    ),
+  },
 ];
 
 function Feature({ title, imageSrc, description, docPath }: FeatureItem) {
   return (
-    <div className={clsx("col col--4")}>
-      <Link to={docPath}>
-        <div className="text--center">
-          <img src={imageSrc} alt={title} className={styles.featureImage} />
-        </div>
-        <div className="text--center padding-horiz--md">
-          <Heading as="h3">{title}</Heading>
-          <p>{description}</p>
+    <div className={clsx("col col--3")}>
+      <Link to={docPath} className={styles.featureLink}>
+        <div className={styles.featureContent}>
+          <div className={styles.featureImageWrapper}>
+            <img src={imageSrc} alt={title} className={styles.featureImage} />
+          </div>
+          <div className={styles.featureText}>
+            <Heading as="h4" className={styles.featureTitle}>{title}</Heading>
+            <p className={styles.featureDescription}>{description}</p>
+          </div>
         </div>
       </Link>
     </div>

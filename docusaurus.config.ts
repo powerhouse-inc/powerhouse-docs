@@ -4,11 +4,11 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
   title: 'Powerhouse Docs',
-  tagline: 'Get started with the Powerhouse tools',
+  tagline: 'Get started with the Powerhouse applications',
   favicon: 'img/ph-icon-light.svg',
 
   // Set the production url of your site here
-  url: 'https://your-docusaurus-site.example.com',
+  url: 'https://powerhouse.inc',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
@@ -38,7 +38,7 @@ const config: Config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+            'https://github.com/powerhouse-inc/powerhouse-docs',
         },
         theme: {
           customCss: './src/css/custom.css',
@@ -66,15 +66,15 @@ const config: Config = {
         },
         {
           type: 'docSidebar',
-          sidebarId: 'fusionSidebar',
-          position: 'left',
-          label: 'Fusion',
-        },
-        {
-          type: 'docSidebar',
           sidebarId: 'switchboardSidebar',
           position: 'left',
           label: 'Switchboard',
+        },
+        {
+          type: 'docSidebar',
+          sidebarId: 'fusionSidebar',
+          position: 'left',
+          label: 'Fusion',
         },
         {
           type: 'docSidebar',
@@ -84,7 +84,7 @@ const config: Config = {
         },
         // {to: '/blog', label: 'Blog', position: 'left'},
         {
-          href: 'https://github.com/facebook/docusaurus',
+          href: 'https://github.com/powerhouse-inc/powerhouse-docs',
           label: 'GitHub',
           position: 'right',
         },

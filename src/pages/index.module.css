@@ -4,7 +4,7 @@
  */
 
 .heroBanner {
-  padding: 4rem 0;
+  padding: 3rem 0 2rem 0;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -20,4 +20,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.iconContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+  margin: 0 0.5rem;
+  object-fit: contain; /* This ensures the image is scaled properly */
 }

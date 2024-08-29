@@ -5,7 +5,66 @@
   width: 100%;
 }
 
-.featureSvg {
-  height: 200px;
-  width: 200px;
+.featureLink {
+  display: block;
+  height: 100%;
+}
+
+.featureContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.featureImageWrapper {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.featureImage {
+  max-width: 100%;
+  height: auto;
+}
+
+.featureText {
+  width: 100%;
+  text-align: center;
+}
+
+.featureTitle {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.featureDescription {
+  font-size: 0.9rem;
+  line-height: 1.2;
+}
+
+@media screen and (max-width: 996px) {
+  .features {
+    padding: 1rem;
+  }
+
+  .featureContent {
+    align-items: center;
+    max-width: 80%;
+    margin: 0 auto;
+  }
+
+  .featureImageWrapper {
+    text-align: center;
+  }
+
+  .featureImage {
+    max-width: 100%;
+    width: auto;
+  }
+
+  .featureText {
+    text-align: left;
+    width: 100%;
+  }
 }
