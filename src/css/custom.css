@@ -93,3 +93,21 @@ html[data-theme='dark'] .footer {
   background-color: #1A1A1B;
 }
 
+html[data-theme='light'] .footer {
+  background-color: #f5f5f5;
+}
+
+/* Light theme styles for footer */
+html[data-theme='light'] .footer {
+  --ifm-footer-color: #000000;
+  --ifm-footer-link-color: #000000;
+  --ifm-footer-title-color: #000000;
+}
+
+/* If you need more specific control: */
+html[data-theme='light'] .footer .footer__link-item,
+html[data-theme='light'] .footer .footer__title,
+html[data-theme='light'] .footer .footer__copyright {
+  color: #000000;
+}
+
