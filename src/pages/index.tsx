@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 import Layout from '@theme/Layout';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import Heading from '@theme/Heading';
@@ -16,7 +17,7 @@ function HomepageHeader() {
     <header 
       className={clsx('hero hero--primary', styles.heroBanner)}
       style={{
-        backgroundImage: 'url("/img/empty-background.png")',
+        backgroundImage: `url(${useBaseUrl('/img/empty-background.png')})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
