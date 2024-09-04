@@ -28,11 +28,11 @@ const FeatureList: FeatureItem[] = [
     description: <>Get access to the API interface through Switchboard</>,
   },
   {
-    title: "Fusion",
-    imageSrc: require("@site/static/img/fusion.png").default,
-    docPath: "/docs/fusion/intro",
+    title: "Reactor",
+    imageSrc: require("@site/static/img/reactor.png").default,
+    docPath: "/docs/reactor/intro",
     description: (
-      <>Find out how to create data transparency & clarity with Fusion</>
+      <>Find out how a Powerhouse Reactor node works</>
     ),
   },
   {

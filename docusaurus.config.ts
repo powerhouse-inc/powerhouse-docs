@@ -74,9 +74,9 @@ const config: Config = {
         },
         {
           type: 'docSidebar',
-          sidebarId: 'fusionSidebar',
+          sidebarId: 'reactorSidebar',
           position: 'left',
-          label: 'Fusion',
+          label: 'Reactor',
         },
         {
           type: 'docSidebar',
