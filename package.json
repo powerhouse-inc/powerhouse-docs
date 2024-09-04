@@ -14,7 +14,7 @@
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
     "typecheck": "tsc",
-    "heroku-postbuild": "node --max_old_space_size=2560 node_modules/@docusaurus/core/bin/docusaurus.mjs build"
+    "heroku-postbuild": "npm run build"
   },
   "dependencies": {
     "@codesandbox/sandpack-react": "^2.14.4",
