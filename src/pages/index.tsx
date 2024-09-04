@@ -27,13 +27,13 @@ function HomepageHeader() {
           {siteConfig.title}
         </Heading>
         <p className="hero__subtitle">{siteConfig.tagline}</p>
-        <div className={styles.iconContainer}>
+        {/* <div className={styles.iconContainer}>
           <img src={ConnectIcon} alt="Connect" className={styles.icon} />
           <img src={SwitchboardIcon} alt="Switchboard" className={styles.icon} />
           <img src={FusionIcon} alt="Fusion" className={styles.icon} />
           <img src={RenownIcon} alt="Renown" className={styles.icon} />
           <img src={AcademyIcon} alt="Academy" className={styles.icon} />
-        </div>
+        </div> */}
       </div>
     </header>
   );
