@@ -7,7 +7,7 @@ displayed_sidebar: reactorSidebar
 
 :::info
 
-Powerhouse creates real-time collaboration environments to enable contributors from around the world to work simultaneously on any type of document. The two key technologies that make this possible are [**Document Models**](docs/connect/Document%20Models/intro.md) and **DocSync**.  
+Powerhouse creates real-time collaboration environments to enable contributors from around the world to work simultaneously on any type of document. The two key technologies that make this possible are [**Document Models**](docs/connect/01-Document-Models/01-intro.md) and **DocSync**.  
 
 Document models are the common design pattern that is used for all documents and files.  
 DocSync is a decentralized synchronization protocol that is storage agnostic.  
