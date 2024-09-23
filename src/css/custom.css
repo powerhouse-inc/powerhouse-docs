@@ -111,3 +111,8 @@ html[data-theme='light'] .footer .footer__copyright {
   color: #000000;
 }
 
+/* Change link color */
+a {
+  font-weight: 4
+  00; /* Slightly more bold */
+}

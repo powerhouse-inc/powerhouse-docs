@@ -24,7 +24,7 @@ Defining the Structure: Each Document Model is composed of several layers, defin
 
 - A document model function according to a transaction based design pattern. Other patterns you might be familiar with are FLUX pattern, or CQRS: Command and Query Responsibility Segregation, a pattern that separates read and update operations for a data store. The operations are akin to transactions in a blockchain, synchronizing changes across different instances of the document. This architecture allows the extraction of secondary data layers, such as operational data and analytics, making documents more than just text – they become dynamic, data-rich resources. Making them machine-readable and interactive through API interfaces.
 
-![Untitled](./The%203%20Data%20layers%20that%20can%20be%20extrated%20from%20document%20mdoels.png)
+![Untitled](./three-data-layers.png)
 *A visual overview of the 3 types of data that document models unlock by being based on a transaction based design pattern (Flux, CQRS) which generates an operation history.*
 
 ### Advanced Features of document models
