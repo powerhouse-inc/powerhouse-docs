@@ -113,6 +113,63 @@ html[data-theme='light'] .footer .footer__copyright {
 
 /* Change link color */
 a {
-  font-weight: 4
-  00; /* Slightly more bold */
+  font-weight: 400; /* Slightly more bold */
+}
+
+/* Special styling for documentation links */
+.docs-doc-page a {
+  text-decoration: underline;
+  color: #0066cc; /* bright blue */
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.docs-doc-page a:hover {
+  color: #003d7a; /* darker blue on hover */
+}
+
+/* Keep navbar and sidebar links with their original styling */
+.navbar a,
+.theme-doc-sidebar-container a {
+  text-decoration: none;
+  color: var(--ifm-menu-color);
+}
+
+/* Keep footer links with their original styling */
+.footer a {
+  text-decoration: none;
+  color: var(--ifm-footer-link-color);
+}
+
+/* Target links only in the main markdown content of doc pages */
+.docs-doc-page .theme-doc-markdown a {
+  text-decoration: underline;
+  color: #0066cc; /* bright blue */
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.docs-doc-page .theme-doc-markdown a:hover {
+  color: #003d7a; /* darker blue on hover */
+}
+
+/* Reset styling for navigation elements, category pages, and utility links */
+.breadcrumbs a,
+.table-of-contents a,
+.pagination-nav a,
+.navbar a,
+.theme-doc-sidebar-container a,
+.footer a,
+.card a,
+article > a,
+.markdown > a,
+.hash-link,
+.theme-edit-this-page {
+  text-decoration: none !important;
+  color: var(--ifm-link-color) !important;
+}
+
+/* Keep the pencil icon black too */
+.theme-edit-this-page svg {
+  color: var(--ifm-link-color) !important;
 }

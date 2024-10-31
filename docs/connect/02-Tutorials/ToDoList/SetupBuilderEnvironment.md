@@ -10,7 +10,7 @@ Let's set up your computer to start building the ToDoList Document Model. Don't 
 
 ## Prerequisites
 
-Before we begin building our ToDoList Document Model, we need to install some software on your computer. We'll need two main tools: Node.js, which helps us run our code, and Visual Studio Code (VS Code), which is where we'll write our code. Follow the steps below based on your computer's operating system.
+Before we begin building our ToDoList Document Model, we need to install some software on your computer. We'll need three main tools: Node.js, which helps us run our code, Visual Studio Code (VS Code), which is where we'll write our code, and Git, which helps us manage our code. Follow the steps below based on your computer's operating system.
 
 ### Installing Node.js
 
@@ -124,3 +124,61 @@ VS Code is the editor we'll use to write our code. Here's how to install it:
 7. Once installed, you can launch VS Code by:
    - Typing `code` in the terminal, or
    - Finding it in your Applications menu
+
+### 3. Install Git
+
+#### Windows
+1. Visit the [Git website](https://git-scm.com/)
+2. Download the latest version for Windows
+3. Run the installer and use these recommended settings:
+   - Select "Use Git from Git Bash only" during installation
+   - Choose "Use the OpenSSL library" for HTTPS
+   - Select "Checkout Windows-style, commit Unix-style line endings"
+   - Choose "Use MinTTY"
+   - Enable "Enable Git Credential Manager"
+4. Verify installation by opening Command Prompt:
+   ```bash
+   git --version
+   ```
+
+#### Mac
+1. Install using Homebrew:
+   ```bash
+   brew install git
+   ```
+2. Verify installation:
+   ```bash
+   git --version
+   ```
+
+#### Linux (Ubuntu/Debian)
+1. Update package list:
+   ```bash
+   sudo apt update
+   ```
+2. Install Git:
+   ```bash
+   sudo apt install git
+   ```
+3. Verify installation:
+   ```bash
+   git --version
+   ```
+
+### 4. Configure Git (All Systems)
+After installation, set up your identity:
+```bash
+git config --global user.name "Your Name"
+git config --global user.email "your.email@example.com"
+```
+
+### 5. Verify Installation
+
+Open Visual Studio Code and create a new terminal (Terminal > New Terminal). Run the following commands to verify your setup:
+```bash
+node --version
+npm --version
+git --version
+```
+
+You should see version numbers displayed for all commands. You're now ready to start building your ToDoList Document Model!
