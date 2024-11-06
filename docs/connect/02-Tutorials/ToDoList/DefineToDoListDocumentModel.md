@@ -66,6 +66,11 @@ The steps below show you how to do this:
 
 1. In the Connect application, click on the `ToDoList` document model to open the document model editor.
 2. You'll be welcomed with a form to fill, this is metadata about the document model, fill in the details in the fields. 
+
+    In the `Document Type` field, type `powerhouse/todolist`. This defines the new type of document that will be created with this document model.
+    
+    ![ToDoList Document Model Form Metadata](./images/form.png)
+
 3. Click on the `Submit` button to save the metadata. Submit button will extend the current window with a code editor to start defining the document model.
 4. In the code editor, you can see the SDL for the document model. Replace the existing SDL with the SDL defined in the [ToDoList Document Model Schema](#todolist-document-model-schema) section. Only copy and paste the types, leaving the inputs for the next step. 
 5. Below the editor, there is an input field `Add module`. You need to create and name a module that the input operations will be added to. In this case, we will name the module `to_do_list`. Press enter.
