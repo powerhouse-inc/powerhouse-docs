@@ -93,4 +93,121 @@ export const reducer: ToDoListToDoListOperations = {
         state.items = state.items.filter(item => item.id !== action.input.id);
     },
 }
-	
+```
+
+## Write the Operation Reducers Tests
+
+In order to make sure the operation reducers are working as expected, you need to write tests for them.
+
+Navigate to `/document-models/to-do-list/src/reducers/tests/to-do-list.test.ts` and copy&paste the code below into the file. Save the file.
+
+Here are the tests for the three operations written in the reducers file. This test file creates an empty ToDoList document model, then adds a todo item, updates it and deletes it.
+
+```typescript
+/**
+ * This is a scaffold file meant for customization:
+ * - change it by adding new tests or modifying the existing ones
+ */
+
+import utils from '../../gen/utils';
+import { reducer } from '../../gen/reducer';
+import * as creators from '../../gen/todolist/creators';
+import { ToDoListDocument } from '../../gen/types';
+
+describe('Todolist Operations', () => {
+    let document: ToDoListDocument;
+
+    beforeEach(() => {
+        document = utils.createDocument();
+    });
+
+    it('should handle addTodoItem operation', () => {
+        const input = {
+            id: '1',
+            text: 'Buy milk',
+        };
+        const updatedDocument = reducer(
+            document,
+            creators.addTodoItem(input),
+        );
+
+        expect(updatedDocument.operations.global).toHaveLength(1);
+        expect(updatedDocument.operations.global[0].type).toBe(
+            'ADD_TODO_ITEM',
+        );
+        expect(updatedDocument.operations.global[0].input).toStrictEqual(input);
+        expect(updatedDocument.operations.global[0].index).toEqual(0);
+        expect(updatedDocument.state.global.items).toHaveLength(1);
+    });
+    it('should handle updateTodoItem operation', () => {
+        const addInput = {
+            id: '1',
+            text: 'Buy milk',
+        };
+        const updateInput = {
+            id: '1',
+            text: 'Buy bread',
+        };
+        const createdDocument = reducer(
+            document,
+            creators.addTodoItem(addInput),
+        );
+        const updatedDocument = reducer(
+            createdDocument,
+            creators.updateTodoItem(updateInput),
+        );
+
+        expect(updatedDocument.operations.global).toHaveLength(2);
+        expect(updatedDocument.operations.global[1].type).toBe(
+            'UPDATE_TODO_ITEM',
+        );
+        expect(updatedDocument.operations.global[1].input).toStrictEqual(updateInput);
+        expect(updatedDocument.operations.global[1].index).toEqual(1);
+        expect(updatedDocument.state.global.items[0].text).toBe(updateInput.text);
+    });
+    it('should handle deleteTodoItem operation', () => {
+        const addInput = {
+            id: '1',
+            text: 'Buy milk',
+        };
+        const deleteInput = {
+            id: '1',
+        };
+        const createdDocument = reducer(
+            document,
+            creators.addTodoItem(addInput),
+        );
+        const updatedDocument = reducer(
+            createdDocument,
+            creators.deleteTodoItem(deleteInput),
+        );
+
+        expect(updatedDocument.operations.global).toHaveLength(2);
+        expect(updatedDocument.operations.global[1].type).toBe(
+            'DELETE_TODO_ITEM',
+        );
+        expect(updatedDocument.operations.global[1].input).toStrictEqual(deleteInput);
+        expect(updatedDocument.operations.global[1].index).toEqual(1);
+        expect(updatedDocument.state.global.items).toHaveLength(0);
+    });
+});
+
+```
+
+Now you can run the tests to make sure the operation reducers are working as expected.
+
+```bash
+npm run test
+```
+
+Output should be as follows:
+
+```bash
+ Test Files  2 passed (2)
+      Tests  5 passed (5)
+   Start at  12:04:57
+   Duration  417ms (transform 79ms, setup 0ms, collect 174ms, tests 12ms, environment 0ms, prepare 158ms)
+```
+
+If you got the same output, you have successfully implemented the operation reducers and tests for the `ToDoList` document model.
+Continue to the next section to learn how to implement the document model editor so you can see a simple user interface for the `ToDoList` document model in action. 
