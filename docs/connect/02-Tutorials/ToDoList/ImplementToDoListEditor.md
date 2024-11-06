@@ -19,6 +19,8 @@ npm run generate -- --editor ToDoList --document-types powerhouse/todolist
 
 Once complete, navigate to the `editors/to-do-list/editor.tsx` file and open it in your editor.
 
+## Write the editor code
+
 Copy&paste the code below into the `editor.tsx` file. Save the file.
 
 ```typescript

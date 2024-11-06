@@ -166,6 +166,9 @@ VS Code is the editor we'll use to write our code. Here's how to install it:
    ```
 
 ### 4. Configure Git (All Systems)
+
+Open your terminal and run the following commands to set up Git:
+
 After installation, set up your identity:
 ```bash
 git config --global user.name "Your Name"
@@ -174,7 +177,7 @@ git config --global user.email "your.email@example.com"
 
 ### 5. Verify Installation
 
-Open Visual Studio Code and create a new terminal (Terminal > New Terminal). Run the following commands to verify your setup:
+Open your terminal and run the following commands to verify your setup:
 ```bash
 node --version
 npm --version
