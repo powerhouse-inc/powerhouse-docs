@@ -57,7 +57,7 @@ You will be presented with two options.
 or
 2. Make use of a To Do List Document Model with a prefilled GraphQL schema. 
 
-This document model forms the base of one of our introductionary tutorials which you can find here: [To Do List tutorial](docs/connect/02-Tutorials/To-do-list-tutorial.md) 
+This document model forms the base of one of our introductionary tutorials which you can find here: [To Do List tutorial](/docs/category/todolist) 
 
 
 ### Defining your GraphQL Schema
