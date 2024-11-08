@@ -130,7 +130,7 @@ VS Code is the editor we'll use to write our code. Here's how to install it:
 #### Windows
 1. Visit the [Git website](https://git-scm.com/)
 2. Download the latest version for Windows
-3. Run the installer and use these recommended settings
+3. Run the installer and use the recommended settings
 4. Verify installation by opening Command Prompt:
    ```bash
    git --version
