@@ -75,11 +75,10 @@ The steps below show you how to do this:
     
     ![ToDoList Document Model Form Metadata](./images/form.png)
 
-3. Click on the `Submit` button to save the metadata. Submit button will extend the current window with a code editor to start defining the document model.
-4. In the code editor, you can see the SDL for the document model. Replace the existing SDL with the SDL defined in the [State Schema](#state-schema) section. Only copy and paste the types, leaving the inputs for the next step. 
-5. Below the editor, there is an input field `Add module`. You need to create and name a module that the input operations will be added to. In this case, we will name the module `to_do_list`. Press enter.
-6. Now there is a new field, called `Add operation`. Here you will have to add each input operation to the module, one by one.
-7. Inside the `Add operation` field, type `ADD_TODO_ITEM` and press enter. A small editor will appear under with an empty input type that you have to fill. Copy the first input type from the [Operations Schema](#operations-schema) section and paste it in the editor. The editor should look like this:
+3. In the code editor, you can see the SDL for the document model. Replace the existing SDL with the SDL defined in the [State Schema](#state-schema) section. Only copy and paste the types, leaving the inputs for the next step. 
+4. Below the editor, there is an input field `Add module`. You need to create and name a module that the input operations will be added to. In this case, we will name the module `to_do_list`. Press enter.
+5. Now there is a new field, called `Add operation`. Here you will have to add each input operation to the module, one by one.
+6. Inside the `Add operation` field, type `ADD_TODO_ITEM` and press enter. A small editor will appear under with an empty input type that you have to fill. Copy the first input type from the [Operations Schema](#operations-schema) section and paste it in the editor. The editor should look like this:
 
     ```graphql
     input AddTodoItemInput {
@@ -88,5 +87,5 @@ The steps below show you how to do this:
     }
     ```
 
-8. Repeat step 7 for the other input operations. If you noticed, you only need to add the name `(UPDATE_TODO_ITEM, DELETE_TODO_ITEM)` of the operation without the `input` suffix. Then it will be generated once you press enter.
-9. Once you have added all the input operations, click on the `Export` button, at the top right of the editor, to save the document model on your local machine.
+7. Repeat step 6 for the other input operations. If you noticed, you only need to add the name `(UPDATE_TODO_ITEM, DELETE_TODO_ITEM)` of the operation without the `input` suffix. Then it will be generated once you press enter.
+8. Once you have added all the input operations, click on the `Export` button, at the top right of the editor, to save the document model on your local machine.
