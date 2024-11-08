@@ -8,6 +8,23 @@ displayed_sidebar: connectSidebar
 
 Let's set up your computer to start building the ToDoList Document Model. Don't worry if this is your first time setting up a development environment - we'll guide you through each step!
 
+## Table of Contents
+- [Prerequisites](#prerequisites)
+- [Installing Node.js](#installing-nodejs)
+  - [For Windows](#for-windows)
+  - [For macOS](#for-macos)
+  - [For Linux (Ubuntu/Debian)](#for-linux-ubuntudebian)
+- [Installing Visual Studio Code](#installing-visual-studio-code)
+  - [For Windows](#for-windows-1)
+  - [For macOS](#for-macos-1)
+  - [For Linux (Ubuntu/Debian)](#for-linux-ubuntudebian-1)
+- [Install Git](#install-git)
+  - [For Windows](#for-windows-2)
+  - [For macOS](#for-macos-2)
+  - [For Linux (Ubuntu/Debian)](#for-linux-ubuntudebian-2)
+- [Configure Git](#configure-git-all-systems)
+- [Verify Installation](#verify-installation)
+
 ## Prerequisites
 
 Before we begin building our ToDoList Document Model, we need to install some software on your computer. We'll need three main tools: Node.js, which helps us run our code, Visual Studio Code (VS Code), which is where we'll write our code, and Git, which helps us manage our code. Follow the steps below based on your computer's operating system.
@@ -17,7 +34,7 @@ Before we begin building our ToDoList Document Model, we need to install some so
 Node.js is a tool that lets us run our application. Let's install it step by step.
 
 #### For Windows:
-1. First, we need to set up PowerShell for running commands:
+1. **Set up PowerShell for running commands:**
    - Press the Windows key
    - Type "PowerShell"
    - Right-click on "Windows PowerShell" and select "Run as administrator"
@@ -27,62 +44,69 @@ Node.js is a tool that lets us run our application. Let's install it step by ste
    ```
    - Type 'A' when prompted to confirm
    - You can now close this window and open PowerShell normally for the remaining steps
-2. Visit the [Node.js official website](https://nodejs.org/)
-3. Click the big green button that says "LTS" (this means Long Term Support - it's the most stable version)
-4. Once the installer downloads, double-click it to start installation
-5. Click "Next" through the installation wizard, leaving all settings at their defaults
-6. After installation, we need to verify it worked. Here's how:
-   - Press the Windows key
-   - Type "PowerShell" and press Enter (no need for admin mode this time)
-   - In the PowerShell window that appears, type these commands one at a time and press Enter after each:
+
+2. **Install Node.js:**
+   - Visit the [Node.js official website](https://nodejs.org/)
+   - Click the big green button that says "LTS" (this means Long Term Support - it's the most stable version)
+   - Once the installer downloads, double-click it to start installation
+   - Click "Next" through the installation wizard, leaving all settings at their defaults
+
+3. **Verify Installation:**
+   - Open PowerShell (no need for admin mode)
+   - Type these commands one at a time and press Enter after each:
    ```powershell
    node --version
    npm --version
    ```
-   You should see numbers appear after each command (like v18.17.0). If you do, congratulations - Node.js is installed!
+   - You should see version numbers appear after each command (e.g., v18.17.0). If you do, congratulations - Node.js is installed!
+
+> **Note**: If Node.js commands don't work in VS Code, restart VS Code to refresh environment variables.
 
 #### For macOS:
-1. First, let's install Homebrew (a tool that helps install other software):
-   - Open Terminal (you can find it by pressing Command + Space and typing "Terminal")
+1. **Install Homebrew:**
+   - Open Terminal (press Command + Space and type "Terminal")
    - Copy and paste this command into Terminal and press Enter:
    ```bash
    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
    ```
    - Follow any additional instructions that appear
-2. Now install Node.js:
+
+2. **Install Node.js:**
    - In the same Terminal window, type this command and press Enter:
    ```bash
    brew install node
    ```
-3. Let's verify the installation:
+
+3. **Verify Installation:**
    - In Terminal, type these commands one at a time and press Enter after each:
    ```bash
    node --version
    npm --version
    ```
-   If you see numbers appear (like v18.17.0), you've successfully installed Node.js!
+   - If you see version numbers, you've successfully installed Node.js!
 
 #### For Linux (Ubuntu/Debian):
-1. First, open Terminal:
+1. **Open Terminal:**
    - Press Ctrl + Alt + T on your keyboard, or
    - Click the Activities button and type "Terminal"
-2. Update your system's package list by typing this command and pressing Enter:
+
+2. **Update Package List:**
    ```bash
    sudo apt update
    ```
-   - When asked for your password, type it (note: you won't see the characters as you type - this is normal!)
-3. Install Node.js and npm by typing this command and pressing Enter:
+
+3. **Install Node.js and npm:**
    ```bash
    sudo apt install nodejs npm
    ```
-   - Type 'Y' and press Enter if asked to confirm
-4. Verify everything is working:
+
+4. **Verify Installation:**
    - Type these commands one at a time and press Enter after each:
    ```bash
    node --version
    npm --version
    ```
-   If you see numbers appear after each command, you're all set!
+   - If you see version numbers, you're all set!
 
 ### Installing Visual Studio Code
 
@@ -135,7 +159,7 @@ VS Code is the editor we'll use to write our code. Here's how to install it:
    - Typing `code` in the terminal, or
    - Finding it in your Applications menu
 
-### 3. Install Git
+### Install Git
 
 #### Windows
 1. Open PowerShell (press Windows key, type "PowerShell", and press Enter)
@@ -147,7 +171,7 @@ VS Code is the editor we'll use to write our code. Here's how to install it:
    git --version
    ```
 
-#### Mac
+#### macOS
 1. Install using Homebrew:
    ```bash
    brew install git
@@ -171,9 +195,9 @@ VS Code is the editor we'll use to write our code. Here's how to install it:
    git --version
    ```
 
-### 4. Configure Git (All Systems)
+### Configure Git (All Systems)
 
-Open your terminal(command prompt) and run the following commands to set up Git:
+Open your terminal (command prompt) and run the following commands to set up Git:
 
 After installation, set up your identity:
 ```bash
@@ -181,9 +205,9 @@ git config --global user.name "Your Name"
 git config --global user.email "your.email@example.com"
 ```
 
-### 5. Verify Installation
+### Verify Installation
 
-Open your terminal(command prompt) and run the following commands to verify your setup:
+Open your terminal (command prompt) and run the following commands to verify your setup:
 ```bash
 node --version
 npm --version
