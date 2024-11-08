@@ -17,15 +17,25 @@ Before we begin building our ToDoList Document Model, we need to install some so
 Node.js is a tool that lets us run our application. Let's install it step by step.
 
 #### For Windows:
-1. Visit the [Node.js official website](https://nodejs.org/)
-2. Click the big green button that says "LTS" (this means Long Term Support - it's the most stable version)
-3. Once the installer downloads, double-click it to start installation
-4. Click "Next" through the installation wizard, leaving all settings at their defaults
-5. After installation, we need to verify it worked. Here's how:
-   - Press the Windows key + R on your keyboard
-   - Type "cmd" and press Enter to open Command Prompt
-   - In the black window that appears, type these commands one at a time and press Enter after each:
-   ```bash
+1. First, we need to set up PowerShell for running commands:
+   - Press the Windows key
+   - Type "PowerShell"
+   - Right-click on "Windows PowerShell" and select "Run as administrator"
+   - In the PowerShell window, type this command and press Enter:
+   ```powershell
+   Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+   ```
+   - Type 'A' when prompted to confirm
+   - You can now close this window and open PowerShell normally for the remaining steps
+2. Visit the [Node.js official website](https://nodejs.org/)
+3. Click the big green button that says "LTS" (this means Long Term Support - it's the most stable version)
+4. Once the installer downloads, double-click it to start installation
+5. Click "Next" through the installation wizard, leaving all settings at their defaults
+6. After installation, we need to verify it worked. Here's how:
+   - Press the Windows key
+   - Type "PowerShell" and press Enter (no need for admin mode this time)
+   - In the PowerShell window that appears, type these commands one at a time and press Enter after each:
+   ```powershell
    node --version
    npm --version
    ```
@@ -128,11 +138,12 @@ VS Code is the editor we'll use to write our code. Here's how to install it:
 ### 3. Install Git
 
 #### Windows
-1. Visit the [Git website](https://git-scm.com/)
-2. Download the latest version for Windows
-3. Run the installer and use the recommended settings
-4. Verify installation by opening Command Prompt(Terminal):
-   ```bash
+1. Open PowerShell (press Windows key, type "PowerShell", and press Enter)
+2. Visit the [Git website](https://git-scm.com/)
+3. Download the latest version for Windows
+4. Run the installer and use the recommended settings
+5. Verify installation by opening PowerShell:
+   ```powershell
    git --version
    ```
 
