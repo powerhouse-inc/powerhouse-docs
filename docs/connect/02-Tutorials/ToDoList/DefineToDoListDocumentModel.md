@@ -89,3 +89,7 @@ The steps below show you how to do this:
 
 7. Repeat step 6 for the other input operations. If you noticed, you only need to add the name `(UPDATE_TODO_ITEM, DELETE_TODO_ITEM)` of the operation without the `input` suffix. Then it will be generated once you press enter.
 8. Once you have added all the input operations, click on the `Export` button, at the top right of the editor, to save the document model on your local machine.
+
+Check below screenshot for the complete implementation:
+
+![ToDoList Document Model](./images/completeEditor.png)
