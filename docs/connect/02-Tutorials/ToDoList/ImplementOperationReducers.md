@@ -50,9 +50,9 @@ Open the `to-do-list.ts` file and you should see the code that needs to be fille
 * - delete the file and run the code generator again to have it reset
 */
 
-import { ToDoListTodolistOperations } from '../../gen/todolist/operations';
+import { ToDoListToDoListOperations } from '../../gen/to-do-list/operations';
 
-export const reducer: ToDoListTodolistOperations = {
+export const reducer: ToDoListToDoListOperations = {
     addTodoItemOperation(state, action, dispatch) {
         state.stats.total += 1;
         state.stats.unchecked += 1;
@@ -111,7 +111,7 @@ Here are the tests for the three operations written in the reducers file. This t
 
 import utils from '../../gen/utils';
 import { reducer } from '../../gen/reducer';
-import * as creators from '../../gen/todolist/creators';
+import * as creators from '../../gen/to-do-list/creators';
 import { ToDoListDocument } from '../../gen/types';
 
 describe('Todolist Operations', () => {
