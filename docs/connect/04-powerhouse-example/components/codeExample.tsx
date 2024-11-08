@@ -7,7 +7,9 @@ export default function App() {
           template='react'
           customSetup={{
             dependencies: {
-              "@powerhousedao/design-system": "^1.0.0-beta.1",
+              "@powerhousedao/design-system": "^1.5.1",
+              "document-model": "^2.3.1"
+
             },
           }}
           files={{
