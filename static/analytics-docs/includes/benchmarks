@@ -1,0 +1,25 @@
+<h1 id='benchmarks'>Benchmarks</h1>
+<p>Due to the performance-sensitive nature of metrics collection, we include a <a href="https://github.com/powerhouse-inc/analytics-engine/tree/main/benchmarks">suite of benchmarks</a> that compare the various analytics store implementations. These are run every publish and stored in the associated <a href="https://github.com/powerhouse-inc/analytics-engine/actions/runs/12123429624/job/33798972072">GitHub action history</a>.</p>
+
+<p>We also include results from major releases <a href="https://github.com/powerhouse-inc/analytics-engine/tree/main/benchmarks/results">here</a>.</p>
+
+<p>In summary, we have found that the <code>MemoryAnalyticsStore</code> and <code>PostgresAnalyticsStore</code> implementations are very close in performance, with the Postgres implementation slightly faster in most applications.</p>
+<h2 id='query-list'>Query-list</h2>
+<p>In <a href="https://github.com/powerhouse-inc/analytics-engine/blob/main/benchmarks/results/query-list/">this benchmark</a>, we ran the most frequent 600+ real-world queries against matching tables of around 200k records.</p>
+
+<p>We found that, on average, the <code>MemoryAnalyticsStore</code> implementation took about <code>1.36x</code> the time it took <code>PostgresAnalyticsStore</code>. Full results <a href="https://github.com/powerhouse-inc/analytics-engine/blob/main/benchmarks/results/query-list/pglite.txt">here</a>.</p>
+<h2 id='wasm'>WASM</h2>
+<p>In <a href="https://github.com/powerhouse-inc/analytics-engine/blob/main/benchmarks/results/wasm/">this benchmark</a>, we analyze the startup and insert time for the <code>MemoryAnalyticsStore</code> implementation.</p>
+
+<table><thead>
+<tr>
+<th>Operation</th>
+<th>Ops per Sec</th>
+<th>Average  Time</th>
+</tr>
+</thead><tbody>
+</tbody></table>
+
+<p>│ Init                │ 3           │ 323.00 ms     │
+│ Insert 100 records  │ 478         │ 2.08 ms       │
+│ Insert 200k records │ 0           │ 4448.10 ms    │</p>

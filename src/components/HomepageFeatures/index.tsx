@@ -46,6 +46,17 @@ const FeatureList: FeatureItem[] = [
       </>
     ),
   },
+  {
+    title: "Analytics",
+    imageSrc: require("@site/static/img/renown.png").default,
+    docPath: "pathname:///analytics-docs/index.html",
+    description: (
+      <>
+        Leverage the Powerhouse Analytics Package to gain insights into your
+        data
+      </>
+    ),
+  },
 ];
 
 function Feature({ title, imageSrc, description, docPath }: FeatureItem) {

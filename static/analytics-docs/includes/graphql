@@ -1,0 +1,3 @@
+<h1 id='graphql'>Graphql</h1>
+<p>The <code>analytics-engine-graphql</code> module provides types and resolvers needed for a fully-functional GraphQL Server API. This library has no dependencies on any particular server but has been tested using <a href="https://www.apollographql.com/docs/apollo-server">Apollo Server 3 and 4</a>.</p>
+<h2 id='apollo-4-setup'>Apollo 4 Setup</h2>
