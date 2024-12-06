@@ -14,9 +14,14 @@ This command will create a new project in the current directory.
 You can run the command in the terminal window of your OS or you open the newly installed VSCode and run the command in the terminal window of VSCode.
 You will need VSCode later in the tutorial once you have generated the document model.
 Make sure the terminal reflects the directory where you want to create the new project.
+To open a directory in a terminal, you use the cd command to change your current directory. The cd command takes an argument, usually the name of the folder you want to move to, so the full command is 
+```bash
+cd your-directory
+```
+This essentially opens that folder and places you in it.
 :::
 
-Navigate to the directory where you want to create the new project and in your terminal, run the following command:
+Once you've navigated to the directory where you want to create the new project and in your terminal, run the following command:
 
 ```bash
 npm create document-model-lib

@@ -28,7 +28,7 @@ To write the opearation reducers of the `ToDoList` document model, you need to g
 To do this, run the following command in the terminal:
 
 ```bash
-npm run generate ToDoList.zip
+npm run generate ToDoList.phdm.zip
 ```
 
 Now you can navigate to `/document-models/to-do-list/src/reducers/to-do-list.ts` and start writing the operation reducers.

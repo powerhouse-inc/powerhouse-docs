@@ -14,7 +14,10 @@ Before you start, make sure you have the Connect application running.
 
 We use GraphQL Schema Definition Language (SDL) to define the document model schema. Below, you can see the SDL for the `ToDoList` document model.
 
+:::info
 This schema contains the data structure of the document model and the basic operations that can be performed on the document model.
+Document models in Powerhouse leverage event sourcing principles, where every state transition is represented by an operation. GraphQL input types describe operations, ensuring that user intents are captured effectively. These operations detail the parameters needed for state transitions The use of GraphQL aligns these transitions with explicit, validated, and reproducible commands, supporting CQRS (Command Query Responsibility Segregation) patterns.
+:::
 
 ## State Schema
 
@@ -75,7 +78,7 @@ The steps below show you how to do this:
     
     ![ToDoList Document Model Form Metadata](./images/form.png)
 
-3. In the code editor, you can see the SDL for the document model. Replace the existing SDL with the SDL defined in the [State Schema](#state-schema) section. Only copy and paste the types, leaving the inputs for the next step. 
+3. In the code editor, you can see the SDL for the document model. Replace the existing SDL with the SDL defined in the [State Schema](#state-schema) section. Only copy and paste the types, leaving the inputs for the next step. You can however already press 'Sync with schema' button to set the initial state of your document model based on your Schema Definition Language. 
 4. Below the editor, there is an input field `Add module`. You need to create and name a module that the input operations will be added to. In this case, we will name the module `to_do_list`. Press enter.
 5. Now there is a new field, called `Add operation`. Here you will have to add each input operation to the module, one by one.
 6. Inside the `Add operation` field, type `ADD_TODO_ITEM` and press enter. A small editor will appear under with an empty input type that you have to fill. Copy the first input type from the [Operations Schema](#operations-schema) section and paste it in the editor. The editor should look like this:
@@ -88,7 +91,7 @@ The steps below show you how to do this:
     ```
 
 7. Repeat step 6 for the other input operations. If you noticed, you only need to add the name `(UPDATE_TODO_ITEM, DELETE_TODO_ITEM)` of the operation without the `input` suffix. Then it will be generated once you press enter.
-8. Once you have added all the input operations, click on the `Export` button, at the top right of the editor, to save the document model on your local machine.
+8. Once you have added all the input operations, click on the `Export` button, at the top right of the editor, to save the document model on your local machine. Ideally you already save your file in the root of your powerhouse project on your machine.
 
 Check below screenshot for the complete implementation:
 
