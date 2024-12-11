@@ -1,19 +1,61 @@
 ---
-sidebar_position: 4
-# displayed_sidebar: switchboardSidebar
+sidebar_position: 0
 ---
 
-# Analytics Engine Documentation
+# Getting Started
 
 ## Introduction
 
-Welcome to the MakerDAO Analytics Engine Documentation. The Analytics Engine processes financial data such as DAI transactions, expense reports, and budget allocations, transforming raw figures into actionable insights for the MakerDAO ecosystem. The analytics engine is here to help you find relevant data insights across a set of different metrics, time periods and dimensions.
+Welcome to the Powerhouse Analytics Engine Documentation. This engine is a powerful, distributed, time-series analytics system, written in Typescript with an optional GraphQL interface on top. It is designed to run anywhere: from browsers, to server environments, or even in embedded systems.
 
-This engine has aggregating and organised the raw data into the pre-defined dimensions, metrics and time periods at the upload point. Giving the user insights into the uploaded raw data.
+This documentation serves as a guide for Typescript and GraphQL API usage, not library development. For documentation on how to build or contribute to this project, see our [README](https://github.com/powerhouse-inc/analytics-engine/blob/main/README.md).
 
-## Getting Started
+## Overview
 
-Basic understanding of GraphQL and access to the MakerDAO analytics API endpoint is require in the next steps. The consumable data is available through the **[GraphQL](https://graphql.org/)** format. This format allows you to only fetch the data you require.
+![high-level](./images/high-level.jpg)
+
+This system can be broken up into several major systems: **queries**, **engine components**, and **storage**. This last piece, **storage**, is a good place to start, as it is important to understand how data is stored so that we can understand how it can be queried.
+
+![untitled](dbs.png)
+*Database table structures for the analytics engine.*
+
+Analytics information  is stored in three database tables: 
+
+- `AnalyticsSeries`: This table stores the raw data over a period with its metric, value, unit, function and parameters
+- `AnalyticsDimension`: This table stores all available dimensions for each serie.
+
+
+
+
+
+Depending on the integration, data may be queried using the [Typescript](./typescript/index.md) or [GraphQL](./graphql/index.md) APIs.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+All consumable data is available through the **[GraphQL](https://graphql.org/)** format, which allows you to only fetch the data you require.
 
 The API is available in two environments, a developer environment (DEV) and a production environment. For testing purposes please use the DEV environment. For the latest up to date data with integration or consumption purposes use the production environment.
 
