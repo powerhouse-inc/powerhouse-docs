@@ -1,0 +1,58 @@
+<h1 id='browser'>Browser</h1>
+<p>The <code>BrowserAnalyticsStore</code> is an <code>IAnalyticsStore</code> implementation that sits on top of <a href="#memory"><code>MemoryAnalyticsStore</code></a> but adds an <code>IndexedDB</code> plugin for persistence.</p>
+
+<aside class="notice">
+See the <a href="#compatibility">Compatibility</a> section for details on which stores are intended to be used in different execution environments.
+</aside>
+<h2 id='construction'>Construction</h2>
+<p>A default implementation of the <code>BrowserAnalyticsStore</code> may be created with no arguments, or options are provided for specialized needs.</p>
+<div class="highlight"><pre class="highlight typescript tab-typescript"><code><span class="c1">// creates a database named "analytics"</span>
+<span class="kd">const</span> <span class="nx">store</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BrowserAnalyticsStore</span><span class="p">();</span>
+</code></pre></div>
+<blockquote>
+<p>Create with a specific database name.</p>
+</blockquote>
+<div class="highlight"><pre class="highlight typescript tab-typescript"><code><span class="kd">const</span> <span class="nx">store</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BrowserAnalyticsStore</span><span class="p">({</span> <span class="na">databaseName</span><span class="p">:</span> <span class="dl">"</span><span class="s2">analytics</span><span class="dl">"</span> <span class="p">});</span>
+</code></pre></div>
+<blockquote>
+<p>It may also be created with optional contructor arguments that may be helpful for debugging or metrics collection.</p>
+</blockquote>
+<div class="highlight"><pre class="highlight typescript tab-typescript"><code><span class="kd">const</span> <span class="nx">store</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BrowserAnalyticsStore</span><span class="p">({</span>
+  <span class="na">databaseName</span><span class="p">:</span> <span class="dl">"</span><span class="s2">analytics</span><span class="dl">"</span><span class="p">,</span>
+
+  <span class="na">queryLogger</span><span class="p">:</span> <span class="nx">defaultQueryLogger</span><span class="p">(</span><span class="dl">"</span><span class="s2">browser</span><span class="dl">"</span><span class="p">),</span>
+  <span class="na">resultsLogger</span><span class="p">:</span> <span class="nx">defaultResultsLogger</span><span class="p">(</span><span class="dl">"</span><span class="s2">browser</span><span class="dl">"</span><span class="p">),</span>
+  <span class="na">profiler</span><span class="p">:</span> <span class="k">new</span> <span class="nx">PassthroughAnalyticsProfiler</span><span class="p">(),</span>
+<span class="p">});</span>
+</code></pre></div>
+<p>For more details on these optional constructor parameters, see the <a href="#utilities">Utilities</a> section.</p>
+
+<p>Since the constructor options argument extends the <code>MemoryAnalyticsStore</code> options argument, see the <a href="#memory"><code>MemoryAnalyticsStore</code></a> documentation for further details on other optional parameters.</p>
+<h2 id='initialization'>Initialization</h2>
+<p>Similar to the <a href="#memory"><code>MemoryAnalyticsStore</code></a>, this implementation requires an asynchronous initialization step.</p>
+
+<blockquote>
+<p>Note that this method is not available on the <code>IAnalyticsStore</code> interface, but only on the concrete type.</p>
+</blockquote>
+<div class="highlight"><pre class="highlight typescript tab-typescript"><code><span class="c1">// create the store</span>
+<span class="kd">const</span> <span class="nx">store</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BrowserAnalyticsStore</span><span class="p">();</span>
+
+<span class="c1">// initialize it</span>
+<span class="k">await</span> <span class="nx">store</span><span class="p">.</span><span class="nx">init</span><span class="p">();</span>
+</code></pre></div><h2 id='persistence'>Persistence</h2>
+<p>The <code>databaseName</code> constructor argument namespaces the database. This allows users to create multiple stores, if needed, which will not conflict with each other. You can use your browser&#39;s developer tools to see these databases, usually through the &quot;Storage&quot; tab.</p>
+
+<aside class="notice">
+While manipulating the data manually is not recommended, this allows you to easily delete and recreate databases if needed.
+</aside>
+
+<p><img src="/images/./images/indexeddb.png" alt="dev-tools" /></p>
+
+<p>The store interface is intended to be immutable, meaning that it does not provide a general method of wiping a DB. However, an IDB database may be deleted via the standard <a href="https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API">IDB API</a>.</p>
+<div class="highlight"><pre class="highlight typescript tab-typescript"><code><span class="c1">// creates the database</span>
+<span class="kd">const</span> <span class="nx">store</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">BrowserAnalyticsStore</span><span class="p">({</span> <span class="na">databaseName</span><span class="p">:</span> <span class="dl">"</span><span class="s2">my-analytics</span><span class="dl">"</span> <span class="p">});</span>
+<span class="k">await</span> <span class="nx">store</span><span class="p">.</span><span class="nx">init</span><span class="p">();</span>
+
+<span class="c1">// use the browser API to delete the database</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">indexedDB</span><span class="p">.</span><span class="nx">deleteDatabase</span><span class="p">(</span><span class="dl">"</span><span class="s2">my-analytics</span><span class="dl">"</span><span class="p">);</span>
+</code></pre></div>

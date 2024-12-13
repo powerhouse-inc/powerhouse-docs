@@ -86,6 +86,11 @@ const config: Config = {
           label: 'Renown',
         },
         {
+          href: "/analytics-docs/index.html",
+          label: "Analytics",
+          target: "_blank",
+        },
+        {
           type: 'docSidebar',
           sidebarId: 'faqSidebar',
           position: 'left',
@@ -120,6 +125,11 @@ const config: Config = {
             {
               label: 'Renown',
               to: '/docs/renown/intro',
+            },
+            {
+              label: 'Analytics',
+              href: '/analytics-docs/index.html',
+              
             },
             {
               label: 'FAQ',
