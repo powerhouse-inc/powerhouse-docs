@@ -125,6 +125,10 @@ const config: Config = {
               label: 'FAQ',
               to: '/docs/faq/intro',
             },
+            {
+              label: "Blog",
+              to: '/blog'
+            }
           ],
         },
         {
