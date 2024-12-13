@@ -5,28 +5,6 @@ description: essential patterns and techniques to help you create robust, mainta
 slug: /best-practices
 ---
 
-## Table of Contents
-
-1. [Introduction](notion://www.notion.so/makerdao-ses/Best-Practices-8adc6b564cf4417188578884c0c94def#introduction)
-2. [Why Best Practices Matter](notion://www.notion.so/makerdao-ses/Best-Practices-8adc6b564cf4417188578884c0c94def#why-best-practices-matter)
-3. [Background on Document Models](notion://www.notion.so/makerdao-ses/Best-Practices-8adc6b564cf4417188578884c0c94def#background-on-document-models)
-4. [Best Practices](notion://www.notion.so/makerdao-ses/Best-Practices-8adc6b564cf4417188578884c0c94def#best-practices)
-    - [General GraphQL Patterns](notion://www.notion.so/makerdao-ses/Best-Practices-8adc6b564cf4417188578884c0c94def#general-graphql-patterns)
-    - [Using Slugs and IDs](notion://www.notion.so/makerdao-ses/Best-Practices-8adc6b564cf4417188578884c0c94def#using-slugs-and-ids)
-    - [Flux Pattern](notion://www.notion.so/makerdao-ses/Best-Practices-8adc6b564cf4417188578884c0c94def#flux-pattern)
-    - [Event Sourcing](notion://www.notion.so/makerdao-ses/Best-Practices-8adc6b564cf4417188578884c0c94def#event-sourcing)
-    - [Command Query Responsibility Segregation (CQRS)](notion://www.notion.so/makerdao-ses/Best-Practices-8adc6b564cf4417188578884c0c94def#command-query-responsibility-segregation-cqrs)
-    - [Domain Modeling](notion://www.notion.so/makerdao-ses/Best-Practices-8adc6b564cf4417188578884c0c94def#domain-modeling)
-    - [Root Object Naming](notion://www.notion.so/makerdao-ses/Best-Practices-8adc6b564cf4417188578884c0c94def#root-object-naming)
-    - [Composition vs Aggregation vs Association](notion://www.notion.so/makerdao-ses/Best-Practices-8adc6b564cf4417188578884c0c94def#composition-vs-aggregation-vs-association)
-    - [ObjectRef vs ObjectInfo](notion://www.notion.so/makerdao-ses/Best-Practices-8adc6b564cf4417188578884c0c94def#objectref-vs-objectinfo)
-    - [Reusing State Types as Input Subtypes](notion://www.notion.so/makerdao-ses/Best-Practices-8adc6b564cf4417188578884c0c94def#reusing-state-types-as-input-subtypes)
-    - [Minimal Mandatory Input Fields](notion://www.notion.so/makerdao-ses/Best-Practices-8adc6b564cf4417188578884c0c94def#minimal-mandatory-input-fields)
-    - [Array `!` Rules](notion://www.notion.so/makerdao-ses/Best-Practices-8adc6b564cf4417188578884c0c94def#array-rules)
-    - [Input Type-Specific Fields](notion://www.notion.so/makerdao-ses/Best-Practices-8adc6b564cf4417188578884c0c94def#input-type-specific-fields)
-    - [Object References](notion://www.notion.so/makerdao-ses/Best-Practices-8adc6b564cf4417188578884c0c94def#object-references)
-5. [Conclusion](notion://www.notion.so/makerdao-ses/Best-Practices-8adc6b564cf4417188578884c0c94def#conclusion)
-
 ## Introduction
 
 Welcome to this tutorial on best practices for writing Powerhouse Document Models. In this guide, we'll walk you through essential patterns and techniques to help you create robust, maintainable, and efficient document models using the Powerhouse Connect tool.
@@ -45,7 +23,7 @@ Document Models are structured frameworks that represent and manage business log
 
 ### General GraphQL Patterns
 
-### Follow Standard GraphQL Conventions
+#### Follow Standard GraphQL Conventions
 
 When defining your document models, adhere to standard GraphQL conventions. This includes using appropriate naming conventions, structuring your types and queries correctly, and ensuring that your schema is both intuitive and efficient.
 
@@ -62,7 +40,7 @@ When defining your document models, adhere to standard GraphQL conventions. This
 
 ### Using Slugs and IDs
 
-### Create Stable, Readable URLs
+#### Create Stable, Readable URLs
 
 Using slugs and IDs together ensures your URLs are both human-readable and stable. This improves usability and SEO, making it easier to reference and share resources.
 
@@ -71,7 +49,7 @@ Using slugs and IDs together ensures your URLs are both human-readable and stabl
 
 ### Flux Pattern
 
-### Implement Unidirectional Data Flow
+#### Implement Unidirectional Data Flow
 
 The Flux pattern is a state management approach that centralizes state updates, ensuring a predictable state flow. This is crucial for debugging and state tracking in complex applications.
 
@@ -91,7 +69,7 @@ The Flux pattern is a state management approach that centralizes state updates, 
 
 ### Event Sourcing
 
-### Store Changes as a Sequence of Events
+#### Store Changes as a Sequence of Events
 
 Event sourcing involves storing all changes to the application state as events. This allows you to reconstruct past states, audit changes, and implement features like undo functionality.
 
@@ -112,7 +90,7 @@ Event sourcing involves storing all changes to the application state as events. 
 
 ### Command Query Responsibility Segregation (CQRS)
 
-### Separate Read and Write Operations
+#### Separate Read and Write Operations
 
 CQRS separates the methods for reading and writing data, optimizing performance and scalability. This distinction helps in maintaining clear and distinct command (write) and query (read) models.
 
@@ -133,7 +111,7 @@ CQRS separates the methods for reading and writing data, optimizing performance 
 
 ### Domain Modeling
 
-### Create a Conceptual Model Based on Real-World Domain
+#### Create a Conceptual Model Based on Real-World Domain
 
 Domain modeling involves creating a conceptual model that mirrors the real-world domain. This helps in structuring your system around core business logic and rules.
 
@@ -152,7 +130,7 @@ Domain modeling involves creating a conceptual model that mirrors the real-world
 
 ### Root Object Naming
 
-### Use `DocumentModelState` as the Root Object
+#### Use `DocumentModelState` as the Root Object
 
 Name your root object `DocumentModelState` to clearly indicate the primary entry point for state management. This consistency makes your model more understandable and maintainable.
 
@@ -166,7 +144,7 @@ type ExampleModelNameState {
 
 ### Composition vs Aggregation vs Association
 
-### Define Relationships Appropriately
+#### Define Relationships Appropriately
 
 - **Composition:** Use when the parent-child relationship is immutable.
 - **Aggregation:** Use when the parent can exist independently.
@@ -174,7 +152,7 @@ type ExampleModelNameState {
 
 ### ObjectRef vs ObjectInfo
 
-### Distinguish Between References and Detailed Information
+#### Distinguish Between References and Detailed Information
 
 - **ObjectRef:** References the unique identifier of an object.
     
@@ -195,7 +173,7 @@ type ExampleModelNameState {
 
 ### Reusing State Types as Input Subtypes
 
-### Maintain Consistency and Reduce Redundancy
+#### Maintain Consistency and Reduce Redundancy
 
 Reuse state types as input subtypes to simplify your codebase and ensure alignment between state representations and input types.
 
@@ -213,7 +191,7 @@ type Item {
 
 ### Minimal Mandatory Input Fields
 
-### Keep Inputs Optional When Appropriate
+#### Keep Inputs Optional When Appropriate
 
 Make input fields optional when the corresponding state fields are optional or have default values. This practice ensures flexibility and reduces unnecessary complexity.
 
@@ -227,7 +205,7 @@ input UpdateItemInput {
 
 ### Array `!` Rules
 
-### Use Mandatory Arrays Appropriately
+#### Use Mandatory Arrays Appropriately
 
 - **Mandatory Inner Elements:** Always use `!` for array element types.
 - **Mandatory Arrays in State:** Use `!` for arrays in the state with a default value of `[]`.
@@ -242,7 +220,7 @@ input UpdateItemInput {
 
 ### Input Type-Specific Fields
 
-### Capture User Intentions Effectively
+#### Capture User Intentions Effectively
 
 Use specific fields in input types to clearly capture user intentions, such as removing optional state fields or adding contextual information.
 
@@ -257,7 +235,7 @@ input UpdateStatusInput {
 
 ### Object References
 
-### Resolve Object References to Complete Objects in API
+#### Resolve Object References to Complete Objects in API
 
 Ensure that object references in your API resolve to full, complete objects. This practice provides comprehensive data and improves usability.
 
