@@ -6,7 +6,7 @@ displayed_sidebar: connectSidebar
 
 # Setup Builder Environment
 
-Let's set up your computer to start building the ToDoList Document Model. Don't worry if this is your first time setting up a development environment - we'll guide you through each step!
+Let's set up your computer to start building your first Document Model. Don't worry if this is your first time setting up a development environment - we'll guide you through each step!
 
 ## Table of Contents
 - [Prerequisites](#prerequisites)
@@ -27,7 +27,7 @@ Let's set up your computer to start building the ToDoList Document Model. Don't 
 
 ## Prerequisites
 
-Before we begin building our ToDoList Document Model, we need to install some software on your computer. We'll need three main tools: Node.js, which helps us run our code, Visual Studio Code (VS Code), which is where we'll write our code, and Git, which helps us manage our code. Follow the steps below based on your computer's operating system.
+Before we begin building our Document Model, we need to install some software on your computer. We'll need three main tools: Node.js, which helps us run our code, Visual Studio Code (VS Code), which is where we'll write our code, and Git, which helps us manage our code. Follow the steps below based on your computer's operating system.
 
 ### Installing Node.js
 
@@ -214,4 +214,4 @@ npm --version
 git --version
 ```
 
-You should see version numbers displayed for all commands. You're now ready to start building your ToDoList Document Model!
+You should see version numbers displayed for all commands. You're now ready to start building your first Document Model!
