@@ -46,6 +46,12 @@ const config: Config = {
         theme: {
           customCss: './src/css/custom.css',
         },
+        blog: {
+          showReadingTime: false,
+          editUrl:
+            'https://github.com/powerhouse-inc/powerhouse-docs/tree/dev',
+          onInlineAuthors: 'ignore'
+        },
       } satisfies Preset.Options,
     ],
   ],
