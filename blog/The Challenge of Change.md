@@ -7,8 +7,7 @@ authors:
     title: Product Manager at Powerhouse
     image_url: https://avatars.githubusercontent.com/u/148560082?v=4
     socials:
-      x: 0xCallme_t
-      github: CallmeT-ty
+      x: https://x.com/0xCallme_t
 tags: [Dao, Tooling]
 image: https://i.imgur.com/mErPwqL.png
 hide_table_of_contents: false

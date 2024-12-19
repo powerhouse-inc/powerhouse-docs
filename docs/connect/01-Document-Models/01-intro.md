@@ -6,7 +6,7 @@ This page is an intro to document models, focused towards an audience of develop
 :::
 
 Document model types are available as a set of document templates within Connect. 
-Each DAO that's making use of Powerhouse has the ability to generate, customise or design their own document models. To get familiar with how a document model is build and created you can try out one of our follow-along [tutorials](docs/connect/02-Tutorials). 
+Each DAO that's making use of Powerhouse has the ability to generate, customise or design their own document models. To get familiar with how a document model is build and created you can try out one of our follow-along [tutorials](docs/connect/02-Tutorials/ToDoList/SetupBuilderEnvironment.md). 
 
 ## Introduction to Document Models
 
