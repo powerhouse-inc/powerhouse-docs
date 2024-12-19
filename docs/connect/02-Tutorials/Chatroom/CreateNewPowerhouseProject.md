@@ -80,7 +80,7 @@ A new browser window will open and you will see the Connect application. If it d
 
 Create a new document model by clicking on the `DocumentModel` button by the "New Document" section. The Gif below shows you where to click.
 
-![Create New Document Model](./images/chatroomconnectapp.gif)
+![Create New Document Model](./images/ChatRoomConnectApp.gif)
 
 If you followed the steps correctly, you should have an empty document model created called `ChatRoom`.
 
