@@ -99,7 +99,7 @@ input EditChatDescriptionInput {
 
 ## Define the Document Model
 
-To be able to define the document model, you need to open the ToDoList document model editor in Connect. 
+To be able to define the document model, you need to open the Chatroom document model editor in Connect. 
 
 The steps below show you how to do this:
 
