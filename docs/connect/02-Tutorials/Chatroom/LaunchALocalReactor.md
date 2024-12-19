@@ -6,7 +6,7 @@ displayed_sidebar: connectSidebar
 
 # Launch a local Reactor
 
-Now we'll create a local [Reactor](docs/reactor) instance to simulate the behaviour of the chatroom synchronising messages between two nodes or users in the network. 
+Now we'll create a local [Reactor](docs/reactor/intro.md) instance to simulate the behaviour of the chatroom synchronising messages between two nodes or users in the network. 
 
 Wind down connect and run the following command in your terminal. 
 
