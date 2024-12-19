@@ -1,4 +1,4 @@
-# Document Model Tools & Theory
+# Document Model Tools
 
 ## What will be produced for you on your next document model: 
 
@@ -27,8 +27,6 @@ Embedding detailed business logic directly within reducers can lead to bulky, ha
 3. Reusability: Utility functions can be reused across different parts of your application, including multiple reducers. 
 
 4. Reducer Simplicity: Keeping reducers lean by focusing on state transition mechanisms rather than detailed logic makes them more predictable and easier to maintain. 
-
-For our todo list, we can create utility functions for common operations like adding, deleting, updating a todo item, and updating the statistics. These functions can then be used within your reducer.
 
 ### 5. Working with derived fields
 
