@@ -30,12 +30,12 @@ npm create document-model-lib
 In the terminal, you will be asked to enter the project name. Fill in the project name and press enter.
 
 ```bash
-you@yourmachine:~/Powerhouse$ npm create document-model-lib
+p@beast:~/Powerhouse$ npm create document-model-lib
 
 > npx
 > create-document-model-lib
 
-? What is the project name? ‣ ChatRoom
+? What is the project name? ‣ Chatroom
 ```	
 
 Once the project is created, you will see the following output:
@@ -44,14 +44,14 @@ Once the project is created, you will see the following output:
  The installation is done!
 
  You can start by typing:
-    cd ChatRoom
+    cd ccd hatroom
     npm run generate
 ```
 
 Navigate to the newly created project directory:
 
 ```bash
-cd ChatRoom
+cd chatroom
 ```
 
 Once you are in the project directory, now you can run the `npm run connect` command to instantiate a local version of the Connect application to start building your document model.
@@ -65,13 +65,13 @@ npm run connect
 The Connect application will start and you will see the following output:
 
 ```bash
-you@yourmachine:~/Powerhouse/chatroom$ npm run connect
+p@beast:~/Powerhouse/chatroom$ npm run connect
 
 > Chatroom@1.0.0 connect
 > connect --config-file ./powerhouse.config.json
 
-Watching local document models at '/home/you/Powerhouse/ChatRoom/document-models'...
-Watching local document editors at '/home/you/Powerhouse/ChatRoom/editors'...
+Watching local document models at '/home/p/Powerhouse/chatroom/document-models'...
+Watching local document editors at '/home/p/Powerhouse/chatroom/editors'...
   ➜  Local:   http://localhost:3000/
   ➜  press h + enter to show help
 ```
@@ -80,8 +80,8 @@ A new browser window will open and you will see the Connect application. If it d
 
 Create a new document model by clicking on the `DocumentModel` button by the "New Document" section. The Gif below shows you where to click.
 
-![Create New Document Model](./images/ChatRoomConnectApp.gif)
+![Create New Document Model](./images/connectApp.gif)
 
-If you followed the steps correctly, you should have an empty document model created called `ChatRoom`.
+If you followed the steps correctly, you should have an empty document model created called `Chatroom`.
 
 In the next tutorial, you will learn how to design your document model and export it to be later used in your Powerhouse project.

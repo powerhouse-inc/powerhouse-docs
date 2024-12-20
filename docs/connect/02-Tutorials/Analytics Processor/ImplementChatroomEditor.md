@@ -191,8 +191,8 @@ In connect, in the bottom right corner you'll find a new Document Model that you
 
 Login with an ethereum address via Renown to start sending messages.
 
-Below GIF shows the `Chatroom` editor in action.
+Below GIF shows the `ToDoList` editor in action.
 
-![Chatroom Editor](./images/ChatRoomTest.gif)
+![ToDoList Editor](./images/mytodolist.gif)
 
 If you managed to follow this tutorial until this point, you have successfully implemented the `ChatRoom` document model with its reducer operations and editor. In the next chapter we'll be showing you how to simulate a synchronisation between two nodes or users making use of the chatroom by starting up a local reactor.
