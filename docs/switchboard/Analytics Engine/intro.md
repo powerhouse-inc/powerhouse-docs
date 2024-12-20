@@ -54,7 +54,7 @@ Visually, you can think of series as values running up and down, while dimension
 
 ### Structure v Reporting
 
-The Series and Dimensions objects give control over how metric data is defined and related. That is, they define the **structure** of data. Two new concepts: Paths and LODs, are parameters used to define how the system should _report_ the data.
+The Series and Dimensions objects give control over how metric data is defined and related. That is, they define the **structure** of data. Three new concepts: Paths, LODs, and granularity, are parameters used to define how the system should _report_ the data.
 
 ### Paths
 
@@ -76,7 +76,7 @@ This is the beauty of dimension paths. All we need to do is use a `path` to desc
 
 ### LODs
 
-`LOD` is short for "level of detail", and it is not a field found on either the series or dimension objects. It is a parameter used in queries only, to determine _how results are aggregated_.
+`LOD` is short for "level of detail", and it is not a field found on either the series or dimension objects. It is a parameter used in queries only, to determine how results are aggregated across dimensions.
 
 Let's look at our example again.
 
@@ -92,11 +92,9 @@ An LOD greater than the number of parts of the path (in this case, 4 or more) wi
 
 ### Granularity
 
-#### Definition of Granularity
+While LODs allow you to aggregate series data across dimensions, _granularity_ refers to how data is aggregated over time. It determines the time span each data point or record covers. Choosing the right granularity is crucial for meaningful analysis, as it affects the interpretation and insights that can be drawn from the data.
 
-Granularity in the context of analytics refers to the level of detail or aggregation of data over time. It determines the time span each data point or record covers. Choosing the right granularity is crucial for meaningful analysis, as it affects the interpretation and insights that can be drawn from the data.
-
-#### Available Granularity Options
+#### Available Options
 
 The analytics engine supports various granularity options, each suitable for different types of analysis:
 
@@ -138,7 +136,9 @@ These are high-level definitions of major terms you will need to know.
 
 * **Path** - Composable, `/`-delimited string field on dimension that is used to _determine specificity_ during queries.
 
-* **LOD** - A number that, when paired with `path`, determines how to aggregate values in reporting.
+* **LOD** - A number that, when paired with `path`, determines how to aggregate values across dimensions.
+
+* **Granularity** - Determines how to aggregate values over time, like "monthly" or "yearly".
 
 ## Next Steps
 

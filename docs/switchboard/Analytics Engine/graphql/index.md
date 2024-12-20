@@ -146,50 +146,20 @@ The filter object can be created by using the UI menu from the graphql apollo st
 ![untitled](../filteroptions.png)
 *Select all filter fields and sub fields*
 
-### Best Practices
+## Troubleshooting
 
-- Start general, end with detailed queries. In the case you want to find a specific number for a specific metric and dimension, the rule of thumb is to start general in the filter definitions and slowly start cutting down the paths to a particular team or budget period.
-- For example: Looking at the dimension section in the filter options: To see available sub paths for the budget, leave the select: "atlas" and lod as 5 . With lod:5 you’ll be able to see the different paths available under your defined filter. Then, later you can apply a more detailed path in the select: "atlas/..." path that will suit your needs.
+### Common Issues
 
-```graphql
-{
-  "filter": {
-  ...
-    "dimensions": [
-      {
-        "name": "budget",
-        "select": "atlas",
-        "lod": 5
-      }
-    ],
-   ...
-  }
-}
-```
+**Mistyping the filter options or not using proper upper or lower case when necessary.** Make sure to check this first when running into problems
 
-Avoiding common mistakes
+### Error Messages
 
-- Follow upper case, lower case rules. To make sure to get the results you require, you must follow the upper or lower case styling for defining the metrics and granularity. To see the available metrics and dimensions just use the referenced queries. For granularity, check the above granularity section for the different types.
+Usually, error messages are explicit and easy to understand what is wrong, below you can find some examples.
 
-Performance considerations
+- `"message": "Cannot read properties of undefined (reading 'filter')"`, → There is something wrong with the filter options, make sure you’ve added all fields in the filter options.
 
-- Fetch per specified path if performance is an issue.
+- `"message": "No valid metrics provided, make sure to use metrics from this list: Actuals, Budget, Forecast, FTEs, PaymentsOffChainIncluded, PaymentsOnChain, ProtocolNetOutflow"`, → A wrong format when adding metrics
 
-### Troubleshooting
+- `"message": "Variable \"$filter\" got invalid value \"Monthlyu\" at \"filter.granularity\"; Value \"Monthlyu\" does not exist in \"AnalyticsGranularity\" enum. Did you mean the enum value \"monthly\"?"`, → Granularity filter is mistyped.
 
-Common issues and their solutions
-
-- Mistyping the filter options or not using proper upper or lower case when necessary. Make sure to check this first when running into problems
-
-How to interpret error messages
-
-- Usually, error messages are explicit and easy to understand what is wrong, below you can find some examples.
-
-    - `"message": "Cannot read properties of undefined (reading 'filter')"`, → There is something wrong with the filter options, make sure you’ve added all fields in the filter options.
-
-    - `"message": "No valid metrics provided, make sure to use metrics from this list: Actuals, Budget, Forecast, FTEs, PaymentsOffChainIncluded, PaymentsOnChain, ProtocolNetOutflow"`, → A wrong format when adding metrics
-
-    - `"message": "Variable \"$filter\" got invalid value \"Monthlyu\" at \"filter.granularity\"; Value \"Monthlyu\" does not exist in \"AnalyticsGranularity\" enum. Did you mean the enum value \"monthly\"?"`, → Granularity filter is mistyped.
-
-- When to contact support
-    - If you are receiving error messages with status code of 500, reach out to the dev team.
+**If you are receiving error messages with status code of 500, reach out to the dev team.**
