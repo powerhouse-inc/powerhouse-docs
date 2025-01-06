@@ -20,9 +20,8 @@ We found that, on average, the `MemoryAnalyticsStore` implementation took about 
 
 In [this benchmark](https://github.com/powerhouse-inc/analytics-engine/blob/main/benchmarks/results/wasm/), we analyze the startup and insert time for the `MemoryAnalyticsStore` implementation.
 
-
-| Operation           | Ops per Sec | Average  Time |
-| ------------------- | ----------- | ------------- |
-│ Init                │ 3           │ 323.00 ms     │
-│ Insert 100 records  │ 478         │ 2.08 ms       │
-│ Insert 200k records │ 0           │ 4448.10 ms    │
+| Operation    | Ops per Sec | Average Time |
+| ------------ | ----------- | ------------ |
+| Init         | 3           | 323.00 ms    |
+| 100 Inserts  | 478         | 2.08 ms      |
+| 200k Inserts | 0           | 4448.10 ms   |
