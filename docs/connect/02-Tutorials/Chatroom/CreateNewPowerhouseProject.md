@@ -5,7 +5,7 @@ displayed_sidebar: connectSidebar
 ---
 # Create New Powerhouse Project
 
-To create a new Powerhouse Document Model Library project, you can use the `npm run create document-model-lib` command in your terminal. This command will create a new project in the current directory.
+To create a new Powerhouse Document Model Library project, you can use the `npm create document-model-lib` command in your terminal. This command will create a new project in the current directory.
 
 ## Create New Powerhouse Document Model Library Project
 
