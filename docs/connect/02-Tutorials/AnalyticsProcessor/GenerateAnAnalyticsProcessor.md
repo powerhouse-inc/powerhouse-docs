@@ -72,7 +72,7 @@ We'll run through the following scenario:
 Under the 'New Document' section in Connect, click on the 'RWA Portfolio' document. 
 Name your document model `Sky Rwa's` and click on 'Create'.
 
-![Create a new RWA document](./images/create-a-new-rwa-document.gif)
+![Create a new RWA document](./images/create-a-new-RWA-document.gif)
 
 You'll immmediaty see that you've arrived in the portfolio editor with the option to add a new asset. 
 Since this document model is a portfolio for tracking the value of different assets, we'll first need to create the asset to be able to add any transaction history to them and track the value of the assets. 
