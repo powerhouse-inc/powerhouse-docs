@@ -4,7 +4,7 @@ sidebar_position: 1
 displayed_sidebar: switchboardSidebar
 ---
 
-#Intro to Switchboard
+# Intro to Switchboard
 
 Switchboard is the API interface that allows developers and data engineers to get access to the data, that is being collected through the use of document models in Connect & Fusion, within your open organisation.
 
