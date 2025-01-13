@@ -211,3 +211,139 @@ With variables:
   }
 }
 ```
+
+## Learn By Example: Document Operations
+
+The RWA processor example pulls information from operation _inputs_ to insert analytics data. Another use case might be to capture meta-analytics from the states themselves.
+
+This processor listens to all documents of type `powerhouse/document-drive`, and since the `document-drive` is itself implemented on top of the document model core systems, this means that we can process all virtual file system operations.  This processor count basic usage metrics using document operations and states.
+
+```typescript
+import { generateId } from "document-model/utils";
+import { AnalyticsPath, AnalyticsSeriesInput } from "@powerhousedao/analytics-engine-core";
+import {
+  AnalyticsProcessor,
+  ProcessorOptions,
+  ProcessorUpdate,
+} from "@powerhousedao/reactor-api";
+import { AddFileInput, DeleteNodeInput, DocumentDriveDocument } from "document-model-libs/document-drive";
+import { DateTime }  from "luxon";
+
+type DocumentType = DocumentDriveDocument;
+
+// iterates over state nodes and retrieves one by id
+const findNode = (state: any, id: string) => {
+  const { nodes } = state;
+  for (const node of nodes) {
+    if (node.id === id) {
+      return node;
+    }
+  }
+
+  return null;
+};
+
+export class DriveProcessorProcessor extends AnalyticsProcessor<DocumentType> {
+  protected processorOptions: ProcessorOptions = {
+    listenerId: generateId(),
+    filter: {
+      branch: ["main"],
+      documentId: ["*"],
+      documentType: ["powerhouse/document-drive"],
+      scope: ["global"],
+    },
+    block: false,
+    label: "analytics-processor",
+    system: true,
+  };
+
+  async onStrands(strands: ProcessorUpdate<DocumentType>[]): Promise<void> {
+    if (strands.length === 0) {
+      return;
+    }
+
+    const values:AnalyticsSeriesInput[] = [];
+
+    for (const strand of strands) {
+      const operations = strand.operations;
+      await Promise.all(operations.map((operation) => {
+        const source = AnalyticsPath.fromString(`switchboard/default/${strand.driveId}`);
+    
+        const start = DateTime.fromISO(operation.timestamp);
+        const dimensions: any = {
+          documentType: AnalyticsPath.fromString(`document/type/powerhouse/document-drive`),
+        };
+
+        if (operation.index === 0) {
+          this.analyticsStore.clearSeriesBySource(source);
+        }
+    
+        switch (operation.type) {
+          case "ADD_FILE": {
+            // count documents of each type (ADD_FILE, input.documentType)
+    
+            // lookup node in state
+            const input = operation.input as AddFileInput;
+            const node = findNode(strand.state, input.id);
+            if (!node) {
+              return Promise.resolve();
+            }
+    
+            dimensions["kind"] = AnalyticsPath.fromString(`document/kind/${node.kind}`);
+    
+            // increment by adding a 1
+            values.push({
+              source,
+              start,
+              value: 1,
+              metric: "Count",
+              dimensions,
+            });
+            
+            break;
+          }
+          case "ADD_FOLDER": {
+            dimensions["kind"] = AnalyticsPath.fromString("document/kind/folder");
+    
+            // increment by adding a 1
+            values.push({
+              source,
+              start,
+              value: 1,
+              metric: "Count",
+              dimensions,
+            });
+            
+            break;
+          }
+          case "DELETE_NODE": {
+            // the operation only contains the id, so lookup deleted item type in previous state
+            const input = operation.input as DeleteNodeInput;
+            const node = findNode(operation.previousState, input.id);
+            if (!node) {
+              return Promise.resolve();
+            }
+    
+            dimensions["kind"] = AnalyticsPath.fromString(`document/kind/${node.kind}`);
+    
+            // decrement by adding a -1
+            values.push({
+              source,
+              start,
+              value: -1,
+              metric: "Count",
+              dimensions,
+            });
+    
+            break;
+          }
+        }
+      }));
+    }
+
+    await this.analyticsStore.addSeriesValues(values);
+  }
+
+  async onDisconnect() {}
+}
+```
