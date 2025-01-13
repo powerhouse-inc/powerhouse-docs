@@ -168,4 +168,46 @@ const args = {
 analyticsInputs.push(args);
 ```
 
+With this processor implementation, we can now write queries against processor analytics updates. For example, a GQL query might look like the following:
 
+```graphql
+query Analytics($filter: AnalyticsFilter) {
+  analytics {
+    series(filter: $filter) {
+      start
+      end
+      rows {
+        dimensions {
+          name
+          path
+        }
+        metric
+        value
+        unit
+      }
+    }
+  }
+}
+```
+
+With variables:
+
+```json
+{
+  "filter": {
+    "granularity": "annual",
+    "start": "2024-01-01",
+    "end": "2025-01-01",
+    "metrics": [
+      "AssetBalance",
+    ],
+    "dimensions": [
+      {
+        "name": "asset",
+        "select": "sky/rwas",
+        "lod": 2
+      }
+    ]
+  }
+}
+```
