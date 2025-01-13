@@ -1,6 +1,10 @@
+---
+sidebar_position: 100
+---
+
 # Analytics Processors
 
-An `AnalyticsProcessor` is an object that can track analytics for operations and state changes on a set of document models. These analytics can be used to generate bespoke dashboards and reports, specific to the type of document model.
+An `AnalyticsProcessor` is an object that can track analytics for operations and state changes on a set of document models. These analytics can be used to generate bespoke dashboards and reports, specific to the type or implementation of the document model.
 
 ## Generating a Processor with the CLI
 
@@ -34,19 +38,36 @@ There are a number of parameters here, but there are two that are most important
 
 ### Filter
 
-The `filter` parameter allows a user to tune which updates it receives. Usage is straightfoward: each field of the filter parameter can receive one to many patterns. The array for each field describes an `OR` comparison. That is, `["a", "b"]` would match `"a"` or `"b"`. However, only updates matching ALL of these fields will be passed to the processor. That is, an update must match on `branch`, `documentId`, `documentType`, AND `scope`.
+The `filter` parameter allows a user to tune which updates it receives. Usage is straightfoward: each field of the filter parameter can receive one to many patterns. The array for each field describes an `OR` operator. That is, `["a", "b"]` would match `"a"` or `"b"`. However, matches across fields describe an `AND` operator. That is, an update must match on `branch` `AND` `documentId` `AND` `documentType` `AND` `scope`.
 
 Globs are accepted as input, but not regexes.
 
+```
+{
+  branch: ["main"],
+  documentId: ["*"],
+  documentType: ["doc-type-a", "doc-type-b"],
+  scope: ["global", "local"],
+}
+```
+
+This example would match updates for:
+
+```
+("main" branch) AND (any documentId) AND ("doc-type-a" OR "doc-type-b" documentType) AND ("global" OR "local" scope)
+```
+
 ### onStrands
 
-The `onStrands` method is the meat of the processor. this is the function called for all the updates matching the filter. 
+The `onStrands` method is the meat of the processor. This is the function called for all the updates matching the filter. Here is what will be generated for you:
 
 ```typescript
 async onStrands(strands: ProcessorUpdate<DocumentType>[]): Promise<void> {
     if (strands.length === 0) {
       return;
     }
+
+    const analyticsInputs: AnalyticsSeriesInput[] = [];
 
     for (const strand of strands) {
       if (strand.operations.length === 0) {
@@ -65,14 +86,24 @@ async onStrands(strands: ProcessorUpdate<DocumentType>[]): Promise<void> {
         console.log(">>> ", operation.type);
       }
     }
+
+    if (analyticsInputs.length > 0) {
+      try {
+        await this.analyticsStore.addSeriesValues(analyticsInputs);
+      } catch (e) {
+        console.error(`Error adding series values: ${e}`);
+      }
+    }
   }
 ```
 
-This function provides a list of strand objects, each with a list of document-model operations on them. Essentially, it is a list of lists. Each operation will have the previous state of the document as well as the next state. This allows analytics capture from new state, deltas, or the operations themselves.
+This function provides a list of `strand` objects, each with a list of document-model operations (`Operation[]`) on them. Essentially, it is a list of lists. Each operation will have the previous state of the document and the next state. This allows analytics capture from new state, deltas, or the operations themselves.
 
-> Note that on the first operation (given by `firstOp.index === 0`), we clear any previous analytics series for that source. This is so that we do not dual insert operations.
+> Note that on the first operation (given by `firstOp.index === 0`), it is best practice to clear any previous analytics series for that source. This is so that we do not dual insert operations.
 
 Model-specific code will go where the `console.log` statement currently resides.
+
+> It is best practice to batch insert all updates to the analytics system. In this example, we add all updates to an array of inputs, then insert them all at once. This is optimal over `await`-ing each separate value.
 
 ## Learn By Example: RwaAnalyticsProcessor
 
@@ -89,7 +120,7 @@ In the case of the RWA processor, we only want to process updates for the rwa-sp
 }
 ```
 
-Inside of the `onStrands` function, past the boiler plate, we see what is essentially a giant switch statement.
+Inside of the `onStrands` function, past the boilerplate, we see what is essentially a giant switch statement.
 
 ```typescript
 if (operation.type === "CREATE_GROUP_TRANSACTION") {
@@ -107,7 +138,7 @@ if (operation.type === "CREATE_GROUP_TRANSACTION") {
 }
 ```
 
-We only want to track analytics for operations that create transactions, and we want to filter out a few transaction types. We do this by casting the operation input as the generated type from the specific document model lib.
+Since we have knowledge of this specific document model, we can cast the operation input to a specific type. Then, since we only want to track analytics for operations that create transactions, and we can filter out a few transaction types.
 
 Below that, we can see how we are capturing analytics data:
 
@@ -134,5 +165,7 @@ const args = {
       : -fixedIncomeTransaction.amount,
 };
 
-await this.analyticsStore.addSeriesValue(args);
+analyticsInputs.push(args);
 ```
+
+

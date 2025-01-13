@@ -1,7 +1,5 @@
 ---
-# sidebar_position: 1
-# sidebar_label: Reactor
-displayed_sidebar: reactorSidebar
+sidebar_position: 0
 ---
 # Intro to Reactor
 
