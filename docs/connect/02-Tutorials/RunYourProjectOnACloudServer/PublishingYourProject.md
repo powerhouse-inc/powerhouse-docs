@@ -215,7 +215,13 @@ It gives you access to a series of powerful commands to create or manage your pr
 
 Now that we've installed all the necessary services on our server instance, we can start deploying the host apps & our packaged project from npm.
 
-1. **Install your project package** we've published earlier on npm now on the server instance.
+1. **Configure the ph-cmd**
+
+```bash
+ph setup-globals 
+```
+
+2. **Install your project package** we've published earlier on npm now on the server instance.
 	   ```bash
 	   ph install your-org/project
 	   ```
