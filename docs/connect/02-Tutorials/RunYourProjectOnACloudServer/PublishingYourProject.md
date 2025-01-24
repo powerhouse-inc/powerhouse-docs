@@ -2,7 +2,7 @@
 
 This tutorial will guide you through publishing your Powerhouse project as a package and running it on a cloud server. The schema below will help you understand all of the context switching we'll in the process of our lengthy tutorial. 
 
-![Tutorial Schema](todo)
+![tutorial schema](images/tutorialschema.png)
 
 Let's start with some key concepts that will help you understand the process.
 
@@ -15,7 +15,7 @@ Let's start with some key concepts that will help you understand the process.
 - **Powerhouse Modules**: The modules that are part of your project, such as the document models, editors, processors or scripts
 - **Powerhouse Package**: A package is a collection of modules that are published to NPM and can be installed on a server instance or locally on your machine. Different organizations can have different packages.
 
-![Key Concepts](todo)
+![Key Concepts](images/keyconcepts.png)
 
 ## Prerequisites for this tutorial
 
@@ -29,18 +29,21 @@ Create an organization on [NPM](https://www.npmjs.com/) using the naming convent
    - The `-ph` suffix indicates it's a Powerhouse ecosystem package to help you and others identify it from regular NPM packages. 
    - Example: `@acme-ph`
 
-Now that you’ve set up your organization you’ve got all the right requirements to later publish your project for others to use and install on their servers. 
+Now that you've set up your organization you've got all the right requirements to later publish your project for others to use and install on their servers. 
 
 ## 2. Building your project 
 
-To start building your project with it’s dedicated document models and editors we’ll run the following command:
+To start building your project with it's dedicated document models and editors we'll run the following command:
 
   ```bash
    pnpm create document-model-lib
    ```
 This command will start the configuration of your powerhouse project. 
 
-   > 💡 For experimental features, use --version [version] which allows selecting a specific branch of our document-model-boilerplate. There are --dev, --staging and --main options. Select `pnpm create document-model-lib@dev --dev` to use the latest development version. Please be aware that this version can contain bugs and experimental features that aren’t fully tested.  
+   > 💡 For experimental features, use --version [version] which allows selecting a specific branch of our document-model-boilerplate. There are --dev, --staging and --main options. Select `pnpm create document-model-lib@dev --dev` to use the latest development version. Please be aware that this version can contain bugs and experimental features that aren't fully tested.  
+
+<details>
+<summary>Reset Package Manager Cache</summary>
 
 If you need to reset your package manager, you can run the following commands for your package manager: (npm, yarn)
 
@@ -55,6 +58,8 @@ yarn cache list
 yarn cache clean --force
 yarn cache list
 ```
+
+</details>
 
 ### 2.1. Specifying your project details
 
@@ -72,7 +77,7 @@ Please feel free to navigate to the package.json file and fill in all the other 
 }
 ```
 
-Now that you’ve created your powerhouse project you are ready to generate the necessary directory and file structure to add your document models.
+Now that you've created your powerhouse project you are ready to generate the necessary directory and file structure to add your document models.
 
 For this purpose you can use your preferred package manager, pnpm, bun, yarn or npm with the command. 
 
@@ -80,21 +85,21 @@ For this purpose you can use your preferred package manager, pnpm, bun, yarn or 
 
 ### 2.2. Adding Document Models, editors and unit tests
 
-Now that you’ve set up your directory. 
-Go ahead and add the document models you’d like to add by going throught the standard document model building flow:
-1. Defining your Document Model GraphQL Schema
-2. Defining your document model operations
-3. Generating the scaffolding code by exporting the Zip file from connect and importing it into your project to start the scaffolding code generation. 
-4. Implementing the reducer code and unit tests of your document models reducers.
-5. Implementing the document editors to visualize and interact with your document models.
-6. Run unit tests and verify the editor functionality via `npm run connect` for local testing.		  
+Now that you've set up your directory. 
+Go ahead and add the document models you'd like to add by going throught the standard document model building flow:
+1. Defining your Document Model **GraphQL Schema**
+2. Defining your Document Model **Operations**
+3. Generating the scaffolding code by **exporting** the Zip file from connect and **importing** it into your project.
+4. Implementing the **reducer code** and unit tests of your document models reducers.
+5. Implementing the **document editors** to visualize and interact with your document models.
+6. Run **unit tests** and verify the editor functionality via `npm run connect` for local testing.		  
 
 ### 2.3. Verifying your project
-Now that we’ve completed our directory with the reducers, tests and editors and your project is populated with modules we’ll verify the build output and see if everything is working correctly. 
+Now that we've completed our directory with the reducers, tests and editors and your project is populated with modules we'll verify the build output and see if everything is working correctly. 
 
-Let’s verify the package build output with the following command:
+Let's verify the package build output with the following command:
 
-`npm run build` / npm run serve coming up
+`npm run build` / (npm run serve coming up..)
 
 Inspect the build output and verify that the document models are working correctly.
 
@@ -105,10 +110,10 @@ Log in via the command line:
 
 `npm login`
 
-You’ll be prompted for your username, password, and email in a seperate browser window. 
+You'll be prompted for your username, password, and email in a seperate browser window. 
 
 Once you've logged in, you can configure your package.json for npm before publishing. 
-If you’re publishing a package under a scope (like @your-org/my-package), you might need to add the `publishConfig` to ensure it’s public, otherwise scoped packages default to private:
+If you're publishing a package under a scope (like @your-org/my-package), you might need to add the `publishConfig` to ensure it's public, otherwise scoped packages default to private:
 
 ```json
 {
@@ -127,7 +132,7 @@ For the actual publishing step, run the following command to publish your projec
 Optionally, if you are publishing a scoped package and you want it public, run:
 `npm publish --access public`
 
-Now let’s verify that the package(s) get published in the package repository, next to pre-existing packages that you might have been publishing before. [NPM](https://www.npmjs.com/) 
+Now let's verify that the package(s) get published in the package repository, next to pre-existing packages that you might have been publishing before. [NPM](https://www.npmjs.com/) 
 
 ## 4. Setting up your cloud environment 
 ### 4.1. Launching your server instance (AWS \- EC2 \- Ubuntu)
@@ -150,12 +155,12 @@ Now click on your instance ID which will open up a new window with the instance 
 
 ### 4.2. Setting up your SSH connection
 
-Once you’ve generated your keypairs and added them in the folder you’ll set up the SSH connections from which you can start the process. 
+Once you've generated your keypairs and added them in the folder you'll set up the SSH connections from which you can start the process. 
 
 SSH, which stands for **Secure Shell**, is a cryptographic network protocol used to securely access and manage devices over an unsecured network. It provides a secure channel over an unsecured network by using encryption, ensuring that data transmitted between your computer and the server remains confidential and tamper-proof.
 
 To establish an SSH connection, you'll typically use an SSH client. On Unix-like systems (Linux, macOS), the SSH client is usually pre-installed.   
-Follow the instructions of the AWS instance you’ve configured with Ubuntu and set up your connection by adding the necessary commands in your terminal.
+Follow the instructions of the AWS instance you've configured with Ubuntu and set up your connection by adding the necessary commands in your terminal.
 
 ![Setting up your SSH connection](images/SSHConnection.png)
 
@@ -165,9 +170,9 @@ Your ubuntu instance is usually always a little out of date. So use the followin
    sudo apt update && sudo apt upgrade
    ```
 
-### 4.3. Installing the required software. 
+### 4.3. Installing the required software with a script
 
-Now that we’ve connected to our ubuntu instance we’ll need to install the necessary services on our server to get things going, such as Nvm, Node, NPM etc. 
+Now that we've connected to our ubuntu instance we'll need to install the necessary services on our server to get things going, such as Nvm, Node, NPM etc. 
 
 For this, our team has set up a small script that will help you to automate a series of installations.  
 
@@ -186,49 +191,64 @@ ph-cmd is a tool that helps you manage your powerhouse projects. It's a command 
 It gives you access to a series of powerful commands to create or manage your projects, start or stop your services, install your project on a server instance, etc.
 :::
 
+Lets have a look at the script that will help you install the necessary services on your server. 
+   
+   #### 1. Install NVM by downloading the install script and running it directly in the bash shell for exectuion. 
    ```bash
-   # Install NVM by downloading the install script and running it directly in the bash shell for exectuion. 
-   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+   curl -o- https://raw.githubusercontent.com/powerhouse-inc/powerhouse/refs/heads/main/packages/ph-cli/scripts/setup.sh | bash
+   ```
 
-   # Load NVM into the current shell session
-    ~/.nvm/nvm.sh
+   #### 2. Load NVM into the current shell session
+   ```bash
    export NVM_DIR="$HOME/.nvm"
-   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # Checks if the file nvm.sh exists and loads it if the condition is true.
-   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm
+   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  
+   ```
 
-   # Verify that NVM is installed and working correctly
+   #### 3. Checks if the file nvm.sh exists and loads it if the condition is true.
+   ```bash
+   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  
+   ```
+   #### 4. Loading & Verifying NVM
+   ```bash
    nvm --version
+   ```
 
-   # Install Node.js by using NVM
+   #### 5. Install Node.js by using NVM
+   ```bash
    nvm install 20
+   ```
 
-   # Install pnpm package manager globally
+   #### 6. Install pnpm package manager globally
+   ```bash
    npm install -g pnpm
    pnpm setup
    source $HOME/.bashrc
-   
-   # Install Powerhouse CLI globally using PNPM, making it available for command-line use anywhere. Not just in the project directory locally
-   pnpm install -g ph-cmd
+   ```
 
+   #### 7. Install Powerhouse CLI 'globally' using PNPM, making it available for command-line use anywhere. Not just in the project directory locally.
+
+   ```bash
+   pnpm install -g ph-cmd
+   ```
 
 ## 5. Deploying the host apps & project. 
 
 Now that we've installed all the necessary services on our server instance, we can start deploying the host apps & our packaged project from npm.
 
-1. **Configure the ph-cmd**
-
-```bash
-ph setup-globals 
-```
-
-2. **Install your project package** we've published earlier on npm now on the server instance.
+1. **Install your project package** we've published earlier on npm now on the server instance.
 	   ```bash
-	   ph install your-org/project
+	   ph install sky-ph/atlas
 	   ```
+
+3. **Start the Connect service** so we can start interacting with our project.
+	```bash
+	ph connect --https --port 8442
+	```
+	Let's verify that the connect service is running and we can start interacting with our project.
 
 2. **Start the Switchboard service** and run the following command to boot the reactor
 	```bash
-	ph reactor
+	ph reactor --port 1234
 	```
 	Let's verify that the reactor has detected your project and is ready to start through the graphQL playground.
 	
@@ -237,33 +257,35 @@ ph setup-globals
 	ph stop reactor
 	```
 
-3. **Start the Connect service** so we can start interacting with our project.
-	```bash
-	ph connect
-	```
-	Let's verify that the connect service is running and we can start interacting with our project.
-	Let's also shut it down and add it as a system service on the server
-
-	```bash
-	ph stop connect
-	```	
-
-	Alternatively you can use the following command to stop all services:
-
-	```bash
-	pm2 stop all
-	```
-
 4. **Verify installation**
 
    ```bash
    ph --help  # Should show available commands
    ```
 
-## 6. Verify your project is running on your server
+## 6. Setup the host apps as system services
+
+   First, let's make sure we are in the global directory of our server instance.
+   ```bash
+   cd .ph
+   ```
+   Now we can add the host apps as system services with the following commands:
+   ```bash
+   ph pnpm service-startup
+   ```
+   Let's move back to our root directory with `cd ..` and run the following command to start the connect service:
+
+   ```bash
+   ph service start connect
+   ```
+   And do the same for the switchboard service:
+   ```bash
+   ph service start reactor
+   ```
+
+## 7. Verify your project is running on your server
 
 - Open up the server domain in your browser and you should see your project running.
-- Add the switchboard instance as a remote drive
 - Verify that synchronization is working and your document is available
 - Try to make a change to your document and see if it's reflected in another instance with that same document.
 - Query the document through the graphQL playground
