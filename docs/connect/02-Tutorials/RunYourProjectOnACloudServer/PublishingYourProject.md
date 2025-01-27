@@ -3,7 +3,7 @@
 This tutorial will guide you through publishing your Powerhouse project as a package and running it on a cloud server. The schema below will help you understand all of the context switching we'll in the process of our lengthy tutorial. 
 
 :::info
-Within the Powerhouse ecosystme we want our users and developers to be able to open an empty Connect or Switchboard instance and download the relevant package for their use-case or workflow. In our case the 'appstore' will initially be represented by the 'node package manager registry' where users can download the relevant packages.
+Within the Powerhouse ecosystem users should be start with an empty Connect or Switchboard instance and download the relevant package for their use-case or workflow. In our case the 'appstore' will initially be represented by the 'node package manager registry' where users can download the relevant packages.
 :::
 
 ![tutorial schema](images/tutorialschema.png)
@@ -149,15 +149,27 @@ Launch a new server instance for Connect and Switchboard with the specific specs
 
 The steps to create an EC2 instance:
    - Make sure your region is set eu-west-1 (Ireland)
-   - Name your instance something like `connect-server` or your project name
+   - Name your instance something like `cloud-server` or your project name
    - Select the Ubuntu 24.04 LTS
    - Architecture 64-bit (x86)
    - Scroll down to instance type and select t2.medium (recommended)
+      - 2 vCPUs and 4 GiB of memory are recommended minimum specs
+      - For larger projects or higher load, consider t2.large or t2.xlarge
    - Create a new key pair and save it in a secure location from which you can connect to your instance with the SSH client later on.
+   - Configure the security group to allow inbound traffic:
+      - SSH (Port 22) from your IP address
+      - HTTP (Port 80) from anywhere
+      - HTTPS (Port 443) from anywhere
+      - Custom TCP (Port 8442) for Connect
+      - Custom TCP (Port 8441) for Switchboard
    - **Launch the instance**
 
 Now click on your instance ID which will open up a new window with the instance details. Hit the 'Connect' button to get the connection details.
+Within the instance details you'll find the public IP address of your server instance. We'll use this to connect to our server instance later on.
 
+:::warning
+Make sure to keep your key pair file (.pem) secure and never share it. Without it, you won't be able to access your instance. Also, consider setting up AWS IAM roles and policies for better security management.
+:::
 
 ### 4.2. Setting up your SSH connection
 
@@ -191,7 +203,7 @@ Base command, which will start installing the necessary services on your server 
 The script contains the following commands and will help you set up a series of services on your server.
 
 - **NVM**: Node Version Manager for managing Node.js versions
-- **Node.js**: JavaScript runtime (v20 recommended)
+- **Node.js**: JavaScript runtime
 - **PM2**: Process manager for Node.js applications
 - **ph-cmd**: Powerhouse CLI tool for managing projects. 
 - **pnpm**: Fast, disk space efficient package manager
@@ -220,7 +232,7 @@ Lets have a look at the other commands that are part of the script that will hel
 
    #### 4. Install Node.js by using NVM
    ```bash
-   nvm install 20
+   nvm install 22
    ```
 
    #### 5. Install pnpm package manager globally
@@ -242,33 +254,29 @@ Now that we've installed all the necessary services on our server instance, we c
 
 1. **Install your project package** we've published earlier on npm now on the server instance.
 	   ```bash
-	   ph install sky-ph/atlas
+	   ph install @your-org/package-name
 	   ```
 
 3. **Start the Connect service** so we can start interacting with our project.
 	```bash
 	ph connect --https --port 8442
 	```
-	Let's verify that the connect service is running and we can start interacting with our project.
+	Let's verify that the connect service is running. Since we can't make use of the local host and we're running the connect service on the server instance we'll need to use the public IP address of our server instance to start interacting with our project. Copy the public IP address of your server instance and paste it into your browser. Now add the port `:8442` to the end of the URL and you should see your project running.
+
+   Create a new document and start interacting with it. Add a new item to the list so you can query the document through the graphQL playground in switchboard in the next step.
 
 2. **Start the Switchboard service** and run the following command to boot the reactor
 	```bash
-	ph reactor --port 1234
+	ph switchboard --port 8441
 	```
-	Let's verify that the reactor has detected your project and is ready to start through the graphQL playground.
-	
-	Now let's shut it down and add it as a system service on the server with the following command:
-	```bash
-	ph stop reactor
-	```
+	Let's verify that the reactor has detected your project and is ready to start by navigating to the graphQL playground.
+   Since we can't make use of the local host and we're running the switchboard service on the server instance we'll need to use the public IP address of our server instance to start interacting with our project. Copy the public IP address of your server instance and paste it into your browser. Now add the port `:8441` to the end of the URL and you should get access to the graphQL playground.
 
-4. **Verify installation**
-
-   ```bash
-   ph --help  # Should show available commands
-   ```
 
 ## 6. Setup the host apps as system services
+
+Now that we've installed the host apps and our project on the server instance, we can start the services as system services. This will allow us to start the services on boot and keep them running even after a reboot.
+For this we'll use the `pnpm service-startup` command which will start the services as system services.
 
    First, let's make sure we are in the global directory of our server instance.
    ```bash
@@ -276,8 +284,10 @@ Now that we've installed all the necessary services on our server instance, we c
    ```
    Now we can add the host apps as system services with the following commands:
    ```bash
-   pnpm service-startup
+   pnpm service-startup 
    ```
+   This will start the connect service as a system service, making use of the `pm2` process manager.
+
    Let's move back to our root directory with `cd ..` and run the following command to start the connect service:
 
    ```bash
@@ -285,13 +295,13 @@ Now that we've installed all the necessary services on our server instance, we c
    ```
    And do the same for the switchboard service:
    ```bash
-   ph service start reactor
+   ph service start switchboard
    ```
 
 ## 7. Verify your project is running on your server
 
 - Open up the server domain in your browser and you should see your project running.
-- Verify that synchronization is working and your document is available
+- Verify that synchronization is working and your document is available. 
 - Try to make a change to your document and see if it's reflected in another instance with that same document.
 - Query the document through the graphQL playground
 
