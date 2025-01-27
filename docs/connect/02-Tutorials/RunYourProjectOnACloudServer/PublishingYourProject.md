@@ -2,6 +2,10 @@
 
 This tutorial will guide you through publishing your Powerhouse project as a package and running it on a cloud server. The schema below will help you understand all of the context switching we'll in the process of our lengthy tutorial. 
 
+:::info
+Within the Powerhouse ecosystme we want our users and developers to be able to open an empty Connect or Switchboard instance and download the relevant package for their use-case or workflow. In our case the 'appstore' will initially be represented by the 'node package manager registry' where users can download the relevant packages.
+:::
+
 ![tutorial schema](images/tutorialschema.png)
 
 Let's start with some key concepts that will help you understand the process.
@@ -99,7 +103,9 @@ Now that we've completed our directory with the reducers, tests and editors and 
 
 Let's verify the package build output with the following command:
 
-`npm run build` / (npm run serve coming up..)
+`npm run build` This command will build the project and create a build directory with the output. The code gets optimized and minified. It optimizes the code for production and distribution so different environments can use it as a package.
+
+`npm run serve` This command will start a local server and serve the build output.
 
 Inspect the build output and verify that the document models are working correctly.
 
@@ -176,7 +182,11 @@ Now that we've connected to our ubuntu instance we'll need to install the necess
 
 For this, our team has set up a small script that will help you to automate a series of installations.  
 
-packages/ph-cli/scripts/service-setup.sh (How do we offer this?)
+Base command, which will start installing the necessary services on your server by downloading the install script and running it directly in the bash shell for exectuion. 
+
+   ```bash
+   curl -o- https://raw.githubusercontent.com/powerhouse-inc/powerhouse/refs/heads/main/packages/ph-cli/scripts/setup.sh | bash
+   ```
 
 The script contains the following commands and will help you set up a series of services on your server.
 
@@ -191,41 +201,36 @@ ph-cmd is a tool that helps you manage your powerhouse projects. It's a command 
 It gives you access to a series of powerful commands to create or manage your projects, start or stop your services, install your project on a server instance, etc.
 :::
 
-Lets have a look at the script that will help you install the necessary services on your server. 
-   
-   #### 1. Install NVM by downloading the install script and running it directly in the bash shell for exectuion. 
-   ```bash
-   curl -o- https://raw.githubusercontent.com/powerhouse-inc/powerhouse/refs/heads/main/packages/ph-cli/scripts/setup.sh | bash
-   ```
+Lets have a look at the other commands that are part of the script that will help you install the necessary services on your server. 
 
-   #### 2. Load NVM into the current shell session
+   #### 1. Load NVM into the current shell session
    ```bash
    export NVM_DIR="$HOME/.nvm"
    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  
    ```
 
-   #### 3. Checks if the file nvm.sh exists and loads it if the condition is true.
+   #### 2. Checks if the file nvm.sh exists and loads it if the condition is true.
    ```bash
    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  
    ```
-   #### 4. Loading & Verifying NVM
+   #### 3. Loading & Verifying NVM
    ```bash
    nvm --version
    ```
 
-   #### 5. Install Node.js by using NVM
+   #### 4. Install Node.js by using NVM
    ```bash
    nvm install 20
    ```
 
-   #### 6. Install pnpm package manager globally
+   #### 5. Install pnpm package manager globally
    ```bash
    npm install -g pnpm
    pnpm setup
    source $HOME/.bashrc
    ```
 
-   #### 7. Install Powerhouse CLI 'globally' using PNPM, making it available for command-line use anywhere. Not just in the project directory locally.
+   #### 6. Install Powerhouse CLI 'globally' using PNPM, making it available for command-line use anywhere. Not just in the project directory locally.
 
    ```bash
    pnpm install -g ph-cmd
@@ -271,7 +276,7 @@ Now that we've installed all the necessary services on our server instance, we c
    ```
    Now we can add the host apps as system services with the following commands:
    ```bash
-   ph pnpm service-startup
+   pnpm service-startup
    ```
    Let's move back to our root directory with `cd ..` and run the following command to start the connect service:
 
