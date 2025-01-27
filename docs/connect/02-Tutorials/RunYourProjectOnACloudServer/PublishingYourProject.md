@@ -1,16 +1,18 @@
 # Run Your Powerhouse Project on a Cloud Server
 
+## Tutorial Workflow
+
 This tutorial will guide you through publishing your Powerhouse project as a package and running it on a cloud server. The schema below will help you understand all of the context switching we'll in the process of our lengthy tutorial. 
 
-:::info
 Within the Powerhouse ecosystem users should be start with an empty Connect or Switchboard instance and download the relevant package for their use-case or workflow. In our case the 'appstore' will initially be represented by the 'node package manager registry' where users can download the relevant packages.
-:::
+
 
 ![tutorial schema](images/tutorialschema.png)
 
-Let's start with some key concepts that will help you understand the process.
 
 ## Key Concepts
+
+Let's start with some key concepts that will help you understand the process.
 
 - **Powerhouse Host Apps**: The 2 applications where your project will run:
   - **Connect**: A real-time collaborative app that allows you to build your document models and editors to work in a shared environment.
@@ -84,8 +86,9 @@ Please feel free to navigate to the package.json file and fill in all the other 
 Now that you've created your powerhouse project you are ready to generate the necessary directory and file structure to add your document models.
 
 For this purpose you can use your preferred package manager, pnpm, bun, yarn or npm with the command. 
-
-`npm run generate`
+```bash
+pnpm generate
+```
 
 ### 2.2. Adding Document Models, editors and unit tests
 
@@ -102,10 +105,16 @@ Go ahead and add the document models you'd like to add by going throught the sta
 Now that we've completed our directory with the reducers, tests and editors and your project is populated with modules we'll verify the build output and see if everything is working correctly. 
 
 Let's verify the package build output with the following command:
+```bash
+pnpm run build
+```
 
-`npm run build` This command will build the project and create a build directory with the output. The code gets optimized and minified. It optimizes the code for production and distribution so different environments can use it as a package.
+This command will build the project and create a build directory with the output. The code gets optimized and minified. It optimizes the code for production and distribution so different environments can use it as a package.
+```bash
+pnpm run serve
+```
 
-`npm run serve` This command will start a local server and serve the build output.
+This command will start a local server and serve the build output.
 
 Inspect the build output and verify that the document models are working correctly.
 
@@ -113,8 +122,9 @@ Inspect the build output and verify that the document models are working correct
 
 Since you've already registered your organization on npm, you can now publish your project to the npm registry. 
 Log in via the command line:
-
-`npm login`
+```bash
+npm login
+```
 
 You'll be prompted for your username, password, and email in a seperate browser window. 
 
@@ -133,10 +143,14 @@ If you're publishing a package under a scope (like @your-org/my-package), you mi
 ```
 
 For the actual publishing step, run the following command to publish your project to the npm registry:
-`npm publish`
+```bash
+npm publish
+```
 
 Optionally, if you are publishing a scoped package and you want it public, run:
-`npm publish --access public`
+```bash
+npm publish --access public
+```
 
 Now let's verify that the package(s) get published in the package repository, next to pre-existing packages that you might have been publishing before. [NPM](https://www.npmjs.com/) 
 
