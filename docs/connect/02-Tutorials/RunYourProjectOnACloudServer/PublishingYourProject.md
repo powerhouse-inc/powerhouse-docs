@@ -106,12 +106,12 @@ Now that we've completed our directory with the reducers, tests and editors and 
 
 Let's verify the package build output with the following command:
 ```bash
-pnpm run build
+pnpm build
 ```
 
 This command will build the project and create a build directory with the output. The code gets optimized and minified. It optimizes the code for production and distribution so different environments can use it as a package.
 ```bash
-pnpm run serve
+pnpm serve
 ```
 
 This command will start a local server and serve the build output.
@@ -289,28 +289,60 @@ Now that we've installed all the necessary services on our server instance, we c
 
 ## 6. Setup the host apps as system services
 
-Now that we've installed the host apps and our project on the server instance, we can start the services as system services. This will allow us to start the services on boot and keep them running even after a reboot.
-For this we'll use the `pnpm service-startup` command which will start the services as system services.
+Now that we've installed the host apps and our project on the server instance, we'll configure them to run as system services. This ensures that:
+- Services automatically start when the server boots up
+- Services automatically restart if they crash
+- Services continue running after you log out of SSH
+- System resources are properly managed through PM2
 
-   First, let's make sure we are in the global directory of our server instance.
-   ```bash
-   cd .ph
-   ```
-   Now we can add the host apps as system services with the following commands:
-   ```bash
-   pnpm service-startup 
-   ```
-   This will start the connect service as a system service, making use of the `pm2` process manager.
+### 6.1. Register services for automatic startup
 
-   Let's move back to our root directory with `cd ..` and run the following command to start the connect service:
+Use the following command to register both Connect and Switchboard as system services:
 
-   ```bash
-   ph service start connect
-   ```
-   And do the same for the switchboard service:
-   ```bash
-   ph service start switchboard
-   ```
+```bash
+ph service-startup
+```
+
+To remove the services from automatic startup:
+
+```bash
+ph service-unstartup
+```
+
+### 6.2. Managing individual services
+
+You can control each service independently:
+
+```bash
+# Start individual services
+ph service start connect     # Starts only Connect
+ph service start switchboard # Starts only Switchboard
+
+# Stop individual services
+ph service stop connect      # Stops only Connect
+ph service stop switchboard  # Stops only Switchboard
+```
+
+### 6.3. Managing all services together
+
+To control both services at once:
+
+```bash
+ph service start  # Starts both Connect and Switchboard
+ph service stop   # Stops both Connect and Switchboard
+```
+
+:::tip
+You can check the status of your services at any time using:
+```bash
+ph service status
+```
+This will show you if services are running, their uptime, and resource usage.
+:::
+
+:::warning
+After making any configuration changes to your project, remember to restart the affected services for the changes to take effect.
+:::
 
 ## 7. Verify your project is running on your server
 
