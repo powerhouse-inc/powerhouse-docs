@@ -12,7 +12,7 @@ Before you start, make sure you have the Connect application running.
 
 ## Chatroom Document Model Schema
 
-We use GraphQL Schema Definition Language (SDL) to define the document model schema. Below, you can see the SDL for the `Chatroom` document model.
+We use GraphQL Schema Definition Language (SDL) to define the document model schema. Below, you can see the SDL for the `ChatCoom` document model.
 
 :::info
 This schema contains the data structure of the document model and the basic operations that can be performed on the document model.
@@ -103,7 +103,7 @@ To be able to define the document model, you need to open the Chatroom document 
 
 The steps below show you how to do this:
 
-1. In the Connect application, click on the `Chatroom` document model you've created in the previous step, to open the document model editor.
+1. In the Connect application, click on the `ChatRoom` document model you've created in the previous step, to open the document model editor.
 2. You'll be welcomed with a form to fill, this is metadata about the document model, fill in the details in the fields. 
 
     In the `Document Type` field, type `powerhouse/chatroom`. This defines the new type of document that will be created with this document model.
@@ -116,15 +116,15 @@ The steps below show you how to do this:
   "id": "",
   "name": "",
   "description": "",
-  "createdAt": "2024-12-12T14:54:37.804Z",
+  "createdAt": "",
   "createdBy": "",
   "messages": ""
 }
 ```
 
-4. Below the editor, there is an input field `Add module`. You need to create and name a module that the input operations will be added to. In this case, we will name the module `general_operations`. Press enter.
-5. Now there is a new field, called `Add operation`. Here you will have to add each input operation to the module, one by one.
-6. Inside the `Add operation` field, type `ADD_MESSAGE` and press enter. A small editor will appear under with an empty input type that you have to fill. Copy the first input type from the [Operations Schema](#operations-schema) section and paste it in the editor. The editor should look like this:
+4. Below the editor, there is an input field **'Add module'**. You need to create and name a module that the input operations will be added to. In this case, we will name the module **'general_operations'**. Press enter.
+5. Now there is a new field, called **'Add operation'**. Here you will have to add each input operation to the module, one by one.
+6. Inside the **'Add operation'** field, type **'ADD_MESSAGE'** and press enter. A small editor will appear under with an empty input type that you have to fill. Copy the first input type from the [Operations Schema](#operations-schema) section and paste it in the editor. The editor should look like this:
 
 ```graphql
   input AddMessageInput {
@@ -135,7 +135,7 @@ The steps below show you how to do this:
     }
 ```
 
-7. Repeat step 6 for the other input operations based on the [Operations Schema](#operations-schema). If you noticed, you only need to add the name `(ANDD_EMOJI_REACTIO, EDIT_CHAT_NAME, etc)` of the operation without the `input` suffix. Then it will be generated once you press enter.
+7. Repeat step 6 for the other input operations based on the [Operations Schema](#operations-schema). If you noticed, you only need to add the name `(ADD_EMOJI_REACTION, EDIT_CHAT_NAME, etc)` of the operation without the `input` suffix. Then it will be generated once you press enter.
 8. Let's just add a couple more reducer exceptions to the `ADD_MESSAGE` operation which we'll be using later to avoid empty messages or messages exceeding a maximum lenght. Add `MessageContentCannotBeEmpty` and `MessageContentExceedsTheMaximumLenght` to the reducer exceptions of `ADD_MESSAGE`
 8. Once you have added all the input operations, click on the `Export` button, at the top right of the editor, to save the document model on your local machine. Ideally you already save your file in the root of your powerhouse project on your machine.
 

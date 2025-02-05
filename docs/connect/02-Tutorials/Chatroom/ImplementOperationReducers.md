@@ -5,7 +5,7 @@ displayed_sidebar: connectSidebar
 ---
 # Implement Operation Reducers
 
-In this section, we will implement and test the operation reducers for the `Chatroom` document model. In order to do this, you have to export the document model from the Connect application and import it into your powerhouse project directory. 
+In this section, we will implement and test the operation reducers for the `ChatRoom` document model. In order to do this, you have to export the document model from the Connect application and import it into your powerhouse project directory. 
 
 To export the document model, follow the steps in the `Define Chatroom Document Model` section.
 
@@ -23,12 +23,12 @@ Either step will import the document model into your powerhouse project.
 The next steps will take place in the VSCode editor. Make sure to have it open and the terminal window inside vscode open as well. 
 
 
-To write the opearation reducers of the `Chatroom` document model, you need to generate the document model code from the document model file you have exported into the powerhouse project directory.
+To write the opearation reducers of the `ChatRoom` document model, you need to generate the document model code from the document model file you have exported into the powerhouse project directory.
 
 To do this, run the following command in the terminal:
 
 ```bash
-npm run generate ChatRoom.phdm.zip
+pnpm run generate ChatRoom.phdm.zip
 ```
 You will see that this action created a range of files for you. Before diving in we'll look at this simple schema to make you familiar with the structure you've defined in the document model once more. It shows how each type is connected to the next one.
  
@@ -38,7 +38,7 @@ Now you can navigate to `/document-models/chat-room/src/reducers/general-operati
 
 Open the `general-operations.ts` file and you should see the code that needs to be filled for the five operations you have defined earlier. Image below shows the code that needs to be filled:
 
-![to-do-list ts file](image-5.png)
+![chatroom ts file](image-5.png)
 
 ## Write the Operation Reducers
 

@@ -5,9 +5,9 @@ displayed_sidebar: connectSidebar
 ---
 # Create New Powerhouse Project
 
-To create a new Powerhouse Document Model Library project, you can use the `npm create document-model-lib` command in your terminal. This command will create a new project in the current directory.
-
 ## Create New Powerhouse Document Model Library Project
+
+To create a new Powerhouse Document Model Library project, you can use the `pnpm create document-model-lib` command in your terminal. This command will create a new project in the current directory.
 
 :::info
 This command will create a new project in the current directory.
@@ -24,13 +24,13 @@ This essentially opens that folder and places you in it.
 Once you've navigated to the directory where you want to create the new project and in your terminal, run the following command:
 
 ```bash
-npm create document-model-lib
+pnpm create document-model-lib
 ```
 
-In the terminal, you will be asked to enter the project name. Fill in the project name and press enter.
+In the terminal, you will be asked to enter the project name. Fill in the project name and press enter. Make sure to use the name `ChatRoom` as the project name with capital letter R so all of our tutorial code works.
 
 ```bash
-you@yourmachine:~/Powerhouse$ npm create document-model-lib
+you@yourmachine:~/Powerhouse$ ph create document-model-lib
 
 > npx
 > create-document-model-lib
@@ -45,7 +45,7 @@ Once the project is created, you will see the following output:
 
  You can start by typing:
     cd ChatRoom
-    npm run generate
+    pnpm run generate
 ```
 
 Navigate to the newly created project directory:
@@ -59,13 +59,13 @@ Once you are in the project directory, now you can run the `npm run connect` com
 Run the following command to start the Connect application:
 
 ```bash
-npm run connect
+ph connect
 ```
 
 The Connect application will start and you will see the following output:
 
 ```bash
-you@yourmachine:~/Powerhouse/chatroom$ npm run connect
+you@yourmachine:~/Powerhouse/chatroom$ ph run connect
 
 > Chatroom@1.0.0 connect
 > connect --config-file ./powerhouse.config.json
