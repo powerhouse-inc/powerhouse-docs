@@ -4,7 +4,7 @@ sidebar_position: 2
 displayed_sidebar: connectSidebar
 ---
 
-# Connect Builder Studio
+# Connect Studio Mode
 
 The Connect Builder Studio is a robust tool designed for builders and developers to create, test, and deploy document models. The studio can be launched through a simple CLI command using the provided npm package. Once set up, the studio allows any developer or document model builder to run a local instance of the Connect hub on their machine and begin working immediately.
 
