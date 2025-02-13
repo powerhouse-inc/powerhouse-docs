@@ -80,7 +80,7 @@ Now that you've set up your directory.
 Go ahead and add the document models you'd like to add by going throught the standard document model building flow:
 
 :::info
-These steps are explained more in depth in any of our [tutorials](docs/connect/02-Tutorials). Follow along with one of the tutorials that matches your project the most.
+These steps are explained more in depth in any of our tutorials. Follow along with one of the tutorials that matches your project the most.
 :::
 
 1. Defining your Document Model **GraphQL Schema** in the document model document editor by launching the document model editor in Connect Studio Mode with the `npm run connect` command.
