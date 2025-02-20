@@ -14,25 +14,27 @@ const FeatureList: FeatureItem[] = [
   {
     title: "Connect",
     imageSrc: require("@site/static/img/connect.png").default,
-    docPath: "/docs/connect/intro",
+    docPath: "docs/academy/AdvancedTopics/PowerhouseArchitecture",
     description: (
       <>
-        Learn about the private contributor tool Connect & its document models
+        Learn about the private contributor tool Connect
       </>
     ),
   },
   {
     title: "Switchboard",
     imageSrc: require("@site/static/img/switchboard.png").default,
-    docPath: "/docs/switchboard/intro",
-    description: <>Get access to the API interface through Switchboard</>,
+    docPath: "docs/academy/WorkWithData/IntroducingSwitchboard",
+    description: <>Get access to the open API interface with Switchboard</>,
   },
   {
-    title: "Reactor",
-    imageSrc: require("@site/static/img/reactor.png").default,
-    docPath: "/docs/reactor/intro",
+    title: "Fusion",
+    imageSrc: require("@site/static/img/fusion.png").default,
+    docPath: "/docs/academy/Front-endImplementations/IntroducingFusion",
     description: (
-      <>Find out how a Powerhouse Reactor node works</>
+      <>
+        Setup Fusion as your organizations dashboard
+      </>
     ),
   },
   {
@@ -41,16 +43,23 @@ const FeatureList: FeatureItem[] = [
     docPath: "/docs/renown/intro",
     description: (
       <>
-        Dive into the customizable reputation system that consolidates data from
-        Powerhouse applications
+        Dive into the customizable reputation system 
       </>
+    ),
+  },
+  {
+    title: "Reactor",
+    imageSrc: require("@site/static/img/reactor.png").default,
+    docPath: "/docs/academy/AdvancedTopics/WorkingWithTheReactor",
+    description: (
+      <>Find out how a Powerhouse Reactor node works</>
     ),
   },
 ];
 
 function Feature({ title, imageSrc, description, docPath }: FeatureItem) {
   return (
-    <div className={clsx("col col--3")}>
+    <div className={styles.col}>
       <Link to={docPath} className={styles.featureLink}>
         <div className={styles.featureContent}>
           <div className={styles.featureImageWrapper}>
@@ -69,8 +78,66 @@ function Feature({ title, imageSrc, description, docPath }: FeatureItem) {
 export default function HomepageFeatures(): JSX.Element {
   return (
     <section className={styles.features}>
-      <div className="container">
-        <div className="row">
+      <div className={styles.featuresWrapper}>
+        {/* Learning Path Cards */}
+        <div className={styles.learningPath}>
+          <div className={styles.pathRow}>
+            {/* Column 1: Get Started & Create */}
+            <div className={styles.pathColumn}>
+              <h2 className={styles.pathColumnTitle}>Explore Powerhouse</h2>
+              <div className={styles.pathCard}>
+                <h3 className={styles.cardTitle}>Get started 🚀</h3>
+                <div className={styles.cardContent}>
+                  <a href="/get-started" className={styles.pathButton}>Learn about Powerhouse in 3 minutes</a>
+                </div>
+              </div>
+              <div className={styles.pathCard}>
+                <h3 className={styles.cardTitle}>Create ⚡</h3>
+                <div className={styles.cardContent}>
+                  <a href="/create-todo" className={styles.pathButton}>Build a Todo-list document model, editor & API endpoint</a>
+                </div>
+              </div>
+            </div>
+
+            {/* Column 2: User Experiences & Work with data */}
+            <div className={styles.pathColumn}>
+              <h2 className={styles.pathColumnTitle}>For Designers & Engineers</h2>
+              <div className={styles.pathCard}>
+                <h3 className={styles.cardTitle}>Build user experiences 🎨</h3>
+                <div className={styles.cardContent}>
+                  <a href="/document-editors" className={styles.pathButton}>Creating beautiful document editors</a>
+                </div>
+              </div>
+              <div className={styles.pathCard}>
+                <h3 className={styles.cardTitle}>Work with data 📊</h3>
+                <div className={styles.cardContent}>
+                  <a href="/api-docs" className={styles.pathButton}>Reading & writing documents through the API</a>
+                </div>
+              </div>
+            </div>
+
+            {/* Column 3: Packages & Frontend */}
+            <div className={styles.pathColumn}>
+              <h2 className={styles.pathColumnTitle}>Solutions</h2>
+              <div className={styles.pathCard}>
+                <h3 className={styles.cardTitle}>Packages 📦</h3>
+                <div className={styles.cardContent}>
+                  <a href="/publishing" className={styles.pathButton}>Publishing and deploying packages</a>
+                </div>
+              </div>
+              <div className={styles.pathCard}>
+                <h3 className={styles.cardTitle}>Front-end implementation 🖥️</h3>
+                <div className={styles.cardContent}>
+                  <a href="/frontend-integration" className={styles.pathButton}>Using Powerhouse in a front-end environment</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Existing Features Section */}
+        <h2 className={styles.sectionTitle}>Browse by host-application</h2>
+        <div className={styles.row}>
           {FeatureList.map((props, idx) => (
             <Feature key={idx} {...props} />
           ))}

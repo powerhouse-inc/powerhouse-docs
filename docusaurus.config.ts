@@ -4,7 +4,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
   title: 'Powerhouse Academy',
-  tagline: 'Get started with the Powerhouse applications',
+  tagline: 'Get started with the Powerhouse ecosystem',
   favicon: 'img/ph-icon-light.svg',
 
   // Set the production url of your site here
@@ -69,33 +69,15 @@ const config: Config = {
       items: [
         {
           type: 'docSidebar',
-          sidebarId: 'connectSidebar',
+          sidebarId: 'academySidebar',
           position: 'left',
-          label: 'Connect',
+          label: 'Academy',
         },
         {
           type: 'docSidebar',
-          sidebarId: 'switchboardSidebar',
+          sidebarId: 'bookofpowerhouseSidebar',
           position: 'left',
-          label: 'Switchboard',
-        },
-        {
-          type: 'docSidebar',
-          sidebarId: 'reactorSidebar',
-          position: 'left',
-          label: 'Reactor',
-        },
-        {
-          type: 'docSidebar',
-          sidebarId: 'renownSidebar',
-          position: 'left',
-          label: 'Renown',
-        },
-        {
-          type: 'docSidebar',
-          sidebarId: 'faqSidebar',
-          position: 'left',
-          label: 'FAQ',
+          label: 'Book of Powerhouse',
         },
         {to: '/blog', label: 'Blog', position: 'left'},
         {
@@ -113,23 +95,23 @@ const config: Config = {
           items: [
             {
               label: 'Connect',
-              to: '/docs/connect/intro',
+              to: 'docs/academy/AdvancedTopics/PowerhouseArchitecture',
             },
             {
               label: 'Reactor',
-              to: '/docs/reactor/intro',
+              to: 'docs/academy/AdvancedTopics/PowerhouseArchitecture',
             },
             {
               label: 'Switchboard',
-              to: '/docs/switchboard/intro',
+              to: 'docs/academy/AdvancedTopics/PowerhouseArchitecture',
             },
             {
               label: 'Renown',
-              to: '/docs/renown/intro',
+              to: 'docs/academy/AdvancedTopics/PowerhouseArchitecture',
             },
             {
               label: 'FAQ',
-              to: '/docs/faq/intro',
+              to: 'docs/academy/AdvancedTopics/PowerhouseArchitecture',
             },
             {
               label: "Blog",
