@@ -88,13 +88,13 @@ export default function HomepageFeatures(): JSX.Element {
               <div className={styles.pathCard}>
                 <h3 className={styles.cardTitle}>Get started 🚀</h3>
                 <div className={styles.cardContent}>
-                  <a href="/get-started" className={styles.pathButton}>Learn about Powerhouse in 3 minutes</a>
+                  <a href="docs/academy/GetStarted/GetStarted-Intro" className={styles.pathButton}>Learn about Powerhouse in 3 minutes</a>
                 </div>
               </div>
               <div className={styles.pathCard}>
                 <h3 className={styles.cardTitle}>Create ⚡</h3>
                 <div className={styles.cardContent}>
-                  <a href="/create-todo" className={styles.pathButton}>Build a Todo-list document model, editor & API endpoint</a>
+                  <a href="docs/academy/Create/ToDoList/CreateNewPowerhouseProject" className={styles.pathButton}>Build a Todo-list document model, editor & API endpoint</a>
                 </div>
               </div>
             </div>
@@ -105,13 +105,13 @@ export default function HomepageFeatures(): JSX.Element {
               <div className={styles.pathCard}>
                 <h3 className={styles.cardTitle}>Build user experiences 🎨</h3>
                 <div className={styles.cardContent}>
-                  <a href="/document-editors" className={styles.pathButton}>Creating beautiful document editors</a>
+                  <a href="docs/academy/BuildingUserExperiences/BuildingBeautifulDocumentEditors" className={styles.pathButton}>Creating beautiful document editors</a>
                 </div>
               </div>
               <div className={styles.pathCard}>
                 <h3 className={styles.cardTitle}>Work with data 📊</h3>
                 <div className={styles.cardContent}>
-                  <a href="/api-docs" className={styles.pathButton}>Reading & writing documents through the API</a>
+                  <a href="/docs/academy/WorkWithData/ReadingAndWritingThroughTheAPI" className={styles.pathButton}>Reading & writing documents through the API</a>
                 </div>
               </div>
             </div>
@@ -122,13 +122,13 @@ export default function HomepageFeatures(): JSX.Element {
               <div className={styles.pathCard}>
                 <h3 className={styles.cardTitle}>Packages 📦</h3>
                 <div className={styles.cardContent}>
-                  <a href="/publishing" className={styles.pathButton}>Publishing and deploying packages</a>
+                  <a href="docs/academy/Packages/PublishYourProject" className={styles.pathButton}>Publishing and deploying packages</a>
                 </div>
               </div>
               <div className={styles.pathCard}>
                 <h3 className={styles.cardTitle}>Front-end implementation 🖥️</h3>
                 <div className={styles.cardContent}>
-                  <a href="/frontend-integration" className={styles.pathButton}>Using Powerhouse in a front-end environment</a>
+                  <a href="docs/academy/Front-endImplementations/IntegrateInAFront-End" className={styles.pathButton}>Using Powerhouse in a front-end environment</a>
                 </div>
               </div>
             </div>
