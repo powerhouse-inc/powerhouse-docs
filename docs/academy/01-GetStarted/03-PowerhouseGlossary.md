@@ -32,8 +32,13 @@
 - **Powerhouse Renown** – A decentralized authentication system managing contributor reputation.
 - **Powerhouse Academy** – A training platform for onboarding and upskilling SNO contributors.
 - **Powergrid** – A decentralized network of reactors that sync with each other.
+
 ## Development & Data Modeling
 - **Document Models** – Structured data models that define how Powerhouse documents store and process information.
+- **Document Model Editors** – An interface or UI to a document model that allows users to create and modify the data captured by the document models.
+- **Powerhouse Project** – A collection of document models, document model editors, and other resources being build in Connect Studio.
+- **Host Applications** – Applications that use the Powerhouse framework to create and manage documents and data.
+- **Packages** – A collection of document models, document model editors, and other resources that are published as a package and can be used in any of the host applications.
 - **GraphQL Scalars** – Data types used in Powerhouse document modeling (e.g., `String`, `Int`, `Currency`, `OID` for unique object IDs).
 - **NanoID** – A small, unique identifier used to reference objects within the Powerhouse framework.
 - **Model-Driven Development (MDD)** – A software approach that uses high-level models to generate system logic and configurations.

@@ -1,0 +1,87 @@
+# Building with Tailwind, CSS & HTML(WIP)
+
+# Using Tailwind in Your Projects
+
+## Introduction
+
+Tailwind CSS is a utility-first CSS framework that provides low-level utility classes to help developers style their applications quickly and efficiently. With the latest improvements in Tailwind v4, integrating it into **Powerhouse Projects** (Document Models + editors that can be published as a package) has become even simpler, eliminating the need for extra configuration files or manual CLI commands.
+
+This guide outlines how to seamlessly use Tailwind in your project, leveraging TypeScript’s build system and modern development tools like Vite and Storybook.
+
+## Installation and Setup
+When working on a Powerhouse Project in Connect Studio (Running Connect Locally), projects will need the following configuration in their package.json to use Tailwind:
+
+```json
+"scripts": {
+  "build:css": "npx @tailwindcss/cli -i ./styles.css -o ./dist/styles.css",
+  "build": "npm run build:css && tsc --build"
+}
+```
+### How It Works:
+**Tailwind CLI Compilation**
+
+This command processes the input styles.css file and generates the compiled CSS in the dist folder.
+Since Tailwind v4 detects the required styles automatically, there’s no need for additional configuration files.
+```
+npx @tailwindcss/cli -i ./styles.css -o ./dist/styles.css
+```
+
+
+**TypeScript Compilation**
+
+```
+tsc --build
+```
+This command handles all TypeScript-related tasks, including code compilation, type checking, and code splitting.
+The `--build` flag enables caching of build artifacts across the monorepo, optimizing performance.
+
+**Automatic Tailwind Detection (No More Config Files!)**  
+With Tailwind v4, the framework automatically detects the necessary CSS classes from your source code.   
+This means:
+- No need for postcss.config.js
+- No need for a tailwind.config.js file
+- Configuration is handled entirely through CSS variables
+
+Tailwind now uses CSS for configuration, so importing styles from the Powerhouse Design System automatically applies the necessary theme and settings.
+
+**Customizing the Design System**  
+Projects using a design system can override specific styles by defining CSS variables with the same name. This provides a flexible way to extend or modify themes without additional Tailwind configuration.
+
+**Integrating Tailwind with Storybook**  
+Since Storybook uses Vite under the hood, integrating Tailwind requires minimal setup. To enable automatic Tailwind compilation when running Storybook, update the .storybook/main.ts file:
+
+```ts
+// .storybook/main.ts
+viteFinal: async (config) => {
+    const { mergeConfig } = await import('vite');
+    const { default: tailwindcss } = await import("@tailwindcss/vite");
+    return mergeConfig(config, {
+      plugins: [tailwindcss()],
+    });
+  },
+```
+Then, simply import the styles in .storybook/preview.ts:
+
+```ts
+// .storybook/preview.ts
+import "../styles.css";
+```
+This setup ensures that Storybook automatically compiles Tailwind styles, without requiring additional CLI commands.
+
+## Using Tailwind in Connect Studio
+For Connect Studio, the process is similar to Storybook:
+
+**Install the Tailwind Vite plugin**  
+Ensure the Tailwind Vite plugin is added to the project configuration.
+
+**Define the Styles Directory for Installed Packages**  
+To make styles accessible across different packages, store them in a consistent location such as `package/{editorsDir}/styles.css`.
+This ensures that editors and components can import the correct styles with minimal effort.
+
+:::info
+**Summary**   
+- Tailwind v4 simplifies setup by removing the need for configuration files.
+- Tailwind styles are automatically detected by the CLI, requiring only a CSS import.
+- TypeScript (tsc --build) manages the entire build process efficiently.
+- Storybook and Connect Studio can integrate Tailwind with zero manual CSS builds using the Tailwind Vite plugin.
+:::
