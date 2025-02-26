@@ -1,6 +1,7 @@
-# GraphQL at Powerhouse
+# GraphQL and Subgraphs
 
-GraphQL plays a fundamental role in defining document model data schemas, handling data access patterns, and enabling event-driven workflows within the Powerhouse ecosystem. This document provides an intro to graphQL and how it is used at Powerhouse.
+GraphQL plays a fundamental role in defining document model data schemas, handling data access patterns, and enabling event-driven workflows within the Powerhouse ecosystem.   
+This document provides an intro to graphQL and how it is used at Powerhouse when dealing with subgraphs
 
 More specifically, GraphQL is used as:
 - The **schema definition language (SDL)** for defining our document models and thereby self-documenting the API to the data model. It allows developers to define the structure and relationships of data in a strongly-typed format.
@@ -40,19 +41,32 @@ This schema ensures that every File entity has an ID, name, size, and timestamp.
 
 In Powerhouse, each subgraph has its own SDL, ensuring modularity and flexibility while working within the ecosystem.
 
+## CQRS Breakdown
+
 Powerhouse uses CQRS to separate write operations (commands) from read operations (queries).   
 This improves system scalability and flexibility. 
 - GraphQL Queries handle read operations, retrieving structured data efficiently. 
 - GraphQL Mutations handle write operations, modifying the state in a controlled manner.
 
-Powerhouse's subgraphs act as the read layer, while processors handle write operations into operational data stores.  
-This prevents conflicts between querying and modifying data.
+Powerhouse's subgraphs act as the read layer, while processors handle write operations into operational data stores. This prevents conflicts between querying and modifying data.
 
-#### Example: Read & Write Separation  
+| Layer | Role | GraphQL Usage | Implementation |
+| --- | --- | --- | --- |
+| Write Model (Commands) | Handles state changes (adding, modifying, deleting) | GraphQL Mutations | Processor |
+| Read Model (Queries) | Optimized for fetching/reading/retrieving data | GraphQL Queries | Subgraph |
+
+### Read & Write Separation  
 **Read Model (Query)**  
-Fetching file metadata:
 
-```graphql
+- Optimized for data retrieval
+- Structured using GraphQL Queries
+- Aggregates and exposes data via a subgraph
+- Pulls data from Operational Data Stores, Analytics Stores, and Reactor
+- Subgraphs do not directly modify the data—they only expose pre-processed information  
+
+
+
+```graphql title="Example of a Powerhouse Contributor schema in GraphQL"
 query {
   getFile(id: "123") {
     name
@@ -61,10 +75,12 @@ query {
 }
 ```
 
-**Write Model (Mutation)**    
-Uploading a new file:
+**Write Model (Mutation)** 
+- Handles state changes (adding, modifying, deleting)
+- Structured using GraphQL Mutations
+- Writes data to Operational Data Stores
 
-```graphql
+```graphql title="Example of a Powerhouse Contributor schema in GraphQL"
 mutation {
   createFile(name: "document.pdf", size: 1024) {
     id
@@ -72,14 +88,6 @@ mutation {
   }
 }
 ```
-
-### Powerhouse-Specific CQRS Breakdown
-
-| Layer | Role | GraphQL Usage | Implementation |
-| --- | --- | --- | --- |
-| Write Model (Commands) | Handles state changes (adding, modifying, deleting) | GraphQL Mutations | Processor |
-| Read Model (Queries) | Optimized for fetching/reading/retrieving data | GraphQL Queries | Subgraph |
-
 
 ### GraphQL & Event-Driven Architecture (EDA)
 Event-Driven Architecture (EDA) enables asynchronous processing where events trigger actions. Powerhouse uses GraphQL to expose real-time event data from its Reactor and Operational Data Stores.
@@ -94,7 +102,8 @@ How GraphQL Fits into EDA
 2. Writes event data to the Operational Data Store.
 3. Subgraph exposes the updated data via GraphQL.
 
-### Future Powerhouse Enhancement: GraphQL Subscriptions
+
+## GraphQL Subscriptions
 Although Powerhouse currently uses queries and mutations, GraphQL Subscriptions could allow real-time streaming of event-based data.
 
 #### Example (future implementation):
@@ -108,33 +117,3 @@ subscription {
 }
 ```
 This would enable clients to listen for new file uploads without polling.
-
-### 4. Read and Write Models in Powerhouse's Architecture  
-Powerhouse's architecture follows CQRS principles, dividing the system into two models:
-
-
-
-### Read Model (Query Side)
-- Optimized for data retrieval
-- Structured using GraphQL Queries
-- Aggregates and exposes data via a subgraph
-- Pulls data from Operational Data Stores, Analytics Stores, and Reactor
-- Subgraphs do not directly modify the data—they only expose pre-processed information
-
-**Example: Querying Read Model**  
-This retrieves structured data without modifying the state.
-```graphql
-query {
-  getFile(id: "123") {
-    name
-    size
-  }
-}
-```
-
-
-
-
-
-
-

@@ -1,28 +1,31 @@
 # Working with Subgraphs
 
-Todays tutorial will focus on creating a new subgraph and customizing it. Let's start with the basics and gradually add more complex features and functionality.
+Todays tutorial will focus on creating a new subgraph and customizing it.  
+Let's start with the basics and gradually add more complex features and functionality.
 
 ## What is a Subgraph?
 
-A subgraph in Powerhouse is a GraphQL-based modular data component that enables efficient data queries and mutations. Subgraphs can retrieve data from:
+A subgraph in Powerhouse is a GraphQL-based modular data component that enables efficient data queries and mutations. 
 
-**The Reactor** – The core Powerhouse data system or network node. 
-**Operational Data Stores** – Structured data storage for operational processes. Real-time updates, for querying structured data.
-**Analytics Stores** – Aggregated historical data, useful for insights, reporting and business intelligence.
+#### Subgraphs can retrieve data from:
 
-Subgraphs consist of:
+- **The Reactor** – The core Powerhouse data system or network node.   
+- **Operational Data Stores** – Structured data storage for operational processes, offering real-time updates, for querying structured data.  
+- **Analytics Stores** – Aggregated historical data, useful for insights, reporting and business intelligence.
 
-- Schema (typeDefs) – Defines GraphQL Queries and Mutations.
-- Resolvers – Handles data fetching and logic.
-- Context Fields – Additional metadata that helps in resolving data efficiently.
+#### Subgraphs consist of:
 
-Context fields allow resolvers to access extra information, such as:
-- User authentication (e.g., checking if a user is an admin).
-- External data sources (e.g., analytics).
+- **Schema** – Defines GraphQL Queries and Mutations.
+- **Resolvers** – Handles data fetching and logic.
+- **Context Fields** – Additional metadata that helps in resolving data efficiently.
 
-Example:
+#### Context fields allow resolvers to access extra information, such as:
+- **User authentication** (e.g., checking if a user is an admin).
+- **External data sources** (e.g., analytics).
 
-```typescript
+
+
+```typescript title="Example of a context field"
 context: {
   admin: async (session) => {
     const admins = await operationalStore.get("admins");
@@ -31,15 +34,16 @@ context: {
 }
 ```
 
-## Step 1: Generating a Subgraph
+## 1. Generating a Subgraph
 
-Powerhouse provides a command-line utility to create new subgraphs easily. Run:
+Powerhouse provides a command-line utility to create new subgraphs easily.   
+Run:
 
 ```bash
 pnpm generate --subgraph <subgraph-name>
 ```
-Expected Output
-```bash
+
+```bash title="Expected Output"
 Loaded templates: node_modules/@powerhousedao/codegen/dist/codegen/.hygen/templates
        FORCED: ./subgraphs/<subgraph-name>/index.ts
      skipped: ./subgraphs/index.ts
@@ -47,12 +51,12 @@ Loaded templates: node_modules/@powerhousedao/codegen/dist/codegen/.hygen/templa
 ```
 
 ### What Happened Here?
-A new subgraph is created in `./subgraphs/<subgraph-name>/`
+A new subgraph was created in `./subgraphs/<subgraph-name>/`  
 It is automatically registered in `./subgraphs/index.ts`, ensuring it loads on startup.
 
-## Step 2: Customizing the Subgraph
+## 2. Customizing the Subgraph
 
-After generation, open:
+After generation of the subgraph, open:
 
 ```bash
 subgraphs/<subgraph-name>/index.ts
@@ -70,8 +74,6 @@ type Query {
 ### 2.2 Implement the Resolver
 Resolvers define how data is retrieved or modified.
 
-#### Basic Resolver Example: Returning Static Data
-
 ```js
 resolvers: {
   Query: {
@@ -85,7 +87,7 @@ resolvers: {
 #### Advanced Resolver: Fetching from Operational Store
 If your subgraph interacts with an Operational Data Store, modify the resolver:
 
-```js
+```typescript title="Example of a resolver that fetches data from an operational store"
 resolvers: {
   Query: {
     fileIds: async (_, __, { operationalStore }) => {
@@ -98,7 +100,7 @@ resolvers: {
 ### 2.3 Add Operational Data Storage (Optional)
 If you need to persist data, initialize an operational datastore inside onSetup():
 
-```ts
+```typescript title="Adding an operational datastore"
 async onSetup() {
   await this.createOperationalTables();
 }
@@ -118,16 +120,17 @@ async createOperationalTables() {
 #### Why Connect a Processor?
 Subgraphs alone are limited. A subgraph only queries data, but doesn't generate or store it.
 To make subgraphs useful, connect them with processors that update the data dynamically.
-A Processor listens to system events and updates the operational store in real-time. This ensures:
+A Processor listens to system events and updates the operational store in real-time. 
 
-- Live updates instead of static data.
-- Scalable architecture through event-driven data changes.
-- Seamless integration with other Powerhouse components.
+This ensures:
+- **Live updates** instead of static data.
+- **Scalable architecture** through event-driven data changes.
+- **Seamless integration** with other Powerhouse components.
 
-#### Example: Creating a Simple Processor
+
 Inside your processor, listen for new files and update the store:
 
-```ts
+```typescript title="Example: Creating a Simple Processor"
 async process(event) {
   if (event.type === "ADD_FILE") {
     await this.operationalStore.insert("fileIds", { id: event.fileId });
@@ -147,9 +150,9 @@ resolvers: {
 }
 ```
 
-## Step 3: Testing the Subgraph
+## 3. Testing the Subgraph
 
-### 1. Start the Reactor
+### 3.1. Start the Reactor
 To activate the subgraph, run:
 
 ```bash
@@ -157,11 +160,11 @@ pnpm reactor
 ```
 Or, for full system startup:
 
-```bash
-pnpm dev #this starts the reactor and connect in studio or dev mode
+```bash title="Start the Reactor & Connect in Studio or Locally
+pnpm dev 
 ```
 
-### 2. Access GraphQL Playground
+### 3.2. Access GraphQL Playground
 Open your browser and go to:
 
 ```bash
@@ -173,7 +176,7 @@ Example:
 http://localhost:4001/test-subgraph
 ```
 
-### 3. Run a Query
+### 3.3. Run a Query
 
 ```graphql
 query {
@@ -181,7 +184,7 @@ query {
 }
 ```
 
-### 4. Expected Response
+### 3.4. Expected Response
 If everything works, you should see:
 
 ```json
@@ -193,7 +196,7 @@ If everything works, you should see:
 ```
 
 
-### Powerhouse Already Has Prebuilt Subgraphs
+### Powerhouse already has prebuilt subgraphs
 
 Some subgraphs (e.g., System Subgraph, Drive Subgraph) already exist.
 To integrate with them, register them via the Reactor API.
