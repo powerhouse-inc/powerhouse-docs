@@ -1,6 +1,8 @@
 # Website
 
-This website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
+This documentation website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
+To contribute to the documentation please work on a feature branch in case of big refactors, and build & serve before pushing to the development branch. 
+Pushing from the dev branch to the main branch will trigger an auto deployment in Heroku for the staging deployment. 
 
 ### Installation
 
