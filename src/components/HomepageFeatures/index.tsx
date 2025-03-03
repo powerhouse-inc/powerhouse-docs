@@ -24,7 +24,7 @@ const FeatureList: FeatureItem[] = [
   {
     title: "Switchboard",
     imageSrc: require("@site/static/img/switchboard.png").default,
-    docPath: "docs/academy/WorkWithData/IntroducingSwitchboard",
+    docPath: "docs/academy/WorkWithData/ReadingAndWritingThroughTheAPI",
     description: <>Get access to the open API interface with Switchboard</>,
   },
   {
