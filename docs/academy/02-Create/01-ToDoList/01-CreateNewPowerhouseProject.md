@@ -1,32 +1,33 @@
 
 # Create New Powerhouse Project
 
-To create a new Powerhouse Document Model Library project, you can use the `npm create document-model-lib` command in your terminal. This command will create a new project in the current directory.
+## Overview
+This tutorial will guide you through creating a new 'Powerhouse project', which consists of a document model and its editor. You'll be using Connect locally, known as 'Studio mode'.
 
-## Create New Powerhouse Document Model Library Project
+## Prerequisites
+- Node.js and npm installed
+- Visual Studio Code (or your preferred IDE)
+- Terminal/Command Prompt access
 
-:::info
-This command will create a new project in the current directory.
-You can run the command in the terminal window of your OS or you open the newly installed VSCode and run the command in the terminal window of VSCode.
-You will need VSCode later in the tutorial once you have generated the document model.
-Make sure the terminal reflects the directory where you want to create the new project.
-To open a directory in a terminal, you use the cd command to change your current directory. The cd command takes an argument, usually the name of the folder you want to move to, so the full command is 
-```bash
-cd your-directory
-```
-This essentially opens that folder and places you in it.
-:::
-
-Once you've navigated to the directory where you want to create the new project and in your terminal, run the following command:
-
+## Quick Start
+Create a new Powerhouse project with a single command:
 ```bash
 npm create document-model-lib
 ```
 
+## Before You Begin
+1. Open your terminal (either your system terminal or VS Code's integrated terminal)
+2. Navigate to your desired project directory using:
+   ```bash
+   cd your-directory
+   ```
+3. Ensure you're in the correct directory before running the create command
+
+
 In the terminal, you will be asked to enter the project name. Fill in the project name and press enter.
 
 ```bash
-p@beast:~/Powerhouse$ npm create document-model-lib
+you@yourmachine:~/Powerhouse$ npm create document-model-lib
 
 > npx
 > create-document-model-lib
@@ -61,7 +62,7 @@ npm run connect
 The Connect application will start and you will see the following output:
 
 ```bash
-p@beast:~/Powerhouse/myToDoList$ npm run connect
+you@yourmachine:~/Powerhouse/myToDoList$ npm run connect
 
 > myToDoList@1.0.0 connect
 > connect --config-file ./powerhouse.config.json

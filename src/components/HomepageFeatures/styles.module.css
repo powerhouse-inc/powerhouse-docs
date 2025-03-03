@@ -80,6 +80,35 @@
     padding: 1rem;
   }
 
+  .row {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .col {
+    width: 100%;
+    min-width: 100%;
+  }
+
+  .pathRow {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .pathColumn {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .featuresWrapper {
+    padding: 0 1rem;
+  }
+
+  .sectionTitle {
+    padding: 0 1rem;
+    text-align: center;
+  }
+
   .featureContent {
     align-items: center;
     max-width: 100%;
@@ -96,8 +125,22 @@
   }
 
   .featureText {
-    text-align: left;
+    text-align: center;
     width: 100%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .features {
+    padding: 0.5rem;
+  }
+
+  .featuresWrapper {
+    padding: 0 0.5rem;
+  }
+
+  .pathCard {
+    padding: 1rem;
   }
 }
 

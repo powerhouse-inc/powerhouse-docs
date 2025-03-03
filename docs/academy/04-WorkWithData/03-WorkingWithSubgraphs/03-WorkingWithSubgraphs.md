@@ -5,7 +5,7 @@ Let's start with the basics and gradually add more complex features and function
 
 ## What is a Subgraph?
 
-A subgraph in Powerhouse is a GraphQL-based modular data component that enables efficient data queries and mutations. 
+A subgraph in Powerhouse is a GraphQL-based **modular data component** that enables efficient data queries and mutations. 
 
 #### Subgraphs can retrieve data from:
 
@@ -15,8 +15,8 @@ A subgraph in Powerhouse is a GraphQL-based modular data component that enables 
 
 #### Subgraphs consist of:
 
-- **Schema** – Defines GraphQL Queries and Mutations.
-- **Resolvers** – Handles data fetching and logic.
+- **A Schema** – Which defines the GraphQL Queries and Mutations.
+- **Resolvers** – Which handle data fetching and logic.
 - **Context Fields** – Additional metadata that helps in resolving data efficiently.
 
 #### Context fields allow resolvers to access extra information, such as:
@@ -36,6 +36,7 @@ context: {
 
 ## 1. Generating a Subgraph
 
+Lets start by generating a new subgraph.  
 Powerhouse provides a command-line utility to create new subgraphs easily.   
 Run:
 
@@ -56,14 +57,15 @@ It is automatically registered in `./subgraphs/index.ts`, ensuring it loads on s
 
 ## 2. Customizing the Subgraph
 
-After generation of the subgraph, open:
+After generation of the subgraph, let's open:
 
 ```bash
 subgraphs/<subgraph-name>/index.ts
 ```
 
 ### 2.1 Define the Schema
-The schema (typeDefs) defines the structure of your queries and mutations:
+
+Here we define the schema (typeDefs) which defines the structure of your queries and mutations.
 
 ```graphql
 type Query {
@@ -73,6 +75,7 @@ type Query {
 
 ### 2.2 Implement the Resolver
 Resolvers define how data is retrieved or modified.
+If you query for a specific value you can retrieve the value from either the reactor itself or an operational datastore.
 
 ```js
 resolvers: {
@@ -194,8 +197,6 @@ If everything works, you should see:
   }
 }
 ```
-
-
 ### Powerhouse already has prebuilt subgraphs
 
 Some subgraphs (e.g., System Subgraph, Drive Subgraph) already exist.

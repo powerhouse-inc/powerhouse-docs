@@ -2,9 +2,9 @@
 
 An `AnalyticsProcessor` is an object that can track analytics for operations and state changes on a set of document models. These analytics can be used to generate bespoke dashboards and reports, specific to the type or implementation of the document model.
 
-## Generating a Processor with the CLI
+## Generating an Analytics Processor with the CLI
 
-The `ph-cli` utility can be used to generate the scaffolding for an `AnalyticsProcessor`.
+The `ph-cli` utility can be used to generate the scaffolding for an `Analytics Processor`.
 
 ```
 npx @powerhousedao/ph-cli generate --processor-type analytics --document-models ./my-document-models
