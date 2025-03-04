@@ -81,8 +81,6 @@ Alternatively we can just use our reactor url and endpoint to figure out the doc
 We can find out what the id of our document is by querying the drive for it's documents.   
 Since we only have one document in our drive it will return the id of our todo list document.
 
-![documentid](./images/documentid.png)
-
 This example query is structured to request a document by its unique identifier (id).   
 It extracts common fields such as id, name, documentType, revision, created, and lastModified.
 
