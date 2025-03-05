@@ -75,14 +75,14 @@ This will prepopulate the Apollo Studio Sandbox with the correct **DocumentID** 
 
 The documentation on the left hand side of the Apollo Sandbox will show you all of the different fields that are available to query.
 
-![Example query of a document](./images/documentid.png)
+![document query](./images/documentid.png)
 
 Alternatively we can just use our reactor url and endpoint to figure out the document id.  
 We can find out what the id of our document is by querying the drive for it's documents.   
 Since we only have one document in our drive it will return the id of our todo list document.
 
 This example query is structured to request a document by its unique identifier (id).   
-It extracts common fields such as id, name, documentType, revision, created, and lastModified.
+It extracts common fields such as **id**, **name**, **documentType**, **revision**, **created**, and **lastModified**.
 
 Let's query for the content of the operations and compare the results with the document operation history. 
 
