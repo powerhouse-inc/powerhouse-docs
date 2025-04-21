@@ -24,7 +24,7 @@ To write the opearation reducers of the `ToDoList` document model, you need to g
 To do this, run the following command in the terminal:
 
 ```bash
-npm run generate ToDoList.phdm.zip
+ph generate ToDoList.phdm.zip
 ```
 
 Now you can navigate to `/document-models/to-do-list/src/reducers/to-do-list.ts` and start writing the operation reducers.
@@ -41,54 +41,37 @@ Open the `to-do-list.ts` file and you should see the code that needs to be fille
 
 ```typescript
 /**
-* This is a scaffold file meant for customization: 
-* - modify it by implementing the reducer functions
-* - delete the file and run the code generator again to have it reset
-*/
+ * This is a scaffold file meant for customization:
+ * - modify it by implementing the reducer functions
+ * - delete the file and run the code generator again to have it reset
+ */
 
-import { ToDoListToDoListOperations } from '../../gen/to-do-list/operations';
+import type { ToDoListOperationsOperations } from "../../gen/operations/operations.js";
+import type { ToDoListState, ToDoItem } from "../../gen/schema/types.js";
+import type { AddTodoItemAction, UpdateTodoItemAction, DeleteTodoItemAction } from "../../gen/operations/actions.js";
 
-export const reducer: ToDoListToDoListOperations = {
-    addTodoItemOperation(state, action, dispatch) {
-        state.stats.total += 1;
-        state.stats.unchecked += 1;
-        state.items.push({
-            id: action.input.id,
-            text: action.input.text,
-            checked: false,
-        });
-    },
-    updateTodoItemOperation(state, action, dispatch) {
-        const item = state.items.find(item => item.id === action.input.id);
-        if (!item) {
-            throw new Error(`Item with id ${action.input.id} not found`);
-        }
-        if (action.input.text) {
-            item.text = action.input.text;
-        }
-        if (action.input.checked) {
-            state.stats.unchecked -= 1;
-            state.stats.checked += 1;
-            item.checked = action.input.checked;
-        }
-        if (action.input.checked === false) {
-            state.stats.unchecked += 1;
-            state.stats.checked -= 1;
-            item.checked = action.input.checked;
-        }
-    },
-    deleteTodoItemOperation(state, action, dispatch) {
-        const item = state.items.find(item => item.id === action.input.id);
-        state.stats.total -= 1;
-        if (item?.checked) {
-            state.stats.checked -= 1;
-        }
-        if (item?.checked === false) {
-            state.stats.unchecked -= 1;
-        }
-        state.items = state.items.filter(item => item.id !== action.input.id);
-    },
-}
+export const reducer: ToDoListOperationsOperations = {
+  addTodoItemOperation(state: ToDoListState, action: AddTodoItemAction) {
+    state.items.push({
+      id: action.input.id,
+      text: action.input.text,
+      checked: false,
+    });
+  },
+  updateTodoItemOperation(state: ToDoListState, action: UpdateTodoItemAction) {
+    const item = state.items.find((item: ToDoItem) => item.id === action.input.id);
+    if (!item) throw new Error(`Item with id ${action.input.id} not found`);
+    if (action.input.text !== undefined && action.input.text !== null) {
+      item.text = action.input.text;
+    }
+    if (action.input.checked !== undefined && action.input.checked !== null) {
+      item.checked = action.input.checked;
+    }
+  },
+  deleteTodoItemOperation(state: ToDoListState, action: DeleteTodoItemAction) {
+    state.items = state.items.filter((item: ToDoItem) => item.id !== action.input.id);
+  },
+};
 ```
 
 ## Write the Operation Reducers Tests
@@ -100,17 +83,12 @@ Navigate to `/document-models/to-do-list/src/reducers/tests/to-do-list.test.ts` 
 Here are the tests for the three operations written in the reducers file. This test file creates an empty ToDoList document model, then adds a todo item, updates it and deletes it.
 
 ```typescript
-/**
- * This is a scaffold file meant for customization:
- * - change it by adding new tests or modifying the existing ones
- */
-
 import utils from '../../gen/utils';
 import { reducer } from '../../gen/reducer';
-import * as creators from '../../gen/to-do-list/creators';
+import * as creators from '../../gen/creators';
 import { ToDoListDocument } from '../../gen/types';
 
-describe('Todolist Operations', () => {
+describe('Todolist Operations (Simplified)', () => {
     let document: ToDoListDocument;
 
     beforeEach(() => {
@@ -118,76 +96,37 @@ describe('Todolist Operations', () => {
     });
 
     it('should handle addTodoItem operation', () => {
-        const input = {
-            id: '1',
-            text: 'Buy milk',
-        };
-        const updatedDocument = reducer(
-            document,
-            creators.addTodoItem(input),
-        );
+        const input = { id: '1', text: 'Buy milk' };
+        const updatedDocument = reducer(document, creators.addTodoItem(input));
 
         expect(updatedDocument.operations.global).toHaveLength(1);
-        expect(updatedDocument.operations.global[0].type).toBe(
-            'ADD_TODO_ITEM',
-        );
-        expect(updatedDocument.operations.global[0].input).toStrictEqual(input);
-        expect(updatedDocument.operations.global[0].index).toEqual(0);
+        expect(updatedDocument.operations.global[0].type).toBe('ADD_TODO_ITEM');
         expect(updatedDocument.state.global.items).toHaveLength(1);
+        expect(updatedDocument.state.global.items[0].text).toBe('Buy milk');
     });
+
     it('should handle updateTodoItem operation', () => {
-        const addInput = {
-            id: '1',
-            text: 'Buy milk',
-        };
-        const updateInput = {
-            id: '1',
-            text: 'Buy bread',
-        };
-        const createdDocument = reducer(
-            document,
-            creators.addTodoItem(addInput),
-        );
-        const updatedDocument = reducer(
-            createdDocument,
-            creators.updateTodoItem(updateInput),
-        );
+        const addInput = { id: '1', text: 'Buy milk' };
+        const updateInput = { id: '1', text: 'Buy bread' };
+
+        const createdDocument = reducer(document, creators.addTodoItem(addInput));
+        const updatedDocument = reducer(createdDocument, creators.updateTodoItem(updateInput));
 
         expect(updatedDocument.operations.global).toHaveLength(2);
-        expect(updatedDocument.operations.global[1].type).toBe(
-            'UPDATE_TODO_ITEM',
-        );
-        expect(updatedDocument.operations.global[1].input).toStrictEqual(updateInput);
-        expect(updatedDocument.operations.global[1].index).toEqual(1);
-        expect(updatedDocument.state.global.items[0].text).toBe(updateInput.text);
+        expect(updatedDocument.state.global.items[0].text).toBe('Buy bread');
     });
+
     it('should handle deleteTodoItem operation', () => {
-        const addInput = {
-            id: '1',
-            text: 'Buy milk',
-        };
-        const deleteInput = {
-            id: '1',
-        };
-        const createdDocument = reducer(
-            document,
-            creators.addTodoItem(addInput),
-        );
-        const updatedDocument = reducer(
-            createdDocument,
-            creators.deleteTodoItem(deleteInput),
-        );
+        const addInput = { id: '1', text: 'Buy milk' };
+        const deleteInput = { id: '1' };
+
+        const createdDocument = reducer(document, creators.addTodoItem(addInput));
+        const updatedDocument = reducer(createdDocument, creators.deleteTodoItem(deleteInput));
 
         expect(updatedDocument.operations.global).toHaveLength(2);
-        expect(updatedDocument.operations.global[1].type).toBe(
-            'DELETE_TODO_ITEM',
-        );
-        expect(updatedDocument.operations.global[1].input).toStrictEqual(deleteInput);
-        expect(updatedDocument.operations.global[1].index).toEqual(1);
         expect(updatedDocument.state.global.items).toHaveLength(0);
     });
 });
-
 ```
 
 Now you can run the tests to make sure the operation reducers are working as expected.

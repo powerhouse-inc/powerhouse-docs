@@ -4,11 +4,11 @@
 In this tutorial, you will learn how to design your document model and export it to be later used in your Powerhouse project.
 If you don't have a document model created yet, have a look at the previous step of this tutorial to create a new document model.
 
-Before you start, make sure you have the Connect application running.
+Before you start, make sure you have the Connect application running with the command `ph connect`
 
 ## ToDoList Document Model Schema
 
-We use GraphQL Schema Definition Language (SDL) to define the document model schema. Below, you can see the SDL for the `ToDoList` document model.
+We use the GraphQL Schema Definition Language (SDL) to define the document model schema. Below, you can see the SDL for the `ToDoList` document model.
 
 :::info
 This schema contains the data structure of the document model and the basic operations that can be performed on the document model.
@@ -18,24 +18,16 @@ Document models in Powerhouse leverage event sourcing principles, where every st
 ## State Schema
 
 ```graphql
-# Defines a GraphQL type for the state of the to-do list document
+# The state of our todolist
 type ToDoListState {
-  items: [ToDoItem!]! # Array of to-do items
-  stats: ToDoListStats! # Statistics about the to-do list items
+  items: [ToDoItem!]!
 }
 
-# Defines a GraphQL type for a single to-do item
+# A single to-do item
 type ToDoItem {
-  id: ID! # Unique identifier for each to-do item
-  text: String! # The text description of the to-do item
-  checked: Boolean! # Status of the to-do item (checked/unchecked)
-}
-
-# Defines a GraphQL type for the statistics of the to-do list
-type ToDoListStats {
-  total: Int! # Total number of items
-  checked: Int! # Number of checked items
-  unchecked: Int! # Number of unchecked items
+  id: ID!
+  text: String!
+  checked: Boolean!
 }
 ```
 
