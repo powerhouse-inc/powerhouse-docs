@@ -60,7 +60,7 @@ Loaded templates: node_modules/@powerhousedao/codegen/dist/codegen/.hygen/templa
 2. The subgraph was automatically registered in your project's registry
 3. Basic boilerplate code was generated with an example query
 
-If we now run 'npm run reactor' we will see the new subgraph being registered during the startup of the Reactor.
+If we now run 'ph reactor' we will see the new subgraph being registered during the startup of the Reactor.
   > Registered /todolist subgraph.
 
 ## 2. Customizing your subgraph with a schema

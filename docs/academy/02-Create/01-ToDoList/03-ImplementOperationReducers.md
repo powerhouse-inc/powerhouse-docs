@@ -144,5 +144,6 @@ Output should be as follows:
    Duration  417ms (transform 79ms, setup 0ms, collect 174ms, tests 12ms, environment 0ms, prepare 158ms)
 ```
 
-If you got the same output, you have successfully implemented the operation reducers and tests for the `ToDoList` document model.
-Continue to the next section to learn how to implement the document model editor so you can see a simple user interface for the `ToDoList` document model in action. 
+If you got the same output, you have successfully implemented the operation reducers and tests for the `ToDoList` document model. Congratulations, you've succesfully setup the back-bone for a simple todolist document model. 
+
+Continue to the next chapter to learn how to implement the document model editor so you can see a simple user interface for the `ToDoList` document model in action. 

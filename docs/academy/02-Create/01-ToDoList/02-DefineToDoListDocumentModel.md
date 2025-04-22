@@ -1,5 +1,5 @@
 
-# Define the ToDoList Document Model
+# The ToDoList Data Model
 
 In this tutorial, you will learn how to design your document model and export it to be later used in your Powerhouse project.
 If you don't have a document model created yet, have a look at the previous step of this tutorial to create a new document model.

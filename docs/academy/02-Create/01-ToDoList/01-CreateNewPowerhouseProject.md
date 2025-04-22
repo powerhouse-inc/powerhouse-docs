@@ -39,14 +39,14 @@ Once the project is created, you will see the following output:
  The installation is done!
 
  You can start by typing:
-    cd myToDoList
+    cd <yourprojectname>
     ph generate
 ```
 
 Navigate to the newly created project directory:
 
 ```bash
-cd myToDoList
+cd <yourprojectname>
 ```
 
 Once you are in the project directory, now you can run the `ph connect` command to instantiate a local version of the Connect application to start building your document model.
@@ -62,11 +62,11 @@ The Connect application will start and you will see the following output:
 ```bash
 you@yourmachine:~/Powerhouse/myToDoList$ ph connect
 
-> ToDoList@1.0.0 connect
+> <yourprojectname>@1.0.0 connect
 > connect --config-file ./powerhouse.config.json
 
-Watching local document models at '/home/p/Powerhouse/ToDoList/document-models'...
-Watching local document editors at '/home/p/Powerhouse/ToDoList/editors'...
+Watching local document models at '/home/p/Powerhouse/<yourprojectname>/document-models'...
+Watching local document editors at '/home/p/Powerhouse/<yourprojectname>/editors'...
   ➜  Local:   http://localhost:3000/
   ➜  press h + enter to show help
 ```
@@ -77,6 +77,6 @@ Create a new document model by clicking on the `DocumentModel` button by the "Ne
 
 ![Create New Document Model](./images/connectApp.gif)
 
-If you followed the steps correctly, you should have an empty document model created called `ToDoList`.
+If you followed the steps correctly, you should have an empty document model created.
 
-In the next tutorial, you will learn how to design your document model and export it to be later used in your Powerhouse project.
+In the next tutorials, you will learn how to design your document model and export it to be later used in your Powerhouse project.

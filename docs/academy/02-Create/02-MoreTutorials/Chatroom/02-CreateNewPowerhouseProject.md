@@ -40,7 +40,6 @@ Once the project is created, you will see the following output:
 
  You can start by typing:
     cd ChatRoom
-    pnpm run generate
 ```
 
 Navigate to the newly created project directory:
@@ -49,7 +48,7 @@ Navigate to the newly created project directory:
 cd ChatRoom
 ```
 
-Once you are in the project directory, now you can run the `npm run connect` command to instantiate a local version of the Connect application to start building your document model.
+Once you are in the project directory, now you can run the `ph connect` command to instantiate a local version of the Connect application to start building your document model.
 
 Run the following command to start the Connect application:
 

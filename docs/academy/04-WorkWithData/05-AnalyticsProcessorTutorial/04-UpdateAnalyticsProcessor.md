@@ -147,7 +147,7 @@ export class RwaAnalyticsProcessor implements IProcessor {
 }
 ```
 
-Now that we've implemented the analytics processor, we can make it receive the correct data by running the reactor again in our other terminal window. We currently don't support hot reloading yet so we'll need to stop the reactor and start it again. Press `Ctrl + C` in the terminal window of the reactor to stop it and then run `npm run reactor` again.
+Now that we've implemented the analytics processor, we can make it receive the correct data by running the reactor again in our other terminal window. We currently don't support hot reloading yet so we'll need to stop the reactor and start it again. Press `Ctrl + C` in the terminal window of the reactor to stop it and then run `ph reactor` again.
 
 You should now be able to see in the terminal output of the reactor that the processor has received the operations and their details and they are available in the subgraphs. In case you would register a new listener for the analytics processor with a new ID, it would display all the operations from operation 0
 

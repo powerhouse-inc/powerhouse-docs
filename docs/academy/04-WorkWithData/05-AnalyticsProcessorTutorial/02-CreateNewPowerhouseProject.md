@@ -55,7 +55,6 @@ Once the project is created and the dependencies are installed (which can take a
 
  You can start by typing:
     cd rwa-analytics-demo
-    npm run generate
 ```
 
 Great! You've created a new powerhouse project, let's move on to the next step.

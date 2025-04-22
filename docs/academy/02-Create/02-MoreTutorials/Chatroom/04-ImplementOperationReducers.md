@@ -24,7 +24,7 @@ To write the opearation reducers of the `ChatRoom` document model, you need to g
 To do this, run the following command in the terminal:
 
 ```bash
-pnpm run generate ChatRoom.phdm.zip
+ph generate ChatRoom.phdm.zip
 ```
 You will see that this action created a range of files for you. Before diving in we'll look at this simple schema to make you familiar with the structure you've defined in the document model once more. It shows how each type is connected to the next one.
  

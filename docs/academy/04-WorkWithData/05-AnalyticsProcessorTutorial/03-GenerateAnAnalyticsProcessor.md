@@ -6,7 +6,7 @@
 Now open the directory with your code editor with the command `code . `
 
 Next, launch the reactor by running the following command in your terminal. 
-`npm run reactor` . A Reactor instance is a local (or remote) node in the Powerhouse network that can hold & sychronize data. You'll see the following output in your terminal while the reactor is starting up and a new browser window opens with the Connect application. The reactor you've created will become available as a public drive in Connect's left hand side bar, named `Powerhouse`.
+`ph reactor` . A Reactor instance is a local (or remote) node in the Powerhouse network that can hold & sychronize data. You'll see the following output in your terminal while the reactor is starting up and a new browser window opens with the Connect application. The reactor you've created will become available as a public drive in Connect's left hand side bar, named `Powerhouse`.
 
 ```bash
 [Reactor]: Initializing ReactorRouterManager...

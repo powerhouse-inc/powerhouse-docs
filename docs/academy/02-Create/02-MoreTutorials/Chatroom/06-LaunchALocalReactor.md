@@ -4,7 +4,7 @@ Now we'll create a local Reactor instance to simulate the behaviour of the chatr
 
 Wind down connect and run the following command in your terminal. 
 
-`npm run reactor`
+`ph reactor`
 
 This spins up a reactor, which represents a node that is usally hosted as a remote server, but in our case we run it locally on our machine. The reactor you've created will become available as a public drive in your left hand side bar. 
 
