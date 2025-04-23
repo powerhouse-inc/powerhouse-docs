@@ -10,7 +10,7 @@ Run below command to generate the editor template for the `Chatroom` document mo
 Notice the `--editor` flag which defines the `chatroom` document model editor. And the `--document-types` flag which defines the document type `powerhouse/chatroom`.
 
 ```bash
-npm run generate -- --editor ChatRoomEditor --document-types powerhouse/chat-room
+ph generate -- --editor ChatRoomEditor --document-types powerhouse/chat-room
 ```
 
 Once complete, navigate to the `editors/chat-room/editor.tsx` file and open it in your editor.
@@ -180,7 +180,7 @@ export default function Editor(props: IProps) {
 Now you can run the Connect app and see the `Chatroom` editor in action.
 
 ```bash
-npm run connect
+ph connect
 ```
 
 In connect, in the bottom right corner you'll find a new Document Model that you can create: `ChatRoom`. Click on it to create a new Chat Room document. A warning will prompt you to login before you are able to send messages. 

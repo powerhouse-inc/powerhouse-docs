@@ -38,23 +38,19 @@ Connect offers an interface to add your graphql schema and configure the setting
 Start with the following command to get started with the Powerhouse CLI
 
 ```
-$ npm install ph-cmd
+$ pnpm install -g ph-cmd
 ```
 
 Your next step is to initialize the CLI with the following command. This will prompt the creation of a local configuratior file and accompagning reactor set up in .ph/documents.
 
 ```
-npx ph init
-```
-or 
-```
-npm create document-model-lib
+ph init
 ```
 
 To run a local version of the Connect in Studio Mode use the following command
 
 ```
-run npx ph connect
+ph connect
 ```
 
 ### 1. Defining Your Document Model GraphQL Schema
@@ -63,7 +59,7 @@ Start by creating your own document model library.
 Step 1: Run the following command to set up your document model library:
 
 ```bash
-npm create document-model-lib
+ph init
 ```
 
 Step 2: Use the Document Model Editor in the Connect app:
@@ -71,7 +67,7 @@ Step 2: Use the Document Model Editor in the Connect app:
 Launch Connect Studio Mode:
 
 ```bash
-npm run connect
+ph connect
 ```
 ## Document Model Creation
 
@@ -96,7 +92,7 @@ Import the .zip file into your project directory created in Step 1.
 Run the following command to generate the scaffolding code:
 
 ```bash
-npm run generate YourModelName.phdm.zip
+ph generate YourModelName.phdm.zip
 ```
 
 This will create a new directory under /document-models containing:
@@ -132,20 +128,20 @@ document-models/"YourModelName"/src/reducers/tests
 Run the tests:
 
 ```bash
-npm test
+npm run test
 ```
 
 Test the editor functionality:
 
 ```bash
-npm run connect
+ph connect
 ```
 
 ### 5. Implementing Document Editors
 Generate the editor template for your document model:
 
 ```bash
-npm run generate -- --editor YourModelName --document-types powerhouse/YourModelName
+ph generate -- --editor YourModelName --document-types powerhouse/YourModelName
 ```
 
 The --editor flag specifies the name of your document model.
@@ -164,7 +160,7 @@ Customize the editor interface to suit your document model.
 Run the Connect app to test your document editor:
 
 ```bash
-npm run connect
+ph connect
 ```
 
 Verify that the editor functions as expected.

@@ -42,11 +42,11 @@ Now that you've set up your organization you've got all the right requirements t
 To start building your project with it's dedicated document models and editors we'll run the following command:
 
   ```bash
-   pnpm create document-model-lib
+   ph init
    ```
 This command will start the configuration of your powerhouse project. 
 
-   > 💡 For experimental features, use --version [version] which allows selecting a specific branch of our document-model-boilerplate. There are --dev, --staging and --main options. Select `pnpm create document-model-lib@dev --dev` to use the latest development version. Please be aware that this version can contain bugs and experimental features that aren't fully tested.  
+   > 💡 For experimental features, use --version [version] which allows selecting a specific branch of our document-model-boilerplate. There are --dev, --staging and --main options. Select `ph init@dev --dev` to use the latest development version. Please be aware that this version can contain bugs and experimental features that aren't fully tested.  
 
 <details>
 <summary>Reset Package Manager Cache</summary>
@@ -99,7 +99,7 @@ Go ahead and add the document models you'd like to add by going throught the sta
 3. Generating the scaffolding code by **exporting** the Zip file from connect and **importing** it into your project.
 4. Implementing the **reducer code** and unit tests of your document models reducers.
 5. Implementing the **document editors** to visualize and interact with your document models.
-6. Run **unit tests** and verify the editor functionality via `npm run connect` for local testing.		  
+6. Run **unit tests** and verify the editor functionality via `ph connect` for local testing.		  
 
 ### 2.3. Verifying your project
 Now that we've completed our directory with the reducers, tests and editors and your project is populated with modules we'll verify the build output and see if everything is working correctly. 

@@ -1,18 +1,19 @@
 
-# Create New Powerhouse Project
+# Create a Powerhouse Project
 
 ## Overview
-This tutorial will guide you through creating a new 'Powerhouse project', which consists of a document model and its editor. You'll be using Connect locally, known as 'Studio mode'.
+This tutorial will guide you through creating a new 'Powerhouse project', which primarely consists of a document model and its editor. You'll be using Connect locally, known as 'Studio mode'.
 
 ## Prerequisites
-- Node.js and npm installed
+- ph-cmd installed: `pnpm install -g ph-cmd`
+- Node.js and pnpm installed
 - Visual Studio Code (or your preferred IDE)
 - Terminal/Command Prompt access
 
 ## Quick Start
-Create a new Powerhouse project with a single command:
+Create a new Powerhouse project with a single command,:
 ```bash
-npm create document-model-lib
+ph init
 ```
 
 ## Before You Begin
@@ -21,18 +22,15 @@ npm create document-model-lib
    ```bash
    cd your-directory
    ```
-3. Ensure you're in the correct directory before running the create command
+3. Ensure you're in the correct directory before running the `ph init` command
 
 
 In the terminal, you will be asked to enter the project name. Fill in the project name and press enter.
 
 ```bash
-you@yourmachine:~/Powerhouse$ npm create document-model-lib
+you@yourmachine:~/Powerhouse$ ph init
 
-> npx
-> create-document-model-lib
-
-? What is the project name? ‣ myToDoList
+? What is the project name? ‣ ToDoList
 ```	
 
 Once the project is created, you will see the following output:
@@ -41,34 +39,34 @@ Once the project is created, you will see the following output:
  The installation is done!
 
  You can start by typing:
-    cd myToDoList
-    npm run generate
+    cd <yourprojectname>
+    ph generate
 ```
 
 Navigate to the newly created project directory:
 
 ```bash
-cd myToDoList
+cd <yourprojectname>
 ```
 
-Once you are in the project directory, now you can run the `npm run connect` command to instantiate a local version of the Connect application to start building your document model.
+Once you are in the project directory, now you can run the `ph connect` command to instantiate a local version of the Connect application to start building your document model.
 
 Run the following command to start the Connect application:
 
 ```bash
-npm run connect
+ph connect
 ```
 
 The Connect application will start and you will see the following output:
 
 ```bash
-you@yourmachine:~/Powerhouse/myToDoList$ npm run connect
+you@yourmachine:~/Powerhouse/myToDoList$ ph connect
 
-> myToDoList@1.0.0 connect
+> <yourprojectname>@1.0.0 connect
 > connect --config-file ./powerhouse.config.json
 
-Watching local document models at '/home/p/Powerhouse/myToDoList/document-models'...
-Watching local document editors at '/home/p/Powerhouse/myToDoList/editors'...
+Watching local document models at '/home/p/Powerhouse/<yourprojectname>/document-models'...
+Watching local document editors at '/home/p/Powerhouse/<yourprojectname>/editors'...
   ➜  Local:   http://localhost:3000/
   ➜  press h + enter to show help
 ```
@@ -79,6 +77,6 @@ Create a new document model by clicking on the `DocumentModel` button by the "Ne
 
 ![Create New Document Model](./images/connectApp.gif)
 
-If you followed the steps correctly, you should have an empty document model created called `ToDoList`.
+If you followed the steps correctly, you should have an empty document model created.
 
-In the next tutorial, you will learn how to design your document model and export it to be later used in your Powerhouse project.
+In the next tutorials, you will learn how to design your document model and export it to be later used in your Powerhouse project.

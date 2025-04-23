@@ -1,0 +1,199 @@
+---
+title: Get Started
+sidebar_label: Get Started
+sidebar_position: 1
+---
+
+import React from 'react';
+import styles from './styles.module.css';
+import BrowserOnly from '@docusaurus/BrowserOnly';
+
+export const ScrollAnimatedPath = () => {
+  React.useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add(styles.visible);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    const pathLines = document.querySelectorAll(`.${styles.pathLine}`);
+    pathLines.forEach(line => observer.observe(line));
+
+    return () => observer.disconnect();
+  }, []);
+
+  return null;
+};
+
+<BrowserOnly>
+  {() => <ScrollAnimatedPath />}
+</BrowserOnly>
+
+<div className={styles.learningPath}>
+  {/* Get Started Card - Full Width */}
+  <div className={`${styles.pathCard} ${styles.fullWidth}`}>
+    <div className={styles.cardHeader} style={{ justifyContent: 'center' }}>
+      <div className={styles.cardIconWrapper}>
+        <img src="/img/academy/icons/Flash.svg" alt="" />
+      </div>
+      <h3 className="card-title">Get started</h3>
+    </div>
+    <div className={styles.cardContent}>
+      <div style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
+        <div style={{ marginBottom: '1.5rem' }}>
+          <p style={{ fontSize: '1.1rem', marginBottom: '1rem' }}><strong>Welcome to Powerhouse!</strong></p>
+          <p style={{ lineHeight: '1.6', color: '#444' }}>As a developer, you're about to dive into a <strong>unique ecosystem built to empower decentralized organizations</strong>. Powerhouse provides the software, infrastructure, and frameworks that enable scalable network organizations to operate efficiently.</p>
+        </div>
+        <div style={{ margin: '20px 0', textAlign: 'center' }}>
+          <a href="/docs/academy/GetStarted/GetStarted-Intro" style={{ display: 'block', textDecoration: 'none' }}>
+            <img 
+              src="/img/video-placeholder.svg" 
+              alt="Powerhouse Introduction Video"
+              style={{ 
+                maxWidth: '100%', 
+                borderRadius: '8px',
+                transition: 'transform 0.2s ease-in-out'
+              }}
+            />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {/* Create Cards - One in each column */}
+  <div className={styles.pathCard}>
+    <div className={styles.cardHeader}>
+      <div className={styles.cardIconWrapper}>
+        <img src="/img/academy/icons/Book.svg" alt="" />
+      </div>
+      <h3 className="card-title">Book of Powerhouse</h3>
+    </div>
+    <div className={styles.cardContent}>
+      <a href="/docs/academy/Create/ToDoList/CreateNewPowerhouseProject" className="path-button">The vision of Powerhouse</a>
+    </div>
+  </div>
+
+  <div className={styles.pathCard} style={{ border: '1px solid #4FC86F' }}>
+    <div className={styles.cardHeader}>
+      <div className={styles.cardIconWrapper}>
+        <img src="/img/academy/icons/Create.svg" alt="" />
+      </div>
+      <h3 className="card-title">Create</h3>
+    </div>
+    <div className={styles.cardContent}>
+      <a href="/docs/academy/Create/ToDoList/CreateNewPowerhouseProject" className="path-button">Build a Todo-list document model</a>
+    </div>
+  </div>
+
+  <div className={styles.pathCard}>
+    <div className={styles.cardHeader}>
+      <div className={styles.cardIconWrapper}>
+        <img src="/img/academy/icons/Advanced.svg" alt="" />
+      </div>
+      <h3 className="card-title">Document Model Theory</h3>
+    </div>
+    <div className={styles.cardContent}>
+      <a href="/docs/academy/Create/ToDoList/CreateNewPowerhouseProject" className="path-button">Deep Dive into Document Modelling</a>
+    </div>
+  </div>
+
+  {/* Left Column Card with 2 buttons */}
+  <div className={styles.pathCard} style={{ border: '1px solid #4FC86F' }}>
+    <div className={styles.cardHeader}>
+      <div className={styles.cardIconWrapper}>
+        <img src="/img/academy/icons/Editor.svg" alt="" />
+      </div>
+      <h3 className="card-title">Build user experiences</h3>
+    </div>
+    <div className={styles.cardContent}>
+      <a href="/docs/academy/BuildingUserExperiences/BuildingBeautifulDocumentEditors" className="path-button">Building beautiful document editors</a>
+      <a href="/docs/academy/BuildingUserExperiences/BuildingCustomDriveExperiences" className="path-button">Building custom drive experiences</a>
+    </div>
+  </div>
+
+  {/* Middle column with Union.svg */}
+  <div className={styles.middleColumn} style={{ 
+    display: 'flex', 
+    justifyContent: 'center', 
+    alignItems: 'flex-start', 
+    paddingTop: '-20px',
+    position: 'relative'
+  }}>
+    <img src="/img/Union.svg" alt="Powerhouse Union" width="250" />
+    <div style={{ 
+      position: 'absolute',
+      top: '18px',
+      backgroundColor: 'white', 
+      padding: '8px 16px', 
+      borderRadius: '8px',
+      textAlign: 'center',
+      zIndex: 2,
+    }}>
+      <h3 className="card-title" style={{ margin: 0 }}>Builder Track</h3>
+    </div>
+  </div>
+
+  {/* Right Column Card with 3 buttons */}
+  <div className={styles.pathCard} style={{ border: '1px solid #4FC86F' }}>
+    <div className={styles.cardHeader}>
+      <div className={styles.cardIconWrapper}>
+        <img src="/img/academy/icons/Data.svg" alt="" />
+      </div>
+      <h3 className="card-title">Work with data</h3>
+    </div>
+    <div className={styles.cardContent}>
+      <a href="/docs/academy/WorkWithData/ReadingAndWritingThroughTheAPI" className="path-button">Reading & writing documents through the API</a>
+      <a href="/docs/academy/WorkWithData/WorkingWithSubgraphs/WorkingWithSubgraphs" className="path-button">Create your own subgraph</a>
+      <a href="/docs/academy/WorkWithData/Analytics Engine/intro" className="path-button">Using the analytics engine</a>
+    </div>
+  </div>
+
+  {/* Launch Card - Full Width with 3 column buttons */}
+  <div className={`${styles.pathCard} ${styles.fullWidth}`}>
+    <div className={styles.cardHeader} style={{ justifyContent: 'center' }}>
+      <div className={styles.cardIconWrapper}>
+        <img src="/img/academy/icons/Launch.svg" alt="" />
+      </div>
+      <h3 className="card-title">Launch</h3>
+    </div>
+    <div className={styles.cardContent}>
+      <div className={styles.buttonContainer}>
+        <a href="/docs/academy/Packages/PublishYourProject" className="path-button">Package & Publish</a>
+        <a href="/docs/academy/Launch/LaunchBackend" className="path-button">Launch Back-end</a>
+        <a href="/docs/academy/Launch/LaunchFrontend" className="path-button">Launch Front-end</a>
+      </div>
+    </div>
+  </div>
+
+  {/* Cookbook Card - Left Column */}
+  <div className={styles.pathCard}>
+    <div className={styles.cardHeader}>
+      <div className={styles.cardIconWrapper}>
+        <img src="/img/academy/icons/Cookbook.svg" alt="" />
+      </div>
+      <h3 className="card-title">Cookbook</h3>
+    </div>
+    <div className={styles.cardContent}>
+      <a href="/docs/academy/Cookbook/Recipes" className="path-button">Recipes</a>
+    </div>
+  </div>
+
+  {/* Empty middle column */}
+  <div></div>
+
+  {/* Advanced Topics Card - Right Column */}
+  <div className={styles.pathCard}>
+    <div className={styles.cardHeader}>
+      <div className={styles.cardIconWrapper}>
+        <img src="/img/academy/icons/Advanced.svg" alt="" />
+      </div>
+      <h3 className="card-title">Advanced Topics</h3>
+    </div>
+    <div className={styles.cardContent}>
+      <a href="/docs/academy/AdvancedTopics/Overview" className="path-button">Learn More</a>
+    </div>
+  </div>
+</div>

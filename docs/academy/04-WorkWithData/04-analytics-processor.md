@@ -1,40 +1,46 @@
 # Analytics Processors
 
-An `AnalyticsProcessor` is an object that can track analytics for operations and state changes on a set of document models. These analytics can be used to generate bespoke dashboards and reports, specific to the type or implementation of the document model.
+An Analytics Processor is an object that can track analytics for operations and state changes on a set of document models. These analytics can be used to generate bespoke dashboards and reports, specific to the type or implementation of the document model.
 
 ## Generating an Analytics Processor with the CLI
 
-The `ph-cli` utility can be used to generate the scaffolding for an `Analytics Processor`.
+The `ph-cli` utility can be used to generate the scaffolding for an Analytics Processor.
 
 ```
 npx @powerhousedao/ph-cli generate --processor-type analytics --document-models ./my-document-models
 ```
 
-This will generate a class that extends `AnalyticsProcessor`. At the top of the generated class, you can see the `ProcessorOptions` object that defines many configuration options on the object.
+This will generate two files: a class that implements `IProcessor` and a `ProcessorFactory` function that creates an instance of your processor. We can start with the factory.
+
+### `ProcessorFactory`
+
+If one has not already been created, the generator will create an `index.ts` that contains a `processorFactory` function:
 
 ```typescript
-protected processorOptions: ProcessorOptions = {
-  // generate a unique id for this listener
-  listenerId: generateId(),
-  
-  // describes which documents should be passed to this processor
-  filter: {
-    branch: ["main"],
-    documentId: ["*"],
-    documentType: ["my-doc-type"],
-    scope: ["global"],
-  },
-  block: false,
-  label: "rwa-analytics",
-  system: true,
-};
+export const processorFactory =
+  (module: any) =>
+  (driveId: string): ProcessorRecord[] => {
+    return [
+      {
+        processor: new MyAnalyticsProcessor(module.analyticsStore),
+        filter: {
+          branch: ["main"],
+          documentId: ["*"],
+          scope: ["*"],
+          documentType: ["*"],
+        },
+      },
+    ];
+  };
 ```
 
-There are a number of parameters here, but there are two that are most important: `listenerId` and `filter`. The former should generally always use the `generateId()` utility to guarantee a random id.
+This function appears complicated at first, but provides for great flexibility.
 
-### Filter
+The outside function (`(module: any) => ProcessorFactory`) will be called by the host application (`Reactor`, `Connect`, etc) a single time at initialization. This is intended to resolve external dependencies through the `module` object. In the case of this processor, you can see how the `module` object contains the `analyticsStore`.
 
-The `filter` parameter allows a user to tune which updates it receives. Usage is straightfoward: each field of the filter parameter can receive one to many patterns. The array for each field describes an `OR` operator. That is, `["a", "b"]` would match `"a"` or `"b"`. However, matches across fields describe an `AND` operator. That is, an update must match on `branch` `AND` `documentId` `AND` `documentType` `AND` `scope`.
+Next, for each drive created, the returned function (`(driveId:string): ProcessorRecord[]`) will be called. This means that this custom function will be responsible for determining which processors are added for each drive. Applications are free to reuse processors or pass in application-specific dependencies in to each processor.
+
+The `filter` parameter allows a user to tune which updates the processor receives. Usage is straightfoward: each field of the filter parameter can receive one to many patterns. The array for each field describes an `OR` operator. That is, `["a", "b"]` would match `"a"` or `"b"`. However, matches across fields describe an `AND` operator. That is, an update must match on `branch` `AND` `documentId` `AND` `documentType` `AND` `scope`.
 
 Globs are accepted as input, but not regexes.
 
@@ -58,42 +64,44 @@ This example would match updates for:
 The `onStrands` method is the meat of the processor. This is the function called for all the updates matching the filter. Here is what will be generated for you:
 
 ```typescript
-async onStrands(strands: ProcessorUpdate<DocumentType>[]): Promise<void> {
-    if (strands.length === 0) {
-      return;
+async onStrands<TDocument extends PHDocument>(
+    strands: InternalTransmitterUpdate<TDocument>[]
+  ): Promise<void> {
+  // nothing to update
+  if (strands.length === 0) {
+    return;
+  }
+
+  const analyticsInputs: AnalyticsSeriesInput[] = [];
+  for (const strand of strands) {
+    if (strand.operations.length === 0) {
+      continue;
     }
 
-    const analyticsInputs: AnalyticsSeriesInput[] = [];
+    const firstOp = strand.operations[0];
+    const source = AnalyticsPath.fromString(
+      `ph/${strand.driveId}/${strand.documentId}/${strand.branch}/${strand.scope}`,
+    );
 
-    for (const strand of strands) {
-      if (strand.operations.length === 0) {
-        continue;
-      }
-
-      const firstOp = strand.operations[0];
-      const source = AnalyticsPath.fromString(
-        `ph/${strand.driveId}/${strand.documentId}/${strand.branch}/${strand.scope}`,
-      );
-      if (firstOp.index === 0) {
-        await this.clearSource(source);
-      }
-
-      for (const operation of strand.operations) {
-        console.log(">>> ", operation.type);
-      }
+    if (firstOp.index === 0) {
+      await this.clearSource(source);
     }
 
-    if (analyticsInputs.length > 0) {
-      try {
-        await this.analyticsStore.addSeriesValues(analyticsInputs);
-      } catch (e) {
-        console.error(`Error adding series values: ${e}`);
-      }
+    for (const operation of strand.operations) {
+      console.log(">>> ", operation.type);
+
+      // add analytics to the analyticsInputs array
     }
   }
+
+  if (analyticsInputs.length > 0) {
+    // batch insert all analytics data
+    await this.analyticsStore.addSeriesValues(analyticsInputs);
+  }
+}
 ```
 
-This function provides a list of `strand` objects, each with a list of document-model operations (`Operation[]`) on them. Essentially, it is a list of lists. Each operation will have the previous state of the document and the next state. This allows analytics capture from new state, deltas, or the operations themselves.
+This function provides a list of `strand` objects, each with a list of document-model operations (`InternalOperationUpdate[]`) on them. Essentially, it is a list of lists. Each operation will have the previous state of the document and the next state. This allows analytics capture from new state, deltas, or the operations themselves.
 
 > Note that on the first operation (given by `firstOp.index === 0`), it is best practice to clear any previous analytics series for that source. This is so that we do not dual insert operations.
 
@@ -215,17 +223,13 @@ The RWA processor example pulls information from operation _inputs_ to insert an
 This processor listens to all documents of type `powerhouse/document-drive`, and since the `document-drive` is itself implemented on top of the document model core systems, this means that we can process all virtual file system operations.  This processor count basic usage metrics using document operations and states.
 
 ```typescript
-import { generateId } from "document-model/utils";
-import { AnalyticsPath, AnalyticsSeriesInput } from "@powerhousedao/analytics-engine-core";
-import {
-  AnalyticsProcessor,
-  ProcessorOptions,
-  ProcessorUpdate,
-} from "@powerhousedao/reactor-api";
-import { AddFileInput, DeleteNodeInput, DocumentDriveDocument } from "document-model-libs/document-drive";
-import { DateTime }  from "luxon";
-
-type DocumentType = DocumentDriveDocument;
+import { IAnalyticsStore } from "@powerhousedao/reactor-api";
+import { AnalyticsPath } from "@powerhousedao/reactor-api";
+import { AnalyticsSeriesInput } from "@powerhousedao/reactor-api";
+import { InternalTransmitterUpdate, IProcessor } from "document-drive";
+import { AddFileInput, DeleteNodeInput } from "document-drive/drive-document-model/gen/types";
+import { PHDocument } from "document-model";
+import { DateTime } from "luxon";
 
 // iterates over state nodes and retrieves one by id
 const findNode = (state: any, id: string) => {
@@ -239,21 +243,14 @@ const findNode = (state: any, id: string) => {
   return null;
 };
 
-export class DriveProcessorProcessor extends AnalyticsProcessor<DocumentType> {
-  protected processorOptions: ProcessorOptions = {
-    listenerId: generateId(),
-    filter: {
-      branch: ["main"],
-      documentId: ["*"],
-      documentType: ["powerhouse/document-drive"],
-      scope: ["global"],
-    },
-    block: false,
-    label: "analytics-processor",
-    system: true,
-  };
-
-  async onStrands(strands: ProcessorUpdate<DocumentType>[]): Promise<void> {
+export class DriveProcessorProcessor implements IProcessor {
+  constructor(private readonly analyticsStore: IAnalyticsStore) {
+    //
+  }
+  
+  async onStrands<TDocument extends PHDocument>(
+    strands: InternalTransmitterUpdate<TDocument>[]
+  ): Promise<void> {
     if (strands.length === 0) {
       return;
     }

@@ -168,6 +168,59 @@ await store.addSeriesValue([
 ]);
 ```
 
+## Subscribing to Data Changes
+
+The `IAnalyticsStore` also provides an API for subscribing to data changes. This is achieved by subscribing to an `AnalyticsPath`.
+
+```typescript
+const store = new MemoryAnalyticsStore();
+
+// subscribe
+const unsub = store.subscribeToSource(AnalyticsPath.fromString("atlas/"), (source) => {
+  console.log('Atlas data was changed!');
+
+  // decide whether or not to requery
+});
+
+// elided
+
+// remove your subscription
+unsub();
+```
+
+The subscription API provides many of the same guarantees regarding pathing that the rest of the analytics system does.
+
+```typescript
+store.subscribeToSource(AnalyticsPath.fromString("atlas/"), handler);
+
+// this will trigger the handler
+await store.addSeriesValue({ source: AnalyticsPath.fromString("atlas/foo"), ... });
+
+// this will trigger the handler
+await store.addSeriesValue({ source: AnalyticsPath.fromString("atlas/foo/bar"), ... });
+
+// this will NOT trigger the handler
+await store.addSeriesValue({ source: AnalyticsPath.fromString("rwa/foo"), ... });
+```
+
+Wildcards can also be used at sub-levels of the path.
+
+```typescript
+store.subscribeToSource(AnalyticsPath.fromString("atlas/*/test"), handler);
+
+// this will trigger the handler
+await store.addSeriesValue({ source: AnalyticsPath.fromString("atlas/foo/test"), ... });
+
+// this will trigger the handler
+await store.addSeriesValue({ source: AnalyticsPath.fromString("atlas/another-thing/test"), ... });
+
+// this will trigger the handler
+await store.addSeriesValue({ source: AnalyticsPath.fromString("atlas/foo/test/a/b/c"), ... });
+
+// this will NOT trigger the handler
+await store.addSeriesValue({ source: AnalyticsPath.fromString("rwa/foo/test"), ... });
+```
+
 ## Store Implementations
 
 Multiple storage implementations are provided, each with comprehensive documentation. See the corresponding docs for:
