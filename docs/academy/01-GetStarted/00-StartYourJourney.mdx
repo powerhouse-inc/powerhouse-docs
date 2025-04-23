@@ -4,7 +4,28 @@ sidebar_label: Start Your Journey Here
 sidebar_position: 1
 ---
 
+import React from 'react';
 import styles from './styles.module.css';
+import BrowserOnly from '@docusaurus/BrowserOnly';
+
+export const ScrollAnimatedPath = () => {
+  React.useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add(styles.visible);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    const pathLines = document.querySelectorAll(`.${styles.pathLine}`);
+    pathLines.forEach(line => observer.observe(line));
+
+    return () => observer.disconnect();
+  }, []);
+
+  return null;
+};
 
 <div className={styles.titleContainer}>
 
@@ -12,11 +33,19 @@ import styles from './styles.module.css';
 
 </div>
 
-<div className="learning-path">
-  <div className="path-row">
-    <div className="path-card" style={{ width: '350px' }}>
-      <h3 className="card-title">1. Get started 🚀</h3>
-      <div className="card-content">
+<BrowserOnly>
+  {() => <ScrollAnimatedPath />}
+</BrowserOnly>
+
+<div className={styles.learningPath}>
+  {/* Get Started Card - Full Width */}
+  <div className={`${styles.pathCard} ${styles.fullWidth}`}>
+    <h3 className="card-title" style={{ textAlign: 'center' }}>
+      <img src="/img/academy/icons/Flash.svg" alt="" className={styles.titleIcon} />
+      Get started
+    </h3>
+    <div className={styles.cardContent}>
+      <div style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
         <div style={{ marginBottom: '1.5rem' }}>
           <p style={{ fontSize: '1.1rem', marginBottom: '1rem' }}><strong>Welcome to Powerhouse!</strong></p>
           <p style={{ lineHeight: '1.6', color: '#444' }}>As a developer, you're about to dive into a <strong>unique ecosystem built to empower decentralized organizations</strong>. Powerhouse provides the software, infrastructure, and frameworks that enable scalable network organizations to operate efficiently.</p>
@@ -29,73 +58,111 @@ import styles from './styles.module.css';
               style={{ 
                 maxWidth: '100%', 
                 borderRadius: '8px',
-                boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-                transition: 'transform 0.2s ease-in-out',
-                ':hover': {
-                  transform: 'scale(1.02)'
-                }
+                transition: 'transform 0.2s ease-in-out'
               }}
             />
           </a>
         </div>
-        <a href="/docs/academy/GetStarted/GetStarted-Intro" className="path-button" style={{ marginTop: '1rem' }}>Learn about Powerhouse in 3 minutes</a>
       </div>
     </div>
   </div>
 
-  <div className="path-row">
-    <div className="path-card" style={{ width: '350px' }}>
-      <h3 className="card-title">2. Create ⚡</h3>
-      <div className="card-content">
-        <a href="/docs/academy/Create/ToDoList/CreateNewPowerhouseProject" className="path-button">Build a Todo-list document model, editor & API endpoint</a>
+  {/* Create Cards - One in each column */}
+  <div className={styles.pathCard}>
+    <h3 className="card-title">
+      <img src="/img/academy/icons/Book.svg" alt="" className={styles.titleIcon} />
+      Book of Powerhouse
+    </h3>
+    <div className={styles.cardContent}>
+      <a href="/docs/academy/Create/ToDoList/CreateNewPowerhouseProject" className="path-button">The vision of Powerhouse</a>
+    </div>
+  </div>
+
+  <div className={styles.pathCard}>
+    <h3 className="card-title">
+      <img src="/img/academy/icons/Create.svg" alt="" className={styles.titleIcon} />
+      Create
+    </h3>
+    <div className={styles.cardContent}>
+      <a href="/docs/academy/Create/ToDoList/CreateNewPowerhouseProject" className="path-button">Build a Todo-list document model</a>
+    </div>
+  </div>
+
+  <div className={styles.pathCard}>
+    <h3 className="card-title">
+      <img src="/img/academy/icons/Advanced.svg" alt="" className={styles.titleIcon} />
+      Document Model Theory
+    </h3>
+    <div className={styles.cardContent}>
+      <a href="/docs/academy/Create/ToDoList/CreateNewPowerhouseProject" className="path-button">Deep Dive into Document Modelling</a>
+    </div>
+  </div>
+
+  {/* Left Column Card with 2 buttons */}
+  <div className={styles.pathCard}>
+    <h3 className="card-title">
+      <img src="/img/academy/icons/Editor.svg" alt="" className={styles.titleIcon} />
+      Build user experiences
+    </h3>
+    <div className={styles.cardContent}>
+      <a href="/docs/academy/BuildingUserExperiences/BuildingBeautifulDocumentEditors" className="path-button">Building beautiful document editors</a>
+      <a href="/docs/academy/BuildingUserExperiences/BuildingCustomDriveExperiences" className="path-button">Building custom drive experiences</a>
+    </div>
+  </div>
+
+  {/* Empty middle column */}
+  <div></div>
+
+  {/* Right Column Card with 3 buttons */}
+  <div className={styles.pathCard}>
+    <h3 className="card-title">
+      <img src="/img/academy/icons/Data.svg" alt="" className={styles.titleIcon} />
+      Work with data
+    </h3>
+    <div className={styles.cardContent}>
+      <a href="/docs/academy/WorkWithData/ReadingAndWritingThroughTheAPI" className="path-button">Reading & writing documents through the API</a>
+      <a href="/docs/academy/WorkWithData/WorkingWithSubgraphs/WorkingWithSubgraphs" className="path-button">Create your own subgraph</a>
+      <a href="/docs/academy/WorkWithData/Analytics Engine/intro" className="path-button">Using the analytics engine</a>
+    </div>
+  </div>
+
+  {/* Launch Card - Full Width with 3 column buttons */}
+  <div className={`${styles.pathCard} ${styles.fullWidth}`}>
+    <h3 className="card-title">
+      <img src="/img/academy/icons/Launch.svg" alt="" className={styles.titleIcon} />
+      Launch
+    </h3>
+    <div className={styles.cardContent}>
+      <div className={styles.buttonContainer}>
+        <a href="/docs/academy/Packages/PublishYourProject" className="path-button">Package & Publish</a>
+        <a href="/docs/academy/Launch/LaunchBackend" className="path-button">Launch Back-end</a>
+        <a href="/docs/academy/Launch/LaunchFrontend" className="path-button">Launch Front-end</a>
       </div>
     </div>
   </div>
 
-  <div className="path-row split">
-    <div className="path-card" style={{ width: '350px' }}>
-      <h3 className="card-title">3. Build user experiences 🎨</h3>
-      <div className="card-content">
-        <a href="/docs/academy/BuildingUserExperiences/BuildingBeautifulDocumentEditors" className="path-button">Building beautiful document editors</a>
-        <a href="/docs/academy/BuildingUserExperiences/BuildingCustomDriveExperiences" className="path-button">Building custom drive experiences</a>
-      </div>
-    </div>
-
-    <div className="path-card" style={{ width: '350px' }}>
-      <h3 className="card-title">4. Work with data 📊</h3>
-      <div className="card-content">
-        <a href="/docs/academy/WorkWithData/ReadingAndWritingThroughTheAPI" className="path-button">Reading & writing documents through the API</a>
-        <a href="/docs/academy/WorkWithData/WorkingWithSubgraphs/WorkingWithSubgraphs" className="path-button">Create your own subgraph</a>
-        <a href="/docs/academy/WorkWithData/Analytics Engine/intro" className="path-button">Using the analytics engine</a>
-      </div>
+  {/* Cookbook Card - Left Column */}
+  <div className={styles.pathCard}>
+    <h3 className="card-title">
+      <img src="/img/academy/icons/Cookbook.svg" alt="" className={styles.titleIcon} />
+      Cookbook
+    </h3>
+    <div className={styles.cardContent}>
+      <a href="/docs/academy/Cookbook/Recipes" className="path-button">Recipes</a>
     </div>
   </div>
 
-  <div className="path-row">
-    <div className="path-card" style={{ width: '350px' }}>
-      <h3 className="card-title">5. Packages 📦</h3>
-      <div className="card-content">
-        <a href="/docs/academy/Packages/PublishYourProject" className="path-button">Publishing and deploying packages</a>
-      </div>
-    </div>
-  </div>
+  {/* Empty middle column */}
+  <div></div>
 
-  <div className="path-row">
-    <div className="path-card" style={{ width: '350px' }}>
-      <h3 className="card-title">6. Front-end implementation 🖥️</h3>
-      <div className="card-content">
-        <a href="/docs/academy/Front-endImplementations/IntegrateInAFront-End" className="path-button">Using Powerhouse in a front-end</a>
-      </div>
-    </div>
-  </div>
-
-  <div className="path-row">
-    <div className="path-card" style={{ width: '350px' }}>
-      <h3 className="card-title">7. Advanced topics 🎓</h3>
-      <div className="card-content">
-        <a href="/docs/academy/AdvancedTopics/PowerhouseArchitecture" className="path-button">Architecture</a>
-        <a href="/docs/academy/AdvancedTopics/WorkingWithTheReactor" className="path-button">Using the reactor directly</a>
-      </div>
+  {/* Advanced Topics Card - Right Column */}
+  <div className={styles.pathCard}>
+    <h3 className="card-title">
+      <img src="/img/academy/icons/Advanced.svg" alt="" className={styles.titleIcon} />
+      Advanced Topics
+    </h3>
+    <div className={styles.cardContent}>
+      <a href="/docs/academy/AdvancedTopics/Overview" className="path-button">Learn More</a>
     </div>
   </div>
 </div>

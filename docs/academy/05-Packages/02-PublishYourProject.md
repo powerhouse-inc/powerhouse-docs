@@ -9,8 +9,9 @@ This tutorial is a step by step guide tackling the following topics:
 Let's start with some **key concepts** that will help you understand the process we're going to go through in this tutorial.
 
 - **Powerhouse Project**: The construction site of your package: A project is build with document models and editors which you will publish to NPM as a package with modules.
-- **Powerhouse Modules**: The modules that are part of your project, such as the document models, editors, processors or scripts
-- **Powerhouse Package**: A package is a collection of modules that are published to NPM and can be installed on a server instance or locally on your machine. Different organizations can have different packages.
+- **Powerhouse Modules**: The modules that are part of your project, such as the document models, editors, processors or scripts. 
+- **Powerhouse Drive Apps**: Customized drive interfaces that function as a drive add and enhance or augment the functionality of your documents and workflows within the drive. 
+- **Powerhouse Package**: A package is a collection of modules that are published to NPM and can be installed on a server instance or locally on your machine with help of the host apps such as Connect, Switchboard & Fusion. Organizations build packages for specfic purposes or workflows.
 
 ![Key Concepts](images/keyconcepts.png)
 :::
@@ -25,7 +26,25 @@ To start building your project with it's dedicated document models and editors w
    ```
 
 <details>
-<summary> Command not working? Reset your package manager cache</summary>
+<summary> Command not working? Did you install `ph-cmd`? </summary>
+
+The Powerhouse CLI (`ph-cmd`) is a command-line interface tool that provides essential commands for managing Powerhouse projects. You can get access to the Powerhouse Ecosystem tools by installing them globally using:
+```bash
+pnpm install -g ph-cmd
+``` 
+
+Key commands include:
+- `ph connect` for running the Connect application locally
+- `ph switchboard` or `ph reactor` for starting the API service
+- `ph init` to start a new project and build a document model
+- `ph help` to get an overview of all the available commands
+
+This tool will be fundamental on your journey when creating, building, and running Document Models
+
+</details>
+
+<details>
+<summary> Got `ph-cmd`installed, but command not working? Reset your package manager cache</summary>
 
 If you need to reset your package manager, you can run the following commands for your package manager: (npm, yarn)
 
@@ -42,7 +61,7 @@ yarn cache list
 ```
 </details>
 
-   > 💡 **Advanced Tip**: For experimental features, use --version [version] which allows selecting a specific branch of our document-model-boilerplate. There are --dev, --staging and --main options. Select `ph init@dev --dev` to use the latest development version. Please be aware that this version can contain bugs and experimental features that aren't fully tested.  
+   > 💡 **Advanced Tip**: For experimental features, use --version [version] which allows selecting a specific branch of our document-model-boilerplate. There are --dev, --staging and --main options. Select `ph init --dev` to use the latest development version. Please be aware that this version can contain bugs and experimental features that aren't fully tested.  
 
 ### 1.1. Specifying your project details
 
@@ -89,10 +108,10 @@ These steps are explained more in depth in any of our tutorials. Follow along wi
 4. Implementing the **reducer code** and unit tests of your document models reducers.
 5. Implementing the **document editors** to visualize and interact with your document models.
 6. Run **unit tests** and verify the editor functionality via `ph connect` for local testing.
-7. Adding a **manifest file** to your project and updating your index.js file to export your modules.
+7. Add a **manifest file** to your project and updating your index.js file to export your modules.
 
 ### 1.3. Verifying your project
-Now that we've completed our directory with the reducers, tests and editors and your project is populated with modules we'll verify the build output and see if everything is working correctly. 
+Now that we've completed our directory with the reducers, tests and editors, and your project is populated with modules we'll verify the build output and see if everything is working correctly. 
 
 Let's **verify the package build output** with the following command:
 ```bash
@@ -105,7 +124,7 @@ This command will **start a local server** and serve the build output.
 Inspect the build output and verify that the document models are working correctly.
 
 ```bash
-npm serve
+npm serve (Not working yet 22/04)
 ```
 
 ### 1.4 Storing your project in a git repository
@@ -115,7 +134,7 @@ Why?
 - So you can track the changes of your project in a remote repository and benefit from the collaboration features of git.
 - So you can publish your project to the npm registry and install it on a server instance or locally on your machine.
 
-If you stick to the layout generated by the `ph init` command, where it's folders for document models and editors, you should later be able to use install your project with `ph install` once it's published to the npm registry.
+If you stick to the layout generated by the `ph init` command, where it's folders for document models and editors, you should later be able to install your package with `ph install @<your-org/package-name>` once it's published to the npm registry.
 
 ```bash
 git init
@@ -177,10 +196,11 @@ Now that we've installed all the necessary services on our server instance, we c
 Install your project package we've published earlier on your local connect (`npm run connect`) instance by running the following command:
 
 ```bash
-ph install @your-org/package-name
+ph install @<your-org/package-name>
 ```
 Alternatively you can also install the package in the setttings of Connect in the 'package manager' section. 
-Where you'll be able to use the same package name as you've used in the `package.json` file and install it with a click of a button.
+Where you'll be able to use the same package name as you've used in the `package.json` file and install it at the click of a button.
 
 ![package manager](images/homedesign.png)
 
+Got this far? Congratulations on publishing your first package! 
