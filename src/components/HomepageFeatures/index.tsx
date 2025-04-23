@@ -1,13 +1,14 @@
 import clsx from "clsx";
 import Heading from "@theme/Heading";
 import Link from "@docusaurus/Link";
+import React from "react";
 import styles from "./styles.module.css";
 
 type FeatureItem = {
   title: string;
   imageSrc: string;
   docPath: string;
-  description: JSX.Element;
+  description: React.ReactNode;
 };
 
 const FeatureList: FeatureItem[] = [
@@ -30,7 +31,7 @@ const FeatureList: FeatureItem[] = [
   {
     title: "Fusion",
     imageSrc: require("@site/static/img/fusion.png").default,
-    docPath: "/docs/academy/Front-endImplementations/IntroducingFusion",
+    docPath: "docs/academy/AdvancedTopics/PowerhouseArchitecture",
     description: (
       <>
         Setup Fusion as your organizations dashboard
@@ -75,72 +76,168 @@ function Feature({ title, imageSrc, description, docPath }: FeatureItem) {
   );
 }
 
-export default function HomepageFeatures(): JSX.Element {
+export default function HomepageFeatures() {
   return (
     <section className={styles.features}>
       <div className={styles.featuresWrapper}>
         {/* Learning Path Cards */}
         <div className={styles.learningPath}>
-          <div className={styles.pathRow}>
-            {/* Column 1: Get Started & Create */}
-            <div className={styles.pathColumn}>
-              <h2 className={styles.pathColumnTitle}>Explore Powerhouse</h2>
-              <div className={styles.pathCard}>
-                <h3 className={styles.cardTitle}>Get started 🚀</h3>
-                <div className={styles.cardContent}>
-                  <a href="docs/academy/GetStarted/GetStarted-Intro" className={styles.pathButton}>Learn about Powerhouse in 3 minutes</a>
-                </div>
+          {/* Get Started Card - Full Width */}
+          <div className={`${styles.pathCard} ${styles.fullWidth}`}>
+            <div className={styles.cardHeader} style={{ justifyContent: 'center' }}>
+              <div className={styles.cardIconWrapper}>
+                <img src="/img/academy/icons/Flash.svg" alt="" />
               </div>
-              <div className={styles.pathCard}>
-                <h3 className={styles.cardTitle}>Create ⚡</h3>
-                <div className={styles.cardContent}>
-                  <a href="docs/academy/Create/ToDoList/CreateNewPowerhouseProject" className={styles.pathButton}>Build a Todo-list document model, editor & API endpoint</a>
-                </div>
-              </div>
+              <h3 className={styles.cardTitle}>Get started</h3>
             </div>
-
-            {/* Column 2: User Experiences & Work with data */}
-            <div className={styles.pathColumn}>
-              <h2 className={styles.pathColumnTitle}>For Designers & Engineers</h2>
-              <div className={styles.pathCard}>
-                <h3 className={styles.cardTitle}>Build user experiences 🎨</h3>
-                <div className={styles.cardContent}>
-                  <a href="docs/academy/BuildingUserExperiences/BuildingBeautifulDocumentEditors" className={styles.pathButton}>Creating beautiful document editors</a>
+            <div className={styles.cardContent}>
+              <div style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
+                <div style={{ marginBottom: '1.5rem' }}>
+                  <p style={{ fontSize: '1.1rem', marginBottom: '1rem' }}><strong>Welcome to Powerhouse!</strong></p>
+                  <p style={{ lineHeight: '1.6', color: '#444' }}>As a developer, you're about to dive into a <strong>unique ecosystem built to empower decentralized organizations</strong>. Powerhouse provides the software, infrastructure, and frameworks that enable scalable network organizations to operate efficiently.</p>
                 </div>
-              </div>
-              <div className={styles.pathCard}>
-                <h3 className={styles.cardTitle}>Work with data 📊</h3>
-                <div className={styles.cardContent}>
-                  <a href="/docs/academy/WorkWithData/ReadingAndWritingThroughTheAPI" className={styles.pathButton}>Reading & writing documents through the API</a>
-                </div>
-              </div>
-            </div>
-
-            {/* Column 3: Packages & Frontend */}
-            <div className={styles.pathColumn}>
-              <h2 className={styles.pathColumnTitle}>Solutions</h2>
-              <div className={styles.pathCard}>
-                <h3 className={styles.cardTitle}>Packages 📦</h3>
-                <div className={styles.cardContent}>
-                  <a href="docs/academy/Packages/PublishYourProject" className={styles.pathButton}>Publishing and deploying packages</a>
-                </div>
-              </div>
-              <div className={styles.pathCard}>
-                <h3 className={styles.cardTitle}>Front-end implementation 🖥️</h3>
-                <div className={styles.cardContent}>
-                  <a href="docs/academy/Front-endImplementations/IntegrateInAFront-End" className={styles.pathButton}>Using Powerhouse in a front-end environment</a>
+                <div style={{ margin: '20px 0', textAlign: 'center' }}>
+                  <a href="/docs/academy/GetStarted/GetStarted-Intro" style={{ display: 'block', textDecoration: 'none' }}>
+                    <img 
+                      src="/img/video-placeholder.svg" 
+                      alt="Powerhouse Introduction Video"
+                      style={{ 
+                        maxWidth: '100%', 
+                        borderRadius: '8px',
+                        transition: 'transform 0.2s ease-in-out'
+                      }}
+                    />
+                  </a>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
+          {/* Create Cards - One in each column */}
+          <div className={styles.pathCard}>
+            <div className={styles.cardHeader}>
+              <div className={styles.cardIconWrapper}>
+                <img src="/img/academy/icons/Book.svg" alt="" />
+              </div>
+              <h3 className={styles.cardTitle}>Book of Powerhouse</h3>
+            </div>
+            <div className={styles.cardContent}>
+              <a href="/docs/academy/Create/ToDoList/CreateNewPowerhouseProject" className={styles.pathButton}>The vision of Powerhouse</a>
+            </div>
+          </div>
+
+          <div className={styles.pathCard} style={{ border: '1px solid #4FC86F' }}>
+            <div className={styles.cardHeader}>
+              <div className={styles.cardIconWrapper}>
+                <img src="/img/academy/icons/Create.svg" alt="" />
+              </div>
+              <h3 className={styles.cardTitle}>Create</h3>
+            </div>
+            <div className={styles.cardContent}>
+              <a href="/docs/academy/Create/ToDoList/CreateNewPowerhouseProject" className={styles.pathButton}>Build a Todo-list document model</a>
+            </div>
+          </div>
+
+          <div className={styles.pathCard}>
+            <div className={styles.cardHeader}>
+              <div className={styles.cardIconWrapper}>
+                <img src="/img/academy/icons/Advanced.svg" alt="" />
+              </div>
+              <h3 className={styles.cardTitle}>Document Model Theory</h3>
+            </div>
+            <div className={styles.cardContent}>
+              <a href="/docs/academy/Create/ToDoList/CreateNewPowerhouseProject" className={styles.pathButton}>Deep Dive into Document Modelling</a>
+            </div>
+          </div>
+
+          {/* Left Column Card with 2 buttons */}
+          <div className={styles.pathCard} style={{ border: '1px solid #4FC86F' }}>
+            <div className={styles.cardHeader}>
+              <div className={styles.cardIconWrapper}>
+                <img src="/img/academy/icons/Editor.svg" alt="" />
+              </div>
+              <h3 className={styles.cardTitle}>Build user experiences</h3>
+            </div>
+            <div className={styles.cardContent}>
+              <a href="/docs/academy/BuildingUserExperiences/BuildingBeautifulDocumentEditors" className={styles.pathButton}>Building beautiful document editors</a>
+              <a href="/docs/academy/BuildingUserExperiences/BuildingCustomDriveExperiences" className={styles.pathButton}>Building custom drive experiences</a>
+            </div>
+          </div>
+
+          {/* Middle column with Union.svg */}
+          <div className={styles.middleColumn} style={{ 
+            display: 'flex', 
+            justifyContent: 'center', 
+            alignItems: 'flex-start', 
+            paddingTop: '-20px',
+            position: 'relative'
+          }}>
+            <img src="/img/Union.svg" alt="Powerhouse Union" width="250" />
+            <div style={{ 
+              position: 'absolute',
+              top: '18px',
+              backgroundColor: 'white', 
+              padding: '8px 16px', 
+              borderRadius: '8px',
+              textAlign: 'center',
+              zIndex: 2,
+            }}>
+              <h3 className={styles.cardTitle} style={{ margin: 0 }}>Builder Track</h3>
+            </div>
+          </div>
+
+          {/* Right Column Card with 3 buttons */}
+          <div className={styles.pathCard} style={{ border: '1px solid #4FC86F' }}>
+            <div className={styles.cardHeader}>
+              <div className={styles.cardIconWrapper}>
+                <img src="/img/academy/icons/Data.svg" alt="" />
+              </div>
+              <h3 className={styles.cardTitle}>Work with data</h3>
+            </div>
+            <div className={styles.cardContent}>
+              <a href="/docs/academy/WorkWithData/ReadingAndWritingThroughTheAPI" className={styles.pathButton}>Reading & writing documents through the API</a>
+              <a href="/docs/academy/WorkWithData/WorkingWithSubgraphs/WorkingWithSubgraphs" className={styles.pathButton}>Create your own subgraph</a>
+              <a href="/docs/academy/WorkWithData/Analytics Engine/intro" className={styles.pathButton}>Using the analytics engine</a>
+            </div>
+          </div>
+
+          {/* Launch Card - Full Width with 3 column buttons */}
+          <div className={`${styles.pathCard} ${styles.fullWidth}`}>
+            <div className={styles.cardHeader} style={{ justifyContent: 'center' }}>
+              <div className={styles.cardIconWrapper}>
+                <img src="/img/academy/icons/Launch.svg" alt="" />
+              </div>
+              <h3 className={styles.cardTitle}>Launch</h3>
+            </div>
+            <div className={styles.cardContent}>
+              <div className={styles.buttonContainer}>
+                <a href="/docs/academy/Packages/PublishYourProject" className={styles.pathButton}>Package & Publish</a>
+                <a href="/docs/academy/Launch/LaunchBackend" className={styles.pathButton}>Launch Back-end</a>
+                <a href="/docs/academy/Launch/LaunchFrontend" className={styles.pathButton}>Launch Front-end</a>
+              </div>
+            </div>
+          </div>
+        </div>
         {/* Existing Features Section */}
         <h2 className={styles.sectionTitle}>Browse by host-application</h2>
         <div className={styles.row}>
-          {FeatureList.map((props, idx) => (
-            <Feature key={idx} {...props} />
-          ))}
+          {FeatureList.map((props, idx) => {
+            return (
+              <div key={idx} className={styles.col}>
+                <Link to={props.docPath} className={styles.featureLink}>
+                  <div className={styles.featureContent}>
+                    <div className={styles.featureImageWrapper}>
+                      <img src={props.imageSrc} alt={props.title} className={styles.featureImage} />
+                    </div>
+                    <div className={styles.featureText}>
+                      <Heading as="h4" className={styles.featureTitle}>{props.title}</Heading>
+                      <p className={styles.featureDescription}>{props.description}</p>
+                    </div>
+                  </div>
+                </Link>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

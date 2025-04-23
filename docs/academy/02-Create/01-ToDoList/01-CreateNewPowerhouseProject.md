@@ -30,7 +30,7 @@ In the terminal, you will be asked to enter the project name. Fill in the projec
 ```bash
 you@yourmachine:~/Powerhouse$ ph init
 
-? What is the project name? ‣ ToDoList
+? What is the project name? ‣ <yourprojectname>
 ```	
 
 Once the project is created, you will see the following output:
@@ -60,7 +60,7 @@ ph connect
 The Connect application will start and you will see the following output:
 
 ```bash
-you@yourmachine:~/Powerhouse/myToDoList$ ph connect
+you@yourmachine:~/Powerhouse/<yourprojectname> ph connect
 
 > <yourprojectname>@1.0.0 connect
 > connect --config-file ./powerhouse.config.json
