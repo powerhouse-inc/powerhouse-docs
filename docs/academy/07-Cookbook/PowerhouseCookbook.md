@@ -83,8 +83,8 @@ function updateContent(state: MyModelState, { input }: { input: UpdateContentInp
 - Testing Document Models
 
 ## Further Reading
-- [Domain Modeling Guide](/domain-modeling)
-- [GraphQL Schema Best Practices](/graphql-best-practices)
+- [Domain Modeling Guide](/docs/domain-modeling)
+- [GraphQL Schema Best Practices](/docs/academy/WorkWithData/GraphQLAtPowerhouse)
 </details>
 
 <details>
@@ -123,8 +123,8 @@ rm -rf ~/.ph
 - TBD
 
 ## Further Reading
-- [Domain Modeling Guide](/domain-modeling)
-- [GraphQL Schema Best Practices](/graphql-best-practices)
+- [Domain Modeling Guide](/docs/domain-modeling)
+- [GraphQL Schema Best Practices](/docs/academy/WorkWithData/GraphQLAtPowerhouse)
 </details>
 
 ## Document Model Recipes
@@ -210,8 +210,8 @@ function updateContent(state: MyModelState, { input }: { input: UpdateContentInp
 - Testing Document Models
 
 ## Further Reading
-- [Domain Modeling Guide](/domain-modeling)
-- [GraphQL Schema Best Practices](/graphql-best-practices)
+- [Domain Modeling Guide](/docs/domain-modeling)
+- [GraphQL Schema Best Practices](/docs/academy/WorkWithData/GraphQLAtPowerhouse)
 </details>
 
 <details>

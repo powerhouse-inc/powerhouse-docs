@@ -161,6 +161,11 @@
   width: 100%;
   padding: 3rem 0 0 0;  /* Added top padding */
   margin-bottom: 3rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  max-width: 1200px;
+  box-sizing: border-box;
 }
 
 .pathRow {
@@ -185,10 +190,50 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Added styles from MDX file */
+.fullWidth {
+  grid-column: 1 / -1;
+  width: 100%;
+}
+
+.middleColumn {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.buttonContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.cardIconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  margin-right: 0.75rem;
+}
+
 .cardTitle {
   margin-bottom: 1rem;
   font-size: 1.2rem;
   color: var(--ifm-color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 0;
+  padding: 0;
+  line-height: 1.2;
 }
 
 .cardContent {
@@ -205,6 +250,8 @@
   color: var(--ifm-font-color-base);
   text-decoration: none;
   transition: background 0.2s;
+  margin: 0.5rem 0;
+  text-align: center;
 }
 
 .pathButton:hover {

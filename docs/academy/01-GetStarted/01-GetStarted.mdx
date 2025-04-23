@@ -8,29 +8,6 @@ import React from 'react';
 import styles from './styles.module.css';
 import BrowserOnly from '@docusaurus/BrowserOnly';
 
-export const ScrollAnimatedPath = () => {
-  React.useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add(styles.visible);
-        }
-      });
-    }, { threshold: 0.1 });
-
-    const pathLines = document.querySelectorAll(`.${styles.pathLine}`);
-    pathLines.forEach(line => observer.observe(line));
-
-    return () => observer.disconnect();
-  }, []);
-
-  return null;
-};
-
-<BrowserOnly>
-  {() => <ScrollAnimatedPath />}
-</BrowserOnly>
-
 <div className={styles.learningPath}>
   {/* Get Started Card - Full Width */}
   <div className={`${styles.pathCard} ${styles.fullWidth}`}>
