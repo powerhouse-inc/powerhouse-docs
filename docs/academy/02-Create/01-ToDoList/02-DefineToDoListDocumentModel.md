@@ -8,7 +8,7 @@ Before you start, make sure you have the Connect application running with the co
 
 ## ToDoList Document Model Schema
 
-We use the GraphQL Schema Definition Language (SDL) to define the document model schema. Below, you can see the SDL for the `ToDoList` document model.
+Likely you have called your project something like 'ToDoList'. We'll continue with this project to teach you how to create a document model and later an editor for your model. We use the GraphQL Schema Definition Language (SDL) to define the document model schema. Below, you can see the SDL for the `ToDoList` document model.
 
 :::info
 This schema contains the data structure of the document model and the basic operations that can be performed on the document model.
