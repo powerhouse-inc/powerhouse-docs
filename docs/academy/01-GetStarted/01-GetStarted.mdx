@@ -1,6 +1,6 @@
 ---
-title: Start Your Journey Here
-sidebar_label: Start Your Journey Here
+title: Get Started
+sidebar_label: Get Started
 sidebar_position: 1
 ---
 
@@ -27,12 +27,6 @@ export const ScrollAnimatedPath = () => {
   return null;
 };
 
-<div className={styles.titleContainer}>
-
-# Start Your Journey
-
-</div>
-
 <BrowserOnly>
   {() => <ScrollAnimatedPath />}
 </BrowserOnly>
@@ -40,10 +34,12 @@ export const ScrollAnimatedPath = () => {
 <div className={styles.learningPath}>
   {/* Get Started Card - Full Width */}
   <div className={`${styles.pathCard} ${styles.fullWidth}`}>
-    <h3 className="card-title" style={{ textAlign: 'center' }}>
-      <img src="/img/academy/icons/Flash.svg" alt="" className={styles.titleIcon} />
-      Get started
-    </h3>
+    <div className={styles.cardHeader} style={{ justifyContent: 'center' }}>
+      <div className={styles.cardIconWrapper}>
+        <img src="/img/academy/icons/Flash.svg" alt="" />
+      </div>
+      <h3 className="card-title">Get started</h3>
+    </div>
     <div className={styles.cardContent}>
       <div style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
         <div style={{ marginBottom: '1.5rem' }}>
@@ -69,56 +65,85 @@ export const ScrollAnimatedPath = () => {
 
   {/* Create Cards - One in each column */}
   <div className={styles.pathCard}>
-    <h3 className="card-title">
-      <img src="/img/academy/icons/Book.svg" alt="" className={styles.titleIcon} />
-      Book of Powerhouse
-    </h3>
+    <div className={styles.cardHeader}>
+      <div className={styles.cardIconWrapper}>
+        <img src="/img/academy/icons/Book.svg" alt="" />
+      </div>
+      <h3 className="card-title">Book of Powerhouse</h3>
+    </div>
     <div className={styles.cardContent}>
       <a href="/docs/academy/Create/ToDoList/CreateNewPowerhouseProject" className="path-button">The vision of Powerhouse</a>
     </div>
   </div>
 
-  <div className={styles.pathCard}>
-    <h3 className="card-title">
-      <img src="/img/academy/icons/Create.svg" alt="" className={styles.titleIcon} />
-      Create
-    </h3>
+  <div className={styles.pathCard} style={{ border: '1px solid #4FC86F' }}>
+    <div className={styles.cardHeader}>
+      <div className={styles.cardIconWrapper}>
+        <img src="/img/academy/icons/Create.svg" alt="" />
+      </div>
+      <h3 className="card-title">Create</h3>
+    </div>
     <div className={styles.cardContent}>
       <a href="/docs/academy/Create/ToDoList/CreateNewPowerhouseProject" className="path-button">Build a Todo-list document model</a>
     </div>
   </div>
 
   <div className={styles.pathCard}>
-    <h3 className="card-title">
-      <img src="/img/academy/icons/Advanced.svg" alt="" className={styles.titleIcon} />
-      Document Model Theory
-    </h3>
+    <div className={styles.cardHeader}>
+      <div className={styles.cardIconWrapper}>
+        <img src="/img/academy/icons/Advanced.svg" alt="" />
+      </div>
+      <h3 className="card-title">Document Model Theory</h3>
+    </div>
     <div className={styles.cardContent}>
       <a href="/docs/academy/Create/ToDoList/CreateNewPowerhouseProject" className="path-button">Deep Dive into Document Modelling</a>
     </div>
   </div>
 
   {/* Left Column Card with 2 buttons */}
-  <div className={styles.pathCard}>
-    <h3 className="card-title">
-      <img src="/img/academy/icons/Editor.svg" alt="" className={styles.titleIcon} />
-      Build user experiences
-    </h3>
+  <div className={styles.pathCard} style={{ border: '1px solid #4FC86F' }}>
+    <div className={styles.cardHeader}>
+      <div className={styles.cardIconWrapper}>
+        <img src="/img/academy/icons/Editor.svg" alt="" />
+      </div>
+      <h3 className="card-title">Build user experiences</h3>
+    </div>
     <div className={styles.cardContent}>
       <a href="/docs/academy/BuildingUserExperiences/BuildingBeautifulDocumentEditors" className="path-button">Building beautiful document editors</a>
       <a href="/docs/academy/BuildingUserExperiences/BuildingCustomDriveExperiences" className="path-button">Building custom drive experiences</a>
     </div>
   </div>
 
-  {/* Empty middle column */}
-  <div></div>
+  {/* Middle column with Union.svg */}
+  <div className={styles.middleColumn} style={{ 
+    display: 'flex', 
+    justifyContent: 'center', 
+    alignItems: 'flex-start', 
+    paddingTop: '-20px',
+    position: 'relative'
+  }}>
+    <img src="/img/Union.svg" alt="Powerhouse Union" width="250" />
+    <div style={{ 
+      position: 'absolute',
+      top: '18px',
+      backgroundColor: 'white', 
+      padding: '8px 16px', 
+      borderRadius: '8px',
+      textAlign: 'center',
+      zIndex: 2,
+    }}>
+      <h3 className="card-title" style={{ margin: 0 }}>Builder Track</h3>
+    </div>
+  </div>
 
   {/* Right Column Card with 3 buttons */}
-  <div className={styles.pathCard}>
-    <h3 className="card-title">
-      <img src="/img/academy/icons/Data.svg" alt="" className={styles.titleIcon} />
-      Work with data
-    </h3>
+  <div className={styles.pathCard} style={{ border: '1px solid #4FC86F' }}>
+    <div className={styles.cardHeader}>
+      <div className={styles.cardIconWrapper}>
+        <img src="/img/academy/icons/Data.svg" alt="" />
+      </div>
+      <h3 className="card-title">Work with data</h3>
+    </div>
     <div className={styles.cardContent}>
       <a href="/docs/academy/WorkWithData/ReadingAndWritingThroughTheAPI" className="path-button">Reading & writing documents through the API</a>
       <a href="/docs/academy/WorkWithData/WorkingWithSubgraphs/WorkingWithSubgraphs" className="path-button">Create your own subgraph</a>
@@ -128,10 +153,12 @@ export const ScrollAnimatedPath = () => {
 
   {/* Launch Card - Full Width with 3 column buttons */}
   <div className={`${styles.pathCard} ${styles.fullWidth}`}>
-    <h3 className="card-title">
-      <img src="/img/academy/icons/Launch.svg" alt="" className={styles.titleIcon} />
-      Launch
-    </h3>
+    <div className={styles.cardHeader} style={{ justifyContent: 'center' }}>
+      <div className={styles.cardIconWrapper}>
+        <img src="/img/academy/icons/Launch.svg" alt="" />
+      </div>
+      <h3 className="card-title">Launch</h3>
+    </div>
     <div className={styles.cardContent}>
       <div className={styles.buttonContainer}>
         <a href="/docs/academy/Packages/PublishYourProject" className="path-button">Package & Publish</a>
@@ -143,10 +170,12 @@ export const ScrollAnimatedPath = () => {
 
   {/* Cookbook Card - Left Column */}
   <div className={styles.pathCard}>
-    <h3 className="card-title">
-      <img src="/img/academy/icons/Cookbook.svg" alt="" className={styles.titleIcon} />
-      Cookbook
-    </h3>
+    <div className={styles.cardHeader}>
+      <div className={styles.cardIconWrapper}>
+        <img src="/img/academy/icons/Cookbook.svg" alt="" />
+      </div>
+      <h3 className="card-title">Cookbook</h3>
+    </div>
     <div className={styles.cardContent}>
       <a href="/docs/academy/Cookbook/Recipes" className="path-button">Recipes</a>
     </div>
@@ -157,10 +186,12 @@ export const ScrollAnimatedPath = () => {
 
   {/* Advanced Topics Card - Right Column */}
   <div className={styles.pathCard}>
-    <h3 className="card-title">
-      <img src="/img/academy/icons/Advanced.svg" alt="" className={styles.titleIcon} />
-      Advanced Topics
-    </h3>
+    <div className={styles.cardHeader}>
+      <div className={styles.cardIconWrapper}>
+        <img src="/img/academy/icons/Advanced.svg" alt="" />
+      </div>
+      <h3 className="card-title">Advanced Topics</h3>
+    </div>
     <div className={styles.cardContent}>
       <a href="/docs/academy/AdvancedTopics/Overview" className="path-button">Learn More</a>
     </div>
