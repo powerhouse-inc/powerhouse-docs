@@ -18,7 +18,7 @@ Once complete, navigate to the `editors/to-do-list/editor.tsx` file and open it 
 
 ### Editor Implementation Options
 
-The To-Do List editor can be implemented using different styling approaches. Below are two implementations: one using plain HTML elements with inline styles, and one using Tailwind CSS for styling. Read more about Tailwind in Powerhouse here [Tailwind in Powerhouse](docs/academy/03-BuildingUserExperiences/03-BuildingWithTailwind-CSS)
+The To-Do List editor can be implemented using different styling approaches. Below are two implementations: one using plain HTML elements with inline styles, and one using Tailwind CSS for styling. Read more about Tailwind in Powerhouse here [Tailwind in Powerhouse](/docs/academy/BuildingUserExperiences/BuildingWithTailwind-CSS)
 
 
 <details>
@@ -316,10 +316,6 @@ In connect, in the bottom right corner you'll find a new Document Model that you
 :::info
 The editor will update dynamically, so you can play around with your editor styling while seeing your results appear in Connect Studio. 
 :::
-
-Below GIF shows the `ToDoList` editor in action.
-
-![ToDoList Editor](./images/mytodolist.gif)
 
 If you managed to follow this tutorial until this point, you have successfully implemented the `ToDoList` document model with its reducer operations and editor.
 
