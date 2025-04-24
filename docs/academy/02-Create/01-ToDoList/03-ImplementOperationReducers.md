@@ -55,57 +55,52 @@ Open the `to-do-list.ts` file and you should see the code that needs to be fille
 
 
 ```typescript
-import type { ToDoListOperationsOperations } from "../../gen/operations/operations.js";
-import type { ToDoListState, ToDoItem } from "../../gen/schema/types.js";
-import type { AddTodoItemAction, UpdateTodoItemAction, DeleteTodoItemAction } from "../../gen/operations/actions.js";
+import { ToDoListToDoListOperations } from '../../gen/to-do-list/operations';
 
-// REMARKS: 
-// Reducers implement the state transitions defined by our operations in the schema.
-// Notice how the imports above directly reference the types we defined in our SDL:
-// - ToDoListState and ToDoItem (from our schema types)
-// - Action types that correspond to our GraphQL input types (AddTodoItemInput, etc.)
-
-export const reducer: ToDoListOperationsOperations = {
-  // REMARKS: 
-  // This reducer implements the ADD_TODO_ITEM operation we defined in our schema.
-  // It takes the current state and an action containing the input data from AddTodoItemInput.
-  // The reducer directly modifies the state object (immutability is handled by the framework).
-  addTodoItemOperation(state: ToDoListState, action: AddTodoItemAction) {
-    // REMARKS: Here we're adding a new item to the state.items array.
-    // Notice how we're using the input fields defined in AddTodoItemInput (id, text),
-    // while setting the initial value for checked (which wasn't in the input).
+// REMARKS: This is our main reducer object that implements all operations defined in the schema.
+// The ToDoListToDoListOperations type is auto-generated from our SDL and ensures type safety.
+export const reducer: ToDoListToDoListOperations = {
+  // REMARKS: The addTodoItemOperation adds a new item to our todolist.
+  // - state: The current document state that we can modify
+  // - action: Contains the operation type and input data from the client
+  // - dispatch: Function to trigger additional operations (not used here)
+  addTodoItemOperation(state, action, dispatch) {
+    // REMARKS: While this looks like we're directly mutating state, Powerhouse
+    // handles immutability behind the scenes, creating a new state object.
     state.items.push({
-      id: action.input.id,
-      text: action.input.text,
-      checked: false,
+      id: action.input.id,      // Using the client-provided ID
+      text: action.input.text,  // Setting the todo text from input
+      checked: false,           // New items always start unchecked
     });
   },
 
-  // REMARKS:
-  // This reducer implements the UPDATE_TODO_ITEM operation.
-  // It shows how we can conditionally update only the fields that were provided in the input.
-  // The operation follows the shape we defined in UpdateTodoItemInput.
-  updateTodoItemOperation(state: ToDoListState, action: UpdateTodoItemAction) {
-    // REMARKS: First we find the item by ID, following our data structure from the schema
-    const item = state.items.find((item: ToDoItem) => item.id === action.input.id);
-    if (!item) throw new Error(`Item with id ${action.input.id} not found`);
+  // REMARKS: The updateTodoItemOperation modifies an existing todo item.
+  // It handles partial updates, allowing only specific fields to be updated.
+  updateTodoItemOperation(state, action, dispatch) {
+    // REMARKS: First find the item we want to update by its ID
+    const item = state.items.find(item => item.id === action.input.id);
     
-    // REMARKS: Both text and checked fields were defined as optional in UpdateTodoItemInput,
-    // so we only update them if they were included in the input
-    if (action.input.text !== undefined && action.input.text !== null) {
+    // REMARKS: Proper error handling if item doesn't exist
+    if (!item) {
+      throw new Error(`Item with id ${action.input.id} not found`);
+    }
+    
+    // REMARKS: We only update fields that were included in the input
+    // This allows for partial updates (only update what was provided)
+    if (action.input.text) {
       item.text = action.input.text;
     }
-    if (action.input.checked !== undefined && action.input.checked !== null) {
+    if (typeof action.input.checked === 'boolean') {
       item.checked = action.input.checked;
     }
   },
 
-  // REMARKS:
-  // This reducer implements the DELETE_TODO_ITEM operation.
-  // It uses the DeleteTodoItemInput which only requires an id to identify the item to remove.
-  deleteTodoItemOperation(state: ToDoListState, action: DeleteTodoItemAction) {
-    // REMARKS: This filters the items array to remove the item with the matching id
-    state.items = state.items.filter((item: ToDoItem) => item.id !== action.input.id);
+  // REMARKS: The deleteTodoItemOperation removes an item from the list.
+  // This showcases functional programming with array filters for immutable updates.
+  deleteTodoItemOperation(state, action, dispatch) {
+    // REMARKS: Create a new array containing only items that don't match the ID
+    // This is a common pattern for immutable array updates in JavaScript
+    state.items = state.items.filter(item => item.id !== action.input.id);
   },
 };
 ```

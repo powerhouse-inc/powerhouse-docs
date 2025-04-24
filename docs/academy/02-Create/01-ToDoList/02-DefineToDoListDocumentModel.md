@@ -11,8 +11,8 @@ Before you start, make sure you have the Connect application running with the co
 Likely you have called your project something like 'ToDoList'. We'll continue with this project to teach you how to create a document model and later an editor for your model. We use the GraphQL Schema Definition Language (SDL) to define the document model schema. Below, you can see the SDL for the `ToDoList` document model.
 
 :::info
-This schema contains the data structure of the document model and the basic operations that can be performed on the document model.
-Document models in Powerhouse leverage event sourcing principles, where every state transition is represented by an operation. GraphQL input types describe operations, ensuring that user intents are captured effectively. These operations detail the parameters needed for state transitions The use of GraphQL aligns these transitions with explicit, validated, and reproducible commands, supporting CQRS (Command Query Responsibility Segregation) patterns.
+This schema contains the **data structure** of the document model and the basic operations that can be performed on the document model.
+Document models in Powerhouse leverage **event sourcing principles**, where every state transition is represented by an operation. GraphQL input types describe operations, ensuring that user intents are captured effectively. These operations detail the parameters needed for state transitions The use of GraphQL aligns these transitions with explicit, validated, and reproducible commands, supporting **CQRS** (Command Query Responsibility Segregation) patterns.
 :::
 
 ## State Schema
@@ -64,7 +64,7 @@ The steps below show you how to do this:
 
     In the `Document Type` field, type `powerhouse/todolist`. This defines the new type of document that will be created with this document model.
     
-    ![ToDoList Document Model Form Metadata](./images/form.png)
+    ![ToDoList Document Model Form Metadata](./images/DocumentModelHeader.png)
 
 3. In the code editor, you can see the SDL for the document model. Replace the existing SDL with the SDL defined in the [State Schema](#state-schema) section. Only copy and paste the types, leaving the inputs for the next step. You can however already press 'Sync with schema' button to set the initial state of your document model based on your Schema Definition Language. 
 4. Below the editor, there is an input field `Add module`. You need to create and name a module that the input operations will be added to. In this case, we will name the module `to_do_list`. Press enter.
@@ -83,4 +83,4 @@ The steps below show you how to do this:
 
 Check below screenshot for the complete implementation:
 
-![ToDoList Document Model](./images/completeEditor.png)
+![ToDoList Document Model](./images/DocumentModelOperations.png)

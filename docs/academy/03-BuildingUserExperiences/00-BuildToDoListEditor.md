@@ -9,59 +9,16 @@ Run the command below to generate the editor template for the `ToDoList` documen
 Notice the `--editor` flag which defines the `ToDoList` document model. And the `--document-types` flag which defines the document type `powerhouse/todolist`.
 
 ```bash
-ph generate -- --editor ToDoList --document-types powerhouse/todolist
+ph generate --editor ToDoList --document-types powerhouse/todolist
 ```
 
 Once complete, navigate to the `editors/to-do-list/editor.tsx` file and open it in your editor.
 
 ## Styling Options
 
-### Setting Up Tailwind CSS (Optional)
+### Editor Implementation Options
 
-If you want to use the Tailwind CSS version of the editor, you'll need to set up Tailwind in your project first:
-
-1. Install Tailwind CSS and its dependencies:
-
-```bash
-pnpm install -D tailwindcss postcss autoprefixer
-```
-
-2. Initialize Tailwind CSS configuration:
-
-```bash
-pnpm dlx tailwindcss init -p
-```
-
-3. Configure the template paths in `tailwind.config.js`:
-
-```javascript
-/** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: [
-    "./editors/**/*.{js,ts,jsx,tsx}",
-  ],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
-}
-```
-
-4. Add the Tailwind directives to your CSS file. Create a file called `editors/styles.css`:
-
-```css
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-```
-
-5. Import the CSS file in your main editor component or in a global file that gets loaded.
-
-If you prefer to keep things simple, you can use the HTML with inline styles version, which doesn't require any additional setup.
-
-## Editor Implementation Options
-
-The To-Do List editor can be implemented using different styling approaches. Below are two implementations: one using plain HTML elements with inline styles, and one using Tailwind CSS for styling.
+The To-Do List editor can be implemented using different styling approaches. Below are two implementations: one using plain HTML elements with inline styles, and one using Tailwind CSS for styling. Read more about Tailwind in Powerhouse here [Tailwind in Powerhouse](docs/academy/03-BuildingUserExperiences/03-BuildingWithTailwind-CSS)
 
 
 <details>
