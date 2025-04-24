@@ -5,7 +5,7 @@
 This tutorial will guide you through creating a new 'Powerhouse project', which primarely consists of a document model and its editor. You'll be using Connect locally, known as 'Studio mode'.
 
 ## Prerequisites
-- ph-cmd installed: `pnpm install -g ph-cmd`
+- Powerhouse CLI installed: `pnpm install -g ph-cmd`
 - Node.js and pnpm installed
 - Visual Studio Code (or your preferred IDE)
 - Terminal/Command Prompt access
@@ -19,6 +19,7 @@ ph init
 ## Before You Begin
 1. Open your terminal (either your system terminal or VS Code's integrated terminal)
 2. Navigate to your desired project directory using:
+
    ```bash
    cd your-directory
    ```
@@ -36,11 +37,8 @@ you@yourmachine:~/Powerhouse$ ph init
 Once the project is created, you will see the following output:
 
 ```bash
- The installation is done!
-
- You can start by typing:
-    cd <yourprojectname>
-    ph generate
+Initialized empty Git repository in /Users/yourmachine/<yourprojectname>/.git/
+The installation is done! 
 ```
 
 Navigate to the newly created project directory:
@@ -60,22 +58,22 @@ ph connect
 The Connect application will start and you will see the following output:
 
 ```bash
-you@yourmachine:~/Powerhouse/<yourprojectname> ph connect
-
-> <yourprojectname>@1.0.0 connect
-> connect --config-file ./powerhouse.config.json
-
-Watching local document models at '/home/p/Powerhouse/<yourprojectname>/document-models'...
-Watching local document editors at '/home/p/Powerhouse/<yourprojectname>/editors'...
   ➜  Local:   http://localhost:3000/
+  ➜  Network: http://192.168.5.110:3000/
   ➜  press h + enter to show help
 ```
 
 A new browser window will open and you will see the Connect application. If it doesn't open automatically, you can open it manually by navigating to `http://localhost:3000/` in your browser.
 
-Create a new document model by clicking on the `DocumentModel` button by the "New Document" section. The Gif below shows you where to click.
+You will see you local drive and a button to create a new drive. 
+:::information
+A drive is a folder to store and organize your documents in. Powerhouse offers the ability to build customized 'Drive Apps' for your documents. Think of a Drive-App as a specialized lens— it offers **different ways to visualize, organize, and interact with** the data stored within a drive, making it more intuitive and efficient for specific use cases. To learn more visit [Building A Drive App](/docs/academy/BuildingUserExperiences/BuildingADriveApp)
+:::
 
-![Create New Document Model](./images/connectApp.gif)
+Move into your local drive. 
+Create a new document model by clicking on the `DocumentModel` button by the "New Document" section in the bottom. The Gif below shows you where to click.
+
+![Create New Document Model](./images/OpenDocumentModelEditor.gif)
 
 If you followed the steps correctly, you should have an empty document model created.
 
