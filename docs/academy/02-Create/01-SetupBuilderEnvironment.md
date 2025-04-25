@@ -67,7 +67,7 @@ Node.js is a tool that lets us run our application. Let's install it step by ste
    - Type these commands one at a time and press Enter after each:
    ```powershell
    node --version
-   npm --version
+   pnpm --version
    ```
    - You should see version numbers appear after each command (e.g., v18.17.0). If you do, congratulations - Node.js is installed!
 
@@ -92,7 +92,7 @@ Node.js is a tool that lets us run our application. Let's install it step by ste
    - In Terminal, type these commands one at a time and press Enter after each:
    ```bash
    node --version
-   npm --version
+   pnpm --version
    ```
    - If you see version numbers, you've successfully installed Node.js!
 
@@ -108,14 +108,14 @@ Node.js is a tool that lets us run our application. Let's install it step by ste
 
 3. **Install Node.js and npm:**
    ```bash
-   sudo apt install nodejs npm
+   sudo apt install nodejs pnpm
    ```
 
 4. **Verify Installation:**
    - Type these commands one at a time and press Enter after each:
    ```bash
    node --version
-   npm --version
+   pnpm --version
    ```
    - If you see version numbers, you're all set!
 

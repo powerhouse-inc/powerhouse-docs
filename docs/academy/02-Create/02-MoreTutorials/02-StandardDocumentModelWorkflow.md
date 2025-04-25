@@ -128,7 +128,7 @@ document-models/"YourModelName"/src/reducers/tests
 Run the tests:
 
 ```bash
-npm run test
+pnpm run test
 ```
 
 Test the editor functionality:

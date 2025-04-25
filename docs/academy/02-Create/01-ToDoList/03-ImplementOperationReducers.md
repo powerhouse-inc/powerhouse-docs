@@ -182,7 +182,7 @@ describe('Todolist Operations', () => {
 Now you can run the tests to make sure the operation reducers are working as expected.
 
 ```bash
-npm run test
+pnpm run test
 ```
 
 Output should be as follows:

@@ -46,9 +46,13 @@ This tool will be fundamental on your journey when creating, building, and runni
 <details>
 <summary> Got `ph-cmd`installed, but command not working? Reset your package manager cache</summary>
 
-If you need to reset your package manager, you can run the following commands for your package manager: (npm, yarn)
+If you need to reset your package manager, you can run the following commands for your package manager: (pnpm, npm, yarn)
 
 ```bash
+pnpm cache verify
+pnpm store prune
+pnpm cache clean --force
+
 npx clear-npx-cache
 
 npm cache verify
@@ -115,7 +119,7 @@ Now that we've completed our directory with the reducers, tests and editors, and
 
 Let's **verify the package build output** with the following command:
 ```bash
-npm build
+pnpm build
 ```
 
 This command will **build** the project and create a build directory with the output. The code gets optimized and minified. It optimizes the code for production and distribution so different environments can use it as a package.
@@ -124,7 +128,7 @@ This command will **start a local server** and serve the build output.
 Inspect the build output and verify that the document models are working correctly.
 
 ```bash
-npm serve (Not working yet 22/04)
+pnpm serve (Not working yet 22/04)
 ```
 
 ### 1.4 Storing your project in a git repository

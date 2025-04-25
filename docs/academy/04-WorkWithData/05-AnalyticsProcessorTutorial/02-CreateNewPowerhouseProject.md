@@ -14,7 +14,7 @@ Offering you the option to cut and slice your data in any way you want.
 
 Let's start with step 1 & 2 in the next section of the tutorial!
 
-To create a new Powerhouse Document Model Library project, you can use the `npm create document-model-lib` command in your terminal. This command will create a new project in the current directory.
+To create a new Powerhouse Document Model Library project, you can use the `ph init` command in your terminal. This command will create a new project in the current directory.
 
 ## Create New Powerhouse Document Model Library Project
 
@@ -33,18 +33,13 @@ This essentially opens that folder and places you in it.
 Once you've navigated to the directory where you want to create the new project and in your terminal, run the following command:
 
 ```bash
-npm create document-model-lib
+`ph init`
 ```
 
 In the terminal, you will be asked to enter the project name. Fill in the project name and press enter.
 Since we'll be using the Analytics Processor on a Real World Asset report (RWA), we'll name the project `rwa-analytics`.
 
 ```bash
-you@yourmachine:~/Powerhouse$ npm create document-model-lib
-
-> npx
-> create-document-model-lib
-
 ? What is the project name? ‣ rwa-analytics
 ```	
 

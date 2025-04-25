@@ -55,7 +55,7 @@ Node.js is a tool that lets us run our application. Let's install it step by ste
    - Type these commands one at a time and press Enter after each:
    ```powershell
    node --version
-   npm --version
+   pnpm --version
    ```
    - You should see version numbers appear after each command (e.g., v18.17.0). If you do, congratulations - Node.js is installed!
 
@@ -80,7 +80,7 @@ Node.js is a tool that lets us run our application. Let's install it step by ste
    - In Terminal, type these commands one at a time and press Enter after each:
    ```bash
    node --version
-   npm --version
+   pnpm --version
    ```
    - If you see version numbers, you've successfully installed Node.js!
 
@@ -103,7 +103,7 @@ Node.js is a tool that lets us run our application. Let's install it step by ste
    - Type these commands one at a time and press Enter after each:
    ```bash
    node --version
-   npm --version
+   pnpm --version
    ```
    - If you see version numbers, you're all set!
 
@@ -209,7 +209,7 @@ git config --global user.email "your.email@example.com"
 Open your terminal (command prompt) and run the following commands to verify your setup:
 ```bash
 node --version
-npm --version
+pnpm --version
 git --version
 ```
 
