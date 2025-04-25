@@ -164,7 +164,72 @@ In the "New Document" section at the bottom of the page, click the `DocumentMode
 </details>
 
 <details>
-<summary>Updating your Powerhouse Project</summary>
+<summary>Using/switching between different environment for your Powerhouse Project </summary>
+
+The use command allows you to switch between different environments for your Powerhouse project dependencies.
+
+```bash
+ph use <environment> [localPath]
+``` 
+**Available Environments**
+- latest - Uses the latest stable version of all Powerhouse packages
+- dev - Uses development versions of the packages
+- prod - Uses production versions of the packages
+- local - Uses local versions of the packages from a specified path
+
+**Examples**
+
+#### Switch to latest stable versions
+```bash
+ph use latest
+``` 
+
+#### Switch to development versions
+```bash
+ph use dev
+``` 
+
+#### Use local versions from a specific path
+```bash
+ph use local /path/to/local/packages
+``` 
+
+#### Use a specific package manager
+```bash
+ph use latest --package-manager pnpm
+``` 
 
 [Content to be added]
+</details>
+
+<details>
+<summary>Updating your Powerhouse project dependencies</summary>
+
+### The Update Command
+The update command allows you to update your Powerhouse dependencies to their latest versions based on the version ranges specified in your package.json.
+
+```bash
+ph update [options]
+```
+
+**Examples**
+#### Update dependencies based on package.json ranges
+```bash
+ph update
+```
+
+#### Force update to latest dev versions
+```bash
+ph update --force dev
+```
+
+#### Force update to latest stable versions
+```bash
+ph update --force prod
+```
+
+#### Use a specific package manager
+```bash
+ph update --package-manager pnpm
+```
 </details>
