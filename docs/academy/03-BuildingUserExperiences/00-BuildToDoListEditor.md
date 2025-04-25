@@ -1,4 +1,4 @@
-# Build ToDoList Editor
+# Build a Todo-list Editor
 
 In this chapter we will continue with the interface or editeor implementation of the `ToDoList` document model editor. This means you will create a simple user interface for the `ToDoList` document model which will be used inside the Connect app to create, update and delete your ToDoList items.
 
@@ -14,164 +14,24 @@ ph generate --editor ToDoList --document-types powerhouse/todolist
 
 Once complete, navigate to the `editors/to-do-list/editor.tsx` file and open it in your editor.
 
-## Styling Options
 
 ### Editor Implementation Options
 
-The To-Do List editor can be implemented using different styling approaches. Below are two implementations: one using plain HTML elements with inline styles, and one using Tailwind CSS for styling. Read more about Tailwind in Powerhouse here [Tailwind in Powerhouse](/docs/academy/BuildingUserExperiences/BuildingWithTailwind-CSS)
+The To-Do List editor can be built using your preferred React-based component framework, such as shadcn UI, along with standard HTML and optional styling frameworks like Tailwind CSS. 
+Tailwind CSS is installed and managed automatically through Connect Studio.
 
+There is no need to use Storybook, as Connect Studio provides a dynamic local environment to visualize your components. 
 
-<details>
-<summary>Editor with HTML and Inline Styles</summary>
+Simply run Connect Studio during development with `ph connect`
+— manual build steps are only needed when publishing packages. 
+- Build React components like you normally would 
+— Everything else is handled for you.
 
-```typescript
-import { EditorProps } from 'document-model';
-import {
-    ToDoListState,
-    ToDoListAction,
-    ToDoListLocalState,
-    ToDoItem,
-    actions,
-    ToDoListDocument
-} from '../../document-models/to-do-list';
-import { useState } from 'react';
-
-export type IProps = EditorProps<ToDoListDocument>;
-
-export default function Editor(props: IProps) {
-    const { document, dispatch } = props;
-    const { state: { global: state } } = document;
-
-    const [todoItem, setTodoItem] = useState('');
-    const [editingItemId, setEditingItemId] = useState<string | null>(null);
-    const [editedText, setEditedText] = useState('');
-
-    return (
-        <div>
-            <h1>To-do List</h1>
-            <input
-                placeholder="Insert task here..."
-                value={todoItem}
-                onChange={(e) => setTodoItem(e.target.value)}
-                onKeyDown={(e) => {
-                    if (e.key === 'Enter') {
-                        dispatch(actions.addTodoItem({
-                            id: Math.random().toString(),
-                            text: todoItem,
-                        }));
-                        setTodoItem('');
-                    }
-                }}
-            />
-            <button
-                onClick={() => {
-                    dispatch(actions.addTodoItem({
-                        id: Math.random().toString(),
-                        text: todoItem,
-                    }));
-                    setTodoItem('');
-                }}
-            >
-                Add
-            </button>
-            <ul style={{ listStyle: 'none', padding: 0 }}>
-                {state.items.map((item: ToDoItem) => (
-                    <li 
-                        key={item.id} 
-                        style={{ 
-                            display: 'flex', 
-                            alignItems: 'center',
-                            padding: '8px',
-                            position: 'relative',
-                            borderBottom: '1px solid #eee'
-                        }}
-                    >
-                        <input
-                            type="checkbox"
-                            checked={item.checked}
-                            onChange={() => {
-                                dispatch(actions.updateTodoItem({
-                                    id: item.id,
-                                    checked: !item.checked,
-                                }));
-                            }}
-                        />
-                        {editingItemId === item.id ? (
-                            <input
-                                value={editedText}
-                                onChange={(e) => setEditedText(e.target.value)}
-                                onKeyDown={(e) => {
-                                    if (e.key === 'Enter') {
-                                        dispatch(actions.updateTodoItem({
-                                            id: item.id,
-                                            text: editedText,
-                                        }));
-                                        setEditingItemId(null);
-                                    }
-                                }}
-                                style={{ marginLeft: '10px', flexGrow: 1 }}
-                                autoFocus
-                            />
-                        ) : (
-                            <div
-                                style={{ 
-                                    marginLeft: '10px',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    flexGrow: 1,
-                                    gap: '4px'
-                                }}
-                            >
-                                <span
-                                    onClick={() => {
-                                        setEditingItemId(item.id);
-                                        setEditedText(item.text);
-                                    }}
-                                    style={{ 
-                                        cursor: 'pointer',
-                                        textDecoration: item.checked ? 'line-through' : 'none',
-                                        color: item.checked ? '#888888' : 'inherit'
-                                    }}
-                                >
-                                    {item.text}
-                                </span>
-                                <span
-                                    onClick={() => dispatch(actions.deleteTodoItem({ id: item.id }))}
-                                    style={{
-                                        color: '#999999',
-                                        cursor: 'pointer',
-                                        opacity: 0.4,
-                                        transition: 'all 0.2s',
-                                        fontSize: '16px',
-                                        fontWeight: 'bold',
-                                        display: 'inline-flex',
-                                        alignItems: 'center',
-                                        paddingLeft: '4px'
-                                    }}
-                                    onMouseEnter={(e) => {
-                                        (e.target as HTMLElement).style.opacity = '1';
-                                        (e.target as HTMLElement).style.color = '#ff4444';
-                                    }}
-                                    onMouseLeave={(e) => {
-                                        (e.target as HTMLElement).style.opacity = '0.4';
-                                        (e.target as HTMLElement).style.color = '#999999';
-                                    }}
-                                >
-                                    ×
-                                </span>
-                            </div>
-                        )}
-                    </li>
-                ))}
-            </ul>
-        </div>
-    );
-}
-```
-</details>
+Powerhouse is developing a set of resuable components that can be used to build your document model editor.
+Learn more about our set of [reusable components](docs/academy/03-BuildingUserExperiences/04-BuildingWithScalars.md)
 
 <details>
-<summary>Editor with Tailwind CSS</summary>
+<summary>Todo-list Editor Code with Tailwind CSS</summary>
 
 ```typescript
 import { EditorProps } from 'document-model';
@@ -287,23 +147,6 @@ export default function Editor(props: IProps) {
 }
 ```
 </details>
-
-### Key Differences
-
-The two implementations achieve the same functionality but use different styling approaches:
-
-1. **HTML with Inline Styles:**
-   - Uses React's style prop with JavaScript objects
-   - Defines styles directly on each element
-   - Manual DOM manipulation for hover effects
-   - More verbose styling code
-
-2. **Tailwind CSS:**
-   - Uses utility classes via className props
-   - Responsive design with predefined utility classes
-   - Built-in hover states and transitions
-   - More concise styling with standardized spacing and colors
-   - Consistent design tokens through utility classes
 
 Now you can run the Connect app and see the `ToDoList` editor in action.
 
