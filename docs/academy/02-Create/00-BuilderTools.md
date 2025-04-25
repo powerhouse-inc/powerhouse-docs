@@ -5,6 +5,18 @@ This page provides an overview of all the builder tooling offered by the Powerho
 ## Powerhouse Command Line Interface
 ___
 
+The Powerhouse CLI (`ph-cmd`) is a command-line interface tool that provides essential commands for managing Powerhouse projects. You can get access to the Powerhouse Ecosystem tools by installing them globally using:
+```bash
+pnpm install -g ph-cmd
+``` 
+
+Key commands include:
+- `ph connect` for running the Connect application locally
+- `ph switchboard` or `ph reactor` for starting the API service
+- `ph init` to start a new project and build a document model
+- `ph help` to get an overview of all the available commands
+
+This tool will be fundamental on your journey when creating, building, and running Document Models
 
 <details>
 
