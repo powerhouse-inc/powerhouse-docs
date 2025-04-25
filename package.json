@@ -3,11 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "homepage": "",
+  "packageManager": "pnpm@10.9.0",
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus serve",
     "dev": "docusaurus start",
-    "build": "docusaurus build",
+    "build": "NODE_OPTIONS=--max_old_space_size=2048 docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",

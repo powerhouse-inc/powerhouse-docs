@@ -42,6 +42,8 @@ const config: Config = {
           // Remove this to remove the "edit this page" links.
           editUrl:
             'https://github.com/powerhouse-inc/powerhouse-docs/tree/dev',
+          showLastUpdateTime: false,
+          showLastUpdateAuthor: false,
         },
         theme: {
           customCss: './src/css/custom.css',
@@ -50,7 +52,9 @@ const config: Config = {
           showReadingTime: false,
           editUrl:
             'https://github.com/powerhouse-inc/powerhouse-docs/tree/dev',
-          onInlineAuthors: 'ignore'
+          onInlineAuthors: 'ignore',
+          showLastUpdateTime: false,
+          showLastUpdateAuthor: false,
         },
       } satisfies Preset.Options,
     ],
