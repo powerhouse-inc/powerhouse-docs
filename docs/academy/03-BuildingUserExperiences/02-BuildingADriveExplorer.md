@@ -63,7 +63,10 @@ The application allows users to create and manage todo lists with a visual progr
 
 **1. Create a Todo Document Model:**
    - Start by connecting with `ph connect`
-   - Since you've likely already ran through the [document modeling process](/docs/academy/Create/ToDoList/DefineToDoListDocumentModel) we'll offer you a slightly more advanced todo-list below. 
+
+:::warning
+Since you've likely already ran through the [document modeling process](/docs/academy/Create/ToDoList/DefineToDoListDocumentModel) we'll offer you a **slightly more advanced** todo-list below. 
+:::
 
      - Download [todo.phdm.zip](https://github.com/powerhouse-inc/todo-drive-explorer/blob/ee63786fa8ceed71de63cd9c52f1795ad11ac403/todo.phdm.zip)
      - Place it in the project root of your project

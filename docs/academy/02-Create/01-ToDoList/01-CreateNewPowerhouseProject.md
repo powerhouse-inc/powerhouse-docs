@@ -72,9 +72,7 @@ A drive is a folder to store and organize your documents in. Powerhouse offers t
 :::
 
 Move into your local drive. 
-Create a new document model by clicking on the `DocumentModel` button by the "New Document" section in the bottom. The Gif below shows you where to click.
-
-![Create New Document Model](./images/OpenDocumentModelEditor.gif)
+Create a new document model by clicking on the `DocumentModel` button by the "New Document" section in the bottom. 
 
 If you followed the steps correctly, you should have an empty document model created.
 

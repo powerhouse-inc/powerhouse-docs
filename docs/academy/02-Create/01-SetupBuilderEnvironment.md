@@ -3,7 +3,7 @@
 Let's set up your machine to start building your first Document Model. Don't worry if this is your first time setting up a development environment - we'll guide you through each step!
 
 :::info
-If you've already setup git, node, and npm, your most important step is to install the Powerhouse CLI with the command `pnpm install ph-cmd`. A global install is recommended if you want to use the command from any directory as a power user. In this case use `pnpm install -g ph-cmd` The Powerhouse CLI is used to create, build, and run your Document Models and gives you direct access to a series of [Powerhouse Builder Tools](../02-Create/00-BuilderTools.md)
+If you've already setup git, node, and npm, your most important step is to install the Powerhouse CLI with the command `pnpm install ph-cmd`. A global install is recommended if you want to use the command from any directory as a power user. In this case use `pnpm install -g ph-cmd` The Powerhouse CLI is used to create, build, and run your Document Models and gives you direct access to a series of [Powerhouse Builder Tools](../Create/BuilderTools)
 :::
 
 The Powerhouse CLI (`ph-cmd`) is a command-line interface tool that provides essential commands for managing Powerhouse projects. You can get access to the Powerhouse Ecosystem tools by installing them globally using:
