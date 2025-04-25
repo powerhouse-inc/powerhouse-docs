@@ -94,87 +94,69 @@ rm -rf ~/.ph
 - [Create A New Powerhouse Project](/docs/academy/Create/ToDoList/CreateNewPowerhouseProject)
 </details>
 
-## Document Model Recipes
+## Powerhouse Project Recipes
 
 <details>
-<summary>Creating a New Document Model WIP</summary>
+<summary>Initializing a new project & document model</summary>
 
-# How to Create a New Document Model
+# How to Initialize a new project and document model
 
 ## Problem Statement
-You need to create a new document model to represent and manage specific business data in your Powerhouse application.
+You need to create a new, empty document model within a Powerhouse project using the local Connect application (Studio mode) to represent a worklfow of business process.
 
 ## Prerequisites
 - Powerhouse CLI (`ph-cmd`) installed
-- Basic understanding of GraphQL schemas
-- Access to a Powerhouse project
+- A Powerhouse project initialized (see [Initializing a Powerhouse Project Recipe](#powerhouse-cli-recipes)) or follow Step 1 & 2 below.
+- Access to a terminal or command prompt
+- A web browser
 
 ## Solution
 
-### Step 1: Initialize the Document Model
+### Step 1: Initialize a Powerhouse Project (if needed)
+If you haven't already, create a new Powerhouse project:
 ```bash
-ph-cmd generate document-model my-model
+ph init
+# Follow the prompts to name your project
 ```
 
-### Step 2: Define the State Schema
-```graphql
-type MyModelState {
-  id: OID!
-  status: String @default(value: "DRAFT")
-  content: String
-  metadata: Metadata
-}
-
-type Metadata {
-  createdAt: DateTime!
-  updatedAt: DateTime
-  author: String
-}
+### Step 2: Navigate to Project Directory
+Change your current directory to the newly created project folder:
+```bash
+cd <yourprojectname>
 ```
 
-### Step 3: Define Operations
-```graphql
-input UpdateContentInput {
-  documentId: OID!
-  content: String!
-}
-
-input UpdateStatusInput {
-  documentId: OID!
-  status: String!
-}
+### Step 3: Start the Local Connect Application
+Run the `connect` command to start the local development environment:
+```bash
+ph connect
 ```
+Wait for the output indicating the server is running (e.g., `Local: http://localhost:3000/`).
 
-### Step 4: Implement Reducers
-```typescript
-function updateContent(state: MyModelState, { input }: { input: UpdateContentInput }) {
-  return {
-    ...state,
-    content: input.content,
-    metadata: {
-      ...state.metadata,
-      updatedAt: new Date().toISOString()
-    }
-  };
-}
-```
+### Step 4: Open Connect in Browser
+A browser window should open automatically to `http://localhost:3000/`. If not, navigate there manually.
+
+### Step 5: Access Your Local Drive
+Click on your local drive displayed on the Connect interface.
+
+### Step 6: Create the Document Model
+In the "New Document" section at the bottom of the page, click the `DocumentModel` button.
 
 ## Expected Outcome
-- A fully functional document model
-- GraphQL schema for state and operations
-- Implemented reducers for state transitions
-- Generated TypeScript types
+- An empty document model is created and opened in the Document Model Editor within the Connect application.
+- You are ready to start defining the schema and logic for your new model.
 
 ## Common Issues and Solutions
-- Issue: Schema validation errors
-  - Solution: Ensure all required fields have proper types and defaults
-- Issue: Reducer not updating state
-  - Solution: Verify the reducer returns a new state object with all required fields
+- Issue: `ph connect` command fails.
+  - Solution: Ensure `ph-cmd` is installed correctly (`ph-cmd --version`). Check for port conflicts if `3000` is already in use. Make sure you are inside the project directory created by `ph init`.
+- Issue: Browser window doesn't open automatically.
+  - Solution: Manually open `http://localhost:3000/` in your browser.
+- Issue: Cannot find the `DocumentModel` button.
+  - Solution: Ensure you have navigated into your local drive within the Connect application first.
 
 ## Related Recipes
-- Implementing Custom Operations
-- Creating Reusable Reducers
-- Testing Document Models
+- Initializing a Powerhouse Project (Covered in Powerhouse CLI Recipes)
+- Designing a Document Model Schema (WIP)
+- Implementing Document Model Reducers (WIP)
 
 ## Further Reading
 - [Domain Modeling Guide](/docs/domain-modeling)
@@ -182,97 +164,7 @@ function updateContent(state: MyModelState, { input }: { input: UpdateContentInp
 </details>
 
 <details>
-<summary>Implementing Custom Operations WIP</summary>
-
-[Content to be added]
-</details>
-
-<details>
-<summary>Setting Up Event Sourcing WIP</summary>
-
-[Content to be added]
-</details>
-
-<details>
-<summary>Creating Reusable Reducers WIP</summary>
-
-[Content to be added]
-</details>
-
-## Reactor Recipes
-
-<details>
-<summary>Setting Up Local Storage WIP</summary>
-
-[Content to be added]
-</details>
-
-<details>
-<summary>Configuring Cloud Storage WIP</summary>
-
-[Content to be added]
-</details>
-
-<details>
-<summary>Implementing Synchronization WIP</summary>
-
-[Content to be added]
-</details>
-
-<details>
-<summary>Managing Conflicts WIP</summary>
-
-[Content to be added]
-</details>
-
-## Package Development Recipes
-
-<details>
-<summary>Creating a New Package WIP</summary>
-
-[Content to be added]
-</details>
-
-<details>
-<summary>Implementing Processors WIP</summary>
-
-[Content to be added]
-</details>
-
-<details>
-<summary>Building Document Model Editors WIP</summary>
-
-[Content to be added]
-</details>
-
-<details>
-<summary>Creating Drive Apps WIP</summary>
-
-[Content to be added]
-</details>
-
-## Integration Recipes
-
-<details>
-<summary>Setting Up Authentication WIP</summary>
-
-[Content to be added]
-</details>
-
-<details>
-<summary>Connecting to External Services WIP</summary>
-
-[Content to be added]
-</details>
-
-<details>
-<summary>Implementing Analytics WIP</summary>
-
-[Content to be added]
-</details>
-
-<details>
-<summary>Custom Storage Adapters WIP</summary>
+<summary>Updating your Powerhouse Project</summary>
 
 [Content to be added]
 </details>

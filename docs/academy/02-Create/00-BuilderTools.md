@@ -5,6 +5,8 @@ This page provides an overview of all the builder tooling offered by the Powerho
 ## Powerhouse Command Line Interface
 ___
 
+# Installing the Powerhouse CLI
+
 The Powerhouse CLI (`ph-cmd`) is a command-line interface tool that provides essential commands for managing Powerhouse projects. You can get access to the Powerhouse Ecosystem tools by installing them globally using:
 ```bash
 pnpm install -g ph-cmd
@@ -17,6 +19,57 @@ Key commands include:
 - `ph help` to get an overview of all the available commands
 
 This tool will be fundamental on your journey when creating, building, and running Document Models
+
+# The use Command
+The use command allows you to switch between different environments for your Powerhouse project dependencies.
+
+```bash
+ph use <environment> [localPath]
+``` 
+**Available Environments**
+- latest - Uses the latest stable version of all Powerhouse packages
+- dev - Uses development versions of the packages
+- prod - Uses production versions of the packages
+- local - Uses local versions of the packages from a specified path
+
+**Examples**
+# Switch to latest stable versions
+`ph use latest`
+
+# Switch to development versions
+`ph use dev`
+
+# Use local versions from a specific path
+`ph use local /path/to/local/packages`
+
+# Use a specific package manager
+`ph use latest --package-manager pnpm``
+
+# The update Command
+The update command allows you to update your Powerhouse dependencies to their latest versions based on the version ranges specified in your package.json.
+
+```bash
+ph update [options]
+```
+
+**Examples**
+# Update dependencies based on package.json ranges
+``ph update``
+
+# Force update to latest dev versions
+``ph update --force dev``
+
+# Force update to latest stable versions
+``ph update --force prod``
+
+# Use a specific package manager
+`ph update --package-manager pnpm``
+
+**Key Differences**
+The use command is for switching between different environments, while the update command is for updating dependencies within your current environment.
+The use command requires you to specify an environment, while the update command is optional with its parameters.
+The use command can work with local packages, while the update command is focused on updating remote package versions.
+Both commands support multiple package managers (npm, yarn, pnpm, and bun) and will automatically detect your project's package manager based on the lockfile present in your project directory.
 
 <details>
 
