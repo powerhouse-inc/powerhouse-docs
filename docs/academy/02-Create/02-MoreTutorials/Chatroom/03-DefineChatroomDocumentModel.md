@@ -7,7 +7,7 @@ Before you start, make sure you have the Connect application running.
 
 ## Chatroom Document Model Schema
 
-We use GraphQL Schema Definition Language (SDL) to define the document model schema. Below, you can see the SDL for the `ChatCoom` document model.
+We use GraphQL Schema Definition Language (SDL) to define the document model schema. Below, you can see the SDL for the `ChatRoom` document model.
 
 :::info
 This schema contains the data structure of the document model and the basic operations that can be performed on the document model.

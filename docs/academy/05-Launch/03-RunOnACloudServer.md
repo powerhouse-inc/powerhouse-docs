@@ -25,7 +25,7 @@ Let's start with some key concepts that will help you understand the process.
 
 ## Prerequisites for this tutorial
 
-- Basic understanding of [document models](/docs/academy/GetStarted/DocumentModelTheory/FunctionalityOfADocumentModel) and editors. If you've never heard of document models or document model editors then this tutorial is too advanced for you. Please get familiar with document models or our tutorials ToDoList & Chatroom where you'll be guided through the setup of your document models. 
+- Basic understanding of document models and editors. If you've never heard of document models or document model editors then this tutorial is too advanced for you. Please get familiar with document models or our tutorials ToDoList & Chatroom where you'll be guided through the setup of your document models. 
 - Node.js and npm installed
 - An AWS account (In this specific tutorial we are deploying to AWS)
 
