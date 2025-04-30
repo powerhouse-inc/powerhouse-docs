@@ -17,21 +17,157 @@ Once complete, navigate to the `editors/to-do-list/editor.tsx` file and open it 
 
 ### Editor Implementation Options
 
-The To-Do List editor can be built using your preferred React-based component framework, such as shadcn UI, along with standard HTML and optional styling frameworks like Tailwind CSS. 
-Tailwind CSS is installed and managed automatically through Connect Studio.
+When building your editor component within the Powerhouse ecosystem, you have several options for styling, allowing you to leverage your preferred methods:
 
-There is no need to use Storybook, as Connect Studio provides a dynamic local environment to visualize your components. 
+1.  **Default HTML Styling:** Standard HTML tags (`<h1>`, `<p>`, `<button>`, etc.) will render with default browser styles or any base styling provided by the Connect environment. This is the simplest approach for basic structure.
+2.  **Tailwind CSS:** Connect Studio comes with Tailwind CSS integrated. You can directly use Tailwind utility classes for rapid, consistent styling without writing separate CSS files.
+3.  **Custom CSS Files:** You can import traditional CSS files (`.css`) to apply custom styles or integrate existing style libraries.
 
-Simply run Connect Studio during development with `ph connect`
-— manual build steps are only needed when publishing packages. 
-- Build React components like you normally would 
-— Everything else is handled for you.
+Connect Studio provides a dynamic local environment (`ph connect`) to visualize your components instantly as you build them, regardless of the styling method you choose. Manual build steps are typically only needed when publishing packages.
 
-Powerhouse is developing a set of resuable components that can be used to build your document model editor.
-Learn more about our set of [reusable components](/docs/academy/BuildingUserExperiences/BuildingWithScalars)
+Let's look at a simple example component structure and how each styling method can be applied.
+
+**Example Component Structure (Base HTML)**
+
+Here's a basic editor structure using only standard HTML tags. This demonstrates how elements look with default styling:
+
+```typescript
+import { EditorProps } from 'document-model';
+// Assuming a simple document model for demonstration
+// import { ExampleDocument, actions } from '../../document-models/example'; 
+
+// Replace with your actual document type props if needed
+export type IProps = EditorProps<any>; 
+
+export default function Editor({ document, dispatch }: IProps) {
+    return (
+        <div>
+            <h1>Document Title</h1>
+            <h2>Document Subtitle</h2>
+            <input 
+                type="text" 
+                placeholder="Small text input" 
+            />
+            <textarea 
+                placeholder="Large text area" 
+                rows={4} 
+            />
+            <button>
+                Submit
+            </button>
+        </div>
+    );
+}
+```
+
+*Run `ph connect` to see these Tailwind styles applied in real-time.*
+
+**Styling with Tailwind CSS**
+
+Now, let's add Tailwind utility classes to the same structure for styling:
+
+```typescript
+import { EditorProps } from 'document-model';
+// import { ExampleDocument, actions } from '../../document-models/example';
+
+export type IProps = EditorProps<any>;
+
+export default function Editor({ document, dispatch }: IProps) {
+    return (
+        <div className="p-4 space-y-4"> {/* Add padding and spacing */}
+            <h1 className="text-2xl font-bold">Document Title</h1> {/* Style heading */}
+            <h2 className="text-lg text-gray-600">Document Subtitle</h2> {/* Style subheading */}
+            <input 
+                type="text" 
+                placeholder="Small text input"
+                className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500" // Style input
+            />
+            <textarea 
+                placeholder="Large text area" 
+                rows={4}
+                className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500" // Style textarea
+            />
+            <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition-colors"> {/* Style button */}
+                Submit
+            </button>
+        </div>
+    );
+}
+```
+*Run `ph connect` to see these Tailwind styles applied in real-time.*
+
+**Styling with a Custom CSS File**
+
+You can also import a standard CSS file.
+
+1.  Create a CSS file (e.g., `editor.css`) in the same directory as your `editor.tsx`:
+
+    ```css
+    /* editors/your-editor/editor.css */
+    .editor-container {
+        padding: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .editor-title {
+        color: navy;
+        margin-bottom: 0.5rem;
+    }
+
+    .editor-button {
+        background-color: green;
+        color: white;
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .editor-button:hover {
+        background-color: darkgreen;
+    }
+    ```
+
+2.  Import the CSS file and use the classes in your component:
+
+    ```typescript
+    import { EditorProps } from 'document-model';
+    // import { ExampleDocument, actions } from '../../document-models/example';
+    import './editor.css'; // Import the CSS file
+
+    export type IProps = EditorProps<any>;
+
+    export default function Editor({ document, dispatch }: IProps) {
+        return (
+            <div className="editor-container"> {/* Use custom class */}
+                <h1 className="editor-title">Document Title</h1> {/* Use custom class */}
+                <h2>Document Subtitle</h2> {/* Default or other styles */}
+                <input 
+                    type="text" 
+                    placeholder="Small text input" 
+                    className="w-full p-2 border rounded" // Can mix with Tailwind/defaults
+                />
+                <textarea 
+                    placeholder="Large text area" 
+                    rows={4} 
+                    className="w-full p-2 border rounded" // Can mix with Tailwind/defaults
+                />
+                <button className="editor-button"> {/* Use custom class */}
+                    Submit
+                </button>
+            </div>
+        );
+    }
+    ```
+*Run `ph connect` to see your custom CSS styles applied.*
+
+---
+
+Below is the complete code for the To-do List editor shown earlier, primarily using Tailwind CSS for styling.
 
 <details>
-<summary>To-do-list Editor Code with Tailwind CSS</summary>
+<summary>Complete To-do-list Editor Example (using Tailwind CSS)</summary>
 
 ```typescript
 import { EditorProps } from 'document-model';
