@@ -16,7 +16,7 @@ We use Storybook as an interactive catalog for our design system components. It 
 
 ## Implementing a Design System Component
 
-Let's walk through the typical workflow for using a component from the design system, using the `Checkbox` from the To-do List editor example (`docs/academy/03-BuildingUserExperiences/00-BuildToDoListEditor.md`).
+Let's walk through the typical workflow for using a component from the design system, using the `Checkbox` from the [To-do List editor](/docs/academy/BuildingUserExperiences/BuildToDoListEditor).
 
 1.  **Identify the Need:** While building your feature (e.g., the To-do List editor in `editor.tsx`), you determine the need for a standard UI element, like a checkbox.
 2.  **Consult Storybook:**

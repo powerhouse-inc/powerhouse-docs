@@ -395,7 +395,7 @@ export default function Editor(props: IProps) {
 :::tip Using the Design System
 Notice the `Checkbox` and `InputField` components used in this example. These are imported from the Powerhouse Design System (`@powerhousedao/design-system/scalars`). This system provides a library of reusable components to ensure consistency and speed up development.
 
-You can explore available components, see usage examples, and understand their properties (props) using our Storybook instance. For a detailed guide on how to leverage the design system and Storybook, see the [Using the Powerhouse Design System](./Reusable-Components/PowerhouseDesignSystem.md) page.
+You can explore available components, see usage examples, and understand their properties (props) using our Storybook instance. For a detailed guide on how to leverage the design system and Storybook, see the [Using the Powerhouse Design System](/docs/academy/BuildingUserExperiences/Reusable-Components/PowerhouseDesignSystem) page.
 :::
 
 Now you can run the Connect app and see the `ToDoList` editor in action.
