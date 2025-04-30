@@ -233,3 +233,89 @@ ph update --force prod
 ph update --package-manager pnpm
 ```
 </details>
+
+## Document & Drive Editor recipes
+
+<details>
+<summary>Generating a Document Editor</summary>
+
+# How to Generate a Document Editor
+
+## Problem Statement
+You have a Powerhouse document model and need to create a user interface (editor) for it to be used within the Connect application.
+
+## Prerequisites
+- Powerhouse CLI (`ph-cmd`) installed
+- A Powerhouse project initialized (`ph init`)
+- A document model generated or defined within the project (e.g., in the `document-models` directory).
+
+## Solution
+
+### Step 1: Navigate to Project Directory
+Ensure your terminal is in the root directory of your Powerhouse project.
+```bash
+cd <yourprojectname>
+```
+
+### Step 2: Generate the Editor Template
+Run the `generate` command, specifying the editor name (usually matching the document model name) and the associated document type.
+
+```bash
+# Replace <ModelName> with the name of your document model (e.g., ToDoList)
+# Replace <docType> with the identifier for your document (e.g., powerhouse/todolist)
+ph generate --editor <ModelName> --document-types <docType>
+```
+
+## Expected Outcome
+- A new directory is created under `editors/` (e.g., `editors/<model-name>/`).
+- An `editor.tsx` file is generated within that directory, containing a basic template for your document editor.
+- You can now customize `editor.tsx` to build your desired UI using HTML, Tailwind CSS, or custom CSS.
+
+## Related Recipes
+- Initializing a new project & document model
+- Generating a Custom Drive Explorer
+
+## Further Reading
+- [Build a Todo-list Editor](/docs/academy/BuildingUserExperiences/BuildToDoListEditor)
+</details>
+
+<details>
+<summary>Generating a Custom Drive Explorer</summary>
+
+# How to Generate a Custom Drive Explorer (Drive App)
+
+## Problem Statement
+You need a custom, application-like interface to browse, organize, or interact with specific types of documents stored within a Powerhouse drive, going beyond the standard file listing.
+
+## Prerequisites
+- Powerhouse CLI (`ph-cmd`) installed
+- A Powerhouse project initialized (`ph init`)
+
+## Solution
+
+### Step 1: Navigate to Project Directory
+Ensure your terminal is in the root directory of your Powerhouse project.
+```bash
+cd <yourprojectname>
+```
+
+### Step 2: Generate the Drive Explorer Template
+Run the `generate` command, specifying the `--drive-editor` flag and a name for your drive explorer application.
+
+```bash
+# Replace <drive-app-name> with a suitable name for your drive explorer (e.g., todo-drive-explorer)
+ph generate --drive-editor <drive-app-name>
+```
+
+## Expected Outcome
+- A new directory is created under `editors/` (e.g., `editors/<drive-app-name>/`).
+- Template files (`EditorContainer.tsx`, components, hooks, etc.) are generated within that directory, providing a basic structure for a drive explorer.
+- You can now customize these files to create your specific drive interface, potentially removing default components and adding custom views relevant to your document models.
+- Remember to update your `powerhouse.manifest.json` to register the new app.
+
+## Related Recipes
+- Generating a Document Editor
+
+## Further Reading
+- [Build a Drive-Explorer](/docs/academy/BuildingUserExperiences/BuildingADriveExplorer)
+</details>

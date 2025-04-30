@@ -45,7 +45,7 @@ export default function Editor({ document, dispatch }: IProps) {
 }
 ```
 
-*Run `ph connect` to see these Tailwind styles applied in real-time.*
+*Run `ph connect` to see these standard html tags applied in real-time.*
 
 **Styling with Tailwind CSS**
 
