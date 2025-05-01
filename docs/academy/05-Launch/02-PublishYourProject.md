@@ -108,7 +108,7 @@ These steps are explained more in depth in any of our tutorials. Follow along wi
 
 1. Defining your Document Model **GraphQL Schema** in the document model document editor by launching the document model editor in Connect Studio Mode with the `ph connect` command.
 2. Defining your Document Model **Operations** in the document model document operations editor and their graphQL counterparts.
-3. Generating the scaffolding code by **exporting** the Zip file from connect and **importing** it into your project. (Save it in the directory you've created in the previous step)
+3. Generating the scaffolding code by **exporting** the Zip file from connect and **importing** it into your project. (Save it in the directory you've created in the previous step) Run `ph generate <zipfile>`.
 4. Implementing the **reducer code** and unit tests of your document models reducers.
 5. Implementing the **document editors** to visualize and interact with your document models.
 6. Run **unit tests** and verify the editor functionality via `ph connect` for local testing.
@@ -128,7 +128,7 @@ This command will **start a local server** and serve the build output.
 Inspect the build output and verify that the document models are working correctly.
 
 ```bash
-pnpm serve (Not working yet 22/04)
+pnpm serve (Not working yet)
 ```
 
 ### 1.4 Storing your project in a git repository
@@ -153,13 +153,14 @@ This will initialize a git repository and add all the files to the repository.
 For this step you'll need to register your organization on npm.
 If you haven't already registered your organization on npm, you can do so by running the following command:
 ```bash
-npm adduser
+pnpm adduser
 ```
+Create an organization on [NPM](https://www.npmjs.com/) using the naming convention: `@yourorganization-ph`
+   - The `-ph` suffix indicates it's a Powerhouse ecosystem package to help you and others identify it from regular NPM packages. 
+   - Example: `@acme-ph`
 
+To make sure you can differentiate between Powerhouse ecosystem packages and other packages we recommend setting up a separate npm account for your organization with the -ph suffix. **example: @yourorg-ph**
 We advice you to **use a dedicated npm account for your organization and not your personal account**.
-To make sure you can differentiate between Powerhouse ecosystem packages and other packages we recommend setting up a separate npm account for your organization with the -ph suffix. 
-
-**example: @yourorg-ph**
 
 Once you've registered your organization on npm, you can now publish your project to the npm registry. 
 Log in via the command line:
@@ -197,12 +198,12 @@ Now let's verify that the package(s) get published in the package repository, ne
 ## 3. Deploying the host apps & project.
 Now that we've installed all the necessary services on our server instance, we can start deploying the host apps & our packaged project from npm.
 
-Install your project package we've published earlier on your local connect (`npm run connect`) instance by running the following command:
+Install your project package we've published earlier on your local connect (`ph connect`) instance by running the following command:
 
 ```bash
 ph install @<your-org/package-name>
 ```
-Alternatively you can also install the package in the setttings of Connect in the 'package manager' section. 
+Alternatively you can also install the package in the setttings of Connect in the 'package manager' section. (Not available yet)
 Where you'll be able to use the same package name as you've used in the `package.json` file and install it at the click of a button.
 
 ![package manager](images/homedesign.png)
