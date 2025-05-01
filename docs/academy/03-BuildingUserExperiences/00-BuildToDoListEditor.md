@@ -243,10 +243,10 @@ export default function Editor(props: IProps) {
             <h1 className="text-2xl font-bold mb-4">To-do List</h1>
 
             {/* Container for the input field and "Add" button */}
-            {/* `flex`: Enables flexbox layout for children (places them in a row). */}
+            {/* `flex items-end`: Enables flexbox layout for children with bottom alignment. */}
             {/* `gap-2`: Adds a small gap between flex items. */}
             {/* `mb-4`: Adds margin to the bottom. */}
-            <div className="flex gap-2 mb-4">
+            <div className="flex items-end gap-2 mb-4">
                 {/* Custom InputField component */}
                 <InputField
                     label="New Task" // Prop for accessibility/placeholder.
@@ -268,11 +268,11 @@ export default function Editor(props: IProps) {
                 {/* `hover:bg-blue-600`: Changes background color on hover. */}
                 {/* `text-white`: Sets text color to white. */}
                 {/* `px-4`: Adds horizontal padding (4 units). */}
-                {/* `py-2`: Adds vertical padding (2 units). */}
+                {/* `py-1.5`: Adds vertical padding (1.5 units). */}
                 {/* `rounded`: Applies rounded corners. */}
                 {/* `transition-colors`: Smoothly animates color changes. */}
                 <button
-                    className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition-colors"
+                    className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-1.5 rounded transition-colors"
                     onClick={() => { // Handle button click to add item.
                         if (todoItem.trim()) { // Check if input is not empty
                             dispatch(actions.addTodoItem({ // Dispatch action to add item.
@@ -388,7 +388,6 @@ export default function Editor(props: IProps) {
         </div>
     );
 }
-
 ```
 </details>
 
