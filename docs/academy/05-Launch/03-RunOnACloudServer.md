@@ -67,7 +67,7 @@ For this, our team has set up a small script that will help you to automate a se
 Base command, which will start installing the necessary services on your server by downloading the install script and running it directly in the bash shell for exectuion. 
 
    ```bash
-   curl -o- https://raw.githubusercontent.com/powerhouse-inc/powerhouse/refs/heads/main/packages/ph-cli/scripts/setup.sh | bash
+   curl -o- https://raw.githubusercontent.com/powerhouse-inc/powerhouse/refs/heads/main/clis/ph-cli/scripts/setup.sh | bash
    ```
 
 The script contains the following commands and will help you set up a series of services on your server.
@@ -111,6 +111,7 @@ Lets have a look at the other commands that are part of the script that will hel
    pnpm setup
    source $HOME/.bashrc
    ```
+   Now follow the instructions of your Ubuntu server at the end of installation. 
 
    #### 6. Install Powerhouse CLI 'globally' using PNPM, making it available for command-line use anywhere. Not just in the project directory locally.
 
