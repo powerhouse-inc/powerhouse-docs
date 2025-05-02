@@ -8,7 +8,7 @@ To help you navigate the steps involved, the diagram below illustrates the overa
 
 ![tutorial schema](images/tutorialschema.png)
 
-Understanding this process is key because, within the Powerhouse ecosystem, users typically start by installing pre-built packages onto their Connect or Switchboard instances. These packages are often sourced from a central repository, similar to an app store. In the previous tutorial, we've [created and published our package](/docs/academy/Launch/PublishYourProject) on the Node Package Manager (NPM) registry as our "app store," and now you'll learn how deploy your own to a cloud environment.
+Understanding this process is key because, within the Powerhouse ecosystem, users typically start by installing pre-built packages onto their Connect or Switchboard instances. These packages are often sourced from a central repository, similar to an app store. In the previous tutorial, we've [created and published our package](/docs/academy/Launch/PublishYourProject) on the Node Package Manager (NPM) registry as our "app store", and now you'll learn how to deploy your own package to a cloud environment.
 
 ## 1. Setting up your cloud environment 
 ### 1.1. Launching your server instance (AWS \- EC2 \- Ubuntu)
@@ -107,7 +107,7 @@ Lets have a look at the other commands that are part of the script that will hel
 
    #### 5. Install pnpm package manager globally
    ```bash
-   npm install -g pnpm
+    nvm install 22
    pnpm setup
    source $HOME/.bashrc
    ```

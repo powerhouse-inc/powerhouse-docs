@@ -91,23 +91,27 @@ export default function HomepageFeatures() {
               <h3 className={styles.cardTitle}>Get started</h3>
             </div>
             <div className={styles.cardContent}>
-              <div style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
+              <div style={{ maxWidth: '960px', margin: '0 auto', textAlign: 'center' }}>
                 <div style={{ marginBottom: '1.5rem' }}>
                   <p style={{ fontSize: '1.1rem', marginBottom: '1rem' }}><strong>Welcome to Powerhouse!</strong></p>
                   <p style={{ lineHeight: '1.6', color: '#444' }}>As a developer, you're about to dive into a <strong>unique ecosystem built to empower decentralized organizations</strong>. Powerhouse provides the software, infrastructure, and frameworks that enable scalable network organizations to operate efficiently.</p>
                 </div>
                 <div style={{ margin: '20px 0', textAlign: 'center' }}>
-                  <a href="/docs/academy/GetStarted/GetStarted-Intro" style={{ display: 'block', textDecoration: 'none' }}>
-                    <img 
-                      src="/img/video-placeholder.svg" 
-                      alt="Powerhouse Introduction Video"
-                      style={{ 
-                        maxWidth: '100%', 
-                        borderRadius: '8px',
-                        transition: 'transform 0.2s ease-in-out'
-                      }}
-                    />
-                  </a>
+                   <iframe
+                     src="https://drive.google.com/file/d/17dDKy-hQeI4ZlLiUZ4xhnXL4bDhJB0N-/preview"
+                     frameBorder="0"
+                     allow="autoplay; fullscreen"
+                     allowFullScreen
+                     title="Powerhouse Introduction Video"
+                     style={{
+                       width: '100%',
+                       maxWidth: '960px',
+                       aspectRatio: '16 / 9',
+                       borderRadius: '8px',
+                       display: 'block',
+                       margin: '0 auto'
+                     }}
+                   ></iframe>
                 </div>
               </div>
             </div>
