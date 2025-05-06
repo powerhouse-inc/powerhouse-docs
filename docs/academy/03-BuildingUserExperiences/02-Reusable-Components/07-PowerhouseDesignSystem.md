@@ -1,6 +1,6 @@
 # Using the Powerhouse Design System
 
-The Powerhouse Design System provides a collection of pre-built, reusable UI components designed for consistency and efficiency across Powerhouse applications and editors. Think of it as a toolkit of standard UI elements like buttons, inputs, and checkboxes.
+The Powerhouse Design System provides a collection of pre-built, reusable UI components designed for consistency and efficiency across Powerhouse applications and editors. Think of it as a toolkit of standard UI elements like buttons, inputs, and checkboxes. Many of these components can be based on a scalar 
 
 ## Exploring Components with Storybook
 
