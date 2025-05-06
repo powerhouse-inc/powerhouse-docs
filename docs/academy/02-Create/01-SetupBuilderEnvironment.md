@@ -19,6 +19,8 @@ Key commands include:
 
 This tool will be fundamental on your journey when creating, building, and running Document Models
 
+___
+
 ## Table of Contents
 - [Prerequisites](#prerequisites)
 - [Installing Node.js](#installing-nodejs)

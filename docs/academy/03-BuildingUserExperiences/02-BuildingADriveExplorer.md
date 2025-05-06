@@ -1,4 +1,4 @@
-# Build a Drive-Explorer
+# Build a Drive Explorer
 
 **Drive Explorers or Drive Apps** enhance how contributors and organizations interact with document models.   
 An 'app-like' experience is created by providing a **custom interface** for working with or exploring the contents of a drive.  
@@ -20,7 +20,7 @@ Drive Explorers or Drive Apps **bridge the gap between raw data and usability**,
 ### **Building a Drive-App**
 
 Drive-Apps provide custom interfaces for interacting with the contents of a drive. 
-Here is an overview of the different steps towards building a drive app, before diving into an implmentation example. 
+Here is a quick overview of the different steps towards building a drive app, before diving into an implmentation example. 
 
 #### 1. Generate the scaffolding code
 
@@ -31,7 +31,7 @@ Use the `generate drive editor` command to create the basic structure for your D
 ph generate --drive-editor <drive-app>
 ```
 
-This creates a template that includes:
+This drive editor template includes:
 - A tree structure navigation panel
 - Basic file/folder operations
 - Standard layout components
@@ -49,8 +49,7 @@ Review the generated template and modify it to better suit your document model:
 2. Add custom views specific to your data model
 3. Implement specialized interactions for your use case
 
-The default template provides a solid foundation, but the real power comes from tailoring the interface to your specific document models. 
-Let's implement a specific example for a more complex todo-list then the one we've been working on. 
+The default template provides a solid foundation, but the real power comes from tailoring the interface to your specific document models. Now let's implement a specific example for a more complex todo-list then the one we've been working on. 
 
 ### Implementation Example: Todo Drive Explorer
 
@@ -62,13 +61,14 @@ This example demonstrates how to create a Todo Drive Explorer application using 
 The application allows users to create and manage todo lists with a visual progress indicator.
 
 **1. Create a Todo Document Model:**
+   - Initialize a new project with `ph init`and give it a projectname. 
    - Start by connecting with `ph connect`
 
 :::warning
-Since you've likely already ran through the [document modeling process](/docs/academy/Create/ToDoList/DefineToDoListDocumentModel) we'll offer you a **slightly more advanced** todo-list below. 
+Since you've likely already ran through the [document modeling process](/docs/academy/Create/ToDoList/DefineToDoListDocumentModel) of a simplified todo-list, we'll offer you a **slightly more advanced** todo-list below! 
 :::
 
-     - Download [todo.phdm.zip](https://github.com/powerhouse-inc/todo-drive-explorer/blob/ee63786fa8ceed71de63cd9c52f1795ad11ac403/todo.phdm.zip)
+     - Download [todo.phdm.zip](https://github.com/powerhouse-inc/todo-drive-explorer/blob/ee63786fa8ceed71de63cd9c52f1795ad11ac403/todo.phdm.zip) from our github repo. 
      - Place it in the project root of your project
      - Generate the document model:
        ```bash
@@ -134,10 +134,12 @@ rm -rf editors/todo-drive-explorer/components/FolderTree.tsx
 
 **2. Create new custom components for you drive explorer app:**
 
-   - Create and populate the following files:
+   - Create and populate the following files to create our types for the todo's & our components to customize the drive explorer.
 
      a. Create `editors/todo-drive-explorer/types/todo.ts`:
      - Copy the code from [todo.ts](https://github.com/powerhouse-inc/todo-drive-explorer/blob/ee63786fa8ceed71de63cd9c52f1795ad11ac403/editors/todo-drive-explorer/types/todo.ts)
+
+     This type represents the specific data structure or state shape that the todo-drive-explorer component uses to manage or display To-Do items.
 
      b. Create `editors/todo-drive-explorer/components/ProgressBar.tsx`:
      - Copy the code from [ProgressBar.tsx](https://github.com/powerhouse-inc/todo-drive-explorer/blob/ee63786fa8ceed71de63cd9c52f1795ad11ac403/editors/todo-drive-explorer/components/ProgressBar.tsx)

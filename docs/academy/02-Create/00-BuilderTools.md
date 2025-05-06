@@ -5,7 +5,11 @@ This page provides an overview of all the builder tooling offered by the Powerho
 ## Powerhouse Command Line Interface
 ___
 
-### Installing the Powerhouse CLI + ph command
+### Installing the Powerhouse CLI 
+:::tip
+The Powerhouse CLI tool is the only essential tool to install on this page.   
+Once you've installed it with the command below you can continue to the next steps.
+:::
 
 The Powerhouse CLI (`ph-cmd`) is a command-line interface tool that provides essential commands for managing Powerhouse projects. You can get access to the Powerhouse Ecosystem tools by installing them globally using:
 ```bash

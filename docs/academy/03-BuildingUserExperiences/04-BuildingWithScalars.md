@@ -3,8 +3,8 @@
 Scalars are here to help you define custom fields in your document model schema and speed up the development process.
 There are two applications of scalar components in the document model workflow:
 
-1. At the schema definition level where you build your schema and write your graphql state schema.
-2. At the frontend / react level where you import it and place it in your UI to represent the scalar field
+1. At the **schema definition** level where you build your schema and write your graphql state schema.
+2. At the **frontend / react** level where you import it and place it in your UI to represent the scalar field
 
 ## Scalar Definition in document model schema. 
 
@@ -46,3 +46,9 @@ return (
 }
 ````
 
+## Scalars & Reusable Components
+
+To make your life easier Powerhouse has defined all usefull scalars with a set of reusable code & UI components. 
+The reusable components are essentially a set of of front-end components based on graphQL scalars. Powerhouse also has a set of custom scalars that are not part of the graphQL standard but are specific to the web3 ecosystem.
+
+Read the next chapter to get familiar with our reusable components. 

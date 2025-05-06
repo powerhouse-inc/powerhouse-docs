@@ -67,7 +67,7 @@ A new browser window will open and you will see the Connect application. If it d
 
 You will see you local drive and a button to create a new drive. 
 
-:::info
+:::tip
 A drive is a folder to store and organize your documents in. Powerhouse offers the ability to build customized 'Drive Apps' for your documents. Think of a Drive-App as a specialized lens— it offers **different ways to visualize, organize, and interact with** the data stored within a drive, making it more intuitive and efficient for specific use cases. To learn more visit [Building A Drive App](/docs/academy/BuildingUserExperiences/BuildingADriveExplorer)
 :::
 
