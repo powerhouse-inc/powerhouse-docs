@@ -45,7 +45,7 @@ Open your project and start your terminal.
 The Powerhouse toolkit provides a command-line utility to create new subgraphs easily.   
 
 ```bash title="Run the following command to generate a new subgraph"
-pnpm generate --subgraph <to-do-list-subgraph>
+ph generate --subgraph <to-do-list-subgraph>
 ```
 
 ```bash title="Expected Output"
@@ -60,7 +60,7 @@ Loaded templates: node_modules/@powerhousedao/codegen/dist/codegen/.hygen/templa
 2. The subgraph was automatically registered in your project's registry
 3. Basic boilerplate code was generated with an example query
 
-If we now run 'npm run reactor' we will see the new subgraph being registered during the startup of the Reactor.
+If we now run 'phreactor' we will see the new subgraph being registered during the startup of the Reactor.
   > Registered /todolist subgraph.
 
 ## 2. Customizing your subgraph with a schema
@@ -95,7 +95,8 @@ type Query {
 
 ### 2.2 Implement the Resolver for the subgraph's schema
 Resolvers define how data is retrieved or modified.
-If you query for a specific value you can retrieve the value from either the reactor itself or an operational datastore. We'll look into this in more detail in the next section.
+If you query for a specific value you can retrieve the value from either the reactor itself or an operational datastore.    
+We'll look into this in more detail in the next section.
 
 ```js
 resolvers: {
@@ -145,12 +146,12 @@ Subgraphs alone are limited. A subgraph only queries data, but doesn't generate 
 To make subgraphs useful, connect them with processors that update the data dynamically.
 **A processor listens to system events and updates the operational store in real-time.**
 
-Making use of a processor ensures:
+Making use of a processor allows for:
 - **Live updates** instead of static data.
 - **Scalable architecture** through event-driven data changes.
 - **Seamless integration** with other Powerhouse components.
 
-Inside your processor, you can listen for new files and update the datastore:
+Inside your processor, you can listen for new files, which in turn update the datastore:
 
 ```typescript title="Example: Creating a Simple Processor"
 async process(event) {
@@ -178,12 +179,12 @@ resolvers: {
 To activate the subgraph, run:
 
 ```bash
-pnpm reactor
+ph reactor
 ```
 Or, for full system startup:
 
 ```bash title="Start the Reactor & Connect in Studio or Locally
-pnpm dev 
+ph dev 
 ```
 
 ### 3.2. Access GraphQL Playground
