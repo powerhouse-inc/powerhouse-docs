@@ -1,8 +1,7 @@
-
 # Create a Powerhouse Project
 
 ## Overview
-This tutorial will guide you through creating a new 'Powerhouse project', which primarely consists of a document model and its editor. You'll be using Connect locally, known as 'Studio mode'.
+This tutorial will guide you through creating a new 'Powerhouse project', which primarily consists of a document model and its editor. You'll be using Connect locally, known as 'Studio mode'.
 
 ## Prerequisites
 - Powerhouse CLI installed: `pnpm install -g ph-cmd`
@@ -11,7 +10,7 @@ This tutorial will guide you through creating a new 'Powerhouse project', which 
 - Terminal/Command Prompt access
 
 ## Quick Start
-Create a new Powerhouse project with a single command,:
+Create a new Powerhouse project with a single command:
 ```bash
 ph init
 ```
@@ -26,7 +25,7 @@ ph init
 3. Ensure you're in the correct directory before running the `ph init` command
 
 
-In the terminal, you will be asked to enter the project name. Fill in the project name and press enter.
+In the terminal, you will be asked to enter the project name. Fill in the project name and press Enter.
 
 ```bash
 you@yourmachine:~/Powerhouse$ ph init
@@ -47,7 +46,7 @@ Navigate to the newly created project directory:
 cd <yourprojectname>
 ```
 
-Once you are in the project directory, now you can run the `ph connect` command to instantiate a local version of the Connect application to start building your document model.
+Once you are in the project directory, you can run the `ph connect` command to instantiate a local version of the Connect application to start building your document model.
 
 Run the following command to start the Connect application:
 
@@ -65,10 +64,10 @@ The Connect application will start and you will see the following output:
 
 A new browser window will open and you will see the Connect application. If it doesn't open automatically, you can open it manually by navigating to `http://localhost:3000/` in your browser.
 
-You will see you local drive and a button to create a new drive. 
+You will see your local drive and a button to create a new drive. 
 
 :::tip
-A drive is a folder to store and organize your documents in. Powerhouse offers the ability to build customized 'Drive Apps' for your documents. Think of a Drive-App as a specialized lens— it offers **different ways to visualize, organize, and interact with** the data stored within a drive, making it more intuitive and efficient for specific use cases. To learn more visit [Building A Drive App](/docs/academy/BuildingUserExperiences/BuildingADriveExplorer)
+A drive is a folder to store and organize your documents in. Powerhouse offers the ability to build customized 'Drive Apps' for your documents. Think of a Drive-App as a specialized lens— it offers **different ways to visualize, organize, and interact with** the data stored within a drive, making it more intuitive and efficient for specific use cases. To learn more, visit [Building A Drive App](/docs/academy/BuildingUserExperiences/BuildingADriveExplorer)
 :::
 
 Move into your local drive. 

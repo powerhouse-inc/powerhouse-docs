@@ -2,7 +2,7 @@
 
 In this section, we will implement and test the operation reducers for the **ToDoList** document model. In order to do this, you have to export the document model from the Connect application and import it into your powerhouse project directory. 
 
-To export the document model, follow the steps in the [define ToDoList document model](./docs/academy/Create/ToDoList/DefineToDoListDocumentModel) section.
+To export the document model, follow the steps in the [Define ToDoList Document Model](./docs/academy/Create/ToDoList/DefineToDoListDocumentModel) section.
 
 ## Understanding Reducers in Document Models
 
@@ -24,17 +24,17 @@ Let's see how these concepts are implemented in our **ToDoList** document model.
 
 To import the document model into your powerhouse project, you can either:
  
-- Copy&Paste the file directly into the root of your powerhouse project.
-- Or drag&drop the file into the powerhouse project directory in the VSCode editor as seen in the image below:
+- Copy and paste the file directly into the root of your powerhouse project.
+- Or drag and drop the file into the powerhouse project directory in the VSCode editor as seen in the image below:
 
 Either step will import the document model into your powerhouse project.
 
 ![vscode image](./images/vscode.png)
 
-The next steps will take place in the VSCode editor. Make sure to have it open and the terminal window inside vscode open as well. 
+The next steps will take place in the VSCode editor. Make sure to have it open and the terminal window inside VSCode open as well. 
 
 
-To write the opearation reducers of the **ToDoList** document model, you need to generate the document model code from the document model file you have exported into the powerhouse project directory.
+To write the operation reducers of the **ToDoList** document model, you need to generate the document model code from the document model file you have exported into the powerhouse project directory.
 
 To do this, run the following command in the terminal:
 
@@ -50,7 +50,7 @@ Open the `to-do-list.ts` file and you should see the code that needs to be fille
 
 ## Write the Operation Reducers
 
-1. Copy&paste the code below into the `to-do-list.ts` file in the `reducers` folder.
+1. Copy and paste the code below into the `to-do-list.ts` file in the `reducers` folder.
 2. Save the file.
 
 
@@ -109,7 +109,7 @@ export const reducer: ToDoListToDoListOperations = {
 
 In order to make sure the operation reducers are working as expected, you need to write tests for them.
 
-Navigate to `/document-models/to-do-list/src/reducers/tests/to-do-list.test.ts` and copy&paste the code below into the file. Save the file.
+Navigate to `/document-models/to-do-list/src/reducers/tests/to-do-list.test.ts` and copy and paste the code below into the file. Save the file.
 
 Here are the tests for the three operations written in the reducers file. This test file creates an empty ToDoList document model, then adds a todo item, updates it and deletes it.
 
@@ -194,7 +194,7 @@ Output should be as follows:
    Duration  417ms (transform 79ms, setup 0ms, collect 174ms, tests 12ms, environment 0ms, prepare 158ms)
 ```
 
-If you got the same output, you have successfully implemented the operation reducers and tests for the **ToDoList** document model. Congratulations, you've succesfully setup the back-bone for a simple todolist document model. 
+If you got the same output, you have successfully implemented the operation reducers and tests for the **ToDoList** document model. Congratulations, you've successfully setup the backbone for a simple **ToDoList** document model. 
 
 :::tip
 Continue to the next chapter on your builder track to learn how to implement the document model editor so you can see a simple user interface for the **ToDoList** document model in action. Click here for the [ToDoList Editor](/docs/academy/BuildingUserExperiences/BuildToDoListEditor)

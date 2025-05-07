@@ -3,7 +3,7 @@
 Let's set up your machine to start building your first Document Model. Don't worry if this is your first time setting up a development environment - we'll guide you through each step!
 
 :::info
-If you've already setup git, node, and npm, your most important step is to install the Powerhouse CLI with the command `pnpm install ph-cmd`. A global install is recommended if you want to use the command from any directory as a power user. In this case use `pnpm install -g ph-cmd` The Powerhouse CLI is used to create, build, and run your Document Models and gives you direct access to a series of [Powerhouse Builder Tools](../Create/BuilderTools)
+If you've already set up Git, Node, and pnpm, your most important step is to install the Powerhouse CLI with the command `pnpm install ph-cmd`. A global install is recommended if you want to use the command from any directory as a power user. In this case use `pnpm install -g ph-cmd`. The Powerhouse CLI is used to create, build, and run your Document Models and gives you direct access to a series of [Powerhouse Builder Tools](../Create/BuilderTools)
 :::
 
 The Powerhouse CLI (`ph-cmd`) is a command-line interface tool that provides essential commands for managing Powerhouse projects. You can get access to the Powerhouse Ecosystem tools by installing them globally using:
@@ -17,7 +17,7 @@ Key commands include:
 - `ph init` to start a new project and build a document model
 - `ph help` to get an overview of all the available commands
 
-This tool will be fundamental on your journey when creating, building, and running Document Models
+This tool will be fundamental on your journey when creating, building, and running Document Models.
 
 ___
 
@@ -40,7 +40,7 @@ ___
 
 ## Prerequisites
 
-Before we begin building our Document Model, we need to install some software on your machine.    We'll need three main tools: Node.js, which helps us run our code, Visual Studio Code (VS Code), which is where we'll write our code, and Git, which helps us manage our code. Follow the steps below based on your computer's operating system.
+Before we begin building our Document Model, we need to install some software on your machine. We'll need three main tools: Node.js, which helps us run our code, Visual Studio Code (VS Code), which is where we'll write our code, and Git, which helps us manage our code. Follow the steps below based on your computer's operating system.
 
 ### Installing Node.js
 
@@ -108,7 +108,7 @@ Node.js is a tool that lets us run our application. Let's install it step by ste
    sudo apt update
    ```
 
-3. **Install Node.js and npm:**
+3. **Install Node.js and pnpm:**
    ```bash
    sudo apt install nodejs pnpm
    ```
@@ -174,7 +174,7 @@ VS Code is the editor we'll use to write our code. Here's how to install it:
 
 ### Install Git
 
-#### Windows
+#### For Windows
 1. Open PowerShell (press Windows key, type "PowerShell", and press Enter)
 2. Visit the [Git website](https://git-scm.com/)
 3. Download the latest version for Windows
@@ -184,7 +184,7 @@ VS Code is the editor we'll use to write our code. Here's how to install it:
    git --version
    ```
 
-#### macOS
+#### For macOS
 1. Install using Homebrew:
    ```bash
    brew install git
@@ -194,7 +194,7 @@ VS Code is the editor we'll use to write our code. Here's how to install it:
    git --version
    ```
 
-#### Linux (Ubuntu/Debian)
+#### For Linux (Ubuntu/Debian)
 1. Update package list:
    ```bash
    sudo apt update
@@ -210,8 +210,6 @@ VS Code is the editor we'll use to write our code. Here's how to install it:
 
 ### Configure Git (All Systems)
 
-Open your terminal (command prompt) and run the following commands to set up Git:
-
 After installation, set up your identity:
 ```bash
 git config --global user.name "Your Name"
@@ -223,7 +221,7 @@ git config --global user.email "your.email@example.com"
 Open your terminal (command prompt) and run the following commands to verify your setup:
 ```bash
 node --version
-npm --version
+pnpm --version
 git --version
 ```
 

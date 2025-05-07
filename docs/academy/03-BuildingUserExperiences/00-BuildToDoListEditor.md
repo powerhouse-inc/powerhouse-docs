@@ -1,6 +1,6 @@
 # Build a Todo-list Editor
 
-In this chapter we will continue with the interface or editeor implementation of the **ToDoList** document model editor. This means you will create a simple user interface for the **ToDoList** document model which will be used inside the Connect app to create, update and delete your ToDoList items.
+In this chapter we will continue with the interface or editor implementation of the **ToDoList** document model editor. This means you will create a simple user interface for the **ToDoList** document model which will be used inside the Connect app to create, update and delete your ToDoList items.
 
 ## Generate the editor template
 
@@ -477,7 +477,7 @@ Now you can run the Connect app and see the **ToDoList** editor in action.
 ph connect
 ```
 
-In connect, in the bottom right corner you'll find a new Document Model that you can create: **ToDoList**.    
+In Connect, in the bottom right corner you'll find a new Document Model that you can create: **ToDoList**.    
 Click on it to create a new ToDoList document.
 
 :::info
@@ -487,8 +487,8 @@ The editor will update dynamically, so you can play around with your editor styl
 Congratulations!
 If you managed to follow this tutorial until this point, you have successfully implemented the **ToDoList** document model with its reducer operations and editor. 
 
-Now you can move on to creating a [custom drive explorer](/docs/academy/BuildingUserExperiences/BuildingADriveExplorer) for your ToDolist document.    
-Imagine you have many todolists sitting in a drive. A custom drive explorer will allow you to organize and track them at a glance. **Opening up a new world of possibilities to increase the functionality of your documents!**
+Now you can move on to creating a [custom drive explorer](/docs/academy/BuildingUserExperiences/BuildingADriveExplorer) for your ToDoList document.    
+Imagine you have many ToDoLists sitting in a drive. A custom drive explorer will allow you to organize and track them at a glance, opening up a new world of possibilities to increase the functionality of your documents!
 
 
 
