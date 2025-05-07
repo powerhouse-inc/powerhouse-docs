@@ -61,7 +61,7 @@ pnpm install -g ph-cmd@<version>
 # How to Uninstall Powerhouse CLI
 
 ## Problem Statement
-You want to start from a clean install with the Powerhouse CLI
+You want to perform a clean installation of the Powerhouse CLI.
 
 ## Prerequisites
 - Powerhouse CLI (`ph-cmd`) installed
@@ -83,11 +83,11 @@ rm -rf ~/.ph
 - Your system should now be clean from the Powerhouse CLI
 
 ## Common Issues and Solutions
-- Issue: Version is out of date 
+- Issue: Outdated version
   - Solution: Uninstall and reinstall the Powerhouse CLI
 
 ## Related Recipes
-- TBD/WIP
+- (Details to be added)
 
 ## Further Reading
 - [Powerhouse Builder Tools](/docs/academy/Create/BuilderTools)
@@ -100,7 +100,7 @@ rm -rf ~/.ph
 # How to Set Up or Reset the Global Powerhouse Configuration
 
 ## Problem Statement
-You need to initialize the global Powerhouse configuration for the first time, or reset it to resolve issues or start fresh, potentially switching to a specific dependency environment like staging.
+You need to initialize the global Powerhouse configuration for the first time, or reset it to resolve issues or start fresh. This might also involve switching to a specific dependency environment like staging.
 
 ## Prerequisites
 - Powerhouse CLI (`ph-cmd`) installed
@@ -145,7 +145,7 @@ ph use staging
 ## Related Recipes
 - Installing 'ph-cmd'
 - Uninstalling 'ph-cmd'
-- Using/switching between different environment for your Powerhouse Project
+- Using/Switching Between Different Environments for Your Powerhouse Project
 
 ## Further Reading
 - [Powerhouse Builder Tools](/docs/academy/Create/BuilderTools)
@@ -155,12 +155,12 @@ ph use staging
 ## Powerhouse Project Recipes
 
 <details>
-<summary>Initializing a new project & document model</summary>
+<summary>Initializing a New Project & Document Model</summary>
 
 # How to Initialize a new project and document model
 
 ## Problem Statement
-You need to create a new, empty document model within a Powerhouse project using the local Connect application (Studio mode) to represent a worklfow of business process.
+You need to create a new, empty document model within a Powerhouse project using the local Connect application (Studio mode) to represent a workflow of a business process.
 
 ## Prerequisites
 - Powerhouse CLI (`ph-cmd`) installed
@@ -214,7 +214,7 @@ In the "New Document" section at the bottom of the page, click the `DocumentMode
 ## Related Recipes
 - Initializing a Powerhouse Project (Covered in Powerhouse CLI Recipes)
 - Designing a Document Model Schema (WIP)
-- Implementing Document Model Reducers (WIP)
+- Implementing Document Model Reducers (Details to be added)
 
 ## Further Reading
 - [Domain Modeling Guide](/docs/domain-modeling)
@@ -250,7 +250,7 @@ ph generate todo.phdm.zip
 ```
 
 ### Step 3: Integrate Generated Code
-The command will output the generated reducer scafolding code in the designated folders. 
+The command will output the generated reducer scaffolding code in the designated folders. 
 
 ## Expected Outcome
 - Reducer functions corresponding to the operations defined in your document model are generated.
@@ -260,7 +260,7 @@ The command will output the generated reducer scafolding code in the designated 
 
 
 ## Related Recipes
-- Initializing a new project & document model
+- Initializing a New Project & Document Model
 - Generating a Document Editor
 
 ## Further Reading
@@ -269,7 +269,7 @@ The command will output the generated reducer scafolding code in the designated 
 </details>
 
 <details>
-<summary>Using/switching between different environment for your Powerhouse Project </summary>
+<summary>Using/Switching Between Different Environments for Your Powerhouse Project</summary>
 
 The use command allows you to switch between different environments for your Powerhouse project dependencies.
 
@@ -308,7 +308,7 @@ ph use latest --package-manager pnpm
 </details>
 
 <details>
-<summary>Updating your Powerhouse project dependencies</summary>
+<summary>Updating Your Powerhouse Project Dependencies</summary>
 
 ### The Update Command
 The update command allows you to update your Powerhouse dependencies to their latest versions based on the version ranges specified in your package.json.
@@ -389,7 +389,7 @@ You might encounter a browser warning about the self-signed certificate; you may
   - Solution: Ensure the port is open in any firewalls (on the server and potentially network firewalls). Verify you are using the correct public IP address or hostname of the machine running Connect.
 
 ## Related Recipes
-- Initializing a new project & document model
+- Initializing a New Project & Document Model
 
 ## Further Reading
 - [Powerhouse Builder Tools](/docs/academy/Create/BuilderTools)
@@ -434,7 +434,7 @@ ph generate --editor <ModelName> --document-types <docType>
 - You can now customize `editor.tsx` to build your desired UI using HTML, Tailwind CSS, or custom CSS.
 
 ## Related Recipes
-- Initializing a new project & document model
+- Initializing a New Project & Document Model
 - Generating a Custom Drive Explorer
 
 ## Further Reading
@@ -523,8 +523,8 @@ ph reactor
   - Solution: Check the `powerhouse.manifest.json` and any reactor-specific configuration files for errors. Ensure storage providers (like local disk) are accessible and configured correctly.
 
 ## Related Recipes
-- Initializing a new project & document model
-- Testing with GraphQL (WIP)
+- Initializing a New Project & Document Model
+- Testing with GraphQL (Details to be added)
 
 </details>
 
@@ -586,7 +586,7 @@ Check your project's `package.json` and `powerhouse.manifest.json` to ensure the
   - Solution: Resolve version conflicts or naming collisions as needed. Review the installed package's structure and dependencies.
 
 ## Related Recipes
-- Publishing a Powerhouse Package (WIP)
+- Publishing a Powerhouse Package (Details to be added)
 - Initializing a Powerhouse Project
 
 </details>

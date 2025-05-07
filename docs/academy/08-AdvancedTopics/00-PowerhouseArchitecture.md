@@ -4,19 +4,19 @@ The Powerhouse ecosystem is built on **five core host applications** that togeth
 
 These five applications are:
 
-1. **Connect** – The contributor’s public or private workspace.
+1. **Connect** – The contributor's public or private workspace.
 2. **Switchboard** – The data infrastructure and API engine.
 3. **Fusion** – The public-facing collaboration hub.
 4. **Renown** – The decentralized reputation and identity system.
 5. **Academy** – The onboarding and learning platform.
 
-Each application is designed to be **modular yet complementary**, ensuring **smooth data flows, structured collaboration, and scalable automation**. The functionality of the 5 host apps offers a completely integrated experience for running decentralized operation. 
+Each application is designed to be **modular yet complementary**, ensuring **smooth data flows, structured collaboration, and scalable automation**. The functionality of the 4 host apps offers a completely integrated experience for running decentralized operations. 
 
 ## **How the Five Applications Work Together**
 
 The Powerhouse ecosystem functions as a **decentralized operating system**, where each of the **four core applications** works in synergy to ensure **seamless collaboration, structured data management, and automated workflows**. Each application has a **distinct purpose**, yet their **interconnectivity** is what makes the system truly powerful.
 
-### **1. Connect: The Contributor’s Workspace and Data Capture Point**
+### **1. Connect: The Contributor's Workspace and Data Capture Point**
 
 Connect is the **entry point** for individual contributors, where they install **apps and packages** tailored to specific business solutions, enabling collaboration in **public or private settings**.
 
@@ -39,7 +39,7 @@ Fusion serves as the **public-facing marketplace and collaboration hub**, allowi
 
 - Fusion **structures, summarizes, and visualizes** key metrics, enabling users to **make data-driven decisions**.
 - It pulls **relevant operational insights**, helping stakeholders navigate and **act on real-time data**.
-- Users can directly **access work completed in Connect**, viewing reports, summaries, and discussions within Fusion’s **public and private environments**.
+- Users can directly **access work completed in Connect**, viewing reports, summaries, and discussions within Fusion's **public and private environments**.
 
 ### **4. Renown: Authentication, Reputation, and Access Control**
 

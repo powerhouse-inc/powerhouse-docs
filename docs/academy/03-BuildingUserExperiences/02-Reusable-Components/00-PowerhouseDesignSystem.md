@@ -1,4 +1,4 @@
-# Reusable Components & Design System
+# Powerhouse Design System
 
 The reusable components are a set of of front-end components based on graphQL scalars. 
 Powerhouse also has a set of custom scalars that are not part of the graphQL standard but are specific to the web3 ecosystem.

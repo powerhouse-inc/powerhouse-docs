@@ -6,7 +6,7 @@ Let's get started by installing the Powerhouse command-line tool `ph-cmd` and th
 
 ## Powerhouse CLI
 
-You'll use the powerhouse CLI to launch a local environment with a "Contributor Billing" package. This package demonstrates how you might track and bill for contributions in a project.
+You'll use the Powerhouse CLI to launch a local environment with a "Contributor Billing" package. This package demonstrates how you might track and bill for contributions in a project.
 
 ### Step 1: Install `ph-cmd`
 
@@ -33,4 +33,4 @@ ph install contributor-billing
 
 This command downloads and sets up the Contributor Billing package, making its features available in your Powerhouse environment.
 
-You've now successfully installed `ph-cmd` and added your first package! To run the package locally in Connect, our collaboration & contributor app you run the `ph connect`command. 
+You've now successfully installed `ph-cmd` and added your first package! To run the package locally in Connect, our collaboration & contributor app, you run the `ph connect` command. 

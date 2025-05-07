@@ -1,12 +1,12 @@
 # Build a Todo-list Editor
 
-In this chapter we will continue with the interface or editeor implementation of the `ToDoList` document model editor. This means you will create a simple user interface for the `ToDoList` document model which will be used inside the Connect app to create, update and delete your ToDoList items.
+In this chapter we will continue with the interface or editor implementation of the **ToDoList** document model editor. This means you will create a simple user interface for the **ToDoList** document model which will be used inside the Connect app to create, update and delete your ToDoList items.
 
 ## Generate the editor template
 
-Run the command below to generate the editor template for the `ToDoList` document model. This command reads the `ToDoList` document model definition from the `document-models` folder and generates the editor template in the `editors/to-do-list/editor.tsx` folder.
+Run the command below to generate the editor template for the **ToDoList** document model. This command reads the **ToDoList** document model definition from the `document-models` folder and generates the editor template in the `editors/to-do-list/editor.tsx` folder.
 
-Notice the `--editor` flag which defines the `ToDoList` document model. And the `--document-types` flag which defines the document type `powerhouse/todolist`.
+Notice the `--editor` flag which defines the **ToDoList** document model. And the `--document-types` flag which defines the document type `powerhouse/todolist`.
 
 ```bash
 ph generate --editor ToDoList --document-types powerhouse/todolist
@@ -190,7 +190,87 @@ export default function Editor({ document, dispatch }: IProps) {
 
 ## To-do List Editor 
 
-Below is the complete code for the To-do List editor shown earlier, primarily using Tailwind CSS for styling.
+:::tip
+### Implementing Components
+The editor we are about to implement makes use of some components from the **Powerhouse Design System**.   
+When you'll add the editor code you'll see it makes use of two components, the `Checkbox` and `InputField`.    
+These are imported from the Powerhouse Design System (`@powerhousedao/design-system/scalars`).   
+
+This system provides a library of reusable components to ensure consistency and speed up development.  
+You can explore available components, see usage examples, and understand their properties (props) using our Storybook instance. For a detailed guide on how to leverage the design system and Storybook, see [using the Powerhouse Design System](/docs/academy/BuildingUserExperiences/Reusable-Components/PowerhouseDesignSystem) page.
+
+For our tutorial you can now create a `components` folder in the `editors/to-do-list` folder and add the following code to each of the components
+:::
+
+<details>
+<summary>Checkbox</summary>
+```typescript
+import { Form, BooleanField } from "@powerhousedao/design-system/scalars";
+
+interface CheckboxProps {
+  value: boolean;
+  onChange: (value: boolean) => void;
+}
+
+export const Checkbox = ({ value, onChange }: CheckboxProps) => {
+  return (
+    <Form onSubmit={() => {}}>
+      <BooleanField 
+        name="checked"
+        description="Check this box to mark the todo as completed"
+        value={value}
+        onChange={onChange}
+      />
+    </Form>
+  );
+};
+```
+</details>
+
+<details>
+<summary>Inputfield</summary>
+```typescript
+import { Form, StringField } from "@powerhousedao/design-system/scalars";
+
+interface InputFieldProps {
+  input: string;
+  value: string;
+  label?: string;
+  onKeyDown: (e: React.KeyboardEvent<HTMLTextAreaElement>) => void;
+  handleInputChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+}
+
+export const InputField = (props: InputFieldProps) => {
+  const { input, value, label, onKeyDown, handleInputChange } = props;
+
+  return (
+    <Form
+      defaultValues={{
+        input: input,
+      }}
+      onSubmit={() => {}}
+      resetOnSuccessfulSubmit
+    >
+      <StringField
+        style={{
+          color: "black",
+        }}
+        label={label}
+        name="input"
+        value={value}
+        onKeyDown={onKeyDown}
+        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+          handleInputChange(e);
+        }}
+      />
+    </Form>
+  );
+};
+```
+</details>
+
+
+Below is the complete code for the To-do List editor, primarily using Tailwind CSS for styling and importing the components from the Powerhouse Design System. 
 
 <details>
 <summary>Complete To-do-list Editor Example (using Tailwind CSS)</summary>
@@ -205,10 +285,10 @@ import {
     ToDoItem,            // Type for a single item in the list.
     actions,             // Object containing action creators for dispatching changes.
     ToDoListDocument     // The complete document structure including state and metadata.
-} from '../../document-models/to-do-list'; // Path to your document model definition.
+} from '../../document-models/to-do-list/index.js'; // Path to your document model definition.
 import { useState } from 'react'; // React hook for managing component-local state.
-import { Checkbox } from './Components/checkbox'; // Custom Checkbox component.
-import { InputField } from './Components/inputField'; // Custom InputField component.
+import { Checkbox } from './components/checkbox.js'; // Custom Checkbox component.
+import { InputField } from './components/inputField.js'; // Custom InputField component.
 
 // Define the props expected by this Editor component. It extends EditorProps with our specific document type.
 export type IProps = EditorProps<ToDoListDocument>;
@@ -391,19 +471,13 @@ export default function Editor(props: IProps) {
 ```
 </details>
 
-:::tip Using the Design System
-Notice the `Checkbox` and `InputField` components used in this example. These are imported from the Powerhouse Design System (`@powerhousedao/design-system/scalars`). This system provides a library of reusable components to ensure consistency and speed up development.
-
-You can explore available components, see usage examples, and understand their properties (props) using our Storybook instance. For a detailed guide on how to leverage the design system and Storybook, see the [Using the Powerhouse Design System](/docs/academy/BuildingUserExperiences/Reusable-Components/ReusableComponents) page.
-:::
-
-Now you can run the Connect app and see the `ToDoList` editor in action.
+Now you can run the Connect app and see the **ToDoList** editor in action.
 
 ```bash
 ph connect
 ```
 
-In connect, in the bottom right corner you'll find a new Document Model that you can create: `ToDoList`.    
+In Connect, in the bottom right corner you'll find a new Document Model that you can create: **ToDoList**.    
 Click on it to create a new ToDoList document.
 
 :::info
@@ -411,10 +485,10 @@ The editor will update dynamically, so you can play around with your editor styl
 :::
 
 Congratulations!
-If you managed to follow this tutorial until this point, you have successfully implemented the `ToDoList` document model with its reducer operations and editor. 
+If you managed to follow this tutorial until this point, you have successfully implemented the **ToDoList** document model with its reducer operations and editor. 
 
-Now you can move on to creating a [custom drive explorer](/docs/academy/BuildingUserExperiences/BuildingADriveExplorer) for your ToDolist document.    
-Imagine you have many todolists sitting in a drive. A custom drive explorer will allow you to organize and track them at a glance. **Opening up a new world of possibilities to increase the functionality of your documents!**
+Now you can move on to creating a [custom drive explorer](/docs/academy/BuildingUserExperiences/BuildingADriveExplorer) for your ToDoList document.    
+Imagine you have many ToDoLists sitting in a drive. A custom drive explorer will allow you to organize and track them at a glance, opening up a new world of possibilities to increase the functionality of your documents!
 
 
 

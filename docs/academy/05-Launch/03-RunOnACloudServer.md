@@ -8,24 +8,24 @@ To help you navigate the steps involved, the diagram below illustrates the overa
 
 ![tutorial schema](images/tutorialschema.png)
 
-Understanding this process is key because, within the Powerhouse ecosystem, users typically start by installing pre-built packages onto their Connect or Switchboard instances. These packages are often sourced from a central repository, similar to an app store. In the previous tutorial, we've [created and published our package](/docs/academy/Launch/PublishYourProject) on the Node Package Manager (NPM) registry as our "app store", and now you'll learn how to deploy your own package to a cloud environment.
+Understanding this process is key because, within the Powerhouse ecosystem, users typically start by installing pre-built packages onto their Connect or Switchboard instances. These packages are often sourced from a central repository, similar to an app store. In the previous tutorial, we have [created and published our package](/docs/academy/Launch/PublishYourProject) on the Node Package Manager (NPM) registry as our "app store", and now you'll learn how to deploy your own package to a cloud environment.
 
-## 1. Setting up your cloud environment 
+## 1. Setting up your cloud environment
 ### 1.1. Launching your server instance (AWS \- EC2 \- Ubuntu)
 
 Let's have a look at how to set up Connect & Switchboard apps on a cloud server.
-Ask your IT provider to get access to the AWS environment to set up a server in AWS  
-Launch a new server instance for Connect and Switchboard with the specific specs that fit your project. 
+Ask your IT provider to get access to the AWS environment to set up a server.
+Launch a new server instance for Connect and Switchboard with the specific specs that fit your project.
 
 The steps to create an EC2 instance:
-   - Make sure your region is set eu-west-1 (Ireland)
-   - Name your instance something like `cloud-server` or your project name
-   - Select the Ubuntu 24.04 LTS
+   - Make sure your region is set to eu-west-1 (Ireland)
+   - Name your instance something like `cloud-server` or your project's name
+   - Select Ubuntu 24.04 LTS
    - Architecture 64-bit (x86)
-   - Scroll down to instance type and select t2.medium (recommended)
-      - 2 vCPUs and 4 GiB of memory are recommended minimum specs
+   - Scroll down to Instance type and select t2.medium (recommended)
+      - 2 vCPUs and 4 GiB of memory are the recommended minimum specs
       - For larger projects or higher load, consider t2.large or t2.xlarge
-   - Create a new key pair and save it in a secure location from which you can connect to your instance with the SSH client later on.
+   - Create a new key pair and save it in a secure location from which you can connect to your instance with the SSH client later.
    - Configure the security group to allow inbound traffic:
       - SSH (Port 22) from your IP address
       - HTTP (Port 80) from anywhere
@@ -34,8 +34,8 @@ The steps to create an EC2 instance:
       - Custom TCP (Port 8441) for Switchboard
    - **Launch the instance**
 
-Now click on your instance ID which will open up a new window with the instance details. Hit the 'Connect' button to get the connection details.
-Within the instance details you'll find the public IP address of your server instance. We'll use this to connect to our server instance later on.
+Now click on your instance ID, which will open a new window with the instance details. Hit the 'Connect' button to get the connection details.
+Within the instance details, you'll find the public IP address of your server instance. We'll use this to connect to our server instance later.
 
 :::warning
 Make sure to keep your key pair file (.pem) secure and never share it. Without it, you won't be able to access your instance. Also, consider setting up AWS IAM roles and policies for better security management.
@@ -43,16 +43,16 @@ Make sure to keep your key pair file (.pem) secure and never share it. Without i
 
 ### 1.2. Setting up your SSH connection
 
-Once you've generated your keypairs and added them in the folder you'll set up the SSH connections from which you can start the process. 
+Once you've generated your key pairs and added them to the designated folder, you can set up the SSH connections to start the process.
 
 SSH, which stands for **Secure Shell**, is a cryptographic network protocol used to securely access and manage devices over an unsecured network. It provides a secure channel over an unsecured network by using encryption, ensuring that data transmitted between your computer and the server remains confidential and tamper-proof.
 
-To establish an SSH connection, you'll typically use an SSH client. On Unix-like systems (Linux, macOS), the SSH client is usually pre-installed.   
-Follow the instructions of the AWS instance you've configured with Ubuntu and set up your connection by adding the necessary commands in your terminal.
+To establish an SSH connection, you'll typically use an SSH client. On Unix-like systems (Linux, macOS), the SSH client is usually pre-installed.
+Follow the instructions for the AWS instance you've configured with Ubuntu and set up your connection by adding the necessary commands in your terminal.
 
 ![Setting up your SSH connection](images/SSHConnection.png)
 
-Your ubuntu instance is usually always a little out of date. So use the following commands to get it up to speed. 
+Your Ubuntu instance is usually always a little out of date. So use the following commands to get it up to speed.
 
    ```bash
    sudo apt update && sudo apt upgrade
@@ -60,11 +60,11 @@ Your ubuntu instance is usually always a little out of date. So use the followin
 
 ### 1.3. Installing the required software with a script
 
-Now that we've connected to our ubuntu instance we'll need to install the necessary services on our server to get things going, such as Nvm, Node, NPM etc. 
+Now that we've connected to our Ubuntu instance, we'll need to install the necessary services on our server to get things going, such as NVM, Node, NPM, etc.
 
-For this, our team has set up a small script that will help you to automate a series of installations.  
+For this, our team has set up a small script that will help you to automate a series of installations.
 
-Base command, which will start installing the necessary services on your server by downloading the install script and running it directly in the bash shell for exectuion. 
+Base command, which will start installing the necessary services on your server by downloading the install script and running it directly in the bash shell for execution.
 
    ```bash
    curl -o- https://raw.githubusercontent.com/powerhouse-inc/powerhouse/refs/heads/main/clis/ph-cli/scripts/setup.sh | bash
@@ -75,15 +75,15 @@ The script contains the following commands and will help you set up a series of 
 - **NVM**: Node Version Manager for managing Node.js versions
 - **Node.js**: JavaScript runtime
 - **PM2**: Process manager for Node.js applications
-- **ph-cmd**: Powerhouse CLI tool for managing projects. 
-- **pnpm**: Fast, disk space efficient package manager
+- **ph-cmd**: Powerhouse CLI tool for managing projects.
+- **pnpm**: Fast, disk-space-efficient package manager
 
 :::info
-ph-cmd is a tool that helps you manage your powerhouse projects. It's a command line interface package that you can install globally on your server and personal machine. 
+ph-cmd is a tool that helps you manage your Powerhouse projects. It's a command-line interface package that you can install globally on your server and personal machine.
 It gives you access to a series of powerful commands to create or manage your projects, start or stop your services, install your project on a server instance, etc.
 :::
 
-Lets have a look at the other commands that are part of the script that will help you install the necessary services on your server. 
+Let's have a look at the other commands that are part of the script that will help you install the necessary services on your server.
 
    #### 1. Load NVM into the current shell session
    ```bash
@@ -111,9 +111,9 @@ Lets have a look at the other commands that are part of the script that will hel
    pnpm setup
    source $HOME/.bashrc
    ```
-   Now follow the instructions of your Ubuntu server at the end of installation. 
+   Now follow the instructions of your Ubuntu server at the end of the installation.
 
-   #### 6. Install Powerhouse CLI 'globally' using PNPM, making it available for command-line use anywhere. Not just in the project directory locally.
+   #### 6. Install Powerhouse CLI 'globally' using pnpm, making it available for command-line use anywhere. This makes it available for command-line use anywhere, not just locally within the project directory.
 
    ```bash
    pnpm install -g ph-cmd
@@ -123,25 +123,25 @@ Lets have a look at the other commands that are part of the script that will hel
 
 Now that we've installed all the necessary services on our server instance, we can start deploying the host apps & our packaged project from npm.
 
-1. **Install your project package** we've published earlier on npm now on the server instance.
+1. **Install your project package** that we published earlier on npm, onto the server instance.
 	   ```bash
 	   ph install @your-org/package-name
 	   ```
 
-3. **Start the Connect service** so we can start interacting with our project.
+2. **Start the Connect service** so that we can start interacting with our project.
 	```bash
 	ph connect --https --port 8442
 	```
-	Let's verify that the connect service is running. Since we can't make use of the local host and we're running the connect service on the server instance we'll need to use the public IP address of our server instance to start interacting with our project. Copy the public IP address of your server instance and paste it into your browser. Now add the port `:8442` to the end of the URL and you should see your project running.
+	Let's verify that the Connect service is running. Since we can't make use of localhost and we're running the Connect service on the server instance, we'll need to use the public IP address of our server instance to start interacting with our project. Copy the public IP address of your server instance and paste it into your browser. Now add the port `:8442` to the end of the URL and you should see your project running.
 
-   Create a new document and start interacting with it. Add a new item to the list so you can query the document through the graphQL playground in switchboard in the next step.
+   Create a new document and start interacting with it. Add a new item to the list so you can query the document through the GraphQL playground in Switchboard in the next step.
 
-2. **Start the Switchboard service** and run the following command to boot the reactor
+3. **Start the Switchboard service** and run the following command to boot the Reactor.
 	```bash
 	ph switchboard --port 8441
 	```
-	Let's verify that the reactor has detected your project and is ready to start by navigating to the graphQL playground.
-   Since we can't make use of the local host and we're running the switchboard service on the server instance we'll need to use the public IP address of our server instance to start interacting with our project. Copy the public IP address of your server instance and paste it into your browser. Now add the port `:8441` to the end of the URL and you should get access to the graphQL playground.
+	Let's verify that the Reactor has detected your project and is ready to start by navigating to the GraphQL playground.
+   Since we can't make use of localhost and we're running the Switchboard service on the server instance, we'll need to use the public IP address of our server instance to start interacting with our project. Copy the public IP address of your server instance and paste it into your browser. Now add the port `:8441` to the end of the URL and you should get access to the GraphQL playground.
 
 
 ## 3. Setup the host apps as system services
@@ -203,9 +203,9 @@ After making any configuration changes to your project, remember to restart the 
 
 ## 4. Verify your project is running on your server
 
-- Open up the server domain in your browser and you should see your project running.
-- Verify that synchronization is working and your document is available. 
+- Open the server domain in your browser, and you should see your project running.
+- Verify that synchronization is working and your document is available.
 - Try to make a change to your document and see if it's reflected in another instance with that same document.
-- Query the document through the graphQL playground
+- Query the document through the GraphQL playground.
 
 Congratulations! You've now published your project and are ready to start collaborating with your team on the same document models and editors!

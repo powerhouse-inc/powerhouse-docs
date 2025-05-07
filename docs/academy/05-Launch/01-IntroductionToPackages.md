@@ -1,13 +1,13 @@
 # Intro to Packages
 
-Packages of Document Models are a core structuring mechanism in the Powerhouse framework, allowing developers to group and manage related document models efficiently. These packages serve as modular collections of document definitions, ensuring consistency, scalability, and reusability across different applications.
+Packages of document models are a core structuring mechanism in the Powerhouse framework, allowing developers to group and manage related document models efficiently. These packages serve as modular collections of document definitions, ensuring consistency, scalability, and reusability across different applications.
 
-By packaging document models together, developers can create well-organized, interoperable sets of data structures that capture the specific needs of various operational processes. Whether used for financial operations, governance, or contributor management, these packages streamline development and integration within Powerhouse’s decentralized framework.
+By packaging document models together, developers can create well-organized, interoperable sets of data structures that capture the specific needs of various operational processes. Whether used for financial operations, governance, or contributor management, these packages streamline development and integration within Powerhouse's decentralized framework.
 
 ### Key Features
 
 - **Modular Structure** – Packages encapsulate related document models, making it easier to manage and deploy them as a cohesive unit.
-- **Standardized Definitions** – Each document model within a package follows Powerhouse’s structured schema approach, ensuring consistency in data representation.
+- **Standardized Definitions** – Each document model within a package follows Powerhouse's structured schema approach, ensuring consistency in data representation.
 - **Reusability and Extensibility** – Packages can be shared across different projects or extended with additional models as needed.
 - **Dependency Management** – Developers can define dependencies between document models, ensuring proper relationships and data flows between interconnected components.
 - **Automated Schema Evolution** – Versioning mechanisms allow document models within a package to evolve over time without breaking existing functionality.
@@ -25,11 +25,11 @@ By packaging document models together, developers can create well-organized, int
 
 Packages follow a **scoped naming convention** based on the organization that owns them or created the package:
 
-- `@powerhousedao` The organization behind powerhouse.
-- `@sky-ph` The Sky / MakerDAO organization with a -ph suffix to indicate it concerns powerhouse ecosystem packages.
+- `@powerhousedao` The organization behind Powerhouse.
+- `@sky-ph` The Sky / MakerDAO organization with a -ph suffix to indicate it concerns Powerhouse ecosystem packages.
 - `@myorg-ph` Your organization with the -ph suffix included.
 
-Within a package, you’ll find **several key modules**, each serving a distinct role in structuring and processing data.
+Within a package, you'll find **several key modules**, each serving a distinct role in structuring and processing data.
 
 ---
 
@@ -68,7 +68,7 @@ A **UI component** that allows users to **interact with document models visually
 
 ### **5. Drive-Apps**
 
-**Custom interfaces** that provide enhanced ways to interact with a package’s document models.
+**Custom interfaces** that provide enhanced ways to interact with a package's document models.
 
 - Allows **visualization, sorting, and organization** of drive contents (e.g., **Kanban boards, list views**).
 - Can aggregate data and display **key insights** from document models.

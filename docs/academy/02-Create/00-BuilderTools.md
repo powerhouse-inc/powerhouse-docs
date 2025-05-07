@@ -11,7 +11,7 @@ The Powerhouse CLI tool is the only essential tool to install on this page.
 Once you've installed it with the command below you can continue to the next steps.
 :::
 
-The Powerhouse CLI (`ph-cmd`) is a command-line interface tool that provides essential commands for managing Powerhouse projects. You can get access to the Powerhouse Ecosystem tools by installing them globally using:
+The Powerhouse CLI (`ph-cmd`) is a command-line interface tool that provides essential commands for managing Powerhouse projects. You can get access to the Powerhouse ecosystem tools by installing them globally using:
 ```bash
 pnpm install -g ph-cmd
 ``` 
@@ -19,7 +19,7 @@ pnpm install -g ph-cmd
 Key commands include:
 - `ph connect` for running the Connect application locally
 - `ph switchboard` or `ph reactor` for starting the API service
-- `ph init` to start a new project and build a document model
+- `ph init` to start a new project and build a Document Model
 - `ph help` to get an overview of all the available commands
 
 This tool will be fundamental on your journey when creating, building, and running Document Models
@@ -69,10 +69,10 @@ The use command allows you to switch between different environments for your Pow
 ph use <environment> [localPath]
 ``` 
 **Available Environments**
-- latest - Uses the latest stable version of all Powerhouse packages
-- dev - Uses development versions of the packages
-- prod - Uses production versions of the packages
-- local - Uses local versions of the packages from a specified path
+- latest - Uses the latest stable version of all Powerhouse packages.
+- dev - Uses development versions of the packages.
+- prod - Uses production versions of the packages.
+- local - Uses local versions of the packages from a specified path.
 
 **Examples**
 
@@ -140,9 +140,9 @@ Both commands support multiple package managers (npm, yarn, pnpm, and bun) and w
 
 ## Boilerplate
 ___
-The Document Model Boilerplate is a foundational template that is used for code generation when scaffolding your editors and models. It ensures compatibility with host applications like Connect and Switchboard for seamless document model and editor integration. 
+The Document Model Boilerplate is a foundational template that is used for code generation when scaffolding your editors and models. It ensures compatibility with host applications like Connect and Switchboard for seamless Document Model and editor integration. 
 
-After installing `ph-cmd`, you will run `ph init`to initialize a project directory & structure. This initialization command makes use of the boilerplate. 
+After installing `ph-cmd`, you will run `ph init` to initialize a project directory and structure. This initialization command makes use of the boilerplate. 
 
 The boilerplate includes essential commands with NPM/PNPM scripts for:
 - Generating code
@@ -155,7 +155,7 @@ The boilerplate includes essential commands with NPM/PNPM scripts for:
 ___
 The Powerhouse Design System is a collection of reusable front-end components based on GraphQL scalars, including custom scalars specific to the web3 ecosystem. It provides:
 - Consistent UI components across Powerhouse applications
-- Automatic inclusion as a dependency in new document model projects
+- Automatic inclusion as a dependency in new Document Model projects
 - Customization options using CSS variables
 
 ## Reactor Libraries
@@ -174,20 +174,20 @@ Handles client-side interactions
 Manages local storage and offline functionality
 
 ### Drive App
-Handles document organization and storage management, but can also be customised to offer specific functionality, categorization or tailored interfaces for your documents. 
+Handles document organization and storage management, but can also be customized to offer specific functionality, categorization, or tailored interfaces for your documents. 
 
 ## Code Generators
 ___
 Powerhouse provides several code generation tools to streamline development:
 
     ### Document Model Scaffolding
-    Generates the basic structure for new document models with the command `ph init` based on the boilerplate. 
+    Generates the basic structure for new Document Models with the command `ph init` based on the boilerplate. 
 
     ### Editor Generator
-    Creates template code for document model editors with the command `ph generate --editor <name> --document-types <documenttype>`
+    Creates template code for Document Model editors with the command `ph generate --editor <name> --document-types <documenttype>`
 
     ### Drive Editor Generator
-    Builds scaffolding for custom drive interfaces with the command `ph generate --drive-editor <name>`
+    Builds scaffolding for custom Drive interfaces with the command `ph generate --drive-editor <name>`
 
     ### Subgraph Generator
     Creates GraphQL subgraph templates for data access automatically upon `ph reactor`
@@ -200,11 +200,11 @@ Powerhouse provides several code generation tools to streamline development:
 
 ## Analytics Engine
 ___
-The Analytics Engine is a system that allows tracking and analyzing operations and state changes on document models. Features include:
+The Analytics Engine is a system that allows tracking and analyzing operations and state changes on Document Models. Features include:
 - Custom dashboard and report generation
-- Document model-specific analytics
+- Document Model-specific analytics
 - Metric and dimension tracking
-- Data combination from multiple document models
+- Data combination from multiple Document Models
 
 Generate an analytics processor using:
 ```bash
