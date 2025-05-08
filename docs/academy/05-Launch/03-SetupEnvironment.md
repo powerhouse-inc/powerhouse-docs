@@ -13,7 +13,7 @@ The `install-tools.sh` script provides a streamlined way to install the Powerhou
 ### Installation Steps:
 1. Download the setup script:
 ```bash
-curl -O https://raw.githubusercontent.com/your-repo/powerhouse/scripts/install-tools.sh
+curl -O https://raw.githubusercontent.com/powerhouse-inc/powerhouse/refs/heads/main/scripts/install-tools.sh
 ```
 
 2. Make the script executable:
@@ -39,10 +39,15 @@ source ~/.bashrc  # or source ~/.zshrc if using zsh
 
 6. Verify the installation:
 ```bash
-ph version
+ph --version
 ```
 
 ## 2. Configuring Your Machine
+
+Download the setup script:
+```bash
+curl -O  https://raw.githubusercontent.com/powerhouse-inc/powerhouse/refs/heads/main/scripts/setup-environment.sh
+```
 
 The `setup-environment.sh` script is a comprehensive tool that prepares your machine for running Powerhouse services. It handles everything from package installation to service configuration, making the setup process straightforward and automated. This script is particularly useful for setting up new servers or reconfiguring existing ones.
 
