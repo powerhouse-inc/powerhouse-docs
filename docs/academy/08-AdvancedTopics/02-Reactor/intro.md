@@ -10,24 +10,49 @@ Welcome to the Powerhouse Reactor system (aka document-drive). Reactor is a powe
 
 Reactor enables applications to work with structured documents in a collaborative and reactive way. It maintains document state through a series of operations, supports versioning, and handles synchronization across multiple clients and servers.
 
-## Models
+## Documents
+
+The Reactor system is built around the concept of documents. Documents are the core data structure that Reactor manages, and they can be organized hierarchically. Documents that hold other documents are called **drives**.
+
+![Document Management](./images/document-management.svg)
+
+**Operations** are the mechanism by which documents are modified. When a client wants to change a document, it sends operations to the Reactor, which applies them to the document.
+
+![Operations Input](./images/operations-input.svg)
+
+When a client requests a document, the Reactor reconstructs it by applying all of its operations in sequence, resulting in the current state of the document.
+
+![Document Reconstruction](./images/document-reconstruction.svg)
+
+## Document Models
+
+Document models are structured descriptions that define both the shape of a document and the operations that can be applied to it. They serve as blueprints for creating and manipulating documents within the Reactor system.
+
+Each document model specifies:
+- The document's data schema: fields and types
+- Valid operations that can modify the document
+- Rules for how operations transform the document state
+
+Document models in the Reactor system are themselves documents. This self-describing pxroperty allows document models to be stored, versioned, and synchronized using the same mechanisms as any other document in the system.
+
+When creating a new document, you must specify which document model it follows. The Reactor then ensures that all operations applied to that document conform to the rules defined by its model.
+
+![Operation Validation](./images/operation-validation.svg)
+
+## Data Objects
 
 Reactor is built around a well-defined data model that represents documents, operations, and the relationships between them.
-
-This is a good place to start understanding the full Reactor, as the entire system is designed around managing document state in a distributed environment.
-
-### Entity Relationship Model
 
 ![Entity Relationship](./images/entity-relationships.svg)
 
 #### PHDocument
 
-The core entity representing a document in the system. Each document:
+The core entity representing a **document**. Each document:
 
 - Has a unique `id`
 - Contains `revision` information
-- Maintains a collection of "scopes" (more on this later)
-- Stores specific `documentType` that defines its structure
+- Maintains a collection of "_scopes_" (more on this later)
+- Stores a specific `documentType` that defines its structure
 
 #### Drive
 
@@ -45,11 +70,9 @@ Operations represent changes to documents:
 - They contain the input data that represents the parameters for the intended change
 - Operations are used to rebuild document state and track history
 
-## Reactor System
+## System Architecture
 
 The Reactor system orchestrates document operations through a well-defined flow of components.
-
-### System Architecture
 
 ![High-Level Architecture](./images/reactor-high-level.svg)
 
@@ -189,12 +212,13 @@ async function createNewDocument() {
   });
   
   const newDocument = result.data.createDocument;
-  console.log(`Created document ${newDocument.name} with ID ${newDocument.id}`);
-  
-  // Subscribe to document changes
-  subscribeToDocumentChanges(newDocument.id);
+  console.log(`Created document ${newDocument.name} with ID ${newDocument.id}`);cument.id);
 }
+```
 
+We can also subscribe to changes in the document:
+
+```typescript
 function subscribeToDocumentChanges(documentId) {
   const subscription = client.subscribe({
     query: gql`
@@ -214,9 +238,131 @@ function subscribeToDocumentChanges(documentId) {
   
   subscription.subscribe(({ data }) => {
     console.log('Document updated:', data.documentChanged);
-    // Update UI with new document state
-    updateDocumentUI(data.documentChanged);
+    
+    // Eg - blast Discord, send an email, etc
   });
+}
+```
+
+We can also search for documents. This can be by id:
+
+```typescript
+import { gql } from '@apollo/client';
+
+const GET_DOCUMENT_BY_ID = gql`
+  query GetDocument($id: String!) {
+    document(id: $id) {
+      id
+      name
+      slug
+      documentType
+      created
+      lastModified
+      revision
+      # Fields specific to the document type can be requested in fragments
+      ... on MarkdownDocument {
+        state {
+          global {
+            content
+          }
+        }
+      }
+    }
+  }
+`;
+
+async function fetchDocumentById(documentId) {
+  const { data } = await client.query({
+    query: GET_DOCUMENT_BY_ID,
+    variables: { id: documentId }
+  });
+  
+  if (data.document) {
+    console.log(`Found document: ${data.document.name}`);
+    return data.document;
+  } else {
+    console.log(`Document with ID ${documentId} not found`);
+    return null;
+  }
+}
+```
+
+By slug:
+
+```typescript
+import { gql } from '@apollo/client';
+
+const GET_DOCUMENT_BY_SLUG = gql`
+  query GetDocumentBySlug($slug: String!) {
+    documentBySlug(slug: $slug) {
+      id
+      name
+      slug
+      documentType
+      created
+      lastModified
+      revision
+      # Fields specific to the document type can be requested in fragments
+      ... on MarkdownDocument {
+        state {
+          global {
+            content
+          }
+        }
+      }
+    }
+  }
+`;
+
+async function fetchDocumentBySlug(slug) {
+  const { data } = await client.query({
+    query: GET_DOCUMENT_BY_SLUG,
+    variables: { slug }
+  });
+  
+  if (data.documentBySlug) {
+    console.log(`Found document: ${data.documentBySlug.name}`);
+    return data.documentBySlug;
+  } else {
+    console.log(`Document with slug ${slug} not found`);
+    return null;
+  }
+}
+```
+
+Or we can pull all the documents in a drive:
+
+```typescript
+import { gql } from '@apollo/client';
+
+const GET_DRIVE_DOCUMENTS = gql`
+  query GetDriveDocuments {
+    documents {
+      id
+      name
+      slug
+      documentType
+      created
+      lastModified
+    }
+  }
+`;
+
+async function fetchAllDriveDocuments() {
+  const { data } = await client.query({
+    query: GET_DRIVE_DOCUMENTS
+  });
+  
+  if (data.documents && data.documents.length > 0) {
+    console.log(`Found ${data.documents.length} documents in drive`);
+    data.documents.forEach(doc => {
+      console.log(`- ${doc.name} (${doc.documentType})`);
+    });
+    return data.documents;
+  } else {
+    console.log('No documents found in drive');
+    return [];
+  }
 }
 ```
 
@@ -224,7 +370,7 @@ function subscribeToDocumentChanges(documentId) {
 
 For applications that embed the Reactor directly, the TypeScript API provides direct access to the document drive server.
 
-We should start by retrieving the list of document models supported by the Reactor.
+First, let's retrieve the supported document models:
 
 ```typescript
 // Get an instance of the document drive server
@@ -234,31 +380,47 @@ const reactor = getDocumentDriveServer();
 const documentModelModules = reactor.getDocumentModelModules();
 console.log(`Found ${documentModelModules.length} document models`);
 
-// Log all model names and extensions
+// Log model names and extensions
 documentModelModules.forEach(module => {
   const model = module.documentModel;
   console.log(`Model: ${model.name} (.${model.extension})`);
 });
+```
+
+You can also check if a specific model is supported:
+
+```typescript
+// Get the document drive server
+const reactor = getDocumentDriveServer();
+
+// Get all document model modules
+const documentModelModules = reactor.getDocumentModelModules();
 
 // Find a specific model by name
-const markdownModel = documentModelModules.find(
-  module => module.documentModel.name === 'markdown-document'
-);
+function isModelSupported(modelName) {
+  const modelModule = documentModelModules.find(
+    module => module.documentModel.name === modelName
+  );
+  
+  if (modelModule) {
+    console.log(`Model ${modelName} is supported`);
+    return true;
+  } else {
+    console.log(`Model ${modelName} is not supported`);
+    return false;
+  }
+}
 
-if (markdownModel) {
-  const model = markdownModel.documentModel;
-  console.log(`Found model: ${model.name}`);
-  
-  // Get operations from the latest specification
-  const latestSpec = model.specifications[model.specifications.length - 1];
-  const operations = latestSpec.modules
-    .flatMap(module => module.operations.map(op => op.name));
-  
-  console.log(`Available operations: ${operations.join(', ')}`);
+// Check if a model is supported before using it
+if (isModelSupported('markdown-document')) {
+  // Proceed with document creation
+  createMarkdownDocument();
+} else {
+  console.error('Cannot create document: markdown model not supported by this Reactor');
 }
 ```
 
-Next, we want to create a new document using the TypeScript API:
+Next, we can create a new document:
 
 ```typescript
 // Get the reactor instance
@@ -272,34 +434,132 @@ const drive = await reactor.addDrive({
 // Create a new document with initial state
 const newDocument = await reactor.createDocumentWithState(
   drive.id,
-  'markdown-document',
+  'task-list',
   {
     global: {
-      content: '# Hello World\n\nThis is a new document.'
+      title: 'Q2 Sprint Planning',
+      tasks: []
     }
   },
   { 
-    name: 'Getting Started Guide',
-    slug: 'getting-started'
+    name: 'Sprint Planning',
+    slug: 'sprint-planning-q2'
   }
 );
 
 console.log(`Created document: ${newDocument.id}`);
-console.log(`Access URL: /documents/${newDocument.slug}`);
-
-// Add an operation to update the document
-await reactor.addOperation(
-  drive.id,
-  newDocument.id,
-  {
-    type: 'updateContent',
-    scope: 'global',
-    branch: 'main',
-    input: {
-      content: '# Hello World\n\nThis is an updated document.'
-    }
-  }
-);
 ```
 
-Through these interfaces, applications can seamlessly integrate with the Reactor system to manage document-centric workflows, enabling collaborative document editing, versioning, and synchronization across distributed environments.
+We can subscribe to changes in the document:
+
+```typescript
+// Get the reactor instance
+const reactor = getDocumentDriveServer();
+
+// Listen to document changes
+function subscribeToDocumentChanges(driveId, documentId) {
+  // Set up event listener for document changes
+  const unsubscribe = reactor.on('documentChanged', (event) => {
+    if (event.documentId === documentId) {
+      console.log('Document updated:', event);
+      
+      // Process the document update
+      // e.g., update UI, trigger notifications, etc.
+    }
+  });
+  
+  // Return function to unsubscribe when no longer needed
+  return unsubscribe;
+}
+
+// Start listening to document changes
+const unsubscribe = subscribeToDocumentChanges('drive-123', 'document-456');
+
+// Later, when no longer needed
+unsubscribe();
+```
+
+We can retrieve a document by ID:
+
+```typescript
+// Get the reactor instance
+const reactor = getDocumentDriveServer();
+
+// Get a document by ID
+async function getDocumentById(driveId, documentId) {
+  try {
+    const document = await reactor.getDocument(driveId, documentId);
+    console.log(`Found document: ${document.name}`);
+    return document;
+  } catch (error) {
+    console.log(`Document with ID ${documentId} not found`);
+    return null;
+  }
+}
+
+// Use the function
+const document = await getDocumentById('drive-123', 'document-456');
+```
+
+We can retrieve a document by slug:
+
+```typescript
+// Get the reactor instance
+const reactor = getDocumentDriveServer();
+
+// Get a document by slug
+async function getDocumentBySlug(slug) {
+  try {
+    const document = await reactor.getDriveBySlug(slug);
+    console.log(`Found document: ${document.name}`);
+    return document;
+  } catch (error) {
+    console.log(`Document with slug ${slug} not found`);
+    return null;
+  }
+}
+
+// Use the function
+const document = await getDocumentBySlug('sprint-planning-q2');
+```
+
+We can get all documents in a drive:
+
+```typescript
+// Get the reactor instance
+const reactor = getDocumentDriveServer();
+
+// Get all documents in a drive
+async function getAllDocumentsInDrive(driveId) {
+  try {
+    // First get the document IDs
+    const documentIds = await reactor.getDocuments(driveId);
+    
+    if (documentIds.length > 0) {
+      console.log(`Found ${documentIds.length} documents in drive`);
+      
+      // Fetch each document's details
+      const documents = await Promise.all(
+        documentIds.map(id => reactor.getDocument(driveId, id))
+      );
+      
+      // Log document information
+      documents.forEach(doc => {
+        console.log(`- ${doc.name} (${doc.documentType})`);
+      });
+      
+      return documents;
+    } else {
+      console.log('No documents found in drive');
+      return [];
+    }
+  } catch (error) {
+    console.error('Error fetching documents:', error);
+    return [];
+  }
+}
+
+// Use the function
+const documents = await getAllDocumentsInDrive('drive-123');
+```
+
