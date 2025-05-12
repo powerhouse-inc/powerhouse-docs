@@ -19,7 +19,7 @@ A supergraph is a GraphQL schema that combines multiple underlying GraphQL APIs,
 
 ## Use the Powerhouse Supergraph
 
-The Powerhouse supergraph for any given remote drive or reactor can be found under http://localhost:4001/graphql. To get to the endpoint open your localhost by starting the reactor and adding `graphql` to the end of the url. The following commands explain how you can test & try the supergraph. 
+The Powerhouse supergraph for any given remote drive or reactor can be found under `http://localhost:4001/graphql`. The gateway / supergraph available on `/graphql` combines all the subgraphs, except for the drive subgraph (which is accessible via `/d/:driveId`). To get to the endpoint open your localhost by starting the reactor and adding `graphql` to the end of the url. The following commands explain how you can test & try the supergraph. 
 
 - Start the reactor:
 

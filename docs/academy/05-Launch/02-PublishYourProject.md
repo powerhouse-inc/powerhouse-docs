@@ -64,7 +64,9 @@ yarn cache list
 ```
 </details>
 
-   > 💡 **Advanced Tip**: For experimental features, use --version [version] which allows selecting a specific branch of our document-model-boilerplate. There are --dev, --staging and --main options. Select `ph init --dev` to use the latest development version. Please be aware that this version can contain bugs and experimental features that aren't fully tested.  
+:::tip
+For experimental features, use --version [version] which allows selecting a specific branch of our document-model-boilerplate. There are --dev, --staging and --main options. Select `ph init --dev` to use the latest development version. Please be aware that this version can contain bugs and experimental features that aren't fully tested.  
+:::
 
 ### 1.1. Specifying your project details
 

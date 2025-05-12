@@ -1,4 +1,4 @@
-# Run Your Powerhouse Project on a Cloud Server
+# Run Your Powerhouse Project on a EC2 instance
 
 ## Tutorial Workflow
 
@@ -64,7 +64,7 @@ Now that we've connected to our Ubuntu instance, we'll need to install the neces
 
 For this, our team has set up a small script that will help you to automate a series of installations.
 
-Base command, which will start installing the necessary services on your server by downloading the install script and running it directly in the bash shell for execution.
+Enter the base command, which will start installing the necessary services on your server by downloading the install script and running it directly in the bash shell for execution.
 
    ```bash
    curl -o- https://raw.githubusercontent.com/powerhouse-inc/powerhouse/refs/heads/main/clis/ph-cli/scripts/setup.sh | bash
@@ -80,7 +80,7 @@ The script contains the following commands and will help you set up a series of 
 
 :::info
 ph-cmd is a tool that helps you manage your Powerhouse projects. It's a command-line interface package that you can install globally on your server and personal machine.
-It gives you access to a series of powerful commands to create or manage your projects, start or stop your services, install your project on a server instance, etc.
+It gives you access to a series of powerful commands to create or manage your projects, start or stop your services, install your project on a server instance, etc. Visit this page to learn more about the [Powerhouse builder tooling](./docs/academy/Create/BuilderTools)
 :::
 
 Let's have a look at the other commands that are part of the script that will help you install the necessary services on your server.
@@ -157,14 +157,62 @@ Now that we've installed the host apps and our project on the server instance, w
 Use the following command to register both Connect and Switchboard as system services:
 
 ```bash
-ph service-startup
+ph service startup
 ```
 
 To remove the services from automatic startup:
 
 ```bash
-ph service-unstartup
+ph service unstartup
 ```
+<details>
+<summary>Read the ph service --help command</summary>
+
+Usage: ph service [options] `<action>` [service]
+
+Manage services
+
+
+Command Overview:
+  The service command manages Powerhouse services, allowing you to start, stop, check status,
+  and more. It provides a centralized way to control the lifecycle of services in your project.
+
+  This command:
+  1. Controls service lifecycle (start, stop, status, etc.)
+  2. Manages multiple services from a single interface
+  3. Provides detailed information about running services
+  4. Uses PM2 under the hood for process management
+
+Arguments:
+  `<action>`              The action to perform. Available actions:
+                        - start: Launch the specified service
+                        - stop: Terminate the specified service
+                        - status: Check the current status of services
+                        - list: List all managed services (default)
+                        - startup: Configure services to start on system boot
+                        - unstartup: Remove services from system startup
+                        
+  [service]             Optional. The service to act upon. Available services:
+                        - switchboard: The document processing engine
+                        - connect: The Connect Studio interface
+                        - all: Act on all services (default)
+
+Examples:
+  $ ph service                               # List all services (same as 'ph service list all')   
+  $ ph service start switchboard             # Start the Switchboard service   
+  $ ph service stop connect                  # Stop the Connect service   
+  $ ph service start all                     # Start all services   
+  $ ph service status                        # Check status of all services   
+  $ ph service startup                       # Configure services to start on system boot   
+  $ ph service unstartup                     # Remove services from system startup   
+
+Notes:
+  - Services are managed using PM2, a process manager for Node.js applications
+  - The 'status' action shows uptime, memory usage, CPU usage, and other metrics
+  - The 'list' action is the default when no action is specified
+  - The 'all' service is the default when no service is specified
+
+  </details>
 
 ### 3.2. Managing individual services
 

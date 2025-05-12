@@ -590,3 +590,68 @@ Check your project's `package.json` and `powerhouse.manifest.json` to ensure the
 - Initializing a Powerhouse Project
 
 </details>
+
+<details>
+<summary>Troubleshooting Document Syncing: Supergraph vs. Drive Endpoints</summary>
+
+# Troubleshooting Document Syncing: Supergraph vs. Drive Endpoints
+
+## Problem Statement
+You've created or modified documents within a specific drive using Powerhouse Connect, but when you query the main GraphQL endpoint (`http://localhost:4001/graphql`), you don't see the changes or the documents you expected. This can lead to confusion about whether data is being synced correctly.
+
+## Prerequisites
+- Powerhouse CLI (`ph-cmd`) installed.
+- A Powerhouse project initialized (`ph init`).
+- The Powerhouse Reactor is running (`ph reactor`).
+- Powerhouse Connect is running (`ph connect`).
+- You have attempted to create or modify documents in a drive (e.g., a "finances" drive).
+
+## Solution
+
+Understanding the different GraphQL endpoints in Powerhouse is crucial for effective troubleshooting:
+
+1.  **The Supergraph Endpoint (`http://localhost:4001/graphql`):**
+    *   This is the main entry point for the supergraph, which combines various subgraphs (e.g., system information, user accounts, etc.).
+    *   While you can query many things here, it's generally **not** the endpoint for direct, real-time document content operations like `pushUpdates` for a specific drive.
+
+2.  **Drive-Specific Endpoints (e.g., `http://localhost:4001/d/<driveId>` or `http://localhost:4001/d/<driveId>/graphql`):**
+    *   Each drive (e.g., "finances", "mydocs") has its own dedicated endpoint.
+    *   Operations that modify or directly interact with the content of a specific drive, such as creating new documents or pushing updates, are typically handled by this endpoint.
+    *   When you interact with documents in Powerhouse Connect, it communicates with these drive-specific endpoints.
+
+**Troubleshooting Steps:**
+
+1.  **Identify the Correct Endpoint:**
+    *   As illustrated in the scenario where a user was looking for documents in a "finances" drive, the key realization was needing to interact with the `http://localhost:4001/d/finances` endpoint for document-specific operations, not just `http://localhost:4001/graphql`.
+
+2.  **Inspect Network Requests:**
+    *   Open your browser's developer tools (usually by pressing F12) and go to the "Network" tab.
+    *   Perform an action in Powerhouse Connect that involves a document (e.g., creating, saving).
+    *   Look for GraphQL requests. You'll often see operations like `pushUpdates`.
+    *   Examine the "Request URL" or "Path" for these requests. You'll likely see they are being sent to a drive-specific endpoint (e.g., `/d/finances`, `/d/powerhouse`).
+    *   The payload might show `operationName: "pushUpdates"`, confirming a document modification attempt.
+
+3.  **Querying Drive Data:**
+    *   If you want to query the state of documents within a specific drive via GraphQL, ensure you are targeting that drive's GraphQL endpoint (often `http://localhost:4001/d/<driveId>/graphql` or through specific queries available on the main supergraph that reference the drive). The exact query structure will depend on your document models.
+
+4.  **Clear Caches and Reset (If Necessary):**
+    *   Sometimes, old state or cached data can cause confusion. As a general troubleshooting step if issues persist:
+        *   Try deleting the `.ph` folder in your user's home directory (`~/.ph`). This folder stores global Powerhouse configurations and cached dependencies. 
+        *   Clear browser storage (localStorage, IndexedDB) for the Connect application.
+
+## Expected Outcome
+- You can correctly identify which GraphQL endpoint to use for different types of queries and operations.
+- You understand that document-specific operations (like creating or updating documents in a drive) are typically handled by drive-specific endpoints.
+- You can use browser developer tools to inspect network requests and confirm which endpoints Powerhouse Connect is using.
+- Documents sync as expected, and you can retrieve their state by querying the appropriate endpoint.
+
+## Common Issues and Solutions
+-   **Issue:** Documents created in Connect don't appear when querying `http://localhost:4001/graphql`.
+    -   **Solution:** You are likely querying the general supergraph. For document-specific data, ensure you are targeting the drive's endpoint (e.g., `http://localhost:4001/d/<driveId>`) or using queries designed to fetch data from specific drives. Inspect Connect's network activity to see the endpoint it uses for `pushUpdates`.
+-   **Issue:** Persistent syncing problems or unexpected behavior after trying the above.
+    -   **Solution:** Consider cleaning the global Powerhouse setup by removing `~/.ph` (and running `ph setup-globals` again) and clearing browser/Connect storage to ensure a fresh start.
+
+
+## Further Reading
+- [Working with Supergraphs](/docs/academy/WorkWithData/WorkingWithSubgraphs/WorkingWithSupergraph)
+</details>
