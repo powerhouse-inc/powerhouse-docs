@@ -14,6 +14,8 @@ Reactor enables applications to work with structured documents in a collaborativ
 
 The Reactor system is built around the concept of documents. Documents are the core data structure that Reactor manages, and they can be organized hierarchically. Documents that hold other documents are called **drives**.
 
+> Note (Prometheus): Simplify
+
 ![Document Management](./images/document-management.svg)
 
 **Operations** are the mechanism by which documents are modified. When a client wants to change a document, it sends operations to the Reactor, which applies them to the document.
@@ -37,6 +39,8 @@ Document models in the Reactor system are themselves documents. This self-descri
 
 When creating a new document, you must specify which document model it follows. The Reactor then ensures that all operations applied to that document conform to the rules defined by its model.
 
+> Note (Prometheus): Document Model is generated from a Document Model Specification
+
 ![Operation Validation](./images/operation-validation.svg)
 
 ## Data Objects
@@ -54,6 +58,8 @@ The core entity representing a **document**. Each document:
 - Maintains a collection of "_scopes_" (more on this later)
 - Stores a specific `documentType` that defines its structure
 
+> Note: Add branch concept.
+
 #### Drive
 
 Drives are themselves documents that also have a collection of documents:
@@ -65,7 +71,7 @@ Drives are themselves documents that also have a collection of documents:
 
 Operations represent changes to documents:
 
-- Each operation is applied to a specific `document` and `scope`
+- Each operation is applied to a specific `document`, `scope`, and `branch`
 - Operations are ordered sequentially with indexing
 - They contain the input data that represents the parameters for the intended change
 - Operations are used to rebuild document state and track history
@@ -86,7 +92,10 @@ The architecture consists of several key components:
 6. **Listeners**: Monitor for changes and facilitate real-time updates.
 7. **Synchronization**: Coordinates document state across distributed systems.
 
-### Usage (Graph API)
+### Usage (GraphQL API)
+
+> Note (Prometheus): Prerequisites, like gql install.
+> Note (Prometheus): Show GQL next to Typescript in Docusaurus.
 
 The GraphQL API is the primary way to interact with the Reactor when it's running as a service. This API provides a standardized interface for client applications.
 
@@ -172,6 +181,8 @@ async function useModelIfSupported() {
 ```
 
 Next, we can create a new document:
+
+> Note (Prometheus): +branch, scope
 
 ```typescript
 import { gql } from '@apollo/client';
@@ -367,6 +378,8 @@ async function fetchAllDriveDocuments() {
 ```
 
 ### Usage (TypeScript)
+
+> Note (Prometheus): Just need a list of functions and their return types (do this FIRST).
 
 For applications that embed the Reactor directly, the TypeScript API provides direct access to the document drive server.
 

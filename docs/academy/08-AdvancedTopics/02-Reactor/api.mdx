@@ -1,0 +1,240 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs>
+<TabItem value="js" label="Typescript">
+
+```typescript
+/**
+ * Retrieves a list of document model specifications
+ *
+ * @param namespace - Optional namespace like "powerhouse" or "sky", defaults to ""
+ * @returns List of document models
+ */
+getDocumentModels(namespace?: string): Promise<DocumentModelState[]>;
+
+/**
+ * Retrieves a specific PHDocument
+ *
+ * @param identifier - Required, this is either a document "id" field or a "slug"
+ * @param branch - Optional branch, defaults to "main"
+ * @param scopes - Optional list of scopes to populate, defaults to ["global"]
+ * @returns The up-to-date PHDocument with scopes and list of child document ids
+ */
+get<TDocument extends PHDocument>(
+  identifier: string,
+  branch?: string,
+  scopes?: string[],
+): Promise<{
+  document: TDocument;
+  childIds?: string[];
+}>;
+
+/**
+ * Filters documents by criteria and returns a list of them
+ *
+ * @param options - Search options
+ * @param options.limit - Optional limit, defaults to 25
+ * @param options.cursor - Optional cursor for pagination
+ * @param options.type - Optional filter by document type
+ * @param options.parentId - Optional filter by parent document id
+ * @param options.identifiers - Optional filter by list of identifiers (ids or slugs)
+ * @returns List of documents matching criteria and pagination cursor
+ */
+find(options?: {
+  limit?: number;
+  cursor?: string;
+  type?: string;
+  parentId?: string;
+  identifiers?: string[];
+}): Promise<{
+  documents: PHDocument[];
+  nextCursor?: string;
+}>;
+
+/**
+ * Creates a document
+ *
+ * @param input - Document creation input
+ * @param input.document - Document with optional id, slug, parent, model type, and initial state
+ * @returns The job id
+ */
+create(input: {
+  document: PHDocument,
+}): Promise<string>;
+
+/**
+ * Deletes a set of documents
+ *
+ * @param input - Document deletion input
+ * @param input.identifiers - List of document identifiers (ids or slugs)
+ * @param input.propagationMode - Optional mode for handling children, CASCADE deletes child documents
+ * @returns List of affected document ids
+ */
+deleteDocuments(input: {
+  identifiers: string[];
+  propagationMode?: "CASCADE" | "RESTRICT";
+}): Promise<string[]>;
+
+/**
+ * Applies a list of operations to a document
+ *
+ * @param input - Operations input
+ * @param input.documentId - Target document id
+ * @param input.branch - Optional branch, defaults to "main"
+ * @param input.scope - Optional scope, defaults to ["global"]
+ * @param input.operations - List of operations to apply
+ * @returns The job id
+ */
+applyOperations(input: {
+  documentId: string;
+  branch?: string;
+  scope?: OperationScope[];
+  operations: Operation[];
+}): Promise<string>;
+
+/**
+ * Adds multiple documents as children to another
+ *
+ * @param input - Child document addition input
+ * @param input.documentIds - List of document ids to add as children
+ * @param input.parentId - Parent document id
+ * @returns The job id
+ */
+addChildren(input: {
+  documentIds: string[];
+  parentId: string;
+}): Promise<string>;
+
+/**
+ * Removes multiple documents as children from another
+ *
+ * @param input - Child document removal input
+ * @param input.documentIds - List of document ids to remove as children
+ * @param input.parentId - Parent document id
+ * @returns The job id
+ */
+removeChildren(input: {
+  documentIds: string[];
+  parentId: string;
+}): Promise<string>;
+
+/**
+ * Retrieves the status of a job
+ *
+ * @param jobId - The job id
+ * @returns The job status and optional error message
+ */
+getJobStatus(jobId: string): Promise<{
+  status: "PENDING" | "PROCESSING" | "COMPLETED" | "FAILED";
+  error?: string;
+}>;
+```
+
+</TabItem>
+<TabItem value="gql" label="GraphQL">
+
+```graphql
+query GetDocumentModels($namespace: String) {
+  documentModels(namespace: $namespace) {
+    id
+    name
+    schema
+  }
+}
+
+query GetDocument($identifier: String!, $branch: String, $scopes: [String]) {
+  document(
+    identifier: $identifier
+    branch: $branch
+    scopes: $scopes
+  ) {
+    document {
+      id
+      slug
+      type
+    }
+    children {
+      id
+      slug
+      type
+    }
+  }
+}
+
+query FindDocuments($limit: Int, $cursor: String, $type: String, $parentId: String, $identifiers: [String]) {
+  documents(
+    limit: $limit
+    cursor: $cursor
+    type: $type
+    parentId: $parentId
+    identifiers: $identifiers
+  ) {
+    documents {
+      id
+      slug
+      type
+    }
+    nextCursor
+  }
+}
+
+query GetJobStatus($jobId: String!) {
+  jobStatus(jobId: $jobId) {
+    status
+    error
+  }
+}
+
+mutation CreateDocument($document: PHDocumentInput!) {
+  createDocument(input: { document: $document }) {
+    jobId
+  }
+}
+
+mutation DeleteDocuments($identifiers: [String!]!, $propagationMode: PropagationMode) {
+  deleteDocuments(input: { 
+    identifiers: $identifiers
+    propagationMode: $propagationMode 
+  }) {
+    affectedDocumentIds
+  }
+}
+
+mutation ApplyOperations($documentId: String!, $branch: String, $scope: [OperationScope], $operations: [OperationInput!]!) {
+  applyOperations(input: {
+    documentId: $documentId
+    branch: $branch
+    scope: $scope
+    operations: $operations
+  }) {
+    jobId
+  }
+}
+
+mutation AddChildren($documentIds: [String!]!, $parentId: String!) {
+  addChildren(input: {
+    documentIds: $documentIds
+    parentId: $parentId
+  }) {
+    jobId
+  }
+}
+
+mutation RemoveChildren($documentIds: [String!]!, $parentId: String!) {
+  removeChildren(input: {
+    documentIds: $documentIds
+    parentId: $parentId
+  }) {
+    jobId
+  }
+}
+
+enum PropagationMode {
+  CASCADE
+  RESTRICT
+}
+```
+
+</TabItem>
+</Tabs>
