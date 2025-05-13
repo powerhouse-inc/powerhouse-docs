@@ -29,8 +29,8 @@ chmod +x install-tools.sh
 4. Choose a version when prompted:
    - `dev`: Development version - Use this for testing new features or development work
    - `staging`: Staging version - Use this for pre-production testing
-   - `latest`: Latest stable version - Recommended for production environments
-   - Press Enter for latest version
+   - RECOMMENDED: `latest`: Latest stable version - Recommended for production environments
+   - Press Enter to go ahead with the latest version
 
 5. After installation, source your shell configuration:
 ```bash
@@ -65,13 +65,13 @@ chmod +x setup-environment.sh
 
 3. Follow the interactive prompts:
 
-#### Package Installation
+### Package Installation
 During the package installation phase, you'll be prompted to enter package names that you want to install. For example, you might want to install `@sky-ph/atlas` or other Powerhouse packages. This step is crucial for adding the specific functionality you need to your Powerhouse installation. You can press Enter to skip this step if you don't need to install any packages immediately, but you can always install packages later using the `ph install` command.
 
-#### Database Configuration
+### Database Configuration
 The script offers two options for database configuration. The first option sets up a local PostgreSQL database, which is ideal for development or small deployments. It automatically creates a database user with a secure random password and configures the database to accept local connections. This option is perfect for getting started quickly or for development environments. The second option allows you to connect to a remote PostgreSQL database by providing a connection URL in the format `postgres://user:password@host:port/db`. This is recommended for production environments where you might want to use a managed database service or a dedicated database server.
 
-#### SSL Configuration
+### SSL Configuration
 For SSL configuration, you have two choices. The **Let's Encrypt** option is recommended for production environments. It requires you to provide a base domain (like `powerhouse.xyz`) and optional subdomains for your services. The script will automatically obtain and configure SSL certificates for your domains, ensuring secure communication between your services and clients. The self-signed certificate option is suitable for development or testing environments. It uses your machine's hostname and generates a self-signed certificate, configuring the services with appropriate base paths. While this option is convenient for development, browsers will show security warnings, which is why it's not recommended for production use.
 
 ### Service Configuration
@@ -80,6 +80,44 @@ The script takes care of all the necessary service configuration automatically. 
 
 ### Security Features
 Security is a top priority in the setup process. The script implements automatic SSL certificate management, generates secure database passwords, and configures security headers in Nginx. It also sets up proper proxy settings to support WebSocket connections securely. The security headers include protection against common web vulnerabilities, and the SSL configuration uses modern cipher suites and protocols. The script also ensures that sensitive files and directories have appropriate permissions.
+
+### Manual configuration of your cloud provider
+
+<details>
+<summary>Setting up a domain in DigitalOcean</summary>
+
+1. **Navigate to Networking:**
+   - Go to the DigitalOcean Control Panel and select "Networking" from the sidebar.
+
+2. **Select Your Project:**
+   - Choose the relevant project (e.g., `firstproject`).
+
+3. **Add a Domain:**
+   - Enter your domain name (e.g., `powerhouse.web3.berlin`) and add it to your project if you haven't already.
+
+4. **Create DNS Records:**
+   - Under the "Create new record" section, add the required DNS records:
+     - **A Record:**
+       - Hostname: `@` or subdomain (e.g., `connect` or `switchboard`)
+       - Will Direct To: Your server's public IP address (e.g., `209.38.216.121`)
+       - TTL: Default (e.g., `3600` seconds)
+     - **NS Records:**
+       - Provided by DigitalOcean (e.g., `ns1.digitalocean.com`, `ns2.digitalocean.com`, `ns3.digitalocean.com`).
+       - Ensure these are set at your domain registrar if DigitalOcean is not your registrar.
+
+5. **Verify DNS Propagation:**
+   - Use tools like `dig` or online DNS checkers to confirm your records are live.
+
+6. **Update Nameservers (if needed):**
+   - If your domain is registered elsewhere, update the nameservers to point to DigitalOcean's NS records.
+
+7. **Wait for Propagation:**
+   - DNS changes may take some time (up to 48 hours) to propagate globally.
+
+<!-- Placeholder: Add screenshots or more detailed steps as needed for your specific setup. -->
+
+</details>
+
 
 ## 3. Verifying the Setup
 
@@ -114,7 +152,10 @@ Once everything is set up, you can access your services through the configured d
 
 ## 5. Troubleshooting
 
-When issues arise, there are several common problems you might encounter. The "ph: command not found" error usually means you need to source your shell configuration file. Nginx configuration errors can be investigated through the error logs, and service issues can be diagnosed using PM2 logs. SSL certificate problems often relate to DNS settings or certificate paths. Understanding these common issues and their solutions will help you maintain a stable Powerhouse installation.
+When issues arise, there are several common problems you might encounter. 
+- The "ph: command not found" error usually means you need to source your shell configuration file. 
+- Nginx configuration errors can be investigated through the error logs, and service issues can be diagnosed using PM2 logs. 
+- SSL certificate problems often relate to DNS settings or certificate paths. Understanding these common issues and their solutions will help you maintain a stable Powerhouse installation.
 
 ### Common Issues:
 1. **"ph: command not found"**
