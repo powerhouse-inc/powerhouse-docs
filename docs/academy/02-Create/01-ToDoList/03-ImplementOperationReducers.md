@@ -2,7 +2,7 @@
 
 In this section, we will implement and test the operation reducers for the **ToDoList** document model. In order to do this, you have to export the document model from the Connect application and import it into your powerhouse project directory. 
 
-To export the document model, follow the steps in the [Define ToDoList Document Model](./docs/academy/Create/ToDoList/DefineToDoListDocumentModel) section.
+To export the document model, follow the steps in the [Define ToDoList Document Model](/docs/academy/Create/ToDoList/DefineToDoListDocumentModel) section.
 
 ## Understanding Reducers in Document Models
 

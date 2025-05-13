@@ -80,7 +80,7 @@ The script contains the following commands and will help you set up a series of 
 
 :::info
 ph-cmd is a tool that helps you manage your Powerhouse projects. It's a command-line interface package that you can install globally on your server and personal machine.
-It gives you access to a series of powerful commands to create or manage your projects, start or stop your services, install your project on a server instance, etc. Visit this page to learn more about the [Powerhouse builder tooling](./docs/academy/Create/BuilderTools)
+It gives you access to a series of powerful commands to create or manage your projects, start or stop your services, install your project on a server instance, etc. Visit this page to learn more about the [Powerhouse builder tooling](/docs/academy/Create/BuilderTools)
 :::
 
 Let's have a look at the other commands that are part of the script that will help you install the necessary services on your server.
