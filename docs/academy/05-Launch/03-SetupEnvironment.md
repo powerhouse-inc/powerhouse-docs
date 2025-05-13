@@ -118,6 +118,87 @@ Security is a top priority in the setup process. The script implements automatic
 
 </details>
 
+<details>
+<summary>Setting up a domain with AWS EC2</summary>
+
+1. **Prepare your EC2 Instance:**
+   - **Elastic IP Address:**
+     - Allocate an Elastic IP address from the EC2 console
+     - Associate it with your EC2 instance
+     - Note: AWS charges for Elastic IPs that are not associated with running instances
+   
+   - **Security Groups:**
+     - Configure security groups to allow:
+       - HTTP (Port 80)
+       - HTTPS (Port 443)
+       - Any other required ports for your application
+     - Consider restricting access to specific IP ranges for administrative ports
+
+   - **Web Server Configuration:**
+     - Install and configure your web server (Nginx/Apache)
+     - Ensure it's listening on the correct ports
+     - Configure virtual hosts if needed
+
+2. **Configure Route 53:**
+   - **Create a Hosted Zone:**
+     - Go to Route 53 console
+     - Click "Create Hosted Zone"
+     - Enter your domain name
+     - Note the nameservers provided
+
+   - **Create DNS Records:**
+     - **A Record:**
+       - Type: A
+       - Name: @ (for root domain) or subdomain
+       - Value: Your Elastic IP address
+       - TTL: 300 (or your preferred value)
+     
+     - **Alias Record (Optional):**
+       - Type: A
+       - Name: www (or other subdomain)
+       - Alias: Yes
+       - Route traffic to: Your EC2 instance's DNS name
+
+3. **Update Domain Registrar:**
+   - Log in to your domain registrar
+   - Locate the nameserver settings
+   - Replace existing nameservers with Route 53 nameservers
+   - Save changes
+
+4. **SSL/TLS Configuration:**
+   - **Option 1: AWS Certificate Manager (Recommended)**
+     - Request a certificate in ACM
+     - Validate domain ownership
+     - Configure your web server to use the certificate
+   
+   - **Option 2: Let's Encrypt**
+     - Install certbot
+     - Obtain and configure certificates
+     - Set up auto-renewal
+
+5. **Verify Setup:**
+   - Check DNS propagation using tools like `dig` or `nslookup`
+   - Test website accessibility
+   - Verify SSL certificate installation
+   - Monitor Route 53 health checks if configured
+
+6. **Best Practices:**
+   - Set up Route 53 health checks for monitoring
+   - Configure CloudWatch alarms for instance monitoring
+   - Implement proper backup strategies
+   - Consider using AWS WAF for additional security
+   - Set up proper logging and monitoring
+
+7. **Troubleshooting:**
+   - Check security group settings
+   - Verify web server configuration
+   - Ensure proper DNS propagation
+   - Check SSL certificate validity
+   - Review CloudWatch logs for issues
+
+Remember: DNS changes can take up to 48 hours to propagate globally, though typically it's much faster (15-30 minutes).
+
+</details>
 
 ## 3. Verifying the Setup
 
