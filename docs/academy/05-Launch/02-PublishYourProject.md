@@ -66,9 +66,25 @@ yarn cache list
 ```
 </details>
 
-:::tip
-For experimental features, use --version [version] which allows selecting a specific branch of our document-model-boilerplate. There are --dev, and --staging options. Select `ph init --dev` to use the latest development version. Please be aware that this version can contain bugs and experimental features that aren't fully tested.  
-:::
+<details>
+<summary> How to make use of different branches? </summary>
+
+When installing or using the Powerhouse CLI commands you are able to make use of the dev & staging branches. These branches contain more experimental features then the latest stable release the PH CLI uses by default. They can be used to get access to a bugfix or features under development.
+
+| Command | Description |
+|---------|-------------|
+| **pnpm install -g ph-cmd** | Install latest stable version |
+| **pnpm install -g ph-cmd@dev** | Install development version |
+| **pnpm install -g ph-cmd@staging** | Install staging version |
+| **ph init** | Use latest stable version of the boilerplate |
+| **ph init --dev** | Use development version of the boilerplate |
+| **ph init --staging** | Use staging version of the boilerplate |
+| **ph use** | Switch all dependencies to latest production versions |
+| **ph use dev** | Switch all dependencies to development versions |
+| **ph use prod** | Switch all dependencies to production versions |
+
+Please be aware that these versions can contain bugs and experimental features that aren't fully tested.
+</details>
 
 ### 1.1. Specifying your project details
 

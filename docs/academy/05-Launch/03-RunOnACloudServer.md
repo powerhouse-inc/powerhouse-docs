@@ -79,8 +79,28 @@ The script contains the following commands and will help you set up a series of 
 - **pnpm**: Fast, disk-space-efficient package manager
 
 :::info
-ph-cmd is a tool that helps you manage your Powerhouse projects. It's a command-line interface package that you can install globally on your server and personal machine.
-It gives you access to a series of powerful commands to create or manage your projects, start or stop your services, install your project on a server instance, etc. Visit this page to learn more about the [Powerhouse builder tooling](/docs/academy/Create/BuilderTools)
+ph-cmd is a tool that helps you manage your Powerhouse projects. It's a command-line interface package that you can install globally on your server and personal machine. It gives you access to a series of powerful commands to create or manage your projects, start or stop your services, install your project on a server instance, etc. Visit this page to learn more about the [Powerhouse builder tooling](/docs/academy/Create/BuilderTools)
+
+<details>
+<summary> How to make use of different branches? </summary>
+
+When installing or using the Powerhouse CLI commands you are able to make use of the dev & staging branches. These branches contain more experimental features then the latest stable release the PH CLI uses by default. They can be used to get access to a bugfix or features under development.
+
+| Command | Description |
+|---------|-------------|
+| **pnpm install -g ph-cmd** | Install latest stable version |
+| **pnpm install -g ph-cmd@dev** | Install development version |
+| **pnpm install -g ph-cmd@staging** | Install staging version |
+| **ph init** | Use latest stable version of the boilerplate |
+| **ph init --dev** | Use development version of the boilerplate |
+| **ph init --staging** | Use staging version of the boilerplate |
+| **ph use** | Switch all dependencies to latest production versions |
+| **ph use dev** | Switch all dependencies to development versions |
+| **ph use prod** | Switch all dependencies to production versions |
+
+Please be aware that these versions can contain bugs and experimental features that aren't fully tested.
+</details>
+
 :::
 
 Let's have a look at the other commands that are part of the script that will help you install the necessary services on your server.
