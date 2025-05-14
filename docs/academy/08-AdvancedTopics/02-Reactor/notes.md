@@ -2,20 +2,7 @@
 
 ## Overview
 
-```mermaid
-graph TD
-    A[Client Application] --> B[IReactorClient]
-    A --> C[GraphQL API]
-    B --> D[IReactor]
-    C --> D
-    D --> E[Document Storage]
-    
-    classDef component fill:#f9f,stroke:#333,stroke-width:2px;
-    classDef interface fill:#bbf,stroke:#333,stroke-width:2px;
-    
-    class B,C interface;
-    class D component;
-```
+![Reactor](./images/reactor.svg)
 
 - **IReactor**: The core server component that provides a simple, asynchronous interface for document operations. It uses a job-based approach where operations return a job ID and status that can be tracked to completion.
 
