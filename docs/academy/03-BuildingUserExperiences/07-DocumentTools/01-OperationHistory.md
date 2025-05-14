@@ -36,28 +36,28 @@ The document's state at any time is the result of running those operations in or
 ## Visualizing Operations History
 
 ### Revision List and Details
-In Connect the Powerhouse UI displays a chronologic timeline of all applied modifications to the document, each with a unique event ID, state hash, and commit message. You can inspect each revision for signatures and errors.
+In Connect the Powerhouse UI displays a chronologic list of all applied modifications to the document, each with a unique event ID, state hash, and commit message. You can inspect each revision for signatures and errors.
 
-![Revision History List](../../images/revision-history-list.png)
+![Revision History List](./images/revision-history-list.png)
 
 
 ### Viewing Revision Hashes and Event IDs
 Hovering over a revision reveals its event ID and state hash, providing traceability for every change.
 
-![Revision Hash Popup](../../images/revision-hash-popup.png)
+![Revision Hash Popup](./images/revision-hash-popup.png)
 
 
 ### Signature Verification
 Clicking the signature badge shows signature details, including signer address, hash, and verification status. This ensures every operation is cryptographically auditable.
-Read more about how we are using [Renown](docs/renown/intro) for authentication & verification of signer data. 
+Read more about how we are using [Renown](/docs/renown/intro) for authentication & verification of signer data. 
 
-![Signature Details Popup](../../images/signature-details-popup.png)
+![Signature Details Popup](./images/signature-details-popup.png)
 
 
 ### Viewing Committer Addresses
 You can also view the committer's address for each revision, supporting full transparency and accountability.
 
-![Committer Address Popup](../../images/committer-address-popup.png)
+![Committer Address Popup](./images/committer-address-popup.png)
 
 
 ## Replay, Branch, and Merge (UNDER DEVELOPMENT)
