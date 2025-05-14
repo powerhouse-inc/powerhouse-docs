@@ -77,8 +77,6 @@ const config: Config = {
       indexName: 'staging-powerhouse',
       // Optional: see doc section below
       contextualSearch: true,
-      // Add debug parameters
-      debug: true,
       // Remove external URL regex since we're only searching our own docs
       // externalUrlRegex: 'external\\.com|domain\\.com',
       // Update the path replacement to match your docs structure
@@ -97,8 +95,6 @@ const config: Config = {
         highlightPostTag: '</mark>',
         // Search in specific attributes
         attributesToRetrieve: ['title', 'content', 'tags'],
-        // Add debug parameter
-        debug: true,
       },
       // Enable the search page
       searchPagePath: 'search',
