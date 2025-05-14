@@ -60,8 +60,8 @@ type PagingOptions = {
 type PagedResults<T> = {
   results: T[];
   options: PagingOptions;
-  next: () => Promise<PagedResults<T>>;
   
+  next?: () => Promise<PagedResults<T>>;
   nextCursor?: string;
 }
 
