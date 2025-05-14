@@ -11,7 +11,7 @@
 You need to install the Powerhouse CLI (`ph-cmd`) to create and manage Powerhouse projects.
 
 ## Prerequisites
-- Node.js installed
+- node.js 22 installed
 - pnpm package manager installed
 - Terminal or command prompt access
 
@@ -152,6 +152,84 @@ ph use staging
 - [GraphQL Schema Best Practices](/docs/academy/WorkWithData/GraphQLAtPowerhouse)
 </details>
 
+<details>
+<summary>Using Different Branches in Powerhouse</summary>
+
+# How to Use Different Branches in Powerhouse
+
+## Problem Statement
+You need to access experimental features, bugfixes, or development versions of Powerhouse components that aren't yet available in the stable release.
+
+## Prerequisites
+- Terminal or command prompt access
+- pnpm package manager installed
+- Node.js 22 installed
+
+## Solution
+
+### Step 1: Install CLI with Specific Branch
+Choose the appropriate installation command based on your needs:
+
+```bash
+# For latest stable version
+pnpm install -g ph-cmd
+
+# For development version
+pnpm install -g ph-cmd@dev
+
+# For staging version
+pnpm install -g ph-cmd@staging
+```
+
+### Step 2: Initialize Project with Specific Branch
+When creating a new project, you can specify which branch to use:
+
+```bash
+# Use latest stable version of the boilerplate
+ph init
+
+# Use development version of the boilerplate
+ph init --dev
+
+# Use staging version of the boilerplate
+ph init --staging
+```
+
+### Step 3: Switch Dependencies for Existing Project
+For existing projects, you can switch all dependencies to different versions:
+
+```bash
+# Switch to latest production versions
+ph use
+
+# Switch to development versions
+ph use dev
+
+# Switch to production versions
+ph use prod
+```
+
+## Expected Outcome
+- Access to the specified version of Powerhouse components
+- Ability to test experimental features or bugfixes
+- Project configured with the chosen branch's dependencies
+
+## Common Issues and Solutions
+- Issue: Experimental features not working as expected
+  - Solution: This is normal as these versions may contain untested features. Consider switching back to stable versions if issues persist.
+- Issue: Version conflicts between components
+  - Solution: Ensure all components are using the same branch version. Use `ph use` commands to synchronize versions.
+
+## Related Recipes
+- Installing 'ph-cmd'
+- Updating Your Powerhouse Project Dependencies
+- Setting up or Resetting the Global Powerhouse Configuration
+
+## Further Reading
+- [Powerhouse Builder Tools](/docs/academy/Create/BuilderTools)
+</details>
+PPhphppoppph co
+
 ## Powerhouse Project Recipes
 
 <details>
@@ -269,45 +347,6 @@ The command will output the generated reducer scaffolding code in the designated
 </details>
 
 <details>
-<summary>Using/Switching Between Different Environments for Your Powerhouse Project</summary>
-
-The use command allows you to switch between different environments for your Powerhouse project dependencies.
-
-```bash
-ph use <environment> [localPath]
-``` 
-**Available Environments**
-- latest - Uses the latest stable version of all Powerhouse packages
-- dev - Uses development versions of the packages
-- prod - Uses production versions of the packages
-- local - Uses local versions of the packages from a specified path
-
-**Examples**
-
-#### Switch to latest stable versions
-```bash
-ph use latest
-``` 
-
-#### Switch to development versions
-```bash
-ph use dev
-``` 
-
-#### Use local versions from a specific path
-```bash
-ph use local /path/to/local/packages
-``` 
-
-#### Use a specific package manager
-```bash
-ph use latest --package-manager pnpm
-``` 
-
-[Content to be added]
-</details>
-
-<details>
 <summary>Updating Your Powerhouse Project Dependencies</summary>
 
 ### The Update Command
@@ -395,6 +434,7 @@ You might encounter a browser warning about the self-signed certificate; you may
 - [Powerhouse Builder Tools](/docs/academy/Create/BuilderTools)
 - [GraphQL Schema Best Practices](/docs/academy/WorkWithData/GraphQLAtPowerhouse)
 </details>
+
 
 ## Document & Drive Editor recipes
 

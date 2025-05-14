@@ -9,7 +9,7 @@ If you've already setup git, node, and npm, your most important step is to insta
 
 ## Table of Contents
 - [Prerequisites](#prerequisites)
-- [Installing Node.js](#installing-nodejs)
+- [Installing node.js 22](#installing-nodejs)
   - [For Windows](#for-windows)
   - [For macOS](#for-macos)
   - [For Linux (Ubuntu/Debian)](#for-linux-ubuntudebian)
@@ -26,11 +26,11 @@ If you've already setup git, node, and npm, your most important step is to insta
 
 ## Prerequisites
 
-Before we begin building our Document Model, we need to install some software on your computer. We'll need three main tools: Node.js, which helps us run our code, Visual Studio Code (VS Code), which is where we'll write our code, and Git, which helps us manage our code. Follow the steps below based on your computer's operating system.
+Before we begin building our Document Model, we need to install some software on your computer. We'll need three main tools: node.js 22, which helps us run our code, Visual Studio Code (VS Code), which is where we'll write our code, and Git, which helps us manage our code. Follow the steps below based on your computer's operating system.
 
-### Installing Node.js
+### Installing node.js 22
 
-Node.js is a tool that lets us run our application. Let's install it step by step.
+node.js 22 is a tool that lets us run our application. Let's install it step by step.
 
 #### For Windows:
 1. **Set up PowerShell for running commands:**
@@ -44,8 +44,8 @@ Node.js is a tool that lets us run our application. Let's install it step by ste
    - Type 'A' when prompted to confirm
    - You can now close this window and open PowerShell normally for the remaining steps
 
-2. **Install Node.js:**
-   - Visit the [Node.js official website](https://nodejs.org/)
+2. **Install node.js 22:**
+   - Visit the [node.js 22 official website](https://nodejs.org/)
    - Click the big green button that says "LTS" (this means Long Term Support - it's the most stable version)
    - Once the installer downloads, double-click it to start installation
    - Click "Next" through the installation wizard, leaving all settings at their defaults
@@ -57,9 +57,9 @@ Node.js is a tool that lets us run our application. Let's install it step by ste
    node --version
    pnpm --version
    ```
-   - You should see version numbers appear after each command (e.g., v18.17.0). If you do, congratulations - Node.js is installed!
+   - You should see version numbers appear after each command (e.g., v18.17.0). If you do, congratulations - node.js 22 is installed!
 
-> **Note**: If Node.js commands don't work in VS Code, restart VS Code to refresh environment variables.
+> **Note**: If node.js 22 commands don't work in VS Code, restart VS Code to refresh environment variables.
 
 #### For macOS:
 1. **Install Homebrew:**
@@ -70,7 +70,7 @@ Node.js is a tool that lets us run our application. Let's install it step by ste
    ```
    - Follow any additional instructions that appear
 
-2. **Install Node.js:**
+2. **Install node.js 22:**
    - In the same Terminal window, type this command and press Enter:
    ```bash
    brew install node
@@ -82,7 +82,7 @@ Node.js is a tool that lets us run our application. Let's install it step by ste
    node --version
    pnpm --version
    ```
-   - If you see version numbers, you've successfully installed Node.js!
+   - If you see version numbers, you've successfully installed node.js 22!
 
 #### For Linux (Ubuntu/Debian):
 1. **Open Terminal:**
@@ -94,7 +94,7 @@ Node.js is a tool that lets us run our application. Let's install it step by ste
    sudo apt update
    ```
 
-3. **Install Node.js and npm:**
+3. **Install node.js 22 and npm:**
    ```bash
    sudo apt install nodejs npm
    ```

@@ -71,22 +71,32 @@ const config: Config = {
     image: 'img/docusaurus-social-card.jpg',
     algolia: {
       // The application ID provided by Algolia
-      appId: 'YOUR_APP_ID',
+      appId: '2P4JJIQAAV',
       // Public API key: it is safe to commit it
-      apiKey: 'YOUR_SEARCH_API_KEY',
-      indexName: 'YOUR_INDEX_NAME',
+      apiKey: '0bd7f4aa2b67345a3dff0e2de63075ea',
+      indexName: 'powerhouse-academy',
       // Optional: see doc section below
       contextualSearch: true,
-      // Optional: Specify domains where the navigation should occur through window.location instead on history.push. Useful when our Algolia config crawls multiple documentation sites and we want to navigate with window.location.href to them.
-      externalUrlRegex: 'external\\.com|domain\\.com',
-      // Optional: Replace parts of the item URLs from Algolia. Useful when using the same search index for multiple deployments using a different baseUrl. You can use regexp or string in the `from` param. For example: localhost:3000 vs myCompany.com/docs
+      // Remove external URL regex since we're only searching our own docs
+      // externalUrlRegex: 'external\\.com|domain\\.com',
+      // Update the path replacement to match your docs structure
       replaceSearchResultPathname: {
-        from: '/docs/', // or as RegExp: /\/docs\//
-        to: '/',
+        from: '/docs/academy/',
+        to: '/docs/academy/',
       },
-      // Optional: Algolia search parameters
-      searchParameters: {},
-      // Optional: path for search page that enabled by default (`false` to disable it)
+      // Add some search parameters for better results
+      searchParameters: {
+        // Number of results to show
+        hitsPerPage: 10,
+        // Enable typo tolerance
+        typoTolerance: true,
+        // Enable highlighting
+        highlightPreTag: '<mark>',
+        highlightPostTag: '</mark>',
+        // Search in specific attributes
+        attributesToRetrieve: ['title', 'content', 'tags'],
+      },
+      // Enable the search page
       searchPagePath: 'search',
     },
     navbar: {

@@ -8,7 +8,7 @@ Before you begin, ensure you have a Linux-based system (Ubuntu or Debian recomme
 
 ## 1. Installing Powerhouse CLI
 
-The `install-tools.sh` script provides a streamlined way to install the Powerhouse CLI tool and all its necessary dependencies. This script handles the installation of Node.js, pnpm, and the Powerhouse CLI itself. It's designed to work across different Linux distributions, though it's optimized for Ubuntu and Debian-based systems.
+The `install-tools.sh` script provides a streamlined way to install the Powerhouse CLI tool and all its necessary dependencies. This script handles the installation of node.js 22, pnpm, and the Powerhouse CLI itself. It's designed to work across different Linux distributions, though it's optimized for Ubuntu and Debian-based systems.
 
 ### Installation Steps:
 1. Download the setup script:

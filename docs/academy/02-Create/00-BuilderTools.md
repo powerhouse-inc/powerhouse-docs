@@ -25,6 +25,26 @@ Key commands include:
 This tool will be fundamental on your journey when creating, building, and running Document Models
 
 <details>
+<summary> How to make use of different branches? </summary>
+
+When installing or using the Powerhouse CLI commands you are able to make use of the dev & staging branches. These branches contain more experimental features then the latest stable release the PH CLI uses by default. They can be used to get access to a bugfix or features under development.
+
+| Command | Description |
+|---------|-------------|
+| **pnpm install -g ph-cmd** | Install latest stable version |
+| **pnpm install -g ph-cmd@dev** | Install development version |
+| **pnpm install -g ph-cmd@staging** | Install staging version |
+| **ph init** | Use latest stable version of the boilerplate |
+| **ph init --dev** | Use development version of the boilerplate |
+| **ph init --staging** | Use staging version of the boilerplate |
+| **ph use** | Switch all dependencies to latest production versions |
+| **ph use dev** | Switch all dependencies to development versions |
+| **ph use prod** | Switch all dependencies to production versions |
+
+Please be aware that these versions can contain bugs and experimental features that aren't fully tested.
+</details>
+
+<details>
 
 <summary> How to clean your system of the Powerhouse CLI?</summary>
 
@@ -44,7 +64,7 @@ rm -rf ~/.ph
 
 3. Reinstall the CLI tool (choose one):
 ```bash
-# For the stable version
+# For the latest stable version
 pnpm install -g ph-cmd
 
 # For the staging version
@@ -124,7 +144,7 @@ ph update --force prod
 ph update --package-manager pnpm
 ```
 
-**Key Differences**
+## **Key Differences**
 
 ### **Use command**
 - For switching between different **environments**.
@@ -157,6 +177,8 @@ The Powerhouse Design System is a collection of reusable front-end components ba
 - Consistent UI components across Powerhouse applications
 - Automatic inclusion as a dependency in new Document Model projects
 - Customization options using CSS variables
+
+Read more about the [design system here](docs/academy/BuildingUserExperiences/Reusable-Components/PowerhouseDesignSystem)
 
 ## Reactor Libraries
 ___

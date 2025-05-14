@@ -5,7 +5,7 @@ This tutorial will guide you through creating a new 'Powerhouse project', which 
 
 ## Prerequisites
 - Powerhouse CLI installed: `pnpm install -g ph-cmd`
-- Node.js and pnpm installed
+- node.js 22 and pnpm installed
 - Visual Studio Code (or your preferred IDE)
 - Terminal/Command Prompt access
 

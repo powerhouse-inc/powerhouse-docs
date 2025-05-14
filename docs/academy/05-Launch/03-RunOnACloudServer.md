@@ -72,9 +72,9 @@ Enter the base command, which will start installing the necessary services on yo
 
 The script contains the following commands and will help you set up a series of services on your server.
 
-- **NVM**: Node Version Manager for managing Node.js versions
-- **Node.js**: JavaScript runtime
-- **PM2**: Process manager for Node.js applications
+- **NVM**: Node Version Manager for managing node.js 22 versions
+- **node.js 22**: JavaScript runtime
+- **PM2**: Process manager for node.js 22 applications
 - **ph-cmd**: Powerhouse CLI tool for managing projects.
 - **pnpm**: Fast, disk-space-efficient package manager
 
@@ -100,7 +100,7 @@ Let's have a look at the other commands that are part of the script that will he
    nvm --version
    ```
 
-   #### 4. Install Node.js by using NVM
+   #### 4. Install node.js 22 by using NVM
    ```bash
    nvm install 22
    ```
@@ -207,7 +207,7 @@ Examples:
   $ ph service unstartup                     # Remove services from system startup   
 
 Notes:
-  - Services are managed using PM2, a process manager for Node.js applications
+  - Services are managed using PM2, a process manager for node.js 22 applications
   - The 'status' action shows uptime, memory usage, CPU usage, and other metrics
   - The 'list' action is the default when no action is specified
   - The 'all' service is the default when no service is specified

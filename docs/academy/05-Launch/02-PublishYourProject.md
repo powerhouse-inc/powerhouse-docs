@@ -32,6 +32,8 @@ The Powerhouse CLI (`ph-cmd`) is a command-line interface tool that provides ess
 pnpm install -g ph-cmd
 ``` 
 
+For experimental features, use --version [version] which allows selecting a specific branch of our document-model-boilerplate. There are --dev and --staging options. Select `ph init --dev` to use the latest development version. Please be aware that this version can contain bugs and experimental features that aren't fully tested.  
+
 Key commands include:
 - `ph connect` for running the Connect application locally
 - `ph switchboard` or `ph reactor` for starting the API service
@@ -65,7 +67,7 @@ yarn cache list
 </details>
 
 :::tip
-For experimental features, use --version [version] which allows selecting a specific branch of our document-model-boilerplate. There are --dev, --staging and --main options. Select `ph init --dev` to use the latest development version. Please be aware that this version can contain bugs and experimental features that aren't fully tested.  
+For experimental features, use --version [version] which allows selecting a specific branch of our document-model-boilerplate. There are --dev, and --staging options. Select `ph init --dev` to use the latest development version. Please be aware that this version can contain bugs and experimental features that aren't fully tested.  
 :::
 
 ### 1.1. Specifying your project details
