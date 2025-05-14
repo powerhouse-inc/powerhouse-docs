@@ -74,9 +74,11 @@ const config: Config = {
       appId: '2P4JJIQAAV',
       // Public API key: it is safe to commit it
       apiKey: '0bd7f4aa2b67345a3dff0e2de63075ea',
-      indexName: 'powerhouse-academy',
+      indexName: 'staging-powerhouse',
       // Optional: see doc section below
       contextualSearch: true,
+      // Add debug parameters
+      debug: true,
       // Remove external URL regex since we're only searching our own docs
       // externalUrlRegex: 'external\\.com|domain\\.com',
       // Update the path replacement to match your docs structure
@@ -95,6 +97,8 @@ const config: Config = {
         highlightPostTag: '</mark>',
         // Search in specific attributes
         attributesToRetrieve: ['title', 'content', 'tags'],
+        // Add debug parameter
+        debug: true,
       },
       // Enable the search page
       searchPagePath: 'search',
