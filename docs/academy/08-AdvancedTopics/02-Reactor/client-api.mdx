@@ -1,9 +1,3 @@
-```typescript
-
-const reactor = getMyReactor();
-const client:IReactorClient = new ReactorClient(reactor);
-
-```
 
 ```typescript
 
@@ -33,7 +27,7 @@ interface IReactorClient {
     view?: ViewFilter,
   ): Promise<{
     document: TDocument;
-    childIds?: string[];
+    childIds: string[];
   }>;
 
   /**
@@ -46,6 +40,20 @@ interface IReactorClient {
    */
   getChildren(
     parentIdentifier: string,
+    view?: ViewFilter,
+    paging?: PagingOptions,
+  ): Promise<PagedResults<PHDocument>>;
+
+  /**
+   * Retrieves parents of a document.
+   * 
+   * @param childIdentifier - Required, this is either a document "id" field or a "slug"
+   * @param view - Optional filter containing branch and scopes information
+   * 
+   * @returns The up-to-date PHDocument and paging cursor
+   */
+  getParents(
+    childIdentifier: string,
     view?: ViewFilter,
     paging?: PagingOptions,
   ): Promise<PagedResults<PHDocument>>;
@@ -96,7 +104,7 @@ interface IReactorClient {
    * @param view - Optional filter containing branch and scopes information
    * @returns The updated document
    */
-  addOperations<TDocument extends PHDocument>(
+  mutate<TDocument extends PHDocument>(
     documentIdentifier: string,
     operations: Operation[],
     view?: ViewFilter,
@@ -110,7 +118,7 @@ interface IReactorClient {
    * @param view - Optional filter containing branch and scopes information
    * @returns The job
    */
-  submitOperations<TDocument extends PHDocument>(
+  mutateAsync<TDocument extends PHDocument>(
     documentIdentifier: string,
     operations: Operation[],
     view?: ViewFilter,
@@ -147,13 +155,13 @@ interface IReactorClient {
   /**
    * Removes multiple documents as children from another and waits for completion
    * 
-   * @param parentIdentifiers - Parent document identifiers
+   * @param parentIdentifier - Parent document identifiers
    * @param documentIdentifiers - List of document ids to remove as children
    * @param view - Optional filter containing branch and scopes information
    * @returns The updated parent document
    */
   removeChildren(
-    parentIdentifiers: string,
+    parentIdentifier: string,
     documentIdentifiers: string[],
     view?: ViewFilter,
   ): Promise<PHDocument>;
@@ -161,15 +169,15 @@ interface IReactorClient {
   /**
    * Moves multiple documents from one parent to another and waits for completion
    * 
-   * @param sourceParentId - Source parent document id or slug
-   * @param targetParentId - Target parent document id or slug
+   * @param sourceParentIdentifier - Source parent document id or slug
+   * @param targetParentIdentifier - Target parent document id or slug
    * @param documentIdentifiers - List of document identifiers to move
    * @param view - Optional filter containing branch and scopes information
    * @returns The updated source and target documents
    */
   moveChildren(
-    sourceParentId: string,
-    targetParentId: string,
+    sourceParentIdentifier: string,
+    targetParentIdentifier: string,
     documentIdentifiers: string[],
     view?: ViewFilter,
   ): Promise<{
@@ -196,7 +204,7 @@ interface IReactorClient {
    * @param propagate - Optional mode for handling children, CASCADE deletes child documents
    * @returns a promise, resolving on deletion confirmation
    */
-  deleteDocument(
+  deleteDocuments(
     identifiers: string[],
     propagate?: PropagationMode,
   ): Promise<void>;
@@ -217,3 +225,5 @@ interface IReactorClient {
    */
   waitForJob(jobId: string | JobId): Promise<JobId>;
 }
+
+```

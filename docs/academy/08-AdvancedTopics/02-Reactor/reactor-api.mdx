@@ -1,0 +1,220 @@
+
+```typescript
+
+/**
+ * The status of a job.
+ */
+enum JobStatus {
+  Success = "success",
+  Error = "error",
+  Pending = "pending",
+}
+
+/**
+ * Enum that determines deletion propagation.
+ */
+enum PropagationMode {
+  None = "none",
+  Cascade = "cascade"
+}
+
+/**
+ * Describes the current state of a job.
+ */
+type JobId = {
+  id: string;
+  status: JobStatus;
+  error?: string;
+}
+
+/**
+ * Describe the view of a set of documents.
+ */
+type ViewFilter = {
+  branch?: string;
+  scopes?: string[];
+  headerOnly?: boolean;
+}
+
+/**
+ * Describes filter options for searching documents.
+ */
+type SearchFilter = {
+  type?: string;
+  parentId?: string;
+  ids?: string[];
+  slugs?: string[];
+}
+
+/**
+ * Describes the options for paging.
+ */
+type PagingOptions = {
+  cursor: string;
+  limit?: number;
+}
+
+/**
+ * The paged result.
+ */
+type PagedResults<T> = {
+  results: T[];
+  options: PagingOptions;
+  next: () => Promise<PagedResults<T>>;
+  
+  nextCursor?: string;
+}
+
+interface IReactor {
+
+  /**
+   * Retrieves a list of document model specifications
+   *
+   * @param namespace - Optional namespace like "powerhouse" or "sky", defaults to ""
+   * @returns List of document models
+   */
+  getDocumentModels(
+    namespace?: string,
+    paging?: PagingOptions,
+  ): Promise<PagedResults<DocumentModelState>>;
+
+  /**
+   * Retrieves a specific PHDocument by id
+   *
+   * @param id - Required, this is the document id
+   * @param view - Optional filter containing branch and scopes information
+   * @returns The up-to-date PHDocument with scopes and list of child document ids
+   */
+  get<TDocument extends PHDocument>(
+    id: string,
+    view?: ViewFilter,
+  ): Promise<{
+    document: TDocument;
+    childIds: string[];
+  }>;
+
+  /**
+   * Retrieves a specific PHDocument by slug
+   *
+   * @param slug - Required, this is the document slug
+   * @param view - Optional filter containing branch and scopes information
+   * @returns The up-to-date PHDocument with scopes and list of child document ids
+   */
+  getBySlug<TDocument extends PHDocument>(
+    slug: string,
+    view?: ViewFilter,
+  ): Promise<{
+    document: TDocument;
+    childIds: string[];
+  }>;
+
+  /**
+   * Resolves a list of ids from a list of slugs.
+   * 
+   * @param slugs - Required, the list of document slugs
+   * @param view - Optional filter containing branch and scopes information
+   * @returns The parallel list of ids
+   */
+  resolveIds(
+    slugs: string[],
+    view?: ViewFilter,
+  ): Promise<string[]>;
+
+  /**
+   * Resolves a list of ids from a list of ids.
+   * 
+   * @param ids - Required, the list of document ids
+   * @param view - Optional filter containing branch and scopes information
+   * @returns The parallel list of slugs
+   */
+  resolveSlugs(
+    slugs: string[],
+    view?: ViewFilter,
+  ): Promise<string[]>;
+
+  /**
+   * Filters documents by criteria and returns a list of them
+   *
+   * @param search - Search filter options (type, parentId, identifiers)
+   * @param view - Optional filter containing branch and scopes information
+   * @param paging - Optional pagination options
+   * @returns List of documents matching criteria and pagination cursor
+   */
+  find(
+    search: SearchFilter,
+    view?: ViewFilter,
+    paging?: PagingOptions,
+  ): Promise<PagedResults<PHDocument>>;
+
+  /**
+   * Creates a document
+   *
+   * @param document - Document with optional id, slug, parent, model type, and initial state
+   * @returns The job status
+   */
+  create(document: PHDocument): Promise<JobStatus>;
+
+  /**
+   * Deletes a document
+   *
+   * @param id - Document id
+   * @param propagate - Optional mode for handling children, CASCADE deletes child documents
+   * @returns The job id and status
+   */
+  deleteDocument(
+    id: string,
+    propagate?: PropagationMode,
+  ): Promise<JobId>;
+
+  /**
+   * Applies a list of operations to a document
+   *
+   * @param id - Document id
+   * @param operations - List of operations to apply
+   * @param view - Optional filter containing branch and scopes information
+   * @returns The job id and status
+   */
+  mutate(
+    id: string,
+    operations: Operation[],
+    view?: ViewFilter,
+  ): Promise<JobId>;
+
+  /**
+   * Adds multiple documents as children to another
+   *
+   * @param parentId - Parent document id
+   * @param documentIds - List of document ids to add as children
+   * @param view - Optional filter containing branch and scopes information
+   * @returns The job id and status
+   */
+  addChildren(
+    parentId: string,
+    documentIds: string[],
+    view?: ViewFilter,
+  ): Promise<JobId>;
+
+  /**
+   * Removes multiple documents as children from another
+   *
+   * @param parentId - Parent document id
+   * @param documentIds - List of document ids to remove as children
+   * @param view - Optional filter containing branch and scopes information
+   * @returns The job id and status
+   */
+  removeChildren(
+    parentId: string,
+    documentIds: string[],
+    view?: ViewFilter,
+  ): Promise<JobId>;
+
+  /**
+   * Retrieves the status of a job
+   *
+   * @param jobId - The job id
+   * @returns The job status
+   */
+  getJobStatus(jobId: string): Promise<JobId>;
+}
+
+```
