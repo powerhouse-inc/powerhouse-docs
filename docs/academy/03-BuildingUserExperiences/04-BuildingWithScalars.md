@@ -1,4 +1,4 @@
-# Building with Scalars
+# Build with Scalars
 
 Scalars are here to help you define custom fields in your document model schema and speed up the development process.
 There are two applications of scalar components in the document model workflow:

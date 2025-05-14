@@ -1,4 +1,4 @@
-# Configuring Drives
+# Configure a Drive
 
 A drive in Powerhouse is a container for documents and data. This guide will walk you through the process of configuring and managing drives in your Powerhouse environment.
 

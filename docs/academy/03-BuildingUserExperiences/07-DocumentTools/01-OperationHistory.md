@@ -1,4 +1,4 @@
-# Tutorial: Using Operations History in a Powerhouse Document Model
+# Operations History
 
 ## What Is a Document Model?
 A **document model** in Powerhouse is the core unit for managing business data. Each document (such as an invoice, contributor agreement, or scope of work) is created from a specific document model, which defines:

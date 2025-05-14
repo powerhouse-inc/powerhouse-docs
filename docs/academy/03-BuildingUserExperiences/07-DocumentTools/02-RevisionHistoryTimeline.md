@@ -1,4 +1,4 @@
-# Using the Timeline Feature
+# Revision History Timeline
 
 The timeline feature enables users to view document history and navigate through different revisions of a document. This guide explains how to implement and customize the timeline functionality in your Powerhouse application.
 
