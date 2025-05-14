@@ -78,7 +78,6 @@ const config: Config = {
       // Optional: see doc section below
       contextualSearch: true,
       // Add debug parameters
-      debug: true,
       // Remove external URL regex since we're only searching our own docs
       // externalUrlRegex: 'external\\.com|domain\\.com',
       // Update the path replacement to match your docs structure
@@ -86,7 +85,7 @@ const config: Config = {
         from: '/docs/academy/',
         to: '/docs/academy/',
       },
-      // Add some search parameters for better results
+      // Enhanced search parameters for better results
       searchParameters: {
         // Number of results to show
         hitsPerPage: 10,
@@ -96,9 +95,14 @@ const config: Config = {
         highlightPreTag: '<mark>',
         highlightPostTag: '</mark>',
         // Search in specific attributes
-        attributesToRetrieve: ['title', 'content', 'tags'],
-        // Add debug parameter
-        debug: true,
+        attributesToRetrieve: ['title', 'content', 'tags', 'hierarchy', 'anchor', 'url'],
+        // Enable advanced syntax
+        advancedSyntax: true,
+        // Ignore plurals
+        ignorePlurals: true,
+        // Minimum word size for typos
+        minWordSizefor1Typo: 3,
+        minWordSizefor2Typos: 7
       },
       // Enable the search page
       searchPagePath: 'search',
