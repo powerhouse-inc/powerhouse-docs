@@ -73,7 +73,7 @@ const config: Config = {
       // The application ID provided by Algolia
       appId: '2P4JJIQAAV',
       // Public API key: it is safe to commit it
-      apiKey: '0bd7f4aa2b67345a3dff0e2de63075ea',
+      apiKey: 'b5d796c3c48626f107dabdcb1cd77f29',
       indexName: 'staging-powerhouse',
       // Optional: see doc section below
       contextualSearch: true,
