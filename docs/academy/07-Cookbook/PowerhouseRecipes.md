@@ -2,10 +2,11 @@
 
 ## Powerhouse CLI Recipes
 
-<details>
+<details id="installing-ph-cmd">
 <summary>Installing 'ph-cmd'</summary>
 
-# How to Install Powerhouse CLI
+## How to Install Powerhouse CLI
+---
 
 ## Problem Statement
 You need to install the Powerhouse CLI (`ph-cmd`) to create and manage Powerhouse projects.
@@ -47,18 +48,19 @@ pnpm install -g ph-cmd@<version>
   - Solution: Clean your system using the uninstallation recipe before installing a new version
 
 ## Related Recipes
-- Uninstalling 'ph-cmd'
-- Creating a New Document Model
-- Initializing a Powerhouse Project
+- [Installing 'ph-cmd'](#installing-ph-cmd)
+- [Uninstalling 'ph-cmd'](#uninstalling-ph-cmd)
+- [Setting up or Resetting the Global Powerhouse Configuration](#setting-up-or-resetting-the-global-powerhouse-configuration)
 
 ## Further Reading
 - [Powerhouse Builder Tools](/docs/academy/Create/BuilderTools)
 </details>
 
-<details>
+<details id="uninstalling-ph-cmd">
 <summary>Uninstalling 'ph-cmd'</summary>
 
-# How to Uninstall Powerhouse CLI
+## How to Uninstall Powerhouse CLI
+---
 
 ## Problem Statement
 You want to perform a clean installation of the Powerhouse CLI.
@@ -87,17 +89,20 @@ rm -rf ~/.ph
   - Solution: Uninstall and reinstall the Powerhouse CLI
 
 ## Related Recipes
-- (Details to be added)
+- [Installing 'ph-cmd'](#installing-ph-cmd)
+- [Uninstalling 'ph-cmd'](#uninstalling-ph-cmd)
+- [Setting up or Resetting the Global Powerhouse Configuration](#setting-up-or-resetting-the-global-powerhouse-configuration)
 
 ## Further Reading
 - [Powerhouse Builder Tools](/docs/academy/Create/BuilderTools)
 - [Create A New Powerhouse Project](/docs/academy/Create/ToDoList/CreateNewPowerhouseProject)
 </details>
 
-<details>
+<details id="setting-up-or-resetting-the-global-powerhouse-configuration">
 <summary>Setting up or Resetting the Global Powerhouse Configuration</summary>
 
-# How to Set Up or Reset the Global Powerhouse Configuration
+## How to Set Up or Reset the Global Powerhouse Configuration
+---
 
 ## Problem Statement
 You need to initialize the global Powerhouse configuration for the first time, or reset it to resolve issues or start fresh. This might also involve switching to a specific dependency environment like staging.
@@ -143,19 +148,20 @@ ph use staging
   - Solution: Use `ph use local /path/to/local/packages`.
 
 ## Related Recipes
-- Installing 'ph-cmd'
-- Uninstalling 'ph-cmd'
-- Using/Switching Between Different Environments for Your Powerhouse Project
+- [Installing 'ph-cmd'](#installing-ph-cmd)
+- [Uninstalling 'ph-cmd'](#uninstalling-ph-cmd)
+- [Using Different Branches in Powerhouse](#using-different-branches-in-powerhouse)
 
 ## Further Reading
 - [Powerhouse Builder Tools](/docs/academy/Create/BuilderTools)
 - [GraphQL Schema Best Practices](/docs/academy/WorkWithData/GraphQLAtPowerhouse)
 </details>
 
-<details>
+<details id="using-different-branches-in-powerhouse">
 <summary>Using Different Branches in Powerhouse</summary>
 
-# How to Use Different Branches in Powerhouse
+## How to Use Different Branches in Powerhouse
+---
 
 ## Problem Statement
 You need to access experimental features, bugfixes, or development versions of Powerhouse components that aren't yet available in the stable release.
@@ -221,21 +227,122 @@ ph use prod
   - Solution: Ensure all components are using the same branch version. Use `ph use` commands to synchronize versions.
 
 ## Related Recipes
-- Installing 'ph-cmd'
+- [Installing 'ph-cmd'](#installing-ph-cmd)
 - Updating Your Powerhouse Project Dependencies
-- Setting up or Resetting the Global Powerhouse Configuration
+- [Setting up or Resetting the Global Powerhouse Configuration](#setting-up-or-resetting-the-global-powerhouse-configuration)
 
 ## Further Reading
 - [Powerhouse Builder Tools](/docs/academy/Create/BuilderTools)
 </details>
-PPhphppoppph co
+
+<details id="using-different-package-managers-with-powerhouse">
+<summary>Using Different Package Managers with Powerhouse</summary>
+
+## How to Use Different Package Managers with Powerhouse
+---
+
+## Problem Statement
+You want to use a different package manager (npm, yarn, or bun) instead of pnpm for managing Powerhouse projects and dependencies.
+
+## Prerequisites
+- Node.js 22 installed
+- Your preferred package manager installed (npm, yarn, or bun)
+- Terminal or command prompt access
+
+## Solution
+
+### Step 1: Install the CLI with Your Preferred Package Manager
+Choose the appropriate installation command based on your package manager:
+
+```bash
+# Using npm
+npm install -g ph-cmd
+
+# Using yarn
+yarn global add ph-cmd
+
+# Using bun
+bun install -g ph-cmd
+
+# Using pnpm (default)
+pnpm install -g ph-cmd
+```
+
+### Step 2: Configure PATH for Global Binaries
+For yarn and bun, you need to add their global binary directories to your PATH:
+
+#### For Yarn:
+```bash
+# Add this to your ~/.bashrc, ~/.zshrc, or equivalent
+export PATH="$PATH:$(yarn global bin)"
+```
+
+#### For Bun:
+```bash
+# Add this to your ~/.bashrc, ~/.zshrc, or equivalent
+export PATH="$PATH:$HOME/.bun/bin"
+```
+
+After adding these lines, reload your shell configuration:
+```bash
+source ~/.bashrc  # or source ~/.zshrc
+```
+
+### Step 3: Verify Installation
+Check that the CLI is properly installed and accessible:
+```bash
+ph-cmd --version
+```
+
+### Step 4: Using Different Package Managers in Projects
+When working with Powerhouse projects, you can specify your preferred package manager:
+
+```bash
+# Initialize a project with npm
+ph init --package-manager npm
+
+# Initialize a project with yarn
+ph init --package-manager yarn
+
+# Initialize a project with bun
+ph init --package-manager bun
+
+# Initialize a project with pnpm (preferred default)
+ph init --package-manager pnpm
+```
+
+## Expected Outcome
+- Powerhouse CLI installed and accessible through your preferred package manager
+- Ability to manage Powerhouse projects using your chosen package manager
+- Proper PATH configuration for global binaries
+
+## Common Issues and Solutions
+- Issue: Command not found after installation
+  - Solution: Ensure the global binary directory is in your PATH (especially for yarn and bun)
+  - Solution: Try running the command with the full path to verify installation
+- Issue: Permission errors during installation
+  - Solution: Use `sudo` on Unix-based systems or run as administrator on Windows
+- Issue: Package manager conflicts
+  - Solution: Stick to one package manager per project to avoid lockfile conflicts
+
+## Related Recipes
+- [Installing 'ph-cmd'](#installing-ph-cmd)
+- [Uninstalling 'ph-cmd'](#uninstalling-ph-cmd)
+- [Setting up or Resetting the Global Powerhouse Configuration](#setting-up-or-resetting-the-global-powerhouse-configuration)
+
+## Further Reading
+- [Powerhouse Builder Tools](/docs/academy/Create/BuilderTools)
+- [Yarn Global Installation Guide](https://classic.yarnpkg.com/lang/en/docs/cli/global/)
+- [Bun Installation Guide](https://bun.sh/docs/installation#how-to-add-your-path)
+</details>
 
 ## Powerhouse Project Recipes
 
-<details>
+<details id="initializing-a-new-project-and-document-model">
 <summary>Initializing a New Project & Document Model</summary>
 
-# How to Initialize a new project and document model
+## How to Initialize a new project and document model
+---
 
 ## Problem Statement
 You need to create a new, empty document model within a Powerhouse project using the local Connect application (Studio mode) to represent a workflow of a business process.
@@ -290,7 +397,7 @@ In the "New Document" section at the bottom of the page, click the `DocumentMode
   - Solution: Ensure you have navigated into your local drive within the Connect application first.
 
 ## Related Recipes
-- Initializing a Powerhouse Project (Covered in Powerhouse CLI Recipes)
+- [Initializing a Powerhouse Project](#powerhouse-cli-recipes)
 - Designing a Document Model Schema (WIP)
 - Implementing Document Model Reducers (Details to be added)
 
@@ -299,10 +406,11 @@ In the "New Document" section at the bottom of the page, click the `DocumentMode
 - [GraphQL Schema Best Practices](/docs/academy/WorkWithData/GraphQLAtPowerhouse)
 </details>
 
-<details>
+<details id="generating-reducers-from-a-document-model-file">
 <summary>Generating Reducers from a Document Model File</summary>
 
-# How to Generate Reducers from a Document Model File
+## How to Generate Reducers from a Document Model File
+---
 
 ## Problem Statement
 You have a Powerhouse Document Model defined in a `.phdm` or `.phdm.zip` file and need to generate the corresponding reducer functions for your project.
@@ -338,7 +446,7 @@ The command will output the generated reducer scaffolding code in the designated
 
 
 ## Related Recipes
-- Initializing a New Project & Document Model
+- [Initializing a New Project & Document Model](#initializing-a-new-project-and-document-model)
 - Generating a Document Editor
 
 ## Further Reading
@@ -346,10 +454,13 @@ The command will output the generated reducer scaffolding code in the designated
 
 </details>
 
-<details>
+<details id="updating-your-powerhouse-project-dependencies">
 <summary>Updating Your Powerhouse Project Dependencies</summary>
 
-### The Update Command
+## How to Update Your Powerhouse Project Dependencies
+---
+
+## Problem Statement
 The update command allows you to update your Powerhouse dependencies to their latest versions based on the version ranges specified in your package.json.
 
 ```bash
@@ -378,10 +489,11 @@ ph update --package-manager pnpm
 ```
 </details>
 
-<details>
+<details id="running-connect-with-https-and-a-custom-port">
 <summary>Running Connect with HTTPS and a Custom Port</summary>
 
-# How to Run Connect with HTTPS and a Custom Port
+## How to Run Connect with HTTPS and a Custom Port
+---
 
 ## Problem Statement
 You need to run the local Powerhouse Connect application using HTTPS, possibly on a different port than the default, for scenarios like testing on a remote server (e.g., EC2) or complying with specific network requirements.
@@ -428,7 +540,7 @@ You might encounter a browser warning about the self-signed certificate; you may
   - Solution: Ensure the port is open in any firewalls (on the server and potentially network firewalls). Verify you are using the correct public IP address or hostname of the machine running Connect.
 
 ## Related Recipes
-- Initializing a New Project & Document Model
+- [Initializing a New Project & Document Model](#initializing-a-new-project-and-document-model)
 
 ## Further Reading
 - [Powerhouse Builder Tools](/docs/academy/Create/BuilderTools)
@@ -438,10 +550,11 @@ You might encounter a browser warning about the self-signed certificate; you may
 
 ## Document & Drive Editor recipes
 
-<details>
+<details id="generating-a-document-editor">
 <summary>Generating a Document Editor</summary>
 
-# How to Generate a Document Editor
+## How to Generate a Document Editor
+---
 
 ## Problem Statement
 You have a Powerhouse document model and need to create a user interface (editor) for it to be used within the Connect application.
@@ -474,17 +587,18 @@ ph generate --editor <ModelName> --document-types <docType>
 - You can now customize `editor.tsx` to build your desired UI using HTML, Tailwind CSS, or custom CSS.
 
 ## Related Recipes
-- Initializing a New Project & Document Model
-- Generating a Custom Drive Explorer
+- [Initializing a New Project & Document Model](#initializing-a-new-project-and-document-model)
+- [Generating a Custom Drive Explorer](#generating-a-custom-drive-explorer)
 
 ## Further Reading
 - [Build a Todo-list Editor](/docs/academy/BuildingUserExperiences/BuildToDoListEditor)
 </details>
 
-<details>
+<details id="generating-a-custom-drive-explorer">
 <summary>Generating a Custom Drive Explorer</summary>
 
-# How to Generate a Custom Drive Explorer (Drive App)
+## How to Generate a Custom Drive Explorer
+---
 
 ## Problem Statement
 You need a custom, application-like interface to browse, organize, or interact with specific types of documents stored within a Powerhouse drive, going beyond the standard file listing.
@@ -516,7 +630,7 @@ ph generate --drive-editor <drive-app-name>
 - Remember to update your `powerhouse.manifest.json` to register the new app.
 
 ## Related Recipes
-- Generating a Document Editor
+- [Generating a Document Editor](#generating-a-document-editor)
 
 ## Further Reading
 - [Build a Drive-Explorer](/docs/academy/BuildingUserExperiences/BuildingADriveExplorer)
@@ -524,10 +638,11 @@ ph generate --drive-editor <drive-app-name>
 
 ## Reactor Recipes
 
-<details>
+<details id="starting-the-reactor">
 <summary>Starting the Reactor</summary>
 
-# How to Start the Powerhouse Reactor
+## How to Start the Powerhouse Reactor
+---
 
 ## Problem Statement
 You need to start the Powerhouse Reactor, the local service responsible for processing document model operations and managing state, typically for testing or development purposes.
@@ -563,17 +678,18 @@ ph reactor
   - Solution: Check the `powerhouse.manifest.json` and any reactor-specific configuration files for errors. Ensure storage providers (like local disk) are accessible and configured correctly.
 
 ## Related Recipes
-- Initializing a New Project & Document Model
+- [Initializing a New Project & Document Model](#initializing-a-new-project-and-document-model)
 - Testing with GraphQL (Details to be added)
 
 </details>
 
 ## Package Development Recipes
 
-<details>
+<details id="installing-a-custom-powerhouse-package">
 <summary>Installing a Custom Powerhouse Package</summary>
 
-# How to Install a Custom Powerhouse Package
+## How to Install a Custom Powerhouse Package
+---
 
 ## Problem Statement
 You have developed and published a Powerhouse package (containing document models, editors, etc.) to npm, or you have a local package, and you need to install it into another Powerhouse project.
@@ -626,15 +742,16 @@ Check your project's `package.json` and `powerhouse.manifest.json` to ensure the
   - Solution: Resolve version conflicts or naming collisions as needed. Review the installed package's structure and dependencies.
 
 ## Related Recipes
-- Publishing a Powerhouse Package (Details to be added)
-- Initializing a Powerhouse Project
+- [Publishing a Powerhouse Package](#publishing-a-powerhouse-package)
+- [Initializing a Powerhouse Project](#initializing-a-new-project-and-document-model)
 
 </details>
 
-<details>
+<details id="troubleshooting-document-syncing">
 <summary>Troubleshooting Document Syncing: Supergraph vs. Drive Endpoints</summary>
 
-# Troubleshooting Document Syncing: Supergraph vs. Drive Endpoints
+## Troubleshooting Document Syncing: Supergraph vs. Drive Endpoints
+---
 
 ## Problem Statement
 You've created or modified documents within a specific drive using Powerhouse Connect, but when you query the main GraphQL endpoint (`http://localhost:4001/graphql`), you don't see the changes or the documents you expected. This can lead to confusion about whether data is being synced correctly.
@@ -689,9 +806,6 @@ Understanding the different GraphQL endpoints in Powerhouse is crucial for effec
 -   **Issue:** Documents created in Connect don't appear when querying `http://localhost:4001/graphql`.
     -   **Solution:** You are likely querying the general supergraph. For document-specific data, ensure you are targeting the drive's endpoint (e.g., `http://localhost:4001/d/<driveId>`) or using queries designed to fetch data from specific drives. Inspect Connect's network activity to see the endpoint it uses for `pushUpdates`.
 -   **Issue:** Persistent syncing problems or unexpected behavior after trying the above.
-    -   **Solution:** Consider cleaning the global Powerhouse setup by removing `~/.ph` (and running `ph setup-globals` again) and clearing browser/Connect storage to ensure a fresh start.
-
-
-## Further Reading
-- [Working with Supergraphs](/docs/academy/WorkWithData/WorkingWithSubgraphs/WorkingWithSupergraph)
+    -   **Solution:** Consider cleaning the global Powerhouse setup by removing `~/.ph`
+    
 </details>

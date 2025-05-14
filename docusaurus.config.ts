@@ -84,7 +84,7 @@ const config: Config = {
         from: '/docs/academy/',
         to: '/docs/academy/',
       },
-      // Add some search parameters for better results
+      // Enhanced search parameters for better results
       searchParameters: {
         // Number of results to show
         hitsPerPage: 10,
@@ -94,7 +94,14 @@ const config: Config = {
         highlightPreTag: '<mark>',
         highlightPostTag: '</mark>',
         // Search in specific attributes
-        attributesToRetrieve: ['title', 'content', 'tags'],
+        attributesToRetrieve: ['title', 'content', 'tags', 'hierarchy', 'anchor', 'url'],
+        // Enable advanced syntax
+        advancedSyntax: true,
+        // Ignore plurals
+        ignorePlurals: true,
+        // Minimum word size for typos
+        minWordSizefor1Typo: 3,
+        minWordSizefor2Typos: 7
       },
       // Enable the search page
       searchPagePath: 'search',
