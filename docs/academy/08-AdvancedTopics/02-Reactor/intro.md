@@ -426,21 +426,58 @@ await client.addChildren(
   [workList.id, homeList.id],
 );
 
-// get all my other todos
+// get all my other todos (header only, since we don't need all the data)
 let all = [];
-let next = () => client.find({ type: "task-list" }, { limit: 100 });
+let next = () => client.find(
+  { type: "task-list" },
+  { headerOnly: true },
+  { limit: 100 });
 
 while (next) {
   const { results, next: nextPage } = await next();
-  all.push(...results);
+  all.push(...results.map(r => r.id));
 
   next = nextPage;
 }
 
-// add to this drive
+// Using the new generator-based pagination API (much simpler!)
+all = [];
+
+// This handles the pagination automatically
+for await (const page of client.paginate(
+  () => client.find(
+    { type: "task-list" },
+    { headerOnly: true },
+    { limit: 100 }),
+)) {
+  for (const document of page.results) {
+    all.push(document.id);
+  }
+}
+
+// add to my drive
 await client.addChildren(
   drive.id,
   all,
 );
+
+// branch a document
+const document = await client.branch(workList.id, "sprint/01");
+
+// perform operation
+document = await client.mutate(
+  document.id,
+  [addTodo({ name: "Write Spec" })],
+);
+
+// merge
+await client.merge(
+  document.id,
+  "sprint/01",
+  "main",
+);
+
+
+
 ```
 

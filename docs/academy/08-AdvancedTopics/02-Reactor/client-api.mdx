@@ -1,6 +1,3 @@
-
-```typescript
-
 interface IReactorClient {
   /**
    * Retrieves a list of document model specifications
@@ -224,6 +221,16 @@ interface IReactorClient {
    * @returns The result of the job
    */
   waitForJob(jobId: string | JobId): Promise<JobId>;
-}
 
+  /**
+   * Creates an async iterable for paginated results, handling network requests lazily
+   * 
+   * @param fn - A function that returns a Promise<PagedResults<T>> for any page
+   * @returns AsyncIterable that yields pages of results as they're fetched
+   */
+  paginate<T>(
+    fn: () => Promise<PagedResults<T>>,
+  ): AsyncIterable<PagedResults<T>>;
+}
 ```
+
