@@ -386,193 +386,61 @@ For applications that embed the Reactor directly, the TypeScript API provides di
 First, let's retrieve the supported document models:
 
 ```typescript
-// Get an instance of the document drive server
-const reactor = getDocumentDriveServer();
+const reactor: IReactor = getReactor();
+const client: IReactorClient = new ReactorClient(reactor);
 
-// Retrieve all supported document models
-const documentModelModules = reactor.getDocumentModelModules();
-console.log(`Found ${documentModelModules.length} document models`);
+const { results } = await client.getDocumentModels();
 
-// Log model names and extensions
-documentModelModules.forEach(module => {
-  const model = module.documentModel;
-  console.log(`Model: ${model.name} (.${model.extension})`);
-});
-```
+console.log(`Found ${results.length} document models`);
 
-You can also check if a specific model is supported:
+const model = results.find(m => m.name === "task-list");
 
-```typescript
-// Get the document drive server
-const reactor = getDocumentDriveServer();
-
-// Get all document model modules
-const documentModelModules = reactor.getDocumentModelModules();
-
-// Find a specific model by name
-function isModelSupported(modelName) {
-  const modelModule = documentModelModules.find(
-    module => module.documentModel.name === modelName
-  );
-  
-  if (modelModule) {
-    console.log(`Model ${modelName} is supported`);
-    return true;
-  } else {
-    console.log(`Model ${modelName} is not supported`);
-    return false;
-  }
+if (!model) {
+  console.log(`Model ${modelName} is not supported`);
+  exit(1);
 }
 
-// Check if a model is supported before using it
-if (isModelSupported('markdown-document')) {
-  // Proceed with document creation
-  createMarkdownDocument();
-} else {
-  console.error('Cannot create document: markdown model not supported by this Reactor');
-}
-```
-
-Next, we can create a new document:
-
-```typescript
-// Get the reactor instance
-const reactor = getDocumentDriveServer();
-
-// Create a drive first (if you don't already have one)
-const drive = await reactor.addDrive({
-  name: 'My Project Documents'
-});
-
-// Create a new document with initial state
-const newDocument = await reactor.createDocumentWithState(
-  drive.id,
-  'task-list',
-  {
-    global: {
-      title: 'Q2 Sprint Planning',
-      tasks: []
-    }
-  },
-  { 
-    name: 'Sprint Planning',
-    slug: 'sprint-planning-q2'
-  }
+let workList = await client.create<TaskListDocument>(
+  createDocument({ slug: "work" }),
 );
 
-console.log(`Created document: ${newDocument.id}`);
-```
+console.log(`Created document ${workList.name} with ID ${workList.id}`);
 
-We can subscribe to changes in the document:
+// change the document
+workList = await client.mutate(
+  workList.id,
+  [addTodo({ name: "Call Stephen" })],
+);
 
-```typescript
-// Get the reactor instance
-const reactor = getDocumentDriveServer();
+const { document: homeList } = await client.get<TaskListDocument>("home");
 
-// Listen to document changes
-function subscribeToDocumentChanges(driveId, documentId) {
-  // Set up event listener for document changes
-  const unsubscribe = reactor.on('documentChanged', (event) => {
-    if (event.documentId === documentId) {
-      console.log('Document updated:', event);
-      
-      // Process the document update
-      // e.g., update UI, trigger notifications, etc.
-    }
-  });
-  
-  // Return function to unsubscribe when no longer needed
-  return unsubscribe;
+console.log(`Document ${homeList.name} has ${homeList.state.global.todos.length} todos`);
+
+// put everything in a drive
+const drive = await client.create<DriveDocument>(
+  createDocument({ slug: "mine" }),
+);
+
+await client.addChildren(
+  drive.id,
+  [workList.id, homeList.id],
+);
+
+// get all my other todos
+let all = [];
+let next = () => client.find({ type: "task-list" }, { limit: 100 });
+
+while (next) {
+  const { results, next: nextPage } = await next();
+  all.push(...results);
+
+  next = nextPage;
 }
 
-// Start listening to document changes
-const unsubscribe = subscribeToDocumentChanges('drive-123', 'document-456');
-
-// Later, when no longer needed
-unsubscribe();
-```
-
-We can retrieve a document by ID:
-
-```typescript
-// Get the reactor instance
-const reactor = getDocumentDriveServer();
-
-// Get a document by ID
-async function getDocumentById(driveId, documentId) {
-  try {
-    const document = await reactor.getDocument(driveId, documentId);
-    console.log(`Found document: ${document.name}`);
-    return document;
-  } catch (error) {
-    console.log(`Document with ID ${documentId} not found`);
-    return null;
-  }
-}
-
-// Use the function
-const document = await getDocumentById('drive-123', 'document-456');
-```
-
-We can retrieve a document by slug:
-
-```typescript
-// Get the reactor instance
-const reactor = getDocumentDriveServer();
-
-// Get a document by slug
-async function getDocumentBySlug(slug) {
-  try {
-    const document = await reactor.getDriveBySlug(slug);
-    console.log(`Found document: ${document.name}`);
-    return document;
-  } catch (error) {
-    console.log(`Document with slug ${slug} not found`);
-    return null;
-  }
-}
-
-// Use the function
-const document = await getDocumentBySlug('sprint-planning-q2');
-```
-
-We can get all documents in a drive:
-
-```typescript
-// Get the reactor instance
-const reactor = getDocumentDriveServer();
-
-// Get all documents in a drive
-async function getAllDocumentsInDrive(driveId) {
-  try {
-    // First get the document IDs
-    const documentIds = await reactor.getDocuments(driveId);
-    
-    if (documentIds.length > 0) {
-      console.log(`Found ${documentIds.length} documents in drive`);
-      
-      // Fetch each document's details
-      const documents = await Promise.all(
-        documentIds.map(id => reactor.getDocument(driveId, id))
-      );
-      
-      // Log document information
-      documents.forEach(doc => {
-        console.log(`- ${doc.name} (${doc.documentType})`);
-      });
-      
-      return documents;
-    } else {
-      console.log('No documents found in drive');
-      return [];
-    }
-  } catch (error) {
-    console.error('Error fetching documents:', error);
-    return [];
-  }
-}
-
-// Use the function
-const documents = await getAllDocumentsInDrive('drive-123');
+// add to this drive
+await client.addChildren(
+  drive.id,
+  all,
+);
 ```
 
