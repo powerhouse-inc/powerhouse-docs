@@ -65,23 +65,22 @@ chmod +x setup-environment.sh
 
 3. Follow the interactive prompts:
 
-### Package Installation
+### Step 1: Package Installation
 During the package installation phase, you'll be prompted to enter package names that you want to install. For example, you might want to install `@sky-ph/atlas` or other Powerhouse packages. This step is crucial for adding the specific functionality you need to your Powerhouse installation. You can press Enter to skip this step if you don't need to install any packages immediately, but you can always install packages later using the `ph install` command.
 
-### Database Configuration
-The script offers two options for database configuration. The first option sets up a local PostgreSQL database, which is ideal for development or small deployments. It automatically creates a database user with a secure random password and configures the database to accept local connections. This option is perfect for getting started quickly or for development environments. The second option allows you to connect to a remote PostgreSQL database by providing a connection URL in the format `postgres://user:password@host:port/db`. This is recommended for production environments where you might want to use a managed database service or a dedicated database server.
+### Step 2: Database Configuration
+The script offers two options for database configuration. 
 
-### SSL Configuration
-For SSL configuration, you have two choices. The **Let's Encrypt** option is recommended for production environments. It requires you to provide a base domain (like `powerhouse.xyz`) and optional subdomains for your services. The script will automatically obtain and configure SSL certificates for your domains, ensuring secure communication between your services and clients. The self-signed certificate option is suitable for development or testing environments. It uses your machine's hostname and generates a self-signed certificate, configuring the services with appropriate base paths. While this option is convenient for development, browsers will show security warnings, which is why it's not recommended for production use.
+**Option 1:** Sets up a local PostgreSQL database, which is ideal for development or small deployments. It automatically creates a database user with a secure random password and configures the database to accept local connections. This option is perfect for getting started quickly or for development environments. 
 
-### Service Configuration
+**Option 2:** Allows you to connect to a remote PostgreSQL database by providing a connection URL in the format `postgres://user:password@host:port/db`. This is recommended for production environments where you might want to use a managed database service or a dedicated database server.
 
-The script takes care of all the necessary service configuration automatically. It installs and configures Nginx as a reverse proxy, sets up SSL certificates, and configures the proxy settings for optimal performance. It also installs PM2 for process management and starts your services with the appropriate configuration based on your SSL choice. The Nginx configuration includes optimizations for WebSocket connections, static file serving, and security headers. PM2 is configured to automatically restart services if they crash and to start them on system boot.
+### Step 3: SSL Configuration
+For SSL configuration, you have two choices. 
 
-### Security Features
-Security is a top priority in the setup process. The script implements automatic SSL certificate management, generates secure database passwords, and configures security headers in Nginx. It also sets up proper proxy settings to support WebSocket connections securely. The security headers include protection against common web vulnerabilities, and the SSL configuration uses modern cipher suites and protocols. The script also ensures that sensitive files and directories have appropriate permissions.
+**Option 1:** The **Let's Encrypt** option is recommended for production environments. It requires you to provide a base domain (like `powerhouse.xyz`) and optional subdomains for your services. The script will automatically obtain and configure SSL certificates for your domains, ensuring secure communication between your services and clients. 
 
-### Manual configuration of your cloud provider
+**Option 2:** The self-signed certificate option is suitable for development or testing environments. It uses your machine's hostname and generates a self-signed certificate, configuring the services with appropriate base paths. While this option is convenient for development, browsers will show security warnings, which is why it's not recommended for production use.
 
 <details>
 <summary>Setting up a domain in DigitalOcean</summary>
@@ -121,84 +120,137 @@ Security is a top priority in the setup process. The script implements automatic
 <details>
 <summary>Setting up a domain with AWS EC2</summary>
 
-1. **Prepare your EC2 Instance:**
-   - **Elastic IP Address:**
-     - Allocate an Elastic IP address from the EC2 console
-     - Associate it with your EC2 instance
-     - Note: AWS charges for Elastic IPs that are not associated with running instances
-   
-   - **Security Groups:**
-     - Configure security groups to allow:
-       - HTTP (Port 80)
-       - HTTPS (Port 443)
-       - Any other required ports for your application
-     - Consider restricting access to specific IP ranges for administrative ports
+## Assigning a Static IP to EC2 Instance
 
-   - **Web Server Configuration:**
-     - Install and configure your web server (Nginx/Apache)
-     - Ensure it's listening on the correct ports
-     - Configure virtual hosts if needed
+To assign a custom static IP to an Amazon EC2 Ubuntu instance, you'll use Elastic IPs. This process involves three main steps:
 
-2. **Configure Route 53:**
-   - **Create a Hosted Zone:**
-     - Go to Route 53 console
-     - Click "Create Hosted Zone"
-     - Enter your domain name
-     - Note the nameservers provided
+### 1. Allocate Elastic IP
 
-   - **Create DNS Records:**
-     - **A Record:**
-       - Type: A
-       - Name: @ (for root domain) or subdomain
-       - Value: Your Elastic IP address
-       - TTL: 300 (or your preferred value)
-     
-     - **Alias Record (Optional):**
-       - Type: A
-       - Name: www (or other subdomain)
-       - Alias: Yes
-       - Route traffic to: Your EC2 instance's DNS name
+1. Navigate to the EC2 service in the AWS console
+2. Choose "Elastic IPs" from the navigation pane on the left
+3. Select "Allocate new address"
+4. Select the VPC where your EC2 instance is located
+5. Click "Allocate"
 
-3. **Update Domain Registrar:**
-   - Log in to your domain registrar
-   - Locate the nameserver settings
-   - Replace existing nameservers with Route 53 nameservers
-   - Save changes
+### 2. Associate Elastic IP
 
-4. **SSL/TLS Configuration:**
-   - **Option 1: AWS Certificate Manager (Recommended)**
-     - Request a certificate in ACM
-     - Validate domain ownership
-     - Configure your web server to use the certificate
-   
-   - **Option 2: Let's Encrypt**
-     - Install certbot
-     - Obtain and configure certificates
-     - Set up auto-renewal
+1. Go back to the EC2 console and select your instance
+2. From the "Networking" tab, expand "Network interfaces"
+3. Note the "Interface ID" of the network interface
+4. Select the "Interface ID" to manage its IP addresses
+5. Choose "Actions", then "Manage IP Addresses"
+6. Find the Elastic IP you allocated and click "Associate"
 
-5. **Verify Setup:**
-   - Check DNS propagation using tools like `dig` or `nslookup`
-   - Test website accessibility
-   - Verify SSL certificate installation
-   - Monitor Route 53 health checks if configured
+### 3. Configure DNS (Optional, for Custom Domains)
 
-6. **Best Practices:**
-   - Set up Route 53 health checks for monitoring
-   - Configure CloudWatch alarms for instance monitoring
-   - Implement proper backup strategies
-   - Consider using AWS WAF for additional security
-   - Set up proper logging and monitoring
+To configure your domain to point to your EC2 instance, you'll need to create an 'A' record with your DNS provider. Here's how to do it:
 
-7. **Troubleshooting:**
-   - Check security group settings
+1. **Access DNS Management:**
+   - Log in to your domain registrar or DNS hosting provider
+   - Navigate to DNS management section (may be called "DNS Records," "Zone File Editor," etc.)
+   - Select your domain
+
+2. **Create A Record:**
+   - Click "Add Record" or similar button
+   - Configure the following:
+     - **Type**: A (maps hostname to IPv4 address)
+     - **Host/Name**: 
+       - For root domain: Use @ or leave blank
+       - For subdomain: Enter subdomain name (e.g., www)
+     - **Value**: Your Elastic IP address
+     - **TTL**: Leave as default (usually 1 hour)
+
+3. **Example Configuration:**
+   For domain `mydomain.com` and Elastic IP `54.123.45.67`:
+   ```
+   Root Domain (@):
+   Type: A
+   Host: @
+   Value: 54.123.45.67
+
+   Subdomain (www):
+   Type: A
+   Host: www
+   Value: 54.123.45.67
+   ```
+
+4. **Verify Configuration:**
+   - Save the DNS record
+   - Wait for DNS propagation (typically 15-30 minutes)
+   - Use tools like whatsmydns.net to verify the changes
+
+### 4. Configure Subdomains
+
+Adding subdomains (like `connect.yourdomain.com` or `switchboard.yourdomain.com`) follows a similar process to the main domain setup. You can point subdomains to either the same EC2 instance as your main domain or to different instances.
+
+#### Same EC2 Instance
+If your subdomain will be served by the same EC2 instance as your main domain:
+
+1. **Create A Record:**
+   - Type: A
+   - Host/Name: Your subdomain name (e.g., `blog` for `blog.yourdomain.com`)
+   - Value: Same Elastic IP as your main domain
+   - TTL: Default (usually 1 hour)
+
+2. **Configure Web Server:**
+   - Set up virtual hosts in your web server (Nginx/Apache)
+   - Configure the server to serve different content based on the subdomain
+
+3. **Verify Setup:**
+   - Wait for DNS propagation
+   - Test subdomain accessibility
    - Verify web server configuration
-   - Ensure proper DNS propagation
-   - Check SSL certificate validity
-   - Review CloudWatch logs for issues
 
-Remember: DNS changes can take up to 48 hours to propagate globally, though typically it's much faster (15-30 minutes).
+### Troubleshooting DNS and SSL Issues
+
+If you encounter SSL certificate issues during setup, it's often related to DNS configuration. Here's how to prevent and resolve these issues:
+
+#### Prevention Steps
+
+1. **Set Up DNS First:**
+   - Create A records for all subdomains before running the setup script
+   - Point them to your EC2 instance's public IP address
+   - Wait for DNS propagation before requesting SSL certificates
+
+2. **Handle Temporary Certificates:**
+   - Ensure temporary certificates aren't deleted before Nginx reload
+   - Check `/etc/nginx/ssl/` for temporary certificate presence
+   - If missing, rerun the SSL setup process
+
+3. **Verify DNS Configuration:**
+   - Check your subdomain A records with:
+     ```bash
+     dig +short your-subdomain.yourdomain.com
+     ```
+   - The output should match your EC2 instance's public IP
+   - If not, update your DNS records and wait for propagation
+
+4. **Rerun SSL Setup:**
+   - After DNS propagation is complete
+   - Run the SSL setup or Certbot command again
+   - This will obtain proper SSL certificates for your domains
+
+### Important Considerations
+
+#### Billing
+- Elastic IPs are billed hourly
+- You'll only be charged for the time an Elastic IP is associated with an instance or while it's allocated but not associated
+
+#### IP Address Types
+- **Public IP**: Elastic IPs are public IP addresses, accessible over the internet
+- **Private IP**: You can still use a private IP for internal communication within your VPC
+
+If you're using a custom domain, ensure your security groups allow traffic to your EC2 instance from anywhere (0.0.0.0/0) on the appropriate ports.
 
 </details>
+
+### Step 4: Service Configuration
+
+The script takes care of all the necessary service configuration automatically. It installs and configures **Nginx** as a reverse proxy, sets up SSL certificates, and configures the proxy settings for optimal performance. It also installs **PM2** for process management and starts your services with the appropriate configuration based on your SSL choice. The Nginx configuration includes optimizations for **WebSocket connections**, static file serving, and security headers. PM2 is configured to automatically restart services if they crash and to start them on system boot.
+
+### Step 5: Security Features
+Security is a top priority in the setup process. The script implements automatic SSL certificate management, generates secure database passwords, and configures security headers in Nginx. It also sets up proper proxy settings to support WebSocket connections securely. The security headers include protection against common web vulnerabilities, and the SSL configuration uses modern cipher suites and protocols. The script also ensures that sensitive files and directories have appropriate permissions.
+
 
 ## 3. Verifying the Setup
 
