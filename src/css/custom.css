@@ -359,3 +359,92 @@ article > a,
 [data-theme='dark'] .card-title {
   color: white;
 }
+
+/* Algolia DocSearch Dark Mode Styles */
+html[data-theme='dark'] .DocSearch-Hits {
+  background-color: #1A1A1B !important;
+}
+
+html[data-theme='dark'] .DocSearch-Hit {
+  background-color: #1A1A1B !important;
+}
+
+html[data-theme='dark'] .DocSearch-Hit-source {
+  background-color: #1A1A1B !important;
+  color: #ffffff !important;
+}
+
+html[data-theme='dark'] .DocSearch-Hit-content-wrapper {
+  color: #ffffff !important;
+}
+
+html[data-theme='dark'] .DocSearch-Hit-title {
+  color: #ffffff !important;
+}
+
+html[data-theme='dark'] .DocSearch-Hit-path {
+  color: #a0a0a0 !important;
+}
+
+html[data-theme='dark'] .DocSearch-Hit-icon {
+  color: #ffffff !important;
+}
+
+html[data-theme='dark'] .DocSearch-Hit-action {
+  color: #ffffff !important;
+}
+
+html[data-theme='dark'] .DocSearch-Hit[aria-selected='true'] {
+  background-color: #2a2a2b !important;
+}
+
+html[data-theme='dark'] .DocSearch-Modal {
+  background-color: #1A1A1B !important;
+}
+
+html[data-theme='dark'] .DocSearch-SearchBar {
+  background-color: #1A1A1B !important;
+}
+
+html[data-theme='dark'] .DocSearch-Form {
+  background-color: #2a2a2b !important;
+}
+
+html[data-theme='dark'] .DocSearch-Input {
+  color: #ffffff !important;
+}
+
+html[data-theme='dark'] .DocSearch-Reset {
+  color: #ffffff !important;
+}
+
+html[data-theme='dark'] .DocSearch-Cancel {
+  color: #ffffff !important;
+}
+
+html[data-theme='dark'] .DocSearch-Hit:first-child {
+  background-color: #1A1A1B !important;
+}
+
+html[data-theme='dark'] .DocSearch-Hit--empty,
+html[data-theme='dark'] .DocSearch-Hit[aria-label="No results"],
+html[data-theme='dark'] .DocSearch-Hit-content-wrapper:empty,
+html[data-theme='dark'] .DocSearch-Hit[style*="background-color: white"],
+html[data-theme='dark'] .DocSearch-Hit {
+  background-color: #1A1A1B !important;
+  color: #ffffff !important;
+}
+
+html[data-theme='dark'] .DocSearch-Hits > * {
+  background-color: #1A1A1B !important;
+  color: #ffffff !important;
+  border-color: #1A1A1B !important;
+}
+
+html[data-theme='dark'] .DocSearch-Hits > *:empty {
+  background-color: #1A1A1B !important;
+  color: #ffffff !important;
+  min-height: 48px; /* or whatever height matches the box */
+  border-radius: 8px;
+  border: none;
+}

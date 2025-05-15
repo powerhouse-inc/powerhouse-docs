@@ -747,6 +747,100 @@ Check your project's `package.json` and `powerhouse.manifest.json` to ensure the
 
 </details>
 
+<details id="managing-powerhouse-dependencies-and-versions">
+<summary>Managing Powerhouse Dependencies and Versions</summary>
+
+## How to Manage Powerhouse Dependencies and Versions
+---
+> **Note:** This is a temporary solution until version control is fully implemented in Powerhouse. Future updates may change how dependencies are managed.
+
+## Problem Statement
+You need to understand and manage different types of dependencies in your Powerhouse project, including:
+- Monorepo dependencies (from the Powerhouse core repository)
+- Project-specific dependencies (from published npm packages)
+- Boilerplate dependencies
+
+## Prerequisites
+- Powerhouse CLI (`ph-cmd`) installed
+- A Powerhouse project initialized (`ph init`)
+- npm account (if you need to publish packages)
+
+## Solution
+
+### Understanding Different Types of Dependencies
+
+1. **Monorepo Dependencies**
+   - The Powerhouse monorepo has three main branches:
+     - `main` (stable)
+     - `dev` (development)
+     - `staging` (pre-release)
+   - You can use these branches by:
+     ```bash
+     # Install dev version of CLI
+     pnpm install -g ph-cmd@dev
+     
+     # Initialize project with dev dependencies
+     ph init --dev
+     ```
+
+2. **Project Dependencies**
+   - These are dependencies from published npm packages
+   - Update them using:
+     ```bash
+     # Update to latest stable versions
+     ph use
+     
+     # Update to development versions
+     ph use dev
+     
+     # Update to production versions
+     ph use prod
+     ```
+
+3. **Publishing Updated Dependencies**
+   - If you make changes to dependencies, you need to:
+     1. Update the dependencies in your project
+     2. Publish the updated package to npm
+     3. Other projects will then get the new version when they run `ph install`
+
+### Important Notes
+
+1. **Breaking Changes**
+   - Currently, updating Connect versions might break older packages
+   - Always test thoroughly after updating dependencies
+   - Consider publishing to a private npm registry for testing
+
+2. **Local Development**
+   - Using `ph use` in a project folder only affects that specific project
+   - Other projects will still download the latest published version from npm
+   - For testing, you can publish to your own npm account
+
+## Expected Outcome
+- Clear understanding of different dependency types
+- Ability to manage and update dependencies appropriately
+- Knowledge of when to publish updated packages
+
+## Common Issues and Solutions
+- Issue: Dependencies not updating as expected
+  - Solution: Ensure you're using the correct `ph use` command for your needs
+- Issue: Breaking changes after updates
+  - Solution: Test thoroughly and consider publishing to a private npm registry first
+- Issue: Confusion about which version is being used
+  - Solution: Check your package.json and powerhouse.manifest.json for current versions
+
+## Related Recipes
+- [Installing 'ph-cmd'](#installing-ph-cmd)
+- [Using Different Branches in Powerhouse](#using-different-branches-in-powerhouse)
+- [Setting up or Resetting the Global Powerhouse Configuration](#setting-up-or-resetting-the-global-powerhouse-configuration)
+
+## Further Reading
+- [Powerhouse Builder Tools](/docs/academy/Create/BuilderTools)
+- [GraphQL Schema Best Practices](/docs/academy/WorkWithData/GraphQLAtPowerhouse)
+
+</details>
+
+Data Synchronisation Recipes
+
 <details id="troubleshooting-document-syncing">
 <summary>Troubleshooting Document Syncing: Supergraph vs. Drive Endpoints</summary>
 
