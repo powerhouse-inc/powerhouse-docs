@@ -1,0 +1,265 @@
+
+```graphql
+
+query GetDocumentModels($namespace: String, $cursor: String, $limit: Int) {
+  documentModels(namespace: $namespace, cursor: $cursor, limit: $limit) {
+    models {
+      id
+      name
+      schema
+    }
+    nextCursor
+  }
+}
+
+query GetDocument($identifier: String!, $branch: String, $scopes: [String], $headerOnly: Boolean) {
+  document(
+    identifier: $identifier
+    branch: $branch
+    scopes: $scopes
+    headerOnly: $headerOnly
+  ) {
+    document {
+      id
+      slug
+      type
+    }
+    childIds
+  }
+}
+
+query GetDocumentChildren($parentIdentifier: String!, $branch: String, $scopes: [String], $headerOnly: Boolean, $cursor: String, $limit: Int) {
+  documentChildren(
+    parentIdentifier: $parentIdentifier
+    branch: $branch
+    scopes: $scopes
+    headerOnly: $headerOnly
+    cursor: $cursor
+    limit: $limit
+  ) {
+    documents {
+      id
+      slug
+      type
+    }
+    nextCursor
+  }
+}
+
+query GetDocumentParents($childIdentifier: String!, $branch: String, $scopes: [String], $headerOnly: Boolean, $cursor: String, $limit: Int) {
+  documentParents(
+    childIdentifier: $childIdentifier
+    branch: $branch
+    scopes: $scopes
+    headerOnly: $headerOnly
+    cursor: $cursor
+    limit: $limit
+  ) {
+    documents {
+      id
+      slug
+      type
+    }
+    nextCursor
+  }
+}
+
+query FindDocuments($type: String, $parentId: String, $ids: [String], $slugs: [String], $branch: String, $scopes: [String], $headerOnly: Boolean, $cursor: String, $limit: Int) {
+  documents(
+    type: $type
+    parentId: $parentId
+    ids: $ids
+    slugs: $slugs
+    branch: $branch
+    scopes: $scopes
+    headerOnly: $headerOnly
+    cursor: $cursor
+    limit: $limit
+  ) {
+    documents {
+      id
+      slug
+      type
+    }
+    nextCursor
+  }
+}
+
+query ResolveIds($slugs: [String!]!, $branch: String, $scopes: [String]) {
+  resolveIds(
+    slugs: $slugs
+    branch: $branch
+    scopes: $scopes
+  )
+}
+
+query ResolveSlugs($ids: [String!]!, $branch: String, $scopes: [String]) {
+  resolveSlugs(
+    ids: $ids
+    branch: $branch
+    scopes: $scopes
+  )
+}
+
+query GetJobStatus($jobId: String!) {
+  jobStatus(jobId: $jobId) {
+    id
+    status
+    error
+  }
+}
+
+mutation CreateDocument($document: PHDocumentInput!, $parentIdentifier: String) {
+  createDocument(input: { 
+    document: $document
+    parentIdentifier: $parentIdentifier 
+  }) {
+    document {
+      id
+      slug
+      type
+    }
+    jobId
+  }
+}
+
+mutation CreateEmptyDocument($documentType: String!, $parentIdentifier: String) {
+  createEmptyDocument(input: {
+    documentType: $documentType
+    parentIdentifier: $parentIdentifier
+  }) {
+    document {
+      id
+      slug
+      type
+    }
+    jobId
+  }
+}
+
+mutation RenameDocument($documentIdentifier: String!, $name: String!, $branch: String, $scopes: [String]) {
+  renameDocument(input: {
+    documentIdentifier: $documentIdentifier
+    name: $name
+    branch: $branch
+    scopes: $scopes
+  }) {
+    document {
+      id
+      slug
+      type
+    }
+    jobId
+  }
+}
+
+mutation DeleteDocuments($identifiers: [String!]!, $propagationMode: PropagationMode) {
+  deleteDocuments(input: { 
+    identifiers: $identifiers
+    propagationMode: $propagationMode 
+  }) {
+    jobId
+    affectedDocumentIds
+  }
+}
+
+mutation ApplyOperations($documentIdentifier: String!, $operations: [OperationInput!]!, $branch: String, $scopes: [String], $headerOnly: Boolean) {
+  applyOperations(input: {
+    documentIdentifier: $documentIdentifier
+    operations: $operations
+    branch: $branch
+    scopes: $scopes
+    headerOnly: $headerOnly
+  }) {
+    document {
+      id
+      slug
+      type
+    }
+    jobId
+  }
+}
+
+mutation AddChildren($parentIdentifier: String!, $documentIdentifiers: [String!]!, $branch: String, $scopes: [String], $headerOnly: Boolean) {
+  addChildren(input: {
+    parentIdentifier: $parentIdentifier
+    documentIdentifiers: $documentIdentifiers
+    branch: $branch
+    scopes: $scopes
+    headerOnly: $headerOnly
+  }) {
+    document {
+      id
+      slug
+      type
+    }
+    jobId
+  }
+}
+
+mutation RemoveChildren($parentIdentifier: String!, $documentIdentifiers: [String!]!, $branch: String, $scopes: [String], $headerOnly: Boolean) {
+  removeChildren(input: {
+    parentIdentifier: $parentIdentifier
+    documentIdentifiers: $documentIdentifiers
+    branch: $branch
+    scopes: $scopes
+    headerOnly: $headerOnly
+  }) {
+    document {
+      id
+      slug
+      type
+    }
+    jobId
+  }
+}
+
+mutation MoveChildren($sourceParentIdentifier: String!, $targetParentIdentifier: String!, $documentIdentifiers: [String!]!, $branch: String, $scopes: [String], $headerOnly: Boolean) {
+  moveChildren(input: {
+    sourceParentIdentifier: $sourceParentIdentifier
+    targetParentIdentifier: $targetParentIdentifier
+    documentIdentifiers: $documentIdentifiers
+    branch: $branch
+    scopes: $scopes
+    headerOnly: $headerOnly
+  }) {
+    sourceDocument {
+      id
+      slug
+      type
+    }
+    targetDocument {
+      id
+      slug
+      type
+    }
+    jobId
+  }
+}
+
+mutation WaitForJob($jobId: String!) {
+  waitForJob(input: {
+    jobId: $jobId
+  }) {
+    id
+    status
+    error
+  }
+}
+
+enum PropagationMode {
+  NONE
+  CASCADE
+}
+
+input ViewFilterInput {
+  branch: String
+  scopes: [String]
+  headerOnly: Boolean
+}
+
+input PagingOptionsInput {
+  cursor: String
+  limit: Int
+}
+```
