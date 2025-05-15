@@ -85,54 +85,157 @@ For SSL configuration, you have two choices.
 <details>
 <summary>Setting up a domain in DigitalOcean</summary>
 
-1. **Navigate to Networking:**
-   - Go to the DigitalOcean Control Panel and select "Networking" from the sidebar.
+This tutorial will guide you through the process of creating a new virtual private server (called a "Droplet") on DigitalOcean and then pointing your custom domain name to it. This will allow users to access your server using a memorable URL like `www.yourdomain.com`.
 
-2. **Select Your Project:**
-   - Choose the relevant project (e.g., `firstproject`).
+**Current Date:** May 15, 2025
 
-3. **Add a Domain:**
-   - Enter your domain name (e.g., `powerhouse.web3.berlin`) and add it to your project if you haven't already.
+## Part 1: Setting Up Your DigitalOcean Droplet
 
-4. **Create DNS Records:**
-   - Under the "Create new record" section, add the required DNS records:
-     - **A Record:**
-       - Hostname: `@` or subdomain (e.g., `connect` or `switchboard`)
-       - Will Direct To: Your server's public IP address (e.g., `209.38.216.121`)
-       - TTL: Default (e.g., `3600` seconds)
-     - **NS Records:**
-       - Provided by DigitalOcean (e.g., `ns1.digitalocean.com`, `ns2.digitalocean.com`, `ns3.digitalocean.com`).
-       - Ensure these are set at your domain registrar if DigitalOcean is not your registrar.
+A Droplet is a scalable virtual machine that you can configure to host your websites, applications, or other services.
 
-5. **Verify DNS Propagation:**
-   - Use tools like `dig` or online DNS checkers to confirm your records are live.
+### Step 1: Sign Up or Log In to DigitalOcean
 
-6. **Update Nameservers (if needed):**
-   - If your domain is registered elsewhere, update the nameservers to point to DigitalOcean's NS records.
+- If you don't have an account, go to [digitalocean.com](https://digitalocean.com) and sign up. You'll likely need to provide payment information.
+- If you already have an account, log in.
 
-7. **Wait for Propagation:**
-   - DNS changes may take some time (up to 48 hours) to propagate globally.
+### Step 2: Create a New Droplet
 
-<!-- Placeholder: Add screenshots or more detailed steps as needed for your specific setup. -->
+1. From your DigitalOcean dashboard, click the green "Create" button in the top right corner and select "Droplets".
+
+2. **Choose an Image:**
+   - **Distributions:** Select a base Linux distribution like Ubuntu (a popular choice, e.g., Ubuntu 22.04 LTS), Fedora, Debian, etc.
+   - **Marketplace:** You can also choose from pre-configured 1-Click Apps (e.g., WordPress, Docker, LAMP stack). This can save you setup time. For this general tutorial, we'll assume a base distribution.
+
+3. **Choose a Plan (Size):**
+   - **Shared CPU:** Good for smaller projects, development, or low-traffic sites. Options like "Basic" Droplets fall here.
+   - **Dedicated CPU:** For production applications needing consistent performance (General Purpose, CPU-Optimized, Memory-Optimized, Storage-Optimized Droplets).
+   - Start with a basic plan that fits your budget and expected needs; you can resize your Droplet later if necessary.
+
+4. **Choose a Datacenter Region:**
+   - Select a server location closest to your target audience to minimize latency.
+   - For example, if your users are primarily in Europe, choose a European datacenter like Amsterdam, Frankfurt, or London.
+
+5. **Authentication:**
+   - **SSH Keys (Recommended for security):** If you have an SSH key pair, you can add your public key. This is more secure than using passwords. Click "New SSH Key" and paste your public key if it's not already added.
+   - **Password:** If you choose this, create a strong root password. You'll use this to log in via SSH initially.
+
+6. **Additional Options (Customize as needed):**
+   - **VPC Network:** By default, your Droplet will be in your default VPC for the chosen region. You can change this if you have custom networking setups.
+   - **Monitoring:** A free metrics monitoring service. It's a good idea to enable this.
+   - **User Data:** Allows you to run initial configuration scripts when the Droplet is first created.
+   - **Backups (Recommended for production):** Enable automated weekly backups for a small additional fee.
+   - **Volume (Additional Storage):** Attach block storage if you need more disk space than the Droplet plan offers.
+
+7. **Finalize and Create:**
+   - Choose a Hostname: Give your Droplet a name (e.g., `my-web-server`). This is for your reference within DigitalOcean.
+   - Add Tags (Optional): Organize your resources with tags.
+   - Select Project: Assign the Droplet to a project.
+   - Review your selections and click the "Create Droplet" button at the bottom.
+
+### Step 3: Access Your Droplet
+
+It will take a minute or two for your Droplet to be provisioned. Once it's ready, its IP address will be displayed in your Droplets list.
+
+To log in via SSH:
+
+1. Open a terminal (on macOS/Linux) or an SSH client like PuTTY (on Windows).
+2. Use one of these commands:
+   ```bash
+   # If using password authentication
+   ssh root@YOUR_DROPLET_IP
+
+   # If using SSH key for a specific user
+   ssh your_user@YOUR_DROPLET_IP
+
+   # If using a specific SSH key
+   ssh -i /path/to/your/private_key root@YOUR_DROPLET_IP
+   ```
+
+3. If you used a password, you'll be prompted to enter it.
+4. If it's your first time logging in, you might be asked to change the root password.
+
+Now your Droplet is running! You'll likely want to install and configure a web server (like Nginx or Apache) and your application or website files. This part is beyond the scope of just creating the Droplet but is crucial for it to do anything useful.
+
+### DNS Configuration
+
+#### Option A: Using DigitalOcean's Nameservers (Recommended)
+
+1. **Add Your Domain to DigitalOcean:**
+   - Go to "Networking" → "Domains"
+   - Enter your domain name (e.g., `yourdomain.com`)
+   - Click "Add Domain"
+
+2. **Update Nameservers at Your Domain Registrar:**
+   - Log in to your domain registrar
+   - Update nameservers to:
+     ```
+     ns1.digitalocean.com
+     ns2.digitalocean.com
+     ns3.digitalocean.com
+     ```
+
+3. **Create DNS Records:**
+   - **Root Domain (A Record):**
+     - **TYPE:** A
+     - **HOSTNAME:** @
+     - **WILL DIRECT TO:** Your Droplet's IP
+     - **TTL:** 3600
+
+   - **WWW Subdomain (A Record):**
+     - **TYPE:** A
+     - **HOSTNAME:** www
+     - **WILL DIRECT TO:** Your Droplet's IP
+     - **TTL:** 3600
+
+#### Option B: Using Your Existing Nameservers
+
+1. **Create DNS Records at Your Registrar:**
+   - **Root Domain (A Record):**
+     - **TYPE:** A
+     - **HOSTNAME:** @
+     - **VALUE:** Your Droplet's IP
+     - **TTL:** 3600
+
+   - **WWW Subdomain (A Record):**
+     - **TYPE:** A
+     - **HOSTNAME:** www
+     - **VALUE:** Your Droplet's IP
+     - **TTL:** 3600
+
+**Note:** DNS changes may take up to 48 hours to propagate globally.
+
+### Verify Configuration
+
+1. Use DNS lookup tools to verify your records:
+   ```bash
+   dig +short yourdomain.com
+   dig +short www.yourdomain.com
+   ```
+
+2. Both should return your Droplet's IP address
+
+**Congratulations!** You have successfully set up your DigitalOcean Droplet and configured your domain. Your server is now ready to host your Powerhouse services.
 
 </details>
 
 <details>
 <summary>Setting up a domain with AWS EC2</summary>
 
-## Assigning a Static IP to EC2 Instance
+This tutorial will guide you through the process of assigning a static IP (Elastic IP) to your EC2 instance and configuring your domain to point to it.
 
-To assign a custom static IP to an Amazon EC2 Ubuntu instance, you'll use Elastic IPs. This process involves three main steps:
+**Current Date:** May 15, 2025
 
-### 1. Allocate Elastic IP
+## Part 1: Assigning a Static IP to EC2 Instance
+
+### Step 1: Allocate Elastic IP
 
 1. Navigate to the EC2 service in the AWS console
-2. Choose "Elastic IPs" from the navigation pane on the left
+2. Choose "Elastic IPs" from the navigation pane
 3. Select "Allocate new address"
 4. Select the VPC where your EC2 instance is located
 5. Click "Allocate"
 
-### 2. Associate Elastic IP
+### Step 2: Associate Elastic IP
 
 1. Go back to the EC2 console and select your instance
 2. From the "Networking" tab, expand "Network interfaces"
@@ -141,106 +244,71 @@ To assign a custom static IP to an Amazon EC2 Ubuntu instance, you'll use Elasti
 5. Choose "Actions", then "Manage IP Addresses"
 6. Find the Elastic IP you allocated and click "Associate"
 
-### 3. Configure DNS (Optional, for Custom Domains)
+## Part 2: DNS Configuration
 
-To configure your domain to point to your EC2 instance, you'll need to create an 'A' record with your DNS provider. Here's how to do it:
+### Option A: Using AWS Route 53 (Recommended)
 
-1. **Access DNS Management:**
-   - Log in to your domain registrar or DNS hosting provider
-   - Navigate to DNS management section (may be called "DNS Records," "Zone File Editor," etc.)
-   - Select your domain
+1. **Add Your Domain to Route 53:**
+   - Go to Route 53 → "Hosted zones"
+   - Click "Create hosted zone"
+   - Enter your domain name (e.g., `yourdomain.com`)
+   - Click "Create"
 
-2. **Create A Record:**
-   - Click "Add Record" or similar button
-   - Configure the following:
-     - **Type**: A (maps hostname to IPv4 address)
-     - **Host/Name**: 
-       - For root domain: Use @ or leave blank
-       - For subdomain: Enter subdomain name (e.g., www)
-     - **Value**: Your Elastic IP address
-     - **TTL**: Leave as default (usually 1 hour)
+2. **Update Nameservers at Your Domain Registrar:**
+   - Log in to your domain registrar
+   - Update nameservers to the ones provided by Route 53
+   - They will look like:
+     ```
+     ns-1234.awsdns-12.org
+     ns-567.awsdns-34.com
+     ns-890.awsdns-56.net
+     ns-1234.awsdns-78.co.uk
+     ```
 
-3. **Example Configuration:**
-   For domain `mydomain.com` and Elastic IP `54.123.45.67`:
-   ```
-   Root Domain (@):
-   Type: A
-   Host: @
-   Value: 54.123.45.67
+3. **Create DNS Records:**
+   - **Root Domain (A Record):**
+     - **TYPE:** A
+     - **HOSTNAME:** @
+     - **VALUE:** Your Elastic IP
+     - **TTL:** 3600
 
-   Subdomain (www):
-   Type: A
-   Host: www
-   Value: 54.123.45.67
-   ```
+   - **WWW Subdomain (A Record):**
+     - **TYPE:** A
+     - **HOSTNAME:** www
+     - **VALUE:** Your Elastic IP
+     - **TTL:** 3600
 
-4. **Verify Configuration:**
-   - Save the DNS record
-   - Wait for DNS propagation (typically 15-30 minutes)
-   - Use tools like whatsmydns.net to verify the changes
+### Option B: Using Your Existing Nameservers
 
-### 4. Configure Subdomains
+1. **Create DNS Records at Your Registrar:**
+   - **Root Domain (A Record):**
+     - **TYPE:** A
+     - **HOSTNAME:** @
+     - **VALUE:** Your Elastic IP
+     - **TTL:** 3600
 
-Adding subdomains (like `connect.yourdomain.com` or `switchboard.yourdomain.com`) follows a similar process to the main domain setup. You can point subdomains to either the same EC2 instance as your main domain or to different instances.
-
-#### Same EC2 Instance
-If your subdomain will be served by the same EC2 instance as your main domain:
-
-1. **Create A Record:**
-   - Type: A
-   - Host/Name: Your subdomain name (e.g., `blog` for `blog.yourdomain.com`)
-   - Value: Same Elastic IP as your main domain
-   - TTL: Default (usually 1 hour)
-
-2. **Configure Web Server:**
-   - Set up virtual hosts in your web server (Nginx/Apache)
-   - Configure the server to serve different content based on the subdomain
-
-3. **Verify Setup:**
-   - Wait for DNS propagation
-   - Test subdomain accessibility
-   - Verify web server configuration
-
-### Troubleshooting DNS and SSL Issues
-
-If you encounter SSL certificate issues during setup, it's often related to DNS configuration. Here's how to prevent and resolve these issues:
-
-#### Prevention Steps
+   - **WWW Subdomain (A Record):**
+     - **TYPE:** A
+     - **HOSTNAME:** www
+     - **VALUE:** Your Elastic IP
+     - **TTL:** 3600
 
 1. **Set Up DNS First:**
    - Create A records for all subdomains before running the setup script
    - Point them to your EC2 instance's public IP address
    - Wait for DNS propagation before requesting SSL certificates
 
-2. **Handle Temporary Certificates:**
-   - Ensure temporary certificates aren't deleted before Nginx reload
-   - Check `/etc/nginx/ssl/` for temporary certificate presence
-   - If missing, rerun the SSL setup process
+### Verify Configuration
 
-3. **Verify DNS Configuration:**
-   - Check your subdomain A records with:
-     ```bash
-     dig +short your-subdomain.yourdomain.com
-     ```
-   - The output should match your EC2 instance's public IP
-   - If not, update your DNS records and wait for propagation
+1. Use DNS lookup tools to verify your records:
+   ```bash
+   dig +short yourdomain.com
+   dig +short www.yourdomain.com
+   ```
 
-4. **Rerun SSL Setup:**
-   - After DNS propagation is complete
-   - Run the SSL setup or Certbot command again
-   - This will obtain proper SSL certificates for your domains
+2. Both should return your Elastic IP address
 
-### Important Considerations
-
-#### Billing
-- Elastic IPs are billed hourly
-- You'll only be charged for the time an Elastic IP is associated with an instance or while it's allocated but not associated
-
-#### IP Address Types
-- **Public IP**: Elastic IPs are public IP addresses, accessible over the internet
-- **Private IP**: You can still use a private IP for internal communication within your VPC
-
-If you're using a custom domain, ensure your security groups allow traffic to your EC2 instance from anywhere (0.0.0.0/0) on the appropriate ports.
+**Congratulations!** You have successfully set up your EC2 instance with a static IP and configured your domain. Your server is now ready to host your Powerhouse services.
 
 </details>
 
