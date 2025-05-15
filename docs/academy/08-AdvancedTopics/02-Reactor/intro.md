@@ -93,6 +93,241 @@ The architecture consists of several key components:
 6. **Listeners**: Monitor for changes and facilitate real-time updates.
 7. **Synchronization**: Coordinates document state across distributed systems.
 
+### Usage (TypeScript)
+
+![Reactor](./images/reactor.svg)
+
+For applications that embed the Reactor directly, the TypeScript API provides direct access to the document drive server.
+
+- [**IReactor**](./reactor-api.mdx): The core server component that provides a simple, asynchronous interface for document operations. It uses a job-based approach where operations return a job ID and status that can be tracked to completion.
+
+- [**IReactorClient**](./client-api.mdx): A wrapper component that makes the IReactor more ergonomic to use. It abstracts away job handling details and provides a more developer-friendly interface with methods that automatically wait for job completion. For example, while IReactor's `addChildren` returns a JobId, IReactorClient's version returns the updated document directly.
+
+- [**GraphQL API**](./graphql-api.mdx): A separate component that implements resolvers for the Reactor functionality. It provides a standardized way to interact with the Reactor from web and mobile clients, exposing mutations and queries that map to the underlying Reactor operations.
+
+```typescript
+const reactor: IReactor = getReactor();
+const client: IReactorClient = new ReactorClient(reactor);
+
+const { results } = await client.getDocumentModels();
+
+console.log(`Found ${results.length} document models`);
+
+const model = results.find(m => m.name === "task-list");
+
+if (!model) {
+  console.log(`Model ${modelName} is not supported`);
+  exit(1);
+}
+
+let workList = await client.create<TaskListDocument>(
+  createDocument({ slug: "work" }),
+);
+
+console.log(`Created document ${workList.name} with ID ${workList.id}`);
+
+// change the document
+workList = await client.mutate(
+  workList.id,
+  [addTodo({ name: "Call Stephen" })],
+);
+
+const { document: homeList } = await client.get<TaskListDocument>("home");
+
+console.log(`Document ${homeList.name} has ${homeList.state.global.todos.length} todos`);
+
+// put everything in a drive
+const drive = await client.create<DriveDocument>(
+  createDocument({ slug: "mine" }),
+);
+
+await client.addChildren(
+  drive.id,
+  [workList.id, homeList.id],
+);
+
+// get all my other todos (header only, since we don't need all the data)
+let all = [];
+let next = () => client.find(
+  { type: "task-list" },
+  { headerOnly: true },
+  { limit: 100 });
+
+while (next) {
+  const { results, next: nextPage } = await next();
+  all.push(...results.map(r => r.id));
+
+  next = nextPage;
+}
+
+// Using the new generator-based pagination API (much simpler!)
+all = [];
+
+// This handles the pagination automatically
+for await (const page of paginate(
+  () => client.find(
+    { type: "task-list" },
+    { headerOnly: true },
+    { limit: 100 }),
+)) {
+  for (const document of page.results) {
+    all.push(document.id);
+  }
+}
+
+// add to my drive
+await client.addChildren(
+  drive.id,
+  all,
+);
+
+// branch a document
+const document = await client.branch(workList.id, "sprint/01");
+
+// perform operation
+document = await client.mutate(
+  document.id,
+  [addTodo({ name: "Write Spec" })],
+);
+
+// merge (throws on unrecoverable errors, not conflicts)
+const result = await client.merge(
+  document.id,
+  "sprint/01",
+  "main",
+);
+
+if (result.conflicts) {
+  // todo
+} else {
+  // merge complete
+  console.log(`Merge complete, resulting document: ${result.document}`);
+}
+
+```
+
+The `PHDocment` also provides nice methods for reading state or performing mutations:
+
+```typescript
+
+let drive = await client.get<DocumentDriveDocument>("mine");
+
+// the `state` property is a plain, serializable object
+console.log(`Drive icon: ${drive.state.global.icon}`);
+
+// the `mutations` property is a typed API for creating operations
+
+// change the drive icon
+await drive.mutations.global.setDriveIcon({
+  icon: "🚀",
+});
+
+// add a new folder
+await drive.mutations.global.setDriveName({
+  name: "My Drive",
+});
+
+// we are still free to batch operations together via the client API
+await client.mutate(
+  drive.id,
+  [
+    setDriveNameOperation({ name: "My Drive" }),
+    setDriveIconOperation({ icon: "🚀" }),
+  ],
+);
+
+// the `history` object is a typed API for fetching the history of a document
+
+await drive.history.global.fetch();
+
+console.log(`Drive history: ${drive.history.global.operations.length} operations`);
+
+// we can also fetch history for a specific revision
+const history = await drive.history.global.fetch(10);
+
+console.log(`History for revision 10: ${history.length} operations`);
+
+```
+
+#### Topics: ViewFilter
+
+The `ViewFilter` object allows you to customize the data retrieved on one or more documents.
+
+```typescript
+type ViewFilter = {
+  branch?: string;
+  scopes?: string[];
+  revision?: number;
+  headerOnly?: boolean;
+}
+```
+
+ViewFilters can significantly improve performance by:
+
+- Using `headerOnly: true` when you only need document metadata
+- Specifying only the `scopes` you need instead of fetching all document content
+- Filtering by `branch` to get a specific version of a document
+- Using a `revision` to get a specific revision of a document
+
+##### Usage
+
+```typescript
+// Get document from a specific branch
+const view = await client.get(
+  documentId,
+  { branch: 'main' }
+);
+
+// Filter by scopes to get specific document content
+const filteredView = await client.getChildren(
+  parentId,
+  { scopes: ['global', 'my-custom-scope'] }
+);
+
+// Combine all filters
+const complexView = await client.find(
+  { type: 'article' },
+  { 
+    branch: 'development', 
+    scopes: ['public'],
+  }
+);
+
+// Use the headers option to minimize data transfer
+const headers = await client.getChildren(
+  parentId,
+  { headerOnly: true },
+);
+```
+
+#### Topics: Paging
+
+The `PagedResults` object provides a consistent way to handle paginated data in the Reactor API. It's particularly useful when retrieving large collections of documents.
+
+##### Usage
+
+```typescript
+// gets all my todos, using the cursor-based pagination API
+let all = [];
+let next = () => client.find({ type: "task-list" });
+
+while (next) {
+  const { results, next: nextPage } = await next();
+  all.push(...results.map(r => r.id));
+
+  next = nextPage;
+}
+
+// or using the generator-based pagination API
+all = [];
+
+for await (const page of paginate(
+  () => client.find({ type: "task-list" }),
+)) {
+  all.push(...page.results.map(r => r.id));
+}
+```
+
 ### Usage (GraphQL API)
 
 > Note (Prometheus): Prerequisites, like gql install.
@@ -376,155 +611,4 @@ async function fetchAllDriveDocuments() {
     return [];
   }
 }
-```
-
-### Usage (TypeScript)
-
-For applications that embed the Reactor directly, the TypeScript API provides direct access to the document drive server.
-
-First, let's retrieve the supported document models:
-
-```typescript
-const reactor: IReactor = getReactor();
-const client: IReactorClient = new ReactorClient(reactor);
-
-const { results } = await client.getDocumentModels();
-
-console.log(`Found ${results.length} document models`);
-
-const model = results.find(m => m.name === "task-list");
-
-if (!model) {
-  console.log(`Model ${modelName} is not supported`);
-  exit(1);
-}
-
-let workList = await client.create<TaskListDocument>(
-  createDocument({ slug: "work" }),
-);
-
-console.log(`Created document ${workList.name} with ID ${workList.id}`);
-
-// change the document
-workList = await client.mutate(
-  workList.id,
-  [addTodo({ name: "Call Stephen" })],
-);
-
-const { document: homeList } = await client.get<TaskListDocument>("home");
-
-console.log(`Document ${homeList.name} has ${homeList.state.global.todos.length} todos`);
-
-// put everything in a drive
-const drive = await client.create<DriveDocument>(
-  createDocument({ slug: "mine" }),
-);
-
-await client.addChildren(
-  drive.id,
-  [workList.id, homeList.id],
-);
-
-// get all my other todos (header only, since we don't need all the data)
-let all = [];
-let next = () => client.find(
-  { type: "task-list" },
-  { headerOnly: true },
-  { limit: 100 });
-
-while (next) {
-  const { results, next: nextPage } = await next();
-  all.push(...results.map(r => r.id));
-
-  next = nextPage;
-}
-
-// Using the new generator-based pagination API (much simpler!)
-all = [];
-
-// This handles the pagination automatically
-for await (const page of paginate(
-  () => client.find(
-    { type: "task-list" },
-    { headerOnly: true },
-    { limit: 100 }),
-)) {
-  for (const document of page.results) {
-    all.push(document.id);
-  }
-}
-
-// add to my drive
-await client.addChildren(
-  drive.id,
-  all,
-);
-
-// branch a document
-const document = await client.branch(workList.id, "sprint/01");
-
-// perform operation
-document = await client.mutate(
-  document.id,
-  [addTodo({ name: "Write Spec" })],
-);
-
-// merge (throws on unrecoverable errors, not conflicts)
-const result = await client.merge(
-  document.id,
-  "sprint/01",
-  "main",
-);
-
-if (result.conflicts) {
-  // todo
-} else {
-  // merge complete
-  console.log(`Merge complete, resulting document: ${result.document}`);
-}
-
-```
-
-The `PHDocment` also provides nice methods for reading state or performing mutations:
-
-```typescript
-
-let drive = await client.get<DocumentDriveDocument>("mine");
-
-// the `state` property is a plain, serializable object
-console.log(`Drive icon: ${drive.state.global.icon}`);
-
-// the `mutations` property is a typed API for creating operations
-
-// change the drive icon
-await drive.mutations.global.setDriveIcon({
-  icon: "🚀",
-});
-
-// add a new folder
-await drive.mutations.global.setDriveName({
-  name: "My Drive",
-});
-
-// we are still free to batch operations together via the client API
-await client.mutate(
-  drive.id,
-  [
-    setDriveNameOperation({ name: "My Drive" }),
-    setDriveIconOperation({ icon: "🚀" }),
-  ],
-);
-
-// the `history` object is a typed API for fetching the history of a document
-
-await drive.history.global.fetch();
-
-console.log(`Drive history: ${drive.history.global.operations.length} operations`);
-
-// we can also fetch history for a specific revision
-const history = await drive.history.global.fetch(10);
-
-console.log(`History for revision 10: ${history.length} operations`);
-
-
 ```
