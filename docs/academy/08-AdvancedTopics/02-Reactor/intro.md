@@ -57,8 +57,9 @@ The core entity representing a **document**. Each document:
 - Contains `revision` information
 - Maintains a collection of "_scopes_" (more on this later)
 - Stores a specific `documentType` that defines its structure
-
-> Note: Add branch concept.
+- Has a `state` property that is a plain, serializable object
+- Has an `mutations` property that is a typed API for creating operations
+- Is associated with a branch
 
 #### Drive
 
@@ -379,8 +380,6 @@ async function fetchAllDriveDocuments() {
 
 ### Usage (TypeScript)
 
-> Note (Prometheus): Just need a list of functions and their return types (do this FIRST).
-
 For applications that embed the Reactor directly, the TypeScript API provides direct access to the document drive server.
 
 First, let's retrieve the supported document models:
@@ -444,7 +443,7 @@ while (next) {
 all = [];
 
 // This handles the pagination automatically
-for await (const page of client.paginate(
+for await (const page of paginate(
   () => client.find(
     { type: "task-list" },
     { headerOnly: true },
@@ -470,14 +469,62 @@ document = await client.mutate(
   [addTodo({ name: "Write Spec" })],
 );
 
-// merge
-await client.merge(
+// merge (throws on unrecoverable errors, not conflicts)
+const result = await client.merge(
   document.id,
   "sprint/01",
   "main",
 );
 
-
+if (result.conflicts) {
+  // todo
+} else {
+  // merge complete
+  console.log(`Merge complete, resulting document: ${result.document}`);
+}
 
 ```
 
+The `PHDocment` also provides nice methods for reading state or performing mutations:
+
+```typescript
+
+let drive = await client.get<DocumentDriveDocument>("mine");
+
+// the `state` property is a plain, serializable object
+console.log(`Drive icon: ${drive.state.global.icon}`);
+
+// the `mutations` property is a typed API for creating operations
+
+// change the drive icon
+await drive.mutations.global.setDriveIcon({
+  icon: "🚀",
+});
+
+// add a new folder
+await drive.mutations.global.setDriveName({
+  name: "My Drive",
+});
+
+// we are still free to batch operations together via the client API
+await client.mutate(
+  drive.id,
+  [
+    setDriveNameOperation({ name: "My Drive" }),
+    setDriveIconOperation({ icon: "🚀" }),
+  ],
+);
+
+// the `history` object is a typed API for fetching the history of a document
+
+await drive.history.global.fetch();
+
+console.log(`Drive history: ${drive.history.global.operations.length} operations`);
+
+// we can also fetch history for a specific revision
+const history = await drive.history.global.fetch(10);
+
+console.log(`History for revision 10: ${history.length} operations`);
+
+
+```

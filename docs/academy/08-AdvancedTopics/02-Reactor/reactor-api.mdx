@@ -33,6 +33,7 @@ type JobId = {
 type ViewFilter = {
   branch?: string;
   scopes?: string[];
+  revision?: number;
   headerOnly?: boolean;
 }
 
@@ -65,8 +66,36 @@ type PagedResults<T> = {
   nextCursor?: string;
 }
 
-interface IReactor {
+interface IDocumentStorage {
+  
+  // existing interface
 
+  /**
+   * Resolves a list of ids from a list of slugs.
+   * 
+   * @param slugs - Required, the list of document slugs
+   * @param view - Optional filter containing branch and scopes information
+   * @returns The parallel list of ids
+   */
+  resolveIds(
+    slugs: string[],
+    view?: ViewFilter,
+  ): Promise<string[]>;
+
+  /**
+   * Resolves a list of ids from a list of ids.
+   * 
+   * @param ids - Required, the list of document ids
+   * @param view - Optional filter containing branch and scopes information
+   * @returns The parallel list of slugs
+   */
+  resolveSlugs(
+    slugs: string[],
+    view?: ViewFilter,
+  ): Promise<string[]>;
+}
+
+interface IReactor {
   /**
    * Retrieves a list of document model specifications
    *
@@ -109,28 +138,18 @@ interface IReactor {
   }>;
 
   /**
-   * Resolves a list of ids from a list of slugs.
-   * 
-   * @param slugs - Required, the list of document slugs
+   * Retrieves the operations for a document
+   *
+   * @param documentId - The document id
    * @param view - Optional filter containing branch and scopes information
-   * @returns The parallel list of ids
+   * @param paging - Optional pagination options
+   * @returns The list of operations
    */
-  resolveIds(
-    slugs: string[],
+  getOperations(
+    documentId: string,
     view?: ViewFilter,
-  ): Promise<string[]>;
-
-  /**
-   * Resolves a list of ids from a list of ids.
-   * 
-   * @param ids - Required, the list of document ids
-   * @param view - Optional filter containing branch and scopes information
-   * @returns The parallel list of slugs
-   */
-  resolveSlugs(
-    slugs: string[],
-    view?: ViewFilter,
-  ): Promise<string[]>;
+    paging?: PagingOptions,
+  ): Promise<PagedResults<Operation>>;
 
   /**
    * Filters documents by criteria and returns a list of them
