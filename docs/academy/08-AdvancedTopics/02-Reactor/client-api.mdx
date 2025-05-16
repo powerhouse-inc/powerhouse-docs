@@ -222,6 +222,20 @@ interface IReactorClient {
    * @returns The result of the job
    */
   waitForJob(jobId: string | JobId): Promise<JobId>;
+
+  /**
+   * Subscribes to changes for documents matching specified filters
+   *
+   * @param search - Search filter options (type, parentId, identifiers)
+   * @param callback - Function called when documents change with the change event details
+   * @param view - Optional filter containing branch and scopes information
+   * @returns A function that unsubscribes from the changes
+   */
+  subscribe(
+    search: SearchFilter,
+    callback: (event: DocumentChangeEvent) => void,
+    view?: ViewFilter,
+  ): () => void;
 }
 
 /**
@@ -233,4 +247,29 @@ interface IReactorClient {
 function paginate<T>(
   fn: () => Promise<PagedResults<T>>,
 ): AsyncIterable<PagedResults<T>>;
+
+/**
+ * Describes the types of document changes that can occur.
+ */
+enum DocumentChangeType {
+  Created = "created",
+  Deleted = "deleted",
+  Updated = "updated",
+  ParentAdded = "parent_added",
+  ParentRemoved = "parent_removed",
+  ChildAdded = "child_added",
+  ChildRemoved = "child_removed"
+}
+
+/**
+ * Represents a change event for documents.
+ */
+type DocumentChangeEvent = {
+  type: DocumentChangeType;
+  documents: PHDocument[];
+  context?: {
+    parentId?: string;
+    childId?: string;
+  };
+}
 ```
