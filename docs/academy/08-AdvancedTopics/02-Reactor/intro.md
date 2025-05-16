@@ -204,6 +204,73 @@ if (result.conflicts) {
   console.log(`Merge complete, resulting document: ${result.document}`);
 }
 
+// subscribe to changes through the subscription manager
+const subscriptionManager = getSubscriptions();
+
+// Subscribe to document creation events (returns only ids)
+const unsubscribeCreated = subscriptionManager.onDocumentCreated(
+  (result) => {
+    console.log(`Documents ids created: ${result.results}`);
+  },
+  { type: 'Task' },
+);
+
+// Subscribe to document updates (returns full documents)
+const unsubscribeUpdated = subscriptionManager.onDocumentStateUpdated(
+  (result) => {
+    console.log('Documents updated:', result.results);
+  },
+  { parentId: 'project-123' },
+  { branch: 'main' },
+);
+
+// Subscribe to relationship changes (returns parentId, childId, changeType)
+const unsubscribeRelationship = subscriptionManager.onRelationshipChanged(
+  (parentId, childId, changeType) => {
+    if (changeType === RelationshipChangeType.Added) {
+      console.log(`Document ${childId} was added to parent ${parentId}`);
+    } else {
+      console.log(`Document ${childId} was removed from parent ${parentId}`);
+    }
+  }
+);
+
+// Later, unsubscribe when no longer needed
+unsubscribeCreated();
+unsubscribeUpdated();
+unsubscribeRelationship();
+
+// subscribe to changes through IReactorClient
+const unsubscribe = client.subscribe(
+  { type: 'Task' },
+  (event) => {
+    switch (event.type) {
+      case DocumentChangeType.Created:
+        console.log('Documents created:', event.documents);
+        break;
+      case DocumentChangeType.Updated:
+        console.log('Documents updated:', event.documents);
+        break;
+      case DocumentChangeType.Deleted:
+        console.log('Documents deleted, IDs:', event.context?.documentIds);
+        break;
+      case DocumentChangeType.ParentAdded:
+      case DocumentChangeType.ParentRemoved:
+        console.log('Relationship changed:', {
+          parentId: event.context?.parentId,
+          childId: event.context?.childId,
+          added: event.type === DocumentChangeType.ParentAdded
+        });
+        break;
+    }
+  },
+  // since this interface returns full documents, we can specify the viewfilter
+  { scopes: ['global'] },
+);
+
+// Later, unsubscribe from all events
+unsubscribe();
+
 ```
 
 The `PHDocment` also provides nice methods for reading state or performing mutations:
