@@ -17,7 +17,7 @@ Powerhouse’s software architecture is designed to empower scalable, decentrali
 ### Three layers of Powerhouse
     1. **Data Infrastructure Layer -** This layer is responsible for data storage and synchronization, whether locally, in the cloud, or on decentralized storage networks like Ceramic or IPFS. It includes: 	
         - **Reactor**: A storage node for documents and files, supporting multiple storage adapters for various environments.
-        - **Powerhouse Network Components**: services required to build scalable networks of Reactor nodes, such as event buses, queues, caching services, and load balancers. DocSync?
+        - **Powerhouse Network Components**: services required to build scalable networks of Reactor nodes, such as event buses, queues, caching services, and load balancers.
 
     2. **Host Application Layer - t**his layer provides the tools to build apps and platforms using modular host applications. Each host application is an empty shell that gains functionality through plugins. The key host applications include: 
         - **Powerhouse Connect**: Tools for contributors to perform their roles with tailored plugins for document management.
@@ -26,7 +26,7 @@ Powerhouse’s software architecture is designed to empower scalable, decentrali
         - **Powerhouse Renown**: Decentralized authentication and reputation management for contributors.
         - **Powerhouse Academy**: Onboarding and training tools for contributors, offering tutorials and reputation badges.
 
-    3. **Customization Layer - t**his layer consists of SNO-specific plugins and instances of the host applications. It enables customization and deployment of unique platforms for each network organization. Examples include: 
+    3. **Customization Layer - t**his layer consists of organization-specific plugins and instances of the host applications. It enables customization and deployment of unique platforms for each network organization. Examples include: 
         - **Connect Plugins**: Tailored apps for contributors.
         - **Switchboard Plugins**: Aggregated data and API services.
         - **Fusion Plugins**: Custom marketplaces and user-facing platforms.
