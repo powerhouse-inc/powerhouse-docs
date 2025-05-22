@@ -15,7 +15,7 @@ const FeatureList: FeatureItem[] = [
   {
     title: "Connect",
     imageSrc: require("@site/static/img/connect.png").default,
-    docPath: "docs/academy/AdvancedTopics/PowerhouseArchitecture",
+    docPath: "docs/academy/Architecture/PowerhouseArchitecture",
     description: (
       <>
         Learn about the private contributor tool Connect
@@ -25,13 +25,13 @@ const FeatureList: FeatureItem[] = [
   {
     title: "Switchboard",
     imageSrc: require("@site/static/img/switchboard.png").default,
-    docPath: "docs/academy/WorkWithData/ReadingAndWritingThroughTheAPI",
+    docPath: "/docs/academy/AdvancedTutorial/WorkWithData/ReadingAndWritingThroughTheAPI",
     description: <>Get access to the open API interface with Switchboard</>,
   },
   {
     title: "Fusion",
     imageSrc: require("@site/static/img/fusion.png").default,
-    docPath: "docs/academy/AdvancedTopics/PowerhouseArchitecture",
+    docPath: "docs/academy/Architecture/PowerhouseArchitecture",
     description: (
       <>
         Setup Fusion as your organizations dashboard
@@ -51,7 +51,7 @@ const FeatureList: FeatureItem[] = [
   {
     title: "Reactor",
     imageSrc: require("@site/static/img/reactor.png").default,
-    docPath: "/docs/academy/AdvancedTopics/WorkingWithTheReactor",
+    docPath: "/docs/academy/Architecture/WorkingWithTheReactor",
     description: (
       <>Find out how a Powerhouse Reactor node works</>
     ),
@@ -138,7 +138,7 @@ export default function HomepageFeatures() {
               <h3 className={styles.cardTitle}>Create</h3>
             </div>
             <div className={styles.cardContent}>
-              <a href="/docs/academy/Create/ToDoList/CreateNewPowerhouseProject" className={styles.pathButton}>Build a Todo-list Document Model</a>
+              <a href="/docs/academy/GetStarted/ToDoList/CreateNewPowerhouseProject" className={styles.pathButton}>Build a Todo-list Document Model</a>
             </div>
           </div>
 
@@ -163,9 +163,9 @@ export default function HomepageFeatures() {
               <h3 className={styles.cardTitle}>Build User Experiences</h3>
             </div>
             <div className={styles.cardContent}>
-              <a href="/docs/academy/BuildingUserExperiences/BuildToDoListEditor" className={styles.pathButton}>Building a Todo-list Editor</a>
+              <a href="/docs/academy/GetStarted/ToDoList/BuildToDoListEditor" className={styles.pathButton}>Building a Todo-list Editor</a>
               <a href="/docs/academy/BuildingUserExperiences/BuildingBeautifulDocumentEditors" className={styles.pathButton}>Building Beautiful Document Editors</a>
-              <a href="/docs/academy/BuildingUserExperiences/BuildingADriveExplorer" className={styles.pathButton}>Building Custom Drive Explorers</a>
+              <a href="/docs/academy/AdvancedTutorial/BuildingUserExperiences/BuildingADriveExplorer" className={styles.pathButton}>Building Custom Drive Explorers</a>
             </div>
           </div>
 
@@ -200,8 +200,8 @@ export default function HomepageFeatures() {
               <h3 className={styles.cardTitle}>Work with Data</h3>
             </div>
             <div className={styles.cardContent}>
-              <a href="/docs/academy/WorkWithData/ReadingAndWritingThroughTheAPI" className={styles.pathButton}>Reading & Writing through the API</a>
-              <a href="/docs/academy/WorkWithData/WorkingWithSubgraphs" className={styles.pathButton}>Create your own Subgraph</a>
+              <a href="//docs/academy/AdvancedTutorial/WorkWithData/ReadingAndWritingThroughTheAPI" className={styles.pathButton}>Reading & Writing through the API</a>
+              <a href="/docs/academy/AdvancedTutorial/WorkWithData/WorkingWithSubgraphs" className={styles.pathButton}>Create your own Subgraph</a>
               <a href="/docs/academy/WorkWithData/Analytics Engine/intro" className={styles.pathButton}>Using the Analytics Engine</a>
             </div>
           </div>
@@ -216,7 +216,7 @@ export default function HomepageFeatures() {
             </div>
             <div className={styles.cardContent}>
               <div className={styles.buttonContainer}>
-                <a href="/docs/academy/Launch/PublishYourProject" className={styles.pathButton}>Package & Publish</a>
+                <a href="/docs/academy/AdvancedTutorial/Launch/PublishYourProject" className={styles.pathButton}>Package & Publish</a>
                 <a href="/docs/academy/Launch/LaunchYourBackend" className={styles.pathButton}>Launch Back-end</a>
                 <a href="/docs/academy/Launch/LaunchYourFrontend" className={styles.pathButton}>Launch Front-end</a>
               </div>
