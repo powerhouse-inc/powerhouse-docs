@@ -111,23 +111,23 @@ const config: Config = {
           items: [
             {
               label: 'Connect',
-              to: 'docs/academy/AdvancedTopics/PowerhouseArchitecture',
+              to: 'docs/academy/Architecture/PowerhouseArchitecture',
             },
             {
               label: 'Reactor',
-              to: 'docs/academy/AdvancedTopics/PowerhouseArchitecture',
+              to: 'docs/academy/Architecture/PowerhouseArchitecture',
             },
             {
               label: 'Switchboard',
-              to: 'docs/academy/AdvancedTopics/PowerhouseArchitecture',
+              to: 'docs/academy/Architecture/PowerhouseArchitecture',
             },
             {
               label: 'Renown',
-              to: 'docs/academy/AdvancedTopics/PowerhouseArchitecture',
+              to: 'docs/academy/Architecture/PowerhouseArchitecture',
             },
             {
               label: 'FAQ',
-              to: 'docs/academy/AdvancedTopics/PowerhouseArchitecture',
+              to: 'docs/academy/Architecture/PowerhouseArchitecture',
             },
             {
               label: "Blog",

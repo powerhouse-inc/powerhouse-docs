@@ -1,10 +1,8 @@
 # Install the Demo Package
 
-:::tip
-To give you a quick idea of how the Powerhouse ecosystem operates on document models and packages, why don't you try installing a package?   
+**To give you a quick idea of how the Powerhouse ecosystem operates on document models and packages, why don't you try installing a package?**
 
 Let's get started by installing the Powerhouse command-line tool `ph-cmd` and then using it to install a pre-built demo package with document models & editors. 
-:::
 
 ## Powerhouse CLI
 
